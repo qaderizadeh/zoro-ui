@@ -18,5 +18,8 @@
   },
   "interest": {
     "280": "0x2404588c4B76e0733fa3Ab4FFfFB4fb20849a01B"
+  },
+  "degen:comptroller": {
+    "280": "0x227C2D6e02a93d885F3D200E9b3b56834E859371"
   }
 }
