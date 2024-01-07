@@ -33,7 +33,7 @@ export const useStyles = () => {
     toolbar: css`
       display: flex;
       justify-content: center;
-      padding: ${theme.spacing(10, 8, 12)};
+      padding: 0px;
       min-height: 0;
       ${theme.breakpoints.down("lg")} {
         min-height: initial;
@@ -155,7 +155,6 @@ export const useStyles = () => {
     `,
     logo: css`
       display: block;
-      margin-bottom: -30px;
       ${theme.breakpoints.down("xl")} {
         display: block;
       }
