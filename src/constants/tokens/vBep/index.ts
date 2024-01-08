@@ -180,6 +180,24 @@ export const ZTOKEN_INFO = {
   } as VToken,
 
   // Isolated assets
+  'degen:eth': {
+    address: "",
+    decimals: 8,
+    symbol: 'vETH',
+    underlyingToken: TOKEN_INFO.eth,
+  },
+  'degen:usdc': {
+    address: "",
+    decimals: 8,
+    symbol: 'vUSDC',
+    underlyingToken: TOKEN_INFO.usdc,
+  },
+  'degen:mute': {
+    address: "",
+    decimals: 8,
+    symbol: 'vMUTE',
+    underlyingToken: TOKEN_INFO.mute,
+  },
   // Pool 1 – Stable Coins
   'hay': {
     address: "",
