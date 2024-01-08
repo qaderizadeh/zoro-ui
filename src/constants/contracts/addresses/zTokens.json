@@ -19,8 +19,5 @@
   },
   "degen:usdc": {
     "280": "0xFA2E3E60Ab9a2A2462D5609baa7ECdF8A6cbe16C"
-  },
-  "degen:mute": {
-    "280": "0x8e1b1CD5f0FA48819dbf6AfF6b499462608834Fa"
   }
 }
