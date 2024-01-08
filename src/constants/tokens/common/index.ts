@@ -26,6 +26,7 @@ import link from 'assets/img/tokens/link.svg';
 import ltc from 'assets/img/tokens/ltc.svg';
 import luna from 'assets/img/tokens/luna.svg';
 import matic from 'assets/img/tokens/matic.svg';
+import mute from 'assets/img/tokens/mute.svg';
 import nft from 'assets/img/tokens/nft.png';
 import raca from 'assets/img/tokens/raca.png';
 import stkbnb from 'assets/img/tokens/stkBNB.svg';
@@ -245,6 +246,12 @@ export const TOKEN_INFO = {
     asset: usdd,
   } as Token,
   // Underlying tokens for isolated markets
+  "mute": {
+    address: "",
+    decimals: 18,
+    symbol: 'MUTE',
+    asset: mute,
+  } as Token,
   "btt": {
     address: "",
     decimals: 18,
