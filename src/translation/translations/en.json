@@ -69,7 +69,8 @@
     }
   },
   "approveToken": {
-    "approveButtonLabel": "Approve"
+    "approveButtonLabel": "Approve",
+    "approvingButtonLabel": "Approving"
   },
   "approveTokenSteps": {
     "approveTokenButton": {
