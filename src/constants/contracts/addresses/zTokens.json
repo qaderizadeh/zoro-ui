@@ -1,7 +1,4 @@
 {
-  "test": {
-    "280": "0xD2eCBd2455c80e23c7D73BCbE41cc3b3DaD25476"
-  },
   "eth": {
     "280": "0xb7cdeF6521EB451D67fB72fd42460f57EdD11101"
   },
@@ -19,5 +16,14 @@
   },
   "degen:usdc": {
     "280": "0xFA2E3E60Ab9a2A2462D5609baa7ECdF8A6cbe16C"
+  },
+  "degen:link": {
+    "280": "0x6402e8055e916A0dd5740bC3641CcD22FFB37Ba7"
+  },
+  "degen:wbtc": {
+    "280": "0xb52Ee74C79d2279aBa644ebcb4965381E6F5379a"
+  },
+  "degen:usdt": {
+    "280": "0x80C11Df9AfBcB3E9c8bf15365B51DA3EE151AEE7"
   }
 }
