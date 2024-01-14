@@ -271,9 +271,9 @@ const getMainMarkets = async ({
 
     const apyData = getApyData(marketMetadata);
 
-    const { exchangeRate } = marketMetadata;
-    const base = ethers.constants.WeiPerEther.toString(); // 1e18
-    const tokenPrice = (new BigNumber(underlyingPrice)).times(exchangeRate).div(base).div(base);
+    const { underlyingDecimal } = marketMetadata;
+    const divisor = new BigNumber(10).pow(new BigNumber(36).minus(underlyingDecimal));
+    const tokenPrice = (new BigNumber(underlyingPrice)).div(divisor);
 
     const { compBorrowSpeeds, compSupplySpeeds } = marketMetadata;
     const borrowerDailyVenus = BLOCKS_PER_DAY.times(compBorrowSpeeds);
@@ -291,7 +291,7 @@ const getMainMarkets = async ({
       balance = ethers.BigNumber.from(ethReturnContext?.[0]?.returnValues?.[0]);
     }
 
-    const { underlyingDecimal } = marketMetadata;
+    const base = ethers.constants.WeiPerEther.toString(); // 1e18
     const liquidity = ethers.utils.formatUnits(
       balance.mul(underlyingPrice).div(base),
       underlyingDecimal
