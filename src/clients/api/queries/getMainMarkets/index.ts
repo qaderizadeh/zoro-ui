@@ -36,7 +36,7 @@ function getTokenData(address) {
 
 const dataToString = (i, d) => ethers.BigNumber.from(d?.[i])?.toString();
 
-function parseMarketMetadata(data, underlyingPrice) {
+function parseMarketMetadata(data, underlyingPrice, vTokenDecimal) {
   const paramMapping = {
     "exchangeRate": 1,
     "supplyRatePerBlock": 2,
@@ -244,7 +244,8 @@ const getMainMarkets = async ({
     const price = pricesResults[address];
     const underlyingPrice = dataToString(1, price);
 
-    const marketMetadata = parseMarketMetadata(data, underlyingPrice);
+    const vTokenDecimal = VBEP_TOKENS[address.toLowerCase()].decimals;
+    const marketMetadata = parseMarketMetadata(data, underlyingPrice, vTokenDecimal);
 
     const comptrollerData = parseComptrollerData(comptrollerReturnContext, address);
 
