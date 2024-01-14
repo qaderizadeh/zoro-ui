@@ -58,20 +58,40 @@ function parseMarketMetadata(data, underlyingPrice, vTokenDecimal) {
 
   marketMetadata["underlyingPrice"] = underlyingPrice;
 
-  const { underlyingDecimal } = marketMetadata;
+  const { underlyingDecimal, exchangeRate } = marketMetadata;
 
-  const formatUnderlying = (amount) =>
-  ethers.utils.formatUnits(amount, underlyingDecimal);
+  const formatSupplyUnderlying = (amount) =>
+    ethers.utils.formatUnits(amount, vTokenDecimal);
+  const formatBorrowUnderlying = (amount) =>
+    ethers.utils.formatUnits(amount, underlyingDecimal);
 
-  const usdValue = (amount) => {
+  const usdSupplyValue = (amount) => {
+    const totalSupply = new BigNumber(amount);
+
+    const underlyingSupplyRaw = totalSupply.times(exchangeRate).div("1e18");
+
+    const underlyingSupplyBase = new BigNumber(10).pow(underlyingDecimal);
+    const underlyingSupply = underlyingSupplyRaw.div(underlyingSupplyBase);
+
+    const underlyingUsdRaw = underlyingSupply.times(underlyingPrice);
+    const priceDecimals = new BigNumber(36).minus(underlyingDecimal);
+
+    const priceBase = new BigNumber(10).pow(priceDecimals);
+    const underlyingUsd = underlyingUsdRaw.div(priceBase);
+
+    return underlyingUsd;
+  };
+
+  const usdBorrowValue = (amount) => {
     const base = ethers.constants.WeiPerEther.toString(); // 1e18
     return (new BigNumber(amount)).times(underlyingPrice).div(base).div(base);
   };
 
-  for (const total of ["totalBorrows", "totalSupply"]) {
-    marketMetadata[`${total}2`] = formatUnderlying(marketMetadata[total]);
-    marketMetadata[`${total}Usd`] = usdValue(marketMetadata[total]);
-  }
+  marketMetadata["totalSupply2"] = formatSupplyUnderlying(marketMetadata["totalSupply"]);
+  marketMetadata["totalSupplyUsd"] = usdSupplyValue(marketMetadata["totalSupply"]);
+
+  marketMetadata["totalBorrows2"] = formatBorrowUnderlying(marketMetadata["totalBorrows"]);
+  marketMetadata["totalBorrowsUsd"] = usdBorrowValue(marketMetadata["totalBorrows"]);
 
   return marketMetadata;
 }
