@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { ethers } from "ethers";
 import BigNumber from 'bignumber.js';
-import { ContractCallContext, Multicall } from 'ethereum-multicall';
+import { ContractCallContext } from 'ethereum-multicall';
 import config from 'config';
 import { Market } from 'types';
 
