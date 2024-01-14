@@ -157,10 +157,10 @@ function getContractCallContexts(multicallAddress, venusLensContract, comptrolle
     const tokenConfig = VBEP_TOKENS[tokenAddress.toLowerCase()];
     const underlyingAddress = tokenConfig.underlyingToken.address;
 
-    if (tokenConfig.underlyingToken.symbol === "eth") {
-      return erc20BalanceContext(underlyingAddress, tokenAddress);
-    } else {
+    if (tokenConfig.underlyingToken.symbol.toLowerCase() === "eth") {
       return ethBalanceContext(tokenAddress);
+    } else {
+      return erc20BalanceContext(underlyingAddress, tokenAddress);
     }
   });
 
@@ -236,7 +236,9 @@ const getMainMarkets = async ({
   venusLensContract,
   comptroller
 }): Promise<GetMainMarketsOutput> => {
-  const vTokenAddresses = _.map(VBEP_TOKENS, "address");
+  const comptrollerCTokens = await comptroller.getAllMarkets();
+  const configuredCTokens = _.map(VBEP_TOKENS, "address");
+  const vTokenAddresses = _.intersection(comptrollerCTokens, configuredCTokens);
 
   const multicallAddress = multicall.getContractBasedOnNetwork(config.chainId);
   const contractCallContexts = getContractCallContexts(
@@ -291,11 +293,8 @@ const getMainMarkets = async ({
       balance = ethers.BigNumber.from(ethReturnContext?.[0]?.returnValues?.[0]);
     }
 
-    const base = ethers.constants.WeiPerEther.toString(); // 1e18
-    const liquidity = ethers.utils.formatUnits(
-      balance.mul(underlyingPrice).div(base),
-      underlyingDecimal
-    );
+    const base = new BigNumber(10).pow(underlyingDecimal);
+    const liquidity = tokenPrice.times(balance._hex).div(base);
 
     return {
       ...tokenData,
@@ -319,6 +318,7 @@ const getMainMarkets = async ({
     const activeMarket = marketsData.find(
       (market: Market) => market.address.toLowerCase() === marketAddress.toLowerCase(),
     );
+
     if (activeMarket) {
       const formattedActiveMarket = {
         ...activeMarket,
@@ -342,7 +342,6 @@ const getMainMarkets = async ({
     return acc;
   }, []);
 
-  console.log("Markets", markets);
   return { markets };
 };
 
