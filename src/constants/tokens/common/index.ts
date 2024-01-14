@@ -57,13 +57,13 @@ export const TOKEN_INFO = {
   } as Token,
   "usdc": {
     address: "",
-    decimals: 18,
+    decimals: 6,
     symbol: 'USDC',
     asset: usdc,
   } as Token,
   "usdt": {
     address: "",
-    decimals: 18,
+    decimals: 6,
     symbol: 'USDT',
     asset: usdt,
   } as Token,
