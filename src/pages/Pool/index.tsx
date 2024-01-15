@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import BigNumber from 'bignumber.js';
 import { Cell, CellGroup, Notice, Spinner } from 'components';
+import { Divider, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'translation';
 import { Pool } from 'types';
 import { formatCentsToReadableValue } from 'utilities';
 
-import { useGetPool } from 'clients/api';
+import { useGetPools } from 'clients/api';
 import PLACEHOLDER_KEY from 'constants/placeholderKey';
 import { routes } from 'constants/routing';
 import { useAuth } from 'context/AuthContext';
@@ -63,6 +64,9 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
 
   return pool ? (
     <>
+      <Typography css={styles.title} variant="h3">
+        {pool.name}
+      </Typography>
       <CellGroup cells={cells} css={styles.header} />
 
       {pool.isIsolated && (
@@ -74,6 +78,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
       )}
 
       <Table pool={pool} />
+      <Divider css={styles.divider} />
     </>
   ) : (
     <Spinner />
@@ -89,17 +94,16 @@ const PoolPage: React.FC<PoolPageProps> = ({
 }) => {
   const { accountAddress } = useAuth();
 
-  const { data: getPoolData, isLoading: isGetPoolLoading } = useGetPool({
-    accountAddress,
-    poolComptrollerAddress,
+  const { data: getPoolData, isLoading: isGetPoolLoading } = useGetPools({
+    accountAddress
   });
 
   // Redirect to Dashboard page if pool Comptroller address is incorrect
-  if (!isGetPoolLoading && !getPoolData?.pool) {
+  if (!isGetPoolLoading && !getPoolData?.pools) {
     <Redirect to={routes.dashboard.path} />;
   }
 
-  return <PoolUi pool={getPoolData?.pool} />;
+  return getPoolData?.pools.map(pool => <PoolUi pool={pool} />);
 };
 
 export default PoolPage;
