@@ -316,6 +316,10 @@
     "description": "Zoro's primary pool is composed of large-cap tokens that meet minimum liquidity requirements.",
     "name": "Zoro Core Pool"
   },
+  "isolatedPool": {
+    "description": "Zoro's degen pool is composed of more volatile tokens and carries higher risks.",
+    "name": "Zoro Degen Pool"
+  },
   "market": {
     "availableLiquidity": "Available Liquidity",
     "borrowButtonLabel": "Borrow",

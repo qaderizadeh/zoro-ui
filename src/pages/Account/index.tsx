@@ -89,6 +89,7 @@ export const AccountUi: React.FC<AccountUiProps> = ({ isFetching, vaults, pools 
       />
 
       {filteredPools.length > 0 && <PoolsBreakdown css={styles.section} pools={filteredPools} />}
+      {filteredPools.length > 1 && <PoolsBreakdown css={styles.section} pools={filteredPools} startPoolIndex={1} />}
     </>
   );
 };

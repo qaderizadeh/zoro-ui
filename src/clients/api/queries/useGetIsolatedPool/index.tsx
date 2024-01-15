@@ -29,8 +29,8 @@ const useGetIsolatedPool = ({ accountAddress }: UseGetMainPoolInput): UseGetMain
     () =>
       getMainAssetsData?.assets && {
         comptrollerAddress: mainPoolComptrollerAddress,
-        name: t('mainPool.name'),
-        description: t('mainPool.description'),
+        name: t('isolatedPool.name'),
+        description: t('isolatedPool.description'),
         isIsolated: false,
         assets: getMainAssetsData.assets,
         userSupplyBalanceCents: getMainAssetsData.userTotalSupplyBalanceCents,

@@ -13,12 +13,13 @@ import { useStyles } from './styles';
 export interface PoolsBreakdownProps {
   pools: Pool[];
   className?: string;
+  startPoolIndex?: number;
 }
 
-export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className }) => {
+export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className, startPoolIndex = 0 }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const [selectedPoolIndex, setSelectedPoolIndex] = useState<number>(0);
+  const [selectedPoolIndex, setSelectedPoolIndex] = useState<number>(startPoolIndex);
   const selectedPool = pools[selectedPoolIndex];
 
   const tags: Tag[] = useMemo(
