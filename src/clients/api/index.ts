@@ -128,6 +128,7 @@ export { default as useBorrow } from './mutations/borrow/useBorrow';
 //export { default as getMainAssetsInAccount } from './queries/getMainAssetsInAccount';
 //export * from './queries/getMainAssetsInAccount';
 export { default as useGetMainAssetsInAccount } from './queries/getMainAssetsInAccount/useGetMainAssetsInAccount';
+export { default as useGetIsolatedAssetsInAccount } from './queries/getMainAssetsInAccount/useGetIsolatedAssetsInAccount';
 
 export { default as getHypotheticalAccountLiquidity } from './queries/getHypotheticalAccountLiquidity';
 //export * from './queries/getHypotheticalAccountLiquidity';
@@ -135,6 +136,7 @@ export { default as getHypotheticalAccountLiquidity } from './queries/getHypothe
 //export { default as getMainMarkets } from './queries/getMainMarkets';
 //export * from './queries/getMainMarkets';
 export { default as useGetMainMarkets } from './queries/getMainMarkets/useGetMainMarkets';
+export { default as useGetIsolatedMarkets } from './queries/getMainMarkets/useGetIsolatedMarkets';
 
 //export { default as getVTokenBalancesAll } from './queries/getVTokenBalancesAll';
 //export * from './queries/getVTokenBalancesAll';
@@ -183,11 +185,15 @@ export { default as useGetTokenBalances } from './queries/getTokenBalances/useGe
 
 export { default as useGetMainAssets } from './queries/useGetMainAssets';
 
+export { default as useGetIsolatedAssets } from './queries/useGetIsolatedAssets';
+
 export { default as useGetAsset } from './queries/useGetAsset';
 
 //export { default as useGetMainPoolTotalXvsDistributed } from './queries/useGetMainPoolTotalXvsDistributed';
 
 export { default as useGetMainPool } from './queries/useGetMainPool';
+
+export { default as useGetIsolatedPool } from './queries/useGetIsolatedPool';
 
 export { default as useGetPools } from './queries/useGetPools';
 
