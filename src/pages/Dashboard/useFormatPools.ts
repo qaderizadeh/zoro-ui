@@ -16,6 +16,10 @@ const useFormatPools = ({
   selectedPoolIndex: number;
 }) => {
   const formattedPools = useMemo(() => {
+    if (selectedPoolIndex >= pools.length) {
+      return [];
+    }
+
     const filteredPools = selectedPoolIndex < 0 ? pools : [pools[selectedPoolIndex]];
 
     if (!searchValue) {

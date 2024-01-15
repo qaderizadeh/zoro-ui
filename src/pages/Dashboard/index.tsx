@@ -50,7 +50,13 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
   const formattedPools = useFormatPools({
     pools,
     searchValue,
-    selectedPoolIndex: selectedPoolTagIndex - 1,
+    selectedPoolIndex: 0,
+  });
+
+  const isolatedFormattedPools = useFormatPools({
+    pools,
+    searchValue,
+    selectedPoolIndex: 1,
   });
 
   const poolTags: Tag[] = useMemo(
@@ -82,6 +88,8 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
       orderDirection: "desc",
     },
   };
+  const isolatedSupplyMarketTableProps: MarketTableProps = {...supplyMarketTableProps};
+  isolatedSupplyMarketTableProps.pools = isolatedFormattedPools;
 
   const borrowMarketTableProps: MarketTableProps = {
     pools: formattedPools,
@@ -96,6 +104,8 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
       orderDirection: "asc",
     },
   };
+  const isolatedBorrowMarketTableProps: MarketTableProps = {...borrowMarketTableProps};
+  isolatedBorrowMarketTableProps.pools = isolatedFormattedPools;
 
   //<NoticeWarning css={styles.banner} description={t('dashboard.banner.borrowApyChange')} />
 
@@ -341,13 +351,13 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
               className="markets-table-grid"
             >
               <MarketTable
-                {...supplyMarketTableProps}
+                {...isolatedSupplyMarketTableProps}
                 title={t("dashboard.supplyMarketTableTitle")}
                 testId={TEST_IDS.supplyMarketTable}
               />
 
               <MarketTable
-                {...borrowMarketTableProps}
+                {...isolatedBorrowMarketTableProps}
                 title={t("dashboard.borrowMarketTableTitle")}
                 testId={TEST_IDS.borrowMarketTable}
               />
@@ -356,12 +366,12 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
             <div css={showXlDownCss}>
               {activeTabIndex === 0 ? (
                 <MarketTable
-                  {...supplyMarketTableProps}
+                  {...isolatedSupplyMarketTableProps}
                   key="dashboard-supply-market-table"
                 />
               ) : (
                 <MarketTable
-                  {...borrowMarketTableProps}
+                  {...isolatedBorrowMarketTableProps}
                   key="dashboard-borrow-market-table"
                 />
               )}

@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Pool } from 'types';
 import { isFeatureEnabled } from 'utilities';
 
-//import { useGetIsolatedPools, useGetMainPool } from 'clients/api';
-import { useGetMainPool } from 'clients/api';
+import { useGetIsolatedPool, useGetMainPool } from 'clients/api';
+//import { useGetMainPool } from 'clients/api';
 
 export interface UseGetPoolsInput {
   accountAddress?: string;
@@ -21,6 +21,9 @@ const useGetPools = ({ accountAddress }: UseGetPoolsInput): UseGetPoolsOutput =>
     accountAddress,
   });
 
+  const { data: getIsolatedPoolData, isLoading: isGetIsolatedPoolDataLoading } = useGetIsolatedPool({
+    accountAddress,
+  });
   //const { data: getIsolatedPoolsData, isLoading: isGetIsolatedPoolsDataLoading } =
     //useGetIsolatedPools(
       //{
@@ -31,25 +34,23 @@ const useGetPools = ({ accountAddress }: UseGetPoolsInput): UseGetPoolsOutput =>
       //},
     //);
 
-  //const isLoading = isGetMainPoolDataLoading || isGetIsolatedPoolsDataLoading;
-  const isLoading = isGetMainPoolDataLoading;
+  const isLoading = isGetMainPoolDataLoading || isGetIsolatedPoolDataLoading;
+  //const isLoading = isGetMainPoolDataLoading;
 
   const data = useMemo(() => {
     if (isLoading) {
-      return undefined;
+      return { pools: [] };
     }
 
     const pools = (getMainPoolData?.pool ? [getMainPoolData?.pool] : []).concat(
-      //getIsolatedPoolsData?.pools || [],
-      []
+      getIsolatedPoolData?.pool || []
     );
-    //console.log("pools", pools);
 
     return {
       pools,
     };
-  //}, [getMainPoolData?.pool, getIsolatedPoolsData?.pools]);
-  }, [getMainPoolData?.pool]);
+  }, [getMainPoolData?.pool, getIsolatedPoolData?.pool]);
+  //}, [getMainPoolData?.pool]);
 
   return { isLoading, data };
 };
