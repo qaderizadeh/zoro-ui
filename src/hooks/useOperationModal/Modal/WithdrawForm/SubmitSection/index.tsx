@@ -49,6 +49,11 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
       disabled={geolocation || !isFormValid || isFormSubmitting}
       fullWidth
       className='custom-btn-wrap'
+      style={{
+        backgroundImage: isFormSubmitting
+          ? 'linear-gradient(114deg, #ecaf54 0%, #e9bc11 100%)'
+          : ''
+      }}
     >
       {submitButtonLabel}
     </PrimaryButton>
