@@ -43,8 +43,8 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
   const { t } = useTranslation()
   const styles = useStyles()
   const { geolocation } = useContext(GeolocationContext)
-
   if (isTokenApproved) {
+    console.log(children)
     return <>{children}</>
   }
   const [loading, setLoading] = useState(false)

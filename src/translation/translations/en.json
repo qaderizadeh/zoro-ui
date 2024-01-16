@@ -427,6 +427,7 @@
         "amountHigherThanBorrowableAmount": "Amount entered higher than borrowable amount",
         "amountHigherThanBorrowCap": "Amount entered higher than borrow cap",
         "borrow": "Borrow",
+        "borrowing": "Borrowing",
         "borrowCapReached": "Borrow cap reached",
         "borrowHighRiskAmount": "Borrow at high risk",
         "enterValidAmount": "Enter a valid amount to borrow"
@@ -458,6 +459,7 @@
         "insufficientWalletBalance": "Insufficient {{tokenSymbol}} balance",
         "processing": "Processing",
         "repay": "Repay",
+        "repaying": "Repaying",
         "unwrappingUnsupported": "Unwrapping unsupported",
         "wrappingUnsupported": "Wrapping unsupported"
       },
@@ -483,6 +485,7 @@
         "insufficientWalletBalance": "Insufficient {{tokenSymbol}} balance",
         "processing": "Processing",
         "supply": "Supply",
+        "supplying": "Supplying",
         "supplyCapReached": "Supply cap reached",
         "unwrappingUnsupported": "Unwrapping unsupported",
         "wrappingUnsupported": "Wrapping unsupported"
@@ -508,7 +511,8 @@
       "submitButtonLabel": {
         "enterValidAmount": "Enter a valid amount to withdraw",
         "higherThanWithdrawableAmount": "Amount entered higher than withdrawable amount",
-        "withdraw": "Withdraw"
+        "withdraw": "Withdraw",
+        "withdrawing": "Withdrawing"
       },
       "successfulTransactionModal": {
         "message": "You successfully withdrew",
