@@ -88,7 +88,7 @@ export const getTokenContract = (token: Token, signer?: Signer) => {
 };
 
 export const getVTokenContract = (vToken: VToken, signer?: Signer) => {
-  if (vToken.symbol === 'vETH') {
+  if (vToken.symbol === 'zETH') {
     return getContract({
       abi: vEtherAbi,
       address: vToken.address,
