@@ -143,10 +143,11 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
     }
 
     // Update field value to correspond to user's balance
+    const repayAmountTokens = asset.userBorrowBalanceTokens.lt(fromTokenUserWalletBalanceTokens) ? asset.userBorrowBalanceTokens : fromTokenUserWalletBalanceTokens || 0;
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
       amountTokens: new BigNumber(
-        fromTokenUserWalletBalanceTokens || 0
+        repayAmountTokens
       ).toFixed(),
       fixedRepayPercentage: undefined,
     }));
@@ -158,7 +159,7 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
         css={sharedStyles.getRow({ isLast: true })}
         label={t("operationModal.repay.currentlyBorrowing")}
       >
-        {readableUserBorrowBalanceTokens}
+        {readableUserBorrowBalanceTokens} 
       </LabeledInlineContent>
 
       <div css={sharedStyles.getRow({ isLast: false })}>
