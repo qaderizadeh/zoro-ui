@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import TosPPModal from ".";
+import { SecondaryButton } from "../Button";
 import { useStyles } from "./styles";
+import type { DialogProps } from "@mui/material";
 import { ModalProps } from "components";
 import React from "react";
 import { useTranslation } from "translation";
-import { SecondaryButton } from "../Button";
+
 export interface TosModalProps {
   title: string;
   open: boolean;
@@ -15,14 +17,17 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
   const { t } = useTranslation();
   const styles = useStyles();
 
+  const onClose: DialogProps["onClose"] = (event, reason) => {
+    if (reason && reason === "backdropClick") return;
+    handleClose();
+  };
   return (
     <TosPPModal
       isOpen={open}
-      handleClose={handleClose}
+      handleClose={onClose}
       title={t("tos.header")}
       css={styles.tosModal}
       disableEscapeKeyDown={true}
-      onBackdropClick={" "}
     >
       <div css={styles.tosContent} className="tosContent">
         <ol>
@@ -1046,7 +1051,9 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
       </div>
-      <SecondaryButton onClick={handleClose} css={styles.acceptTerms}>{t("tos.button")}</SecondaryButton>
+      <SecondaryButton onClick={handleClose} css={styles.acceptTerms}>
+        {t("tos.button")}
+      </SecondaryButton>
     </TosPPModal>
   );
 };

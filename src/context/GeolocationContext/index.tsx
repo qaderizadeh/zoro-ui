@@ -16,7 +16,9 @@ const GeolocationProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const fetchGeolocation = async () => {
       try {
-        const response = await fetch(`https://pro.ip-api.com/json?key=${import.meta.env.VITE_FF_IPAPI_KEY}`);
+        const response = await fetch(
+          `https://pro.ip-api.com/json?key=${import.meta.env.VITE_FF_IPAPI_KEY}`
+        );
         const { countryCode } = await response.json();
         setGeolocation(BlockedRegions.includes(countryCode));
       } catch (error) {
@@ -25,9 +27,11 @@ const GeolocationProvider: React.FC = ({ children }) => {
     };
 
     // To remove hidden inputs from MuiSelect to fix missing id and name props for form elements
-    const muiSelectHiddenInputs = document.querySelectorAll('input.MuiSelect-nativeInput').forEach((input) => {
-      input.remove();
-    });
+    const muiSelectHiddenInputs = document
+      .querySelectorAll("input.MuiSelect-nativeInput")
+      .forEach((input) => {
+        input.remove();
+      });
 
     fetchGeolocation();
   }, []);
