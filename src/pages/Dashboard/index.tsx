@@ -202,7 +202,6 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
               </div>
             </div>
           </div>
-          {console.log({ activeTabIndex })}
           <div className="tabing-btn-wrap">
             {!isFeatureEnabled("isolatedPools") && (
               <ButtonGroup
