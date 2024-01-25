@@ -1,38 +1,26 @@
 /** @jsxImportSource @emotion/react */
-import { useStyles as useSharedStyles } from '../styles'
-import Notice from './Notice'
-import SubmitSection from './SubmitSection'
-import TEST_IDS from './testIds'
-import useForm, { FormValues, UseFormInput } from './useForm'
-import BigNumber from 'bignumber.js'
+import { useStyles as useSharedStyles } from '../styles';
+import Notice from './Notice';
+import SubmitSection from './SubmitSection';
+import TEST_IDS from './testIds';
+import useForm, { FormValues, UseFormInput } from './useForm';
+import BigNumber from 'bignumber.js';
 //import { useSupply, useSwapTokensAndSupply } from 'clients/api';
-import { useSupply } from 'clients/api'
-import {
-  AccountData,
-  Delimiter,
-  IsolatedAssetWarning,
-  LabeledInlineContent,
-  SelectTokenTextField,
-  Toggle,
-  TokenTextField,
-  toast
-} from 'components'
-import { TOKENS } from 'constants/tokens'
-import { useAuth } from 'context/AuthContext'
-import { VError, formatVErrorToReadableString } from 'errors'
-import useCollateral from 'hooks/useCollateral'
-import useFormatTokensToReadableValue from 'hooks/useFormatTokensToReadableValue'
+import { useSupply } from 'clients/api';
+import { AccountData, Delimiter, IsolatedAssetWarning, LabeledInlineContent, SelectTokenTextField, Toggle, TokenTextField, toast } from 'components';
+import { TOKENS } from 'constants/tokens';
+import { useAuth } from 'context/AuthContext';
+import { VError, formatVErrorToReadableString } from 'errors';
+import useCollateral from 'hooks/useCollateral';
+import useFormatTokensToReadableValue from 'hooks/useFormatTokensToReadableValue';
 //import useGetSwapInfo from 'hooks/useGetSwapInfo';
-import useGetSwapTokenUserBalances from 'hooks/useGetSwapTokenUserBalances'
-import React, { useCallback, useMemo, useState } from 'react'
-import { useTranslation } from 'translation'
-import { Asset, Pool, Swap, SwapError, TokenBalance } from 'types'
-import {
-  areTokensEqual,
-  convertTokensToWei,
-  convertWeiToTokens,
-  isFeatureEnabled
-} from 'utilities'
+import useGetSwapTokenUserBalances from 'hooks/useGetSwapTokenUserBalances';
+import { useGetAllowance } from 'clients/api';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'translation';
+import { Asset, Pool, Swap, SwapError, TokenBalance } from 'types';
+import { areTokensEqual, convertTokensToWei, convertWeiToTokens, isFeatureEnabled } from 'utilities';
+
 
 export const PRESET_PERCENTAGES = [25, 50, 75, 100]
 
@@ -143,15 +131,17 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
       }
     }
   }
+  const { accountAddress } = useAuth();
+  const { data: getTokenAllowanceData, isLoading: isTokenApprovalStatusLoading } = useGetAllowance({token: asset.vToken.underlyingToken, spenderAddress: asset.vToken.address, accountAddress }, {enabled: !!accountAddress && !asset.vToken.underlyingToken.isNative});
 
   const handleRightMaxButtonClick = useCallback(() => {
+    console.log("here is called", accountAddress, asset.vToken.underlyingToken, asset, getTokenAllowanceData?.allowanceWei.dividedBy(Math.pow(10, asset.vToken.underlyingToken.decimals)), isTokenApprovalStatusLoading);
     // Update field value to correspond to user's wallet balance
-    setFormValues(currentFormValues => ({
+    const supplyAmountTokens = getTokenAllowanceData?.allowanceWei.lt(fromTokenUserWalletBalanceTokens) ? getTokenAllowanceData?.allowanceWei.dividedBy(Math.pow(10, asset.vToken.underlyingToken.decimals)): fromTokenUserWalletBalanceTokens || 0;
+    setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: new BigNumber(
-        fromTokenUserWalletBalanceTokens || 0
-      ).toFixed()
-    }))
+      amountTokens: new BigNumber(supplyAmountTokens).toFixed(),
+    }));
   }, [fromTokenUserWalletBalanceTokens])
 
   return (
