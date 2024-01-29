@@ -38,7 +38,12 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
   const { t, Trans } = useTranslation();
   const sharedStyles = useSharedStyles();
 
-  // Calculate maximum and safe maximum amount of tokens user can borrow
+  const formatValue = (value: BigNumber) =>
+  value
+    .dp(asset.vToken.underlyingToken.decimals, BigNumber.ROUND_DOWN)
+    .toFixed();
+
+    // Calculate maximum and safe maximum amount of tokens user can borrow
   const [limitTokens, safeLimitTokens] = React.useMemo(() => {
     // Return 0 values while asset is loading or if borrow limit has been
     // reached
@@ -92,11 +97,6 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
         )
       : new BigNumber(0);
 
-    const formatValue = (value: BigNumber) =>
-      value
-        .dp(asset.vToken.underlyingToken.decimals, BigNumber.ROUND_DOWN)
-        .toFixed();
-
     return [formatValue(maxTokens), formatValue(safeMaxTokens)];
   }, [asset.vToken.underlyingToken.decimals, asset, pool]);
 
@@ -117,12 +117,13 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
   });
 
   const handleRightMaxButtonClick = useCallback(() => {
+    const eightyTokens = new BigNumber(limitTokens).times(80).div(100)
     // Update field value to correspond to user's wallet balance
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: safeLimitTokens,
+      amountTokens: formatValue(eightyTokens),
     }));
-  }, [safeLimitTokens]);
+  }, [limitTokens]);
 
   return (
     <form onSubmit={handleSubmit}>
