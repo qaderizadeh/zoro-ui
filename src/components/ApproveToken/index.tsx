@@ -122,11 +122,13 @@ export interface ApproveTokenProps
     "assetInfo" | "disabled" | "title" | "token"
   > {
   spenderAddress: string;
+  isValidAllowance: boolean;
 }
 
 export const ApproveToken: React.FC<ApproveTokenProps> = ({
   token,
   spenderAddress,
+  isValidAllowance,
   ...rest
 }) => {
   const { accountAddress } = useAuth();
@@ -147,7 +149,7 @@ export const ApproveToken: React.FC<ApproveTokenProps> = ({
       {...rest}
       token={token}
       approveToken={approveToken}
-      isTokenApproved={isTokenApproved ?? false}
+      isTokenApproved={isValidAllowance? isTokenApproved ?? false : false}
       isApproveTokenLoading={isApproveTokenLoading}
       isInitialLoading={isTokenApprovalStatusLoading}
       disabled={!accountAddress}

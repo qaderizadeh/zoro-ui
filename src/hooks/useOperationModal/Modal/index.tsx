@@ -3,17 +3,12 @@ import BorrowForm from "./BorrowForm";
 import RepayForm from "./RepayForm";
 import SupplyForm from "./SupplyForm";
 import WithdrawForm from "./WithdrawForm";
-import {
-  Modal,
-  ModalProps,
-  TabContent,
-  Tabs,
-  TokenIconWithSymbol,
-} from "components";
+import { Modal, ModalProps, TabContent, Tabs, TokenIconWithSymbol } from "components";
 import AssetAccessor from "containers/AssetAccessor";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "translation";
 import { VToken } from "types";
+
 
 export interface OperationModalProps {
   onClose: ModalProps["handleClose"];
@@ -29,6 +24,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
   initialActiveTabIndex = 0,
 }) => {
   const { t } = useTranslation();
+  const [ isValidAllowance, setIsValidAllowance ] = useState(true);
 
   const tabsContent: TabContent[] = [
     {
@@ -41,10 +37,16 @@ const OperationModal: React.FC<OperationModalProps> = ({
           approveTokenMessage={t("operationModal.supply.enableToken.title", {
             symbol: vToken.underlyingToken.symbol,
           })}
+          isValidAllowance={isValidAllowance}
           action="supply"
         >
           {({ asset, pool }) => (
-            <SupplyForm asset={asset} pool={pool} onCloseModal={onClose} />
+            <SupplyForm
+              asset={asset}
+              pool={pool}
+              onCloseModal={onClose}
+              setIsValidAllowance={setIsValidAllowance}
+           />
           )}
         </AssetAccessor>
       ),

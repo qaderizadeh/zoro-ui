@@ -10,6 +10,7 @@ import uni from 'assets/img/tokens/uni.jpeg';
 import usdc from 'assets/img/tokens/usdc.svg';
 import usdt from 'assets/img/tokens/usdt.svg';
 import wbtc from 'assets/img/tokens/btcb.svg';
+import bnb from 'assets/img/tokens/btcb.svg';
 
 export const TOKEN_INFO = {
   "aave": {
@@ -72,5 +73,11 @@ export const TOKEN_INFO = {
     decimals: 8,
     symbol: 'WBTC',
     asset: wbtc,
+  } as Token,
+  "bnb": {
+    address: "",
+    decimals: 8,
+    symbol: 'BNB',
+    asset: bnb,
   } as Token,
 };

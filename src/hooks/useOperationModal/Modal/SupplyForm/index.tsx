@@ -36,6 +36,7 @@ export interface SupplyFormUiProps {
   isSwapLoading: boolean
   swap?: Swap
   swapError?: SwapError
+  setIsValidAllowance: () => void
 }
 
 export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
@@ -49,11 +50,23 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
   formValues,
   isSwapLoading,
   swap,
-  swapError
+  swapError,
+  setIsValidAllowance,
 }) => {
   const { t, Trans } = useTranslation()
   const sharedStyles = useSharedStyles()
   const { CollateralModal, toggleCollateral } = useCollateral()
+  const { accountAddress } = useAuth();
+  const {
+    data: getTokenAllowanceData
+  } = useGetAllowance(
+    {
+      token: formValues.fromToken,
+      spenderAddress: asset.vToken.address,
+      accountAddress,
+    },
+    { enabled: !!accountAddress && !formValues.fromToken.isNative }
+  );
 
   const isIntegratedSwapEnabled = useMemo(
     () =>
@@ -100,6 +113,22 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
     tokenBalances
   ])
 
+  const tokenAllowance = useMemo(
+    () =>
+      convertWeiToTokens({
+        valueWei: getTokenAllowanceData?.allowanceWei || new BigNumber(0),
+        token: formValues.fromToken,
+      }),
+    [formValues.fromToken]
+  );
+
+  const isApprove = useMemo(() => {
+    if (formValues.amountTokens && tokenAllowance)
+      return new BigNumber(formValues.amountTokens).isGreaterThan(tokenAllowance);
+    else
+      return false;
+  }, [formValues.amountTokens]);
+
   const { handleSubmit, isFormValid, formError } = useForm({
     asset,
     fromTokenUserWalletBalanceTokens,
@@ -131,22 +160,34 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
       }
     }
   }
-  const { accountAddress } = useAuth();
-  const { data: getTokenAllowanceData, isLoading: isTokenApprovalStatusLoading } = useGetAllowance({token: asset.vToken.underlyingToken, spenderAddress: asset.vToken.address, accountAddress }, {enabled: !!accountAddress && !asset.vToken.underlyingToken.isNative});
 
   const handleRightMaxButtonClick = useCallback(() => {
-    console.log("here is called", accountAddress, asset.vToken.underlyingToken, asset, getTokenAllowanceData?.allowanceWei.dividedBy(Math.pow(10, asset.vToken.underlyingToken.decimals)), isTokenApprovalStatusLoading);
+
     // Update field value to correspond to user's wallet balance
-    const supplyAmountTokens = getTokenAllowanceData?.allowanceWei.lt(fromTokenUserWalletBalanceTokens) ? getTokenAllowanceData?.allowanceWei.dividedBy(Math.pow(10, asset.vToken.underlyingToken.decimals)): fromTokenUserWalletBalanceTokens || 0;
+
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: new BigNumber(supplyAmountTokens).toFixed(),
+      amountTokens: new BigNumber(
+        fromTokenUserWalletBalanceTokens || 0
+      ).toFixed(),
     }));
-  }, [fromTokenUserWalletBalanceTokens])
+  }, [fromTokenUserWalletBalanceTokens]);
+
+  const handleSubmitWithAllowanceCheck = (e?: React.SyntheticEvent) => {
+    e?.preventDefault();
+
+    if (formValues.amountTokens && tokenAllowance) {
+      if (new BigNumber(formValues.amountTokens).isGreaterThan(tokenAllowance)) {
+        setIsValidAllowance(false);
+      } else {
+        handleSubmit();
+      }
+    }    
+  }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitWithAllowanceCheck}>
         {pool.isIsolated && (
           <IsolatedAssetWarning
             token={asset.vToken.underlyingToken}
@@ -274,6 +315,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
           toToken={asset.vToken.underlyingToken}
           fromToken={formValues.fromToken}
           fromTokenAmountTokens={formValues.amountTokens}
+          isApprove={isApprove}
         />
       </form>
 
@@ -285,13 +327,15 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
 export interface SupplyFormProps {
   asset: Asset
   pool: Pool
-  onCloseModal: () => void
+  onCloseModal: () => void,
+  setIsValidAllowance: () => void,
 }
 
 const SupplyForm: React.FC<SupplyFormProps> = ({
   asset,
   pool,
-  onCloseModal
+  onCloseModal,
+  setIsValidAllowance,
 }) => {
   const { accountAddress } = useAuth()
 
@@ -384,6 +428,7 @@ const SupplyForm: React.FC<SupplyFormProps> = ({
       tokenBalances={tokenBalances}
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
+      setIsValidAllowance={setIsValidAllowance}
     />
   )
 }
