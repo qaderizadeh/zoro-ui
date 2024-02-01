@@ -8,15 +8,10 @@ import useForm, { FormValues, UseFormInput } from "./useForm";
 import BigNumber from "bignumber.js";
 //import { useRepay, useSwapTokensAndRepay } from 'clients/api';
 import { useRepay } from "clients/api";
-import {
-  AccountData,
-  Delimiter,
-  LabeledInlineContent,
-  NoticeWarning,
-  QuaternaryButton,
-  SelectTokenTextField, //SwapDetails,
-  TokenTextField,
-} from "components";
+// import { Asset, Pool, Swap, SwapError, TokenBalance } from "types";
+import { useGetAllowance } from "clients/api";
+import { AccountData, Delimiter, LabeledInlineContent, NoticeWarning, QuaternaryButton, SelectTokenTextField, //SwapDetails,
+TokenTextField } from "components";
 import { useAuth } from "context/AuthContext";
 import { VError } from "errors";
 import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue";
@@ -24,15 +19,9 @@ import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue
 import useGetSwapTokenUserBalances from "hooks/useGetSwapTokenUserBalances";
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "translation";
-//import { Asset, Pool, Swap, SwapError, TokenBalance } from 'types';
 import { Asset, Pool, TokenBalance } from "types";
-import {
-  areTokensEqual,
-  convertTokensToWei,
-  convertWeiToTokens,
-  formatToReadablePercentage,
-  isFeatureEnabled,
-} from "utilities";
+import { areTokensEqual, convertTokensToWei, convertWeiToTokens, formatToReadablePercentage, isFeatureEnabled } from "utilities";
+
 
 export const PRESET_PERCENTAGES = [25, 50, 75, 100];
 
@@ -47,9 +36,10 @@ export interface RepayFormUiProps {
     setter: (currentFormValues: FormValues) => FormValues
   ) => void;
   formValues: FormValues;
-  //isSwapLoading: boolean;
-  //swap?: Swap;
-  //swapError?: SwapError;
+  setIsValidAllowance: () => void;
+  isSwapLoading: boolean;
+  // swap?: Swap;
+  // swapError?: SwapError;
 }
 
 export const RepayFormUi: React.FC<RepayFormUiProps> = ({
@@ -64,18 +54,28 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
   isSwapLoading,
   swap,
   swapError,
+  setIsValidAllowance,
 }) => {
   const { t, Trans } = useTranslation();
 
   const sharedStyles = useSharedStyles();
   const styles = useStyles();
-
+  const { accountAddress } = useAuth();
   const isUsingSwap = useMemo(
     () =>
       isFeatureEnabled("integratedSwap") &&
       formValues.fromToken &&
       !areTokensEqual(asset.vToken.underlyingToken, formValues.fromToken),
     [formValues.fromToken, asset.vToken.underlyingToken]
+  );
+
+  const { data: getTokenAllowanceData } = useGetAllowance(
+    {
+      token: formValues.fromToken,
+      spenderAddress: asset.vToken.address,
+      accountAddress,
+    },
+    { enabled: !!accountAddress && !formValues.fromToken.isNative }
   );
 
   const fromTokenUserWalletBalanceTokens = useMemo(() => {
@@ -143,23 +143,79 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
     }
 
     // Update field value to correspond to user's balance
-    const repayAmountTokens = asset.userBorrowBalanceTokens.lt(fromTokenUserWalletBalanceTokens) ? asset.userBorrowBalanceTokens : fromTokenUserWalletBalanceTokens || 0;
+    const repayAmountTokens = asset.userBorrowBalanceTokens.lt(
+      fromTokenUserWalletBalanceTokens
+    )
+      ? asset.userBorrowBalanceTokens
+      : fromTokenUserWalletBalanceTokens || 0;
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: new BigNumber(
-        repayAmountTokens
-      ).toFixed(),
+      amountTokens: repayAmountTokens.toFixed(),
       fixedRepayPercentage: undefined,
     }));
   }, [asset.userBorrowBalanceTokens, fromTokenUserWalletBalanceTokens]);
 
+  const tokenAllowance = useMemo(
+    () =>
+      convertWeiToTokens({
+        valueWei: getTokenAllowanceData?.allowanceWei || new BigNumber(0),
+        token: formValues.fromToken,
+      }),
+    [formValues.fromToken]
+  );
+
+  const isApprove = useMemo(() => {
+    if (
+      formValues.amountTokens &&
+      tokenAllowance &&
+      asset.userBorrowBalanceTokens
+    ) {
+      return (
+        new BigNumber(formValues.amountTokens).gt(tokenAllowance) &&
+        new BigNumber(formValues.amountTokens).lte(
+          asset.userBorrowBalanceTokens
+        )
+      );
+    } else return false;
+  }, [formValues.amountTokens]);
+
+  const handleSubmitWithAllowanceCheck = (e?: React.SyntheticEvent) => {
+    e?.preventDefault();
+
+    if (
+      formValues.amountTokens &&
+      tokenAllowance &&
+      asset.userBorrowBalanceTokens
+    ) {
+      if (
+        new BigNumber(formValues.amountTokens).gt(tokenAllowance) &&
+        new BigNumber(formValues.amountTokens).lte(
+          asset.userBorrowBalanceTokens
+        )
+      ) {
+        setIsValidAllowance(false);
+      } else if (
+        new BigNumber(formValues.amountTokens).lt(tokenAllowance) &&
+        new BigNumber(formValues.amountTokens).lte(
+          asset.userBorrowBalanceTokens
+        )
+      ) {
+        handleSubmit();
+      } else if (
+        new BigNumber(formValues.amountTokens).gt(asset.userBorrowBalanceTokens)
+      ) {
+        alert("It will be advised shortly");
+      }
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitWithAllowanceCheck}>
       <LabeledInlineContent
         css={sharedStyles.getRow({ isLast: true })}
         label={t("operationModal.repay.currentlyBorrowing")}
       >
-        {readableUserBorrowBalanceTokens} 
+        {readableUserBorrowBalanceTokens}
       </LabeledInlineContent>
 
       <div css={sharedStyles.getRow({ isLast: false })}>
@@ -287,6 +343,7 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
         toToken={asset.vToken.underlyingToken}
         fromToken={formValues.fromToken}
         fromTokenAmountTokens={formValues.amountTokens}
+        isApprove={isApprove}
       />
     </form>
   );
@@ -296,9 +353,15 @@ export interface RepayFormProps {
   asset: Asset;
   pool: Pool;
   onCloseModal: () => void;
+  setIsValidAllowance: () => void;
 }
 
-const RepayForm: React.FC<RepayFormProps> = ({ asset, pool, onCloseModal }) => {
+const RepayForm: React.FC<RepayFormProps> = ({
+  asset,
+  pool,
+  onCloseModal,
+  setIsValidAllowance,
+}) => {
   const { accountAddress } = useAuth();
 
   const [formValues, setFormValues] = useState<FormValues>({
@@ -409,6 +472,7 @@ const RepayForm: React.FC<RepayFormProps> = ({ asset, pool, onCloseModal }) => {
       tokenBalances={tokenBalances}
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
+      setIsValidAllowance={setIsValidAllowance}
     />
   );
 };

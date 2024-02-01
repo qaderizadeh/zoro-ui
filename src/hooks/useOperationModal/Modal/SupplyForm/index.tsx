@@ -167,9 +167,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
 
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: new BigNumber(
-        fromTokenUserWalletBalanceTokens || 0
-      ).toFixed(),
+      amountTokens: fromTokenUserWalletBalanceTokens.toFixed(),
     }));
   }, [fromTokenUserWalletBalanceTokens]);
 

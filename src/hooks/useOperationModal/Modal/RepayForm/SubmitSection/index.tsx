@@ -19,6 +19,7 @@ export interface SubmitSectionProps {
   isSwapLoading: boolean
   swap?: Swap
   formError?: FormError
+  isApprove: boolean
 }
 
 export const SubmitSection: React.FC<SubmitSectionProps> = ({
@@ -30,7 +31,8 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
   fromTokenAmountTokens,
   formError,
   swap,
-  isSwapLoading
+  isSwapLoading,
+  isApprove,
 }) => {
   const { t } = useTranslation()
   const { geolocation } = useContext(GeolocationContext)
@@ -81,7 +83,7 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
       return t('operationModal.repay.submitButtonLabel.repaying')
     }
 
-    return t('operationModal.repay.submitButtonLabel.repay')
+    return isApprove ? t('approveToken.approveButtonLabel') : t('operationModal.repay.submitButtonLabel.repay')
   }, [
     isSwapLoading,
     fromTokenAmountTokens,

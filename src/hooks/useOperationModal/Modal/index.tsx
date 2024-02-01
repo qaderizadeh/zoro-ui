@@ -46,7 +46,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
               pool={pool}
               onCloseModal={onClose}
               setIsValidAllowance={setIsValidAllowance}
-           />
+            />
           )}
         </AssetAccessor>
       ),
@@ -100,9 +100,15 @@ const OperationModal: React.FC<OperationModalProps> = ({
             symbol: vToken.underlyingToken.symbol,
           })}
           action="repay"
+          isValidAllowance={isValidAllowance}
         >
           {({ asset, pool }) => (
-            <RepayForm asset={asset} pool={pool} onCloseModal={onClose} />
+            <RepayForm
+              asset={asset}
+              pool={pool}
+              onCloseModal={onClose}
+              setIsValidAllowance={setIsValidAllowance}
+            />
           )}
         </AssetAccessor>
       ),
