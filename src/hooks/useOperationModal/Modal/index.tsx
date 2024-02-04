@@ -37,6 +37,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
           approveTokenMessage={t("operationModal.supply.enableToken.title", {
             symbol: vToken.underlyingToken.symbol,
           })}
+          setIsValidAllowance={setIsValidAllowance}
           isValidAllowance={isValidAllowance}
           action="supply"
         >
@@ -45,6 +46,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
               asset={asset}
               pool={pool}
               onCloseModal={onClose}
+              isValidAllowance={isValidAllowance}
               setIsValidAllowance={setIsValidAllowance}
             />
           )}
@@ -100,6 +102,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
             symbol: vToken.underlyingToken.symbol,
           })}
           action="repay"
+          setIsValidAllowance={setIsValidAllowance}
           isValidAllowance={isValidAllowance}
         >
           {({ asset, pool }) => (
@@ -107,6 +110,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
               asset={asset}
               pool={pool}
               onCloseModal={onClose}
+              isValidAllowance={isValidAllowance}
               setIsValidAllowance={setIsValidAllowance}
             />
           )}

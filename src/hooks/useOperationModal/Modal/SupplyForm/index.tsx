@@ -16,7 +16,7 @@ import useFormatTokensToReadableValue from 'hooks/useFormatTokensToReadableValue
 //import useGetSwapInfo from 'hooks/useGetSwapInfo';
 import useGetSwapTokenUserBalances from 'hooks/useGetSwapTokenUserBalances';
 import { useGetAllowance } from 'clients/api';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'translation';
 import { Asset, Pool, Swap, SwapError, TokenBalance } from 'types';
 import { areTokensEqual, convertTokensToWei, convertWeiToTokens, isFeatureEnabled } from 'utilities';
@@ -36,6 +36,7 @@ export interface SupplyFormUiProps {
   isSwapLoading: boolean
   swap?: Swap
   swapError?: SwapError
+  isValidAllowance: boolean
   setIsValidAllowance: () => void
 }
 
@@ -51,6 +52,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
   isSwapLoading,
   swap,
   swapError,
+  isValidAllowance,
   setIsValidAllowance,
 }) => {
   const { t, Trans } = useTranslation()
@@ -119,7 +121,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
         valueWei: getTokenAllowanceData?.allowanceWei || new BigNumber(0),
         token: formValues.fromToken,
       }),
-    [formValues.fromToken]
+    [formValues.fromToken, isValidAllowance]
   );
 
   const isApprove = useMemo(() => {
@@ -326,6 +328,7 @@ export interface SupplyFormProps {
   asset: Asset
   pool: Pool
   onCloseModal: () => void,
+  isValidAllowance: boolean,
   setIsValidAllowance: () => void,
 }
 
@@ -333,6 +336,7 @@ const SupplyForm: React.FC<SupplyFormProps> = ({
   asset,
   pool,
   onCloseModal,
+  isValidAllowance,
   setIsValidAllowance,
 }) => {
   const { accountAddress } = useAuth()
@@ -426,6 +430,7 @@ const SupplyForm: React.FC<SupplyFormProps> = ({
       tokenBalances={tokenBalances}
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
+      isValidAllowance={isValidAllowance}
       setIsValidAllowance={setIsValidAllowance}
     />
   )

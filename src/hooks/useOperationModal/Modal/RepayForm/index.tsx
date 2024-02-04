@@ -36,6 +36,7 @@ export interface RepayFormUiProps {
     setter: (currentFormValues: FormValues) => FormValues
   ) => void;
   formValues: FormValues;
+  isValidAllowance: boolean
   setIsValidAllowance: () => void;
   isSwapLoading: boolean;
   // swap?: Swap;
@@ -54,6 +55,7 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
   isSwapLoading,
   swap,
   swapError,
+  isValidAllowance,
   setIsValidAllowance,
 }) => {
   const { t, Trans } = useTranslation();
@@ -161,7 +163,7 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
         valueWei: getTokenAllowanceData?.allowanceWei || new BigNumber(0),
         token: formValues.fromToken,
       }),
-    [formValues.fromToken]
+    [formValues.fromToken, isValidAllowance]
   );
 
   const isApprove = useMemo(() => {
@@ -353,6 +355,7 @@ export interface RepayFormProps {
   asset: Asset;
   pool: Pool;
   onCloseModal: () => void;
+  isValidAllowance: boolean;
   setIsValidAllowance: () => void;
 }
 
@@ -360,6 +363,7 @@ const RepayForm: React.FC<RepayFormProps> = ({
   asset,
   pool,
   onCloseModal,
+  isValidAllowance,
   setIsValidAllowance,
 }) => {
   const { accountAddress } = useAuth();
@@ -472,6 +476,7 @@ const RepayForm: React.FC<RepayFormProps> = ({
       tokenBalances={tokenBalances}
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
+      isValidAllowance={isValidAllowance}
       setIsValidAllowance={setIsValidAllowance}
     />
   );

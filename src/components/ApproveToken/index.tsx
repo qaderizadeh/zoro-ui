@@ -27,6 +27,7 @@ export interface ApproveTokenUiProps {
   isApproveTokenLoading?: boolean;
   assetInfo?: LabeledInlineContentProps[];
   disabled?: boolean;
+  setIsValidAllowance: () => void;
 }
 
 export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
@@ -39,6 +40,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
   isInitialLoading = false,
   isApproveTokenLoading = false,
   disabled = false,
+  setIsValidAllowance,
 }) => {
   const { t } = useTranslation();
   const styles = useStyles();
@@ -49,6 +51,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
       setLoading(true);
       await approveToken();
       setLoading(false);
+      setIsValidAllowance(true);
     } catch (error) {
       setLoading(false);
 
@@ -122,6 +125,7 @@ export interface ApproveTokenProps
     "assetInfo" | "disabled" | "title" | "token"
   > {
   spenderAddress: string;
+  setIsValidAllowance: () => void;
   isValidAllowance: boolean;
 }
 
@@ -129,6 +133,7 @@ export const ApproveToken: React.FC<ApproveTokenProps> = ({
   token,
   spenderAddress,
   isValidAllowance,
+  setIsValidAllowance,
   ...rest
 }) => {
   const { accountAddress } = useAuth();
@@ -149,6 +154,7 @@ export const ApproveToken: React.FC<ApproveTokenProps> = ({
       {...rest}
       token={token}
       approveToken={approveToken}
+      setIsValidAllowance={setIsValidAllowance}
       isTokenApproved={isValidAllowance? isTokenApproved ?? false : false}
       isApproveTokenLoading={isApproveTokenLoading}
       isInitialLoading={isTokenApprovalStatusLoading}
