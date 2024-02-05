@@ -167,7 +167,8 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
   );
 
   const isApprove = useMemo(() => {
-    if (
+    if (formValues.fromToken?.isNative) return false;
+    else if (
       formValues.amountTokens &&
       tokenAllowance &&
       asset.userBorrowBalanceTokens
@@ -184,7 +185,8 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
   const handleSubmitWithAllowanceCheck = (e?: React.SyntheticEvent) => {
     e?.preventDefault();
 
-    if (
+    if (formValues.fromToken?.isNative) handleSubmit();
+    else if (
       formValues.amountTokens &&
       tokenAllowance &&
       asset.userBorrowBalanceTokens

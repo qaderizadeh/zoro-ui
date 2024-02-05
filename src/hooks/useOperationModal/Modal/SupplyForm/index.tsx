@@ -125,7 +125,9 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
   );
 
   const isApprove = useMemo(() => {
-    if (formValues.amountTokens && tokenAllowance)
+    if (formValues.fromToken?.isNative)
+      return false;
+    else if (formValues.amountTokens && tokenAllowance)
       return new BigNumber(formValues.amountTokens).isGreaterThan(tokenAllowance);
     else
       return false;
@@ -176,12 +178,11 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
   const handleSubmitWithAllowanceCheck = (e?: React.SyntheticEvent) => {
     e?.preventDefault();
 
-    if (formValues.amountTokens && tokenAllowance) {
+    if (formValues.fromToken?.isNative) handleSubmit();
+    else if (formValues.amountTokens && tokenAllowance) {
       if (new BigNumber(formValues.amountTokens).isGreaterThan(tokenAllowance)) {
         setIsValidAllowance(false);
-      } else {
-        handleSubmit();
-      }
+      } else handleSubmit();
     }    
   }
 
