@@ -14,6 +14,7 @@ export type UseGetAllowanceQueryKey = [
     tokenAddress: string;
     spenderAddress: string;
     accountAddress: string;
+    isValidAllowance?: boolean;
   },
 ];
 
@@ -30,6 +31,7 @@ const useGetAllowance = (
     token,
     spenderAddress,
     accountAddress,
+    isValidAllowance,
   }: Omit<GetAllowanceInput, 'tokenContract'> & { token: Token },
   options?: Options,
 ) => {
@@ -42,6 +44,7 @@ const useGetAllowance = (
         tokenAddress: token.address,
         spenderAddress,
         accountAddress,
+        isValidAllowance,
       },
     ],
     () =>

@@ -6,6 +6,7 @@ export interface GetAllowanceInput {
   tokenContract: VrtToken | XvsToken | Bep20 | VaiToken;
   accountAddress: string;
   spenderAddress: string;
+  isValidAllowance?: boolean;
 }
 
 export type GetAllowanceOutput = {

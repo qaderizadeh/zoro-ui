@@ -66,6 +66,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
       token: formValues.fromToken,
       spenderAddress: asset.vToken.address,
       accountAddress,
+      isValidAllowance,
     },
     { enabled: !!accountAddress && !formValues.fromToken.isNative }
   );
