@@ -14,7 +14,7 @@ import { GeolocationContext } from "context/GeolocationContext";
 import { VError, formatVErrorToReadableString } from "errors";
 import { ContractReceipt } from "ethers";
 import useTokenApproval from "hooks/useTokenApproval";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useTranslation } from "translation";
 import { Token } from "types";
 
@@ -28,6 +28,7 @@ export interface ApproveTokenUiProps {
   assetInfo?: LabeledInlineContentProps[];
   disabled?: boolean;
   setIsValidAllowance: () => void;
+  isValidAllowance?: boolean;
 }
 
 export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
@@ -40,6 +41,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
   isInitialLoading = false,
   isApproveTokenLoading = false,
   disabled = false,
+  isValidAllowance,
   setIsValidAllowance,
 }) => {
   const { t } = useTranslation();
@@ -66,6 +68,10 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
       });
     }
   };
+
+  useEffect(() => {
+    if (!isValidAllowance) handleApproveToken();
+  }, [isValidAllowance])
 
   if (isTokenApproved) {
     return <>{children}</>;
@@ -155,6 +161,7 @@ export const ApproveToken: React.FC<ApproveTokenProps> = ({
       token={token}
       approveToken={approveToken}
       setIsValidAllowance={setIsValidAllowance}
+      isValidAllowance={isValidAllowance}
       isTokenApproved={isValidAllowance? isTokenApproved ?? false : false}
       isApproveTokenLoading={isApproveTokenLoading}
       isInitialLoading={isTokenApprovalStatusLoading}

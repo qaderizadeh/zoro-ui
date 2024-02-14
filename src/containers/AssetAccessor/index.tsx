@@ -40,7 +40,7 @@ const AssetAccessor: React.FC<AssetAccessorProps> = ({
     areTokensEqual(item.vToken, vToken)
   );
   const type =
-    action === "supply" || action === "withdraw" || action === "repay"
+    action === "supply" || action === "repay"
       ? "supply"
       : "borrow";
 
