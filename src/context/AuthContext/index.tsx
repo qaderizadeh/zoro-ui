@@ -7,6 +7,7 @@ import useCopyToClipboard from "hooks/useCopyToClipboard";
 import noop from "noop-ts";
 import React, { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "translation";
+import config from "config";
 export interface AuthContextValue {
   login: (connector: Connector) => Promise<void>;
   logOut: () => void;
@@ -53,9 +54,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (
       typeof connectedChain?.id !== "undefined" &&
-      connectedChain?.id !== "0x118"
+      connectedChain?.id !== `0x${config.chainId.toString(16)}`
     )
-      setChain({ chainId: "0x118" });
+      setChain({ chainId: `0x${config.chainId.toString(16)}` });
   }, [connectedChain]);
 
   const { t } = useTranslation();
