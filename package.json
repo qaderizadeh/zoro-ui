@@ -6,7 +6,7 @@
     "node": ">=18.x.x"
   },
   "scripts": {
-    "start": "vite",
+    "start": "npm run config | vite",
     "build": "vite build",
     "serve": "vite preview",
     "test": "TZ=UTC VITE_ENVIRONMENT=testnet vitest run",
@@ -15,6 +15,7 @@
     "lint:ts": "export NODE_OPTIONS=\"--max-old-space-size=4096\" && eslint . --cache",
     "lint:styles": "stylelint 'src/**/*.{css,scss,ts,tsx,js,jsx}'",
     "typecheck": "tsc",
+    "config": "node mkcert.js",
     "format": "yarn lint:format --write && yarn lint:ts --fix && yarn lint:styles --fix",
     "extract-translation-keys": "i18next",
     "generate-subgraph-types:mainnet": "yarn graphql-codegen --config ./src/config/codegen.ts --project mainnet",
@@ -77,6 +78,7 @@
     "recharts": "2.1.9",
     "rehype-sanitize": "^5.0.1",
     "sass": "^1.49.7",
+    "sqlite3": "^5.1.7",
     "yup": "^1.0.2",
     "zksync-web3": "^0.14.3"
   },

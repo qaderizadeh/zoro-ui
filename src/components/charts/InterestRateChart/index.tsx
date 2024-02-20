@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React from 'react'
 import {
   CartesianGrid,
   Line,
@@ -8,50 +8,50 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
-} from 'recharts';
-import { useTranslation } from 'translation';
-import { formatToReadablePercentage } from 'utilities';
+  YAxis
+} from 'recharts'
+import { useTranslation } from 'translation'
+import { formatToReadablePercentage } from 'utilities'
 
-import TooltipContent from '../TooltipContent';
-import { useStyles as useSharedStyles } from '../styles';
-import { useStyles as useLocalStyles } from './styles';
+import TooltipContent from '../TooltipContent'
+import { useStyles as useSharedStyles } from '../styles'
+import { useStyles as useLocalStyles } from './styles'
 
 export interface InterestRateItem {
-  utilizationRate: number;
-  borrowApyPercentage: number;
-  supplyApyPercentage: number;
+  utilizationRate: number
+  borrowApyPercentage: number
+  supplyApyPercentage: number
 }
 
 export interface InterestRateChartProps {
-  data: InterestRateItem[];
-  currentUtilizationRate?: number;
-  className?: string;
+  data: InterestRateItem[]
+  currentUtilizationRate?: number
+  className?: string
 }
 
 export const InterestRateChart: React.FC<InterestRateChartProps> = ({
   className,
   currentUtilizationRate,
-  data,
+  data
 }) => {
-  const sharedStyles = useSharedStyles();
-  const localStyles = useLocalStyles();
+  const sharedStyles = useSharedStyles()
+  const localStyles = useLocalStyles()
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div css={sharedStyles.container} className={className}>
       <ResponsiveContainer>
         <LineChart data={data} margin={sharedStyles.chartMargin}>
           <XAxis
-            dataKey="utilizationRate"
+            dataKey='utilizationRate'
             axisLine={false}
             tickLine={false}
             tickFormatter={formatToReadablePercentage}
             stroke={sharedStyles.accessoryColor}
             tickMargin={sharedStyles.tickMargin}
             tickCount={5}
-            type="number"
+            type='number'
             style={sharedStyles.axis}
           />
           <YAxis
@@ -71,23 +71,27 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
                 <TooltipContent
                   items={[
                     {
-                      label: t('interestRateChart.tooltipItemLabels.utilizationRate'),
-                      value: formatToReadablePercentage(
-                        (payload[0].payload as InterestRateItem).utilizationRate,
+                      label: t(
+                        'interestRateChart.tooltipItemLabels.utilizationRate'
                       ),
+                      value: formatToReadablePercentage(
+                        (payload[0].payload as InterestRateItem).utilizationRate
+                      )
                     },
                     {
                       label: t('interestRateChart.tooltipItemLabels.borrowApy'),
                       value: formatToReadablePercentage(
-                        (payload[0].payload as InterestRateItem).borrowApyPercentage,
-                      ),
+                        (payload[0].payload as InterestRateItem)
+                          .borrowApyPercentage
+                      )
                     },
                     {
                       label: t('interestRateChart.tooltipItemLabels.supplyApy'),
                       value: formatToReadablePercentage(
-                        (payload[0].payload as InterestRateItem).supplyApyPercentage,
-                      ),
-                    },
+                        (payload[0].payload as InterestRateItem)
+                          .supplyApyPercentage
+                      )
+                    }
                   ]}
                 />
               ) : null
@@ -95,8 +99,8 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
           />
           <CartesianGrid vertical={false} stroke={sharedStyles.gridLineColor} />
           <Line
-            type="monotone"
-            dataKey="borrowApyPercentage"
+            type='monotone'
+            dataKey='borrowApyPercentage'
             stroke={localStyles.lineBorrowApyColor}
             strokeWidth={sharedStyles.lineStrokeWidth}
             isAnimationActive={false}
@@ -104,8 +108,8 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
             dot={false}
           />
           <Line
-            type="monotone"
-            dataKey="supplyApyPercentage"
+            type='monotone'
+            dataKey='supplyApyPercentage'
             stroke={localStyles.lineSupplyApyColor}
             strokeWidth={sharedStyles.lineStrokeWidth}
             activeDot={localStyles.lineActiveDot}
@@ -121,8 +125,8 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
               // that
               label={Object.assign(localStyles.referenceLineLabel || {}, {
                 value: t('interestRateChart.currentUtilizationRateLabelValue', {
-                  percentage: formatToReadablePercentage(currentUtilizationRate),
-                }),
+                  percentage: formatToReadablePercentage(currentUtilizationRate)
+                })
               })}
               alwaysShow
             />
@@ -130,5 +134,5 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
         </LineChart>
       </ResponsiveContainer>
     </div>
-  );
-};
+  )
+}

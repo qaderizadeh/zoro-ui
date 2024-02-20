@@ -14,11 +14,10 @@ const formatToApySnapshots = ({
 }): VTokenApySnapshot[] => {
   const apySimulations: VTokenApySnapshot[] = [];
   const results = Object.values(vTokenBalanceCallResults.results)[0].callsReturnContext;
-
   let utilizationRate = 1;
 
   for (let i = 0; i < results.length; i += 2) {
-    const borrowBase = new BigNumber(results[i].returnValues[0].hex)
+    const borrowBase = new BigNumber(results[i].returnValues[0]?.hex)
       .div(COMPOUND_MANTISSA)
       .times(BLOCKS_PER_DAY)
       .plus(1);
@@ -29,7 +28,7 @@ const formatToApySnapshots = ({
       .times(100)
       .toNumber();
 
-    const supplyBase = new BigNumber(results[i + 1].returnValues[0].hex)
+    const supplyBase = new BigNumber(results[i + 1].returnValues[0]?.hex)
       .div(COMPOUND_MANTISSA)
       .times(BLOCKS_PER_DAY)
       .plus(1);

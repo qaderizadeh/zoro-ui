@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import Card, { CardProps } from "./Card";
-import MarketInfo, { MarketInfoProps } from "./MarketInfo";
-import { useStyles } from "./styles";
-import TEST_IDS from "./testIds";
-import useGetChartData from "./useGetChartData";
-import { Paper } from "@mui/material";
-import BigNumber from "bignumber.js";
-import { useGetAsset, useGetVTokenApySimulations } from "clients/api";
+import Card, { CardProps } from './Card'
+import MarketInfo, { MarketInfoProps } from './MarketInfo'
+import { useStyles } from './styles'
+import TEST_IDS from './testIds'
+import useGetChartData from './useGetChartData'
+import { Paper } from '@mui/material'
+import BigNumber from 'bignumber.js'
+import { useGetAsset, useGetVTokenApySimulations } from 'clients/api'
 import {
   ApyChart,
   ApyChartProps,
@@ -14,20 +14,20 @@ import {
   InterestRateChart,
   InterestRateChartProps,
   SecondaryButton,
-  Spinner,
-} from "components";
-import { COMPOUND_MANTISSA } from "constants/compoundMantissa";
-import PLACEHOLDER_KEY from "constants/placeholderKey";
-import { routes } from "constants/routing";
-import { TOKENS } from "constants/tokens";
-import { BLOCKS_PER_DAY } from "constants/zk";
-import { useAuth } from "context/AuthContext";
-import { useHideXlDownCss, useShowXlDownCss } from "hooks/responsive";
-import useOperationModal from "hooks/useOperationModal";
-import React, { useMemo } from "react";
-import { Redirect, RouteComponentProps } from "react-router-dom";
-import { useTranslation } from "translation";
-import { Asset } from "types";
+  Spinner
+} from 'components'
+import { COMPOUND_MANTISSA } from 'constants/compoundMantissa'
+import PLACEHOLDER_KEY from 'constants/placeholderKey'
+import { routes } from 'constants/routing'
+import { TOKENS } from 'constants/tokens'
+import { BLOCKS_PER_DAY } from 'constants/zk'
+import { useAuth } from 'context/AuthContext'
+import { useHideXlDownCss, useShowXlDownCss } from 'hooks/responsive'
+import useOperationModal from 'hooks/useOperationModal'
+import React, { useMemo } from 'react'
+import { Redirect, RouteComponentProps } from 'react-router-dom'
+import { useTranslation } from 'translation'
+import { Asset } from 'types'
 import {
   areAddressesEqual,
   formatCentsToReadableValue,
@@ -35,17 +35,17 @@ import {
   formatTokensToReadableValue,
   getContractAddress,
   getVTokenByAddress,
-  isTokenActionEnabled,
-} from "utilities";
+  isTokenActionEnabled
+} from 'utilities'
 
 export interface MarketUiProps {
-  isChartDataLoading: boolean;
-  supplyChartData: ApyChartProps["data"];
-  borrowChartData: ApyChartProps["data"];
-  interestRateChartData: InterestRateChartProps["data"];
-  isInterestRateChartDataLoading: boolean;
-  poolComptrollerAddress: string;
-  asset?: Asset;
+  isChartDataLoading: boolean
+  supplyChartData: ApyChartProps['data']
+  borrowChartData: ApyChartProps['data']
+  interestRateChartData: InterestRateChartProps['data']
+  isInterestRateChartDataLoading: boolean
+  poolComptrollerAddress: string
+  asset?: Asset
 }
 
 export const MarketUi: React.FC<MarketUiProps> = ({
@@ -55,20 +55,20 @@ export const MarketUi: React.FC<MarketUiProps> = ({
   supplyChartData,
   borrowChartData,
   isInterestRateChartDataLoading,
-  interestRateChartData,
+  interestRateChartData
 }) => {
-  const { t } = useTranslation();
-  const styles = useStyles();
+  const { t } = useTranslation()
+  const styles = useStyles()
 
-  const hideXlDownCss = useHideXlDownCss();
-  const showXlDownCss = useShowXlDownCss();
+  const hideXlDownCss = useHideXlDownCss()
+  const showXlDownCss = useShowXlDownCss()
 
-  const { openOperationModal, OperationModal } = useOperationModal();
+  const { openOperationModal, OperationModal } = useOperationModal()
 
   const {
     currentUtilizationRate,
     dailySupplyInterestsCents,
-    dailyBorrowInterestsCents,
+    dailyBorrowInterestsCents
   } = useMemo(
     () => ({
       currentUtilizationRate:
@@ -90,156 +90,156 @@ export const MarketUi: React.FC<MarketUiProps> = ({
       // prettier-ignore
       dailySupplyInterestsCents: asset && +asset.supplyBalanceCents * (((1 + asset.supplyRatePerBlockTokens.toNumber()) ** BLOCKS_PER_DAY) - 1),
       // prettier-ignore
-      dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** BLOCKS_PER_DAY) - 1),
+      dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** BLOCKS_PER_DAY) - 1)
     }),
     [
       asset?.supplyRatePerBlockTokens,
       asset?.supplyBalanceCents,
       asset?.borrowRatePerBlockTokens,
-      asset?.borrowRatePerBlockTokens,
+      asset?.borrowRatePerBlockTokens
     ]
-  );
+  )
 
   const isSupplyOrBorrowEnabled = React.useMemo(
     () =>
       asset &&
       (isTokenActionEnabled({
         token: asset.vToken.underlyingToken,
-        action: "supply",
+        action: 'supply'
       }) ||
         isTokenActionEnabled({
           token: asset.vToken.underlyingToken,
-          action: "borrow",
+          action: 'borrow'
         })),
     [asset?.vToken.underlyingToken]
-  );
+  )
 
-  const supplyInfoStats: CardProps["stats"] = React.useMemo(
+  const supplyInfoStats: CardProps['stats'] = React.useMemo(
     () =>
       asset
         ? [
             {
-              label: t("market.supplyInfo.stats.totalSupply"),
+              label: t('market.supplyInfo.stats.totalSupply'),
               value: formatCentsToReadableValue({
-                value: asset.supplyBalanceCents,
-              }),
+                value: asset.supplyBalanceCents
+              })
             },
             {
-              label: t("market.supplyInfo.stats.apy"),
-              value: formatToReadablePercentage(asset?.supplyApyPercentage),
+              label: t('market.supplyInfo.stats.apy'),
+              value: formatToReadablePercentage(asset?.supplyApyPercentage)
             },
             {
-              label: t("market.supplyInfo.stats.distributionApy"),
+              label: t('market.supplyInfo.stats.distributionApy'),
               value: formatToReadablePercentage(
                 asset.distributions.reduce(
                   (acc: any, distribution: any) =>
                     acc.plus(distribution.supplyApyPercentage),
                   new BigNumber(0)
                 )
-              ),
-            },
+              )
+            }
           ]
         : [],
     [
       asset?.supplyApyPercentage,
       asset?.supplyApyPercentage,
-      asset?.distributions,
+      asset?.distributions
     ]
-  );
+  )
 
-  const supplyInfoLegends: CardProps["legends"] = [
+  const supplyInfoLegends: CardProps['legends'] = [
     {
-      label: t("market.legends.supplyApy"),
-      color: styles.legendColors.supplyApy,
-    },
-  ];
+      label: t('market.legends.supplyApy'),
+      color: styles.legendColors.supplyApy
+    }
+  ]
 
-  const borrowInfoStats: CardProps["stats"] = React.useMemo(
+  const borrowInfoStats: CardProps['stats'] = React.useMemo(
     () =>
       asset
         ? [
             {
-              label: t("market.borrowInfo.stats.totalBorrow"),
+              label: t('market.borrowInfo.stats.totalBorrow'),
               value: formatCentsToReadableValue({
-                value: asset.borrowBalanceCents,
-              }),
+                value: asset.borrowBalanceCents
+              })
             },
             {
-              label: t("market.borrowInfo.stats.apy"),
-              value: formatToReadablePercentage(asset.borrowApyPercentage),
+              label: t('market.borrowInfo.stats.apy'),
+              value: formatToReadablePercentage(asset.borrowApyPercentage)
             },
             {
-              label: t("market.borrowInfo.stats.distributionApy"),
+              label: t('market.borrowInfo.stats.distributionApy'),
               value: formatToReadablePercentage(
                 asset.distributions.reduce(
                   (acc: any, distribution: any) =>
                     acc.plus(distribution.borrowApyPercentage),
                   new BigNumber(0)
                 )
-              ),
-            },
+              )
+            }
           ]
         : [],
     [
       asset?.borrowBalanceCents,
       asset?.borrowApyPercentage,
-      asset?.distributions,
+      asset?.distributions
     ]
-  );
+  )
 
-  const borrowInfoLegends: CardProps["legends"] = [
+  const borrowInfoLegends: CardProps['legends'] = [
     {
-      label: t("market.legends.borrowApy"),
-      color: styles.legendColors.borrowApy,
-    },
-  ];
+      label: t('market.legends.borrowApy'),
+      color: styles.legendColors.borrowApy
+    }
+  ]
 
-  const interestRateModelLegends: CardProps["legends"] = [
+  const interestRateModelLegends: CardProps['legends'] = [
     {
-      label: t("market.legends.utilizationRate"),
-      color: styles.legendColors.utilizationRate,
+      label: t('market.legends.utilizationRate'),
+      color: styles.legendColors.utilizationRate
     },
     {
-      label: t("market.legends.borrowApy"),
-      color: styles.legendColors.borrowApy,
+      label: t('market.legends.borrowApy'),
+      color: styles.legendColors.borrowApy
     },
     {
-      label: t("market.legends.supplyApy"),
-      color: styles.legendColors.supplyApy,
-    },
-  ];
+      label: t('market.legends.supplyApy'),
+      color: styles.legendColors.supplyApy
+    }
+  ]
 
-  const marketInfoStats: MarketInfoProps["stats"] = React.useMemo(() => {
+  const marketInfoStats: MarketInfoProps['stats'] = React.useMemo(() => {
     if (!asset) {
-      return [];
+      return []
     }
 
     const distributionRows = asset.distributions.map((distribution: any) => ({
-      label: t("market.marketInfo.stats.dailyDistribution", {
-        tokenSymbol: distribution.token.symbol,
+      label: t('market.marketInfo.stats.dailyDistribution', {
+        tokenSymbol: distribution.token.symbol
       }),
       value: formatTokensToReadableValue({
         value: distribution.dailyDistributedTokens,
         addSymbol: false,
-        token: TOKENS.xvs,
-      }),
-    }));
+        token: TOKENS.xvs
+      })
+    }))
 
     return [
       {
-        label: t("market.marketInfo.stats.priceLabel"),
+        label: t('market.marketInfo.stats.priceLabel'),
         value: asset.tokenPriceCents
           ? formatCentsToReadableValue({
               value: asset.tokenPriceCents,
-              isTokenPrice: true,
+              isTokenPrice: true
             })
-          : PLACEHOLDER_KEY,
+          : PLACEHOLDER_KEY
       },
       {
-        label: t("market.marketInfo.stats.marketLiquidityLabel"),
+        label: t('market.marketInfo.stats.marketLiquidityLabel'),
         value: formatCentsToReadableValue({
-          value: asset.liquidityCents,
-        }),
+          value: asset.liquidityCents
+        })
       },
       //{
       //label: t('market.marketInfo.stats.supplierCountLabel'),
@@ -259,69 +259,69 @@ export const MarketUi: React.FC<MarketUiProps> = ({
       //}),
       //},
       {
-        label: t("market.marketInfo.stats.borrowCapLabel"),
+        label: t('market.marketInfo.stats.borrowCapLabel'),
         value: !asset.borrowCapTokens
-          ? t("market.marketInfo.stats.unlimitedBorrowCap")
+          ? t('market.marketInfo.stats.unlimitedBorrowCap')
           : formatTokensToReadableValue({
               value: asset.borrowCapTokens,
-              token: asset.vToken.underlyingToken,
-            }),
+              token: asset.vToken.underlyingToken
+            })
       },
       {
-        label: t("market.marketInfo.stats.dailySupplyingInterestsLabel"),
+        label: t('market.marketInfo.stats.dailySupplyingInterestsLabel'),
         value: formatCentsToReadableValue({
-          value: dailySupplyInterestsCents,
-        }),
+          value: dailySupplyInterestsCents
+        })
       },
       {
-        label: t("market.marketInfo.stats.dailyBorrowingInterestsLabel"),
+        label: t('market.marketInfo.stats.dailyBorrowingInterestsLabel'),
         value: formatCentsToReadableValue({
-          value: dailyBorrowInterestsCents,
-        }),
+          value: dailyBorrowInterestsCents
+        })
       },
       ...distributionRows,
       {
-        label: t("market.marketInfo.stats.reserveTokensLabel"),
+        label: t('market.marketInfo.stats.reserveTokensLabel'),
         value: formatTokensToReadableValue({
           value: asset.reserveTokens,
-          token: asset.vToken.underlyingToken,
-        }),
+          token: asset.vToken.underlyingToken
+        })
       },
       {
-        label: t("market.marketInfo.stats.reserveFactorLabel"),
+        label: t('market.marketInfo.stats.reserveFactorLabel'),
         value: formatToReadablePercentage(
           asset.reserveFactor && asset.reserveFactor * 100
-        ),
+        )
       },
       {
-        label: t("market.marketInfo.stats.collateralFactorLabel"),
+        label: t('market.marketInfo.stats.collateralFactorLabel'),
         value: formatToReadablePercentage(
           asset.collateralFactor && asset.collateralFactor * 100
-        ),
+        )
       },
       {
-        label: t("market.marketInfo.stats.mintedTokensLabel", {
-          vTokenSymbol: asset.vToken.symbol,
+        label: t('market.marketInfo.stats.mintedTokensLabel', {
+          vTokenSymbol: asset.vToken.symbol
         }),
         value: formatTokensToReadableValue({
           value: asset.supplyBalanceTokens.multipliedBy(
             asset.exchangeRateVTokens
           ),
           addSymbol: false,
-          token: asset.vToken,
-        }),
+          token: asset.vToken
+        })
       },
       {
-        label: t("market.marketInfo.stats.exchangeRateLabel"),
+        label: t('market.marketInfo.stats.exchangeRateLabel'),
         value: asset.exchangeRateVTokens
-          ? t("market.marketInfo.stats.exchangeRateValue", {
+          ? t('market.marketInfo.stats.exchangeRateValue', {
               tokenSymbol: asset.vToken.underlyingToken.symbol,
               vTokenSymbol: asset.vToken.symbol,
-              rate: asset.exchangeRateVTokens.dp(6).toFixed(),
+              rate: asset.exchangeRateVTokens.dp(6).toFixed()
             })
-          : PLACEHOLDER_KEY,
-      },
-    ];
+          : PLACEHOLDER_KEY
+      }
+    ]
   }, [
     asset?.tokenPriceCents,
     asset?.liquidityCents,
@@ -336,18 +336,18 @@ export const MarketUi: React.FC<MarketUiProps> = ({
     asset?.supplyBalanceTokens,
     asset?.exchangeRateVTokens,
     dailySupplyInterestsCents,
-    dailyBorrowInterestsCents,
-  ]);
+    dailyBorrowInterestsCents
+  ])
 
   if (!asset) {
-    return <Spinner />;
+    return <Spinner />
   }
 
   const buttonsDom = (
     <>
       {isTokenActionEnabled({
         token: asset.vToken.underlyingToken,
-        action: "supply",
+        action: 'supply'
       }) && (
         <Button
           fullWidth
@@ -356,17 +356,17 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             openOperationModal({
               vToken: asset.vToken,
               poolComptrollerAddress,
-              initialActiveTabIndex: 0,
+              initialActiveTabIndex: 0
             })
           }
-          className={"custom-btn-wrap"}
+          className={'custom-btn-wrap'}
         >
-          {t("market.supplyButtonLabel")}
+          {t('market.supplyButtonLabel')}
         </Button>
       )}
       {isTokenActionEnabled({
         token: asset.vToken.underlyingToken,
-        action: "borrow",
+        action: 'borrow'
       }) && (
         <SecondaryButton
           fullWidth
@@ -375,16 +375,16 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             openOperationModal({
               vToken: asset.vToken,
               poolComptrollerAddress,
-              initialActiveTabIndex: 2,
+              initialActiveTabIndex: 2
             })
           }
-          className={"custom-btn-wrap"}
+          className={'custom-btn-wrap'}
         >
-          {t("market.borrowButtonLabel")}
+          {t('market.borrowButtonLabel')}
         </SecondaryButton>
       )}
     </>
-  );
+  )
 
   return (
     <>
@@ -398,14 +398,14 @@ export const MarketUi: React.FC<MarketUiProps> = ({
         <div css={[styles.column, styles.graphsColumn]}>
           <Card
             testId={TEST_IDS.supplyInfo}
-            title={t("market.supplyInfo.title")}
+            title={t('market.supplyInfo.title')}
             css={styles.graphCard}
             stats={supplyInfoStats}
             legends={supplyInfoLegends}
           >
             {supplyChartData.length > 0 && (
               <div css={styles.apyChart}>
-                <ApyChart data={supplyChartData} type="supply" />
+                <ApyChart data={supplyChartData} type='supply' />
               </div>
             )}
             {isChartDataLoading && supplyChartData.length === 0 && <Spinner />}
@@ -413,7 +413,7 @@ export const MarketUi: React.FC<MarketUiProps> = ({
 
           <Card
             testId={TEST_IDS.borrowInfo}
-            title={t("market.borrowInfo.title")}
+            title={t('market.borrowInfo.title')}
             css={styles.graphCard}
             stats={borrowInfoStats}
             legends={borrowInfoLegends}
@@ -421,14 +421,14 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             {isChartDataLoading && borrowChartData.length === 0 && <Spinner />}
             {borrowChartData.length > 0 && (
               <div css={styles.apyChart}>
-                <ApyChart data={borrowChartData} type="borrow" />
+                <ApyChart data={borrowChartData} type='borrow' />
               </div>
             )}
           </Card>
 
           <Card
             testId={TEST_IDS.interestRateModel}
-            title={t("market.interestRateModel.title")}
+            title={t('market.interestRateModel.title')}
             css={styles.graphCard}
             legends={interestRateModelLegends}
           >
@@ -458,50 +458,50 @@ export const MarketUi: React.FC<MarketUiProps> = ({
 
       <OperationModal />
     </>
-  );
-};
+  )
+}
 
 export type MarketProps = RouteComponentProps<{
-  vTokenAddress: string;
-  poolComptrollerAddress: string;
-}>;
+  vTokenAddress: string
+  poolComptrollerAddress: string
+}>
 
 const Market: React.FC<MarketProps> = ({
   match: {
-    params: { vTokenAddress, poolComptrollerAddress },
-  },
+    params: { vTokenAddress, poolComptrollerAddress }
+  }
 }) => {
-  const { accountAddress } = useAuth();
-  const vToken = getVTokenByAddress(vTokenAddress);
+  const { accountAddress } = useAuth()
+  const vToken = getVTokenByAddress(vTokenAddress)
 
   //console.log("vToken in Market", vToken);
   //console.log("poolComptrollerAddress in Market", poolComptrollerAddress);
 
   // Redirect to markets page if params are invalid
   if (!vToken || !poolComptrollerAddress) {
-    return <Redirect to={routes.pools.path} />;
+    return <Redirect to={routes.pools.path} />
   }
 
-  const mainPoolComptrollerAddress = getContractAddress("comptroller");
+  const mainPoolComptrollerAddress = getContractAddress('comptroller')
 
   const isIsolatedPoolMarket = !areAddressesEqual(
     mainPoolComptrollerAddress,
     poolComptrollerAddress
-  );
+  )
 
   const { data: getAssetData } = useGetAsset({
     vToken,
-    accountAddress,
-  });
+    accountAddress
+  })
 
   //const { data: chartData, isLoading: isChartDataLoading } = useGetChartData({
   //vToken,
   //});
-  const isChartDataLoading = false;
+  const isChartDataLoading = false
   const chartData = {
     supplyChartData: [],
-    borrowChartData: [],
-  };
+    borrowChartData: []
+  }
 
   const reserveFactorMantissa = useMemo(
     () =>
@@ -510,18 +510,18 @@ const Market: React.FC<MarketProps> = ({
         COMPOUND_MANTISSA
       ),
     [getAssetData?.asset?.reserveFactor]
-  );
+  )
 
   const {
     isLoading: isInterestRateChartDataLoading,
     data: interestRateChartData = {
-      apySimulations: [],
-    },
+      apySimulations: []
+    }
   } = useGetVTokenApySimulations({
     vToken,
     reserveFactorMantissa,
-    isIsolatedPoolMarket,
-  });
+    isIsolatedPoolMarket
+  })
 
   return (
     <MarketUi
@@ -532,7 +532,7 @@ const Market: React.FC<MarketProps> = ({
       isInterestRateChartDataLoading={isInterestRateChartDataLoading}
       interestRateChartData={interestRateChartData.apySimulations}
     />
-  );
-};
+  )
+}
 
-export default Market;
+export default Market
