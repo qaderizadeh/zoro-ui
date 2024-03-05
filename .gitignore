@@ -60,3 +60,6 @@ storybook-static
 /src/constants/version.ts
 
 *.zip
+
+package-lock.json
+

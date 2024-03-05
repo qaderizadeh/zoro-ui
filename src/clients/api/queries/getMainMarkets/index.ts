@@ -226,7 +226,7 @@ function getApyData(marketMetadata) {
 
   const apyData = _.mapValues(rates, (rate) => {
     return (SECONDS_PER_DAY.times(borrowRatePerBlock).div(base).plus(1))
-    .pow(365).minus(1);
+    .pow(365).minus(1).times(100);
   });
 
   return apyData;
