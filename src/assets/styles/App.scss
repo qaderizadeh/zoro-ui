@@ -102,3 +102,10 @@ p {
 .MuiModal-root{
   z-index: 9 !important;
 } 
+.MuiSlider-thumb{
+  display: none !important;
+}
+
+.MuiSlider-track{
+  background-color: #dfbe52 !important;
+}
