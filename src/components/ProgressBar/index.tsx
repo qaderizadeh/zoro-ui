@@ -123,7 +123,6 @@ export const ProgressBar = ({
       min={min}
       max={max}
       size='medium'
-      style={{ color: 'red' }}
       disabled
     />
   )
