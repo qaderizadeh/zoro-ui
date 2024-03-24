@@ -35,7 +35,7 @@ export const ZTOKEN_INFO = {
     underlyingToken: TOKEN_INFO.wbtc,
   } as VToken,
   // Isolated assets
-  'dege:aave': {
+  'degen:aave': {
     address: "",
     decimals: 8,
     symbol: 'zAAVE',
@@ -94,5 +94,11 @@ export const ZTOKEN_INFO = {
     decimals: 8,
     symbol: 'zWBTC',
     underlyingToken: TOKEN_INFO.wbtc,
+  } as VToken,
+  'degen:sol': {
+    address: "",
+    decimals: 8,
+    symbol: 'zSOL',
+    underlyingToken: TOKEN_INFO.sol,
   } as VToken,
 };

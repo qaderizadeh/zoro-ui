@@ -11,6 +11,7 @@ import usdc from 'assets/img/tokens/usdc.svg';
 import usdt from 'assets/img/tokens/usdt.svg';
 import wbtc from 'assets/img/tokens/btcb.svg';
 import bnb from 'assets/img/tokens/btcb.svg';
+import sol from 'assets/img/tokens/sol.svg';
 
 export const TOKEN_INFO = {
   "aave": {
@@ -80,4 +81,10 @@ export const TOKEN_INFO = {
     symbol: 'BNB',
     asset: bnb,
   } as Token,
+  "sol": {
+    address: "",
+    decimals: 8,
+    symbol: 'SOL',
+    asset: sol,
+  } as Token
 };
