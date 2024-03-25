@@ -66,9 +66,7 @@ const useGenerateColumns = ({
           if (column === 'borrowApy' || column === 'labeledBorrowApy') {
             const combinedDistributionApys = getCombinedDistributionApys({ asset: poolAsset });
 
-            const borrowApy = poolAsset.borrowApyPercentage.minus(
-              combinedDistributionApys.borrowApyPercentage,
-            );
+            const borrowApy = combinedDistributionApys.borrowApyPercentage.minus(poolAsset.borrowApyPercentage);
 
             return formatToReadablePercentage(borrowApy);
           }
