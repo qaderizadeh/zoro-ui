@@ -50,10 +50,7 @@ const useGetMenuItems = () => {
             icon: 'market'
           }
         : {
-            href: routes.markets.path.replace(
-              ':poolComptrollerAddress',
-              MAIN_POOL_COMPTROLLER_ADDRESS
-            ),
+            href: routes.markets.path,
             // Translation key: do not remove this comment
             // t('layout.menuItems.markets')
             i18nKey: 'layout.menuItems.markets',

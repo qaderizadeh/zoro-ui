@@ -6,7 +6,7 @@ export enum Subdirectory {
   //XVS = '/xvs',
   POOLS = '/pools',
   POOL = '/pool/:poolComptrollerAddress',
-  MARKETS = '/markets/:poolComptrollerAddress',
+  MARKETS = '/markets/',
   MARKET = '/market/:vTokenAddress',
   NOTFOUND = '/404',
   //HISTORY = '/history',
