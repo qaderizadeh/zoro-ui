@@ -4,4 +4,4 @@ export const ZORO_TWITTER_URL = "https://twitter.com/ZoroProtocol";
 export const ZORO_GITHUB_URL = "https://github.com/zoro-protocol";
 export const ZORO_TELEGRAM_URL = "https://t.me/zoroprotocol";
 export const ZORO_GITBOOK_URL = "https://docs.zoroprotocol.com";
-export const ZORO_LIQUIDATOR_URL = "https://liquidator.zoroprotocol.com";
+export const ZORO_LIQUIDATOR_URL = "https://liquidations.zoroprotocol.com";
