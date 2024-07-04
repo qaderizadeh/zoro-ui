@@ -29,16 +29,16 @@ export const AuthContext = React.createContext<AuthContextValue>({
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = React.useState(false);
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const [{ connectedChain }, setChain] = useSetChain();
+
   let provider = null;
-  if (window.ethereum) {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
+  if (wallet?.provider) {
+    provider = new ethers.providers.Web3Provider(wallet.provider);
   } else {
     provider = new ethers.providers.JsonRpcProvider("https://eth.llamarpc.com");
   }
   const signer = provider.getSigner();
-
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
-  const [{ connectedChain }, setChain] = useSetChain();
 
   const accountAddress = wallet ? wallet.accounts[0].address : "";
 
