@@ -42,18 +42,15 @@ const chains = [
     id: "0x118",
     token: "ETH",
     label: "zkSync Era Testnet RPC",
-    rpcUrl: `https://testnet.era.zksync.dev	`,
+    rpcUrl: `https://testnet.era.zksync.dev`,
   },
+  {
+    id: '0x144',
+    token: 'ETH',
+    label: 'zkSync Era Mainnet',
+    rpcUrl: `https://mainnet.era.zksync.io `
+  }
 ];
-
-// const chains = [
-//   {
-//     id: "0x1",
-//     token: "ETH",
-//     label: "Ethereum",
-//     rpcUrl: `https://rpc.mevblocker.io`,
-//   },
-// ];
 
 const web3Onboard = init({
   wallets,
