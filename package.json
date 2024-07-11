@@ -6,7 +6,7 @@
     "node": ">=18.x.x"
   },
   "scripts": {
-    "start": "npm run config | vite",
+    "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "test": "TZ=UTC VITE_ENVIRONMENT=testnet vitest run",
@@ -22,7 +22,6 @@
     "generate-subgraph-types": "npm-run-all --parallel generate-subgraph-types:mainnet generate-subgraph-types:testnet",
     "generate-contract-types": "rimraf src/types/contracts && typechain --target=ethers-v5 --out-dir=src/types/contracts 'src/constants/contracts/abis/*.json'",
     "generate-version-file": "genversion --es6 --semi src/constants/version.ts",
-    "config": "node ./setupTests.ts",
     "postinstall": "npm-run-all --parallel generate-contract-types generate-version-file",
     "regression": "reg-suit run"
   },

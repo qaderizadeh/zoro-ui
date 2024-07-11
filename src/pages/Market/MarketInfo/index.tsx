@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import { LabeledInlineContent } from 'components';
-import React from 'react';
-import { useTranslation } from 'translation';
+import { LabeledInlineContent } from 'components'
+import React from 'react'
+import { useTranslation } from 'translation'
 
-import Card from '../Card';
-import { Stat } from '../types';
-import { useStyles } from './styles';
+import Card from '../Card'
+import { Stat } from '../types'
+import { useStyles } from './styles'
 
 export interface MarketInfoProps {
-  stats: Stat[];
-  testId?: string;
+  stats: Stat[]
+  testId?: string
 }
 
 const MarketInfo: React.FC<MarketInfoProps> = ({ stats, testId }) => {
-  const { t } = useTranslation();
-  const styles = useStyles();
+  const { t } = useTranslation()
+  const styles = useStyles()
 
   return (
     <Card title={t('asset.marketInfo.title')} testId={testId}>
@@ -28,7 +28,7 @@ const MarketInfo: React.FC<MarketInfoProps> = ({ stats, testId }) => {
         ))}
       </ul>
     </Card>
-  );
-};
+  )
+}
 
-export default MarketInfo;
+export default MarketInfo
