@@ -15,7 +15,8 @@ import { useTranslation } from '@/translation';
 import { Pool } from '@/types';
 import { isFeatureEnabled } from '@/utilities';
 import React, { InputHTMLAttributes, useMemo, useState } from 'react';
-
+import alertImg from '@/assets/img/alert.png';
+import Image from 'next/image';
 interface DashboardUiProps {
   searchValue: string;
   onSearchInputChange: (newValue: string) => void;
@@ -123,7 +124,7 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
                   <div className='tooltip-details-wrap'>
                     {/* <div className="d-align">
                       <h4>Core pools are risky</h4>
-                      <img src='/images/alert.png' />
+                      <Image src={alertImg} alt='alert' />
                     </div> */}
                     <p>
                       Assets in isolated pools cannot be used as collateral.
@@ -285,7 +286,7 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
                   <div className='tooltip-details-wrap'>
                     <div className='d-align'>
                       <h4>Isolated pools are risky</h4>
-                      <img src='/images/alert.png' />
+                      <Image src={alertImg} alt='alert' />
                     </div>
                     <p>
                       Assets in isolated pools cannot be used as collateral.

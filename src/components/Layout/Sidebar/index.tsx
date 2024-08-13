@@ -13,8 +13,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import { Typography } from '@mui/material';
-// import LogoMobile from '@/assets/img/Logo-01.svg?url';
-// import LogoDesktop from '@/assets/img/Logo-02.svg?url';
+import LogoMobile from '@/assets/img/Logo-01.svg';
+import LogoDesktop from '@/assets/img/Logo-02.svg';
 import React, { useState } from 'react';
 import { useTranslation } from '@/translation';
 
@@ -46,20 +46,9 @@ export const SidebarUi: React.FC = () => {
           className='sidebar-menu-logo-option-list-wrap'
         >
           <Toolbar css={styles.toolbar} className='sidebar-logo'>
-            <img
-              src={'/images/Logo-02.svg'}
-              alt='Zoro Desktop Logo'
-              css={styles.logo}
-              title='Zoro Protocol'
-            />
-            <img
-              src={'/images/Logo-01.svg'}
-              alt='Zoro Mobile Logo'
-              css={styles.logoClosed}
-              title='Zoro Protocol'
-            />
+            <LogoDesktop css={styles.logo} />
+            <LogoMobile css={styles.logoClosed} />
           </Toolbar>
-
           <List>
             {menuItems.map((menuItem) => {
               return (

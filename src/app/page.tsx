@@ -3,7 +3,6 @@
 import { useGetPools } from '@/clients/api';
 import { useAuth } from '@/context/AuthContext';
 import { DashboardUi } from '@/pages/Dashboard';
-import { Metadata } from 'next';
 import { useState } from 'react';
 
 const Dashboard: React.FC = () => {
