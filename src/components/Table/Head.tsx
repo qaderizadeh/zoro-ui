@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import Box from '@mui/material/Box';
 import MuiTableCell from '@mui/material/TableCell';
@@ -19,12 +20,18 @@ interface HeadProps<R> {
   className?: string;
 }
 
-function Head<R>({ columns, orderBy, orderDirection, onRequestOrder, className }: HeadProps<R>) {
+function Head<R>({
+  columns,
+  orderBy,
+  orderDirection,
+  onRequestOrder,
+  className,
+}: HeadProps<R>) {
   const styles = useStyles();
   return (
     <MuiTableHead>
       <MuiTableRow className={className}>
-        {columns.map(column => {
+        {columns.map((column) => {
           const active = orderBy?.key === column.key;
 
           return (
@@ -37,7 +44,9 @@ function Head<R>({ columns, orderBy, orderDirection, onRequestOrder, className }
                 css={styles.tableSortLabel({ orderable: !!column.sortRows })}
                 active={active}
                 direction={active ? orderDirection : 'asc'}
-                onClick={column.sortRows ? () => onRequestOrder(column) : undefined}
+                onClick={
+                  column.sortRows ? () => onRequestOrder(column) : undefined
+                }
                 hideSortIcon={false}
                 // @ts-expect-error Override IconComponent with null so it doesn't render
                 IconComponent={null}
@@ -47,27 +56,29 @@ function Head<R>({ columns, orderBy, orderDirection, onRequestOrder, className }
                 {!!column.sortRows && (
                   <div css={styles.tableSortLabelIconsContainer}>
                     <Icon
-                      name="sort"
-                      size="8px"
+                      name='sort'
+                      size='8px'
                       css={styles.tableSortLabelIcon({
                         active: active && orderDirection === 'asc',
                       })}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                      className='MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc'
                     />
                     <Icon
-                      name="sort"
-                      size="8px"
+                      name='sort'
+                      size='8px'
                       css={styles.tableSortLabelIcon({
                         active: active && orderDirection === 'desc',
                       })}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
+                      className='MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc'
                     />
                   </div>
                 )}
 
                 {active && !!column.sortRows && (
-                  <Box component="span" sx={visuallyHidden}>
-                    {orderDirection === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  <Box component='span' sx={visuallyHidden}>
+                    {orderDirection === 'desc'
+                      ? 'sorted descending'
+                      : 'sorted ascending'}
                   </Box>
                 )}
               </MuiTableSortLabel>

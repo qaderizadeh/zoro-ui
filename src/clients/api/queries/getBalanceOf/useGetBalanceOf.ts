@@ -1,4 +1,4 @@
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 
 import {
   GetBalanceOfInput,
@@ -28,17 +28,17 @@ const useGetBalanceOf = (
 ) => {
   const { provider } = useAuth();
 
-  return useQuery(
-    [
+  return useQuery({
+    queryKey: [
       FunctionKey.GET_BALANCE_OF,
       {
         accountAddress,
         tokenAddress: token.address,
       },
     ],
-    () => getBalanceOf({ provider, accountAddress, token }),
-    options
-  );
+    queryFn: () => getBalanceOf({ provider, accountAddress, token }),
+    ...(options ? options : {}),
+  });
 };
 
 export default useGetBalanceOf;

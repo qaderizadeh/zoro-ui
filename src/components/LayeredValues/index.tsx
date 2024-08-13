@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import React from 'react';
@@ -19,11 +20,11 @@ export const LayeredValues: React.FC<LayeredValuesProps> = ({
 
   return (
     <div css={styles.container} className={className}>
-      <Typography variant="small1" css={styles.topValue}>
+      <Typography variant='small1' css={styles.topValue}>
         {topValue}
       </Typography>
 
-      <Typography variant="small2">{bottomValue}</Typography>
+      <Typography variant='small2'>{bottomValue}</Typography>
     </div>
   );
 };

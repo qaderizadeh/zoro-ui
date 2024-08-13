@@ -1,4 +1,4 @@
-export { default as queryClient } from './queryClient';
+// export { default as queryClient } from './queryClient';
 
 // Mutations
 //export { default as mintVai } from './mutations/mintVai';

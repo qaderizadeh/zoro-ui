@@ -1,3 +1,5 @@
+'use client';
+
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 import { isFeatureEnabled } from '@/utilities';

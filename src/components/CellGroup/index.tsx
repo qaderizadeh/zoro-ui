@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Paper, Typography } from '@mui/material';
 import React from 'react';
@@ -30,14 +31,22 @@ export const CellGroup: React.FC<CellGroupProps> = ({
       {cells.map(({ label, value, tooltip, color }) => (
         <div css={styles.cell} key={`cell-group-item-${label}`}>
           <div css={styles.labelContainer}>
-            <Typography variant={smallValues ? 'small2' : 'body2'} css={styles.label}>
+            <Typography
+              variant={smallValues ? 'small2' : 'body2'}
+              css={styles.label}
+            >
               {label}
             </Typography>
 
-            {!!tooltip && <InfoIcon tooltip={tooltip} css={styles.labelInfoIcon} />}
+            {!!tooltip && (
+              <InfoIcon tooltip={tooltip} css={styles.labelInfoIcon} />
+            )}
           </div>
 
-          <Typography variant={smallValues ? 'h4' : 'h3'} css={styles.getValue({ color })}>
+          <Typography
+            variant={smallValues ? 'h4' : 'h3'}
+            css={styles.getValue({ color })}
+          >
             {value}
           </Typography>
         </div>

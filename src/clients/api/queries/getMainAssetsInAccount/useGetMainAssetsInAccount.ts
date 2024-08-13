@@ -1,4 +1,4 @@
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 import { getContractAddress } from '@/utilities';
 
 import getMainAssetsInAccount, {
@@ -29,11 +29,12 @@ const useGetMainAssetsInAccount = (
     mainPoolComptrollerAddress
   );
 
-  return useQuery(
-    [FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT, { accountAddress }],
-    () => getMainAssetsInAccount({ comptrollerContract, accountAddress }),
-    options
-  );
+  return useQuery({
+    queryKey: [FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT, { accountAddress }],
+    queryFn: () =>
+      getMainAssetsInAccount({ comptrollerContract, accountAddress }),
+    ...(options ? options : {}),
+  });
 };
 
 export default useGetMainAssetsInAccount;

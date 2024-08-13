@@ -1,4 +1,4 @@
-export default {
+const nextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -23,9 +23,11 @@ export default {
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
+    config.externals.push('pino-pretty', 'lokijs', 'encoding', 'eccrypto');
 
     return config;
   },
 
   // ...other config
 };
+export default nextConfig;

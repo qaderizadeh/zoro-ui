@@ -1,10 +1,11 @@
 'use client';
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Select as MuiSelect } from '@mui/material';
 import { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from '@/translation';
 

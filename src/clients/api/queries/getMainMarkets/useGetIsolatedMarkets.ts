@@ -1,4 +1,4 @@
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 
 import getMainMarkets, {
   GetMainMarketsOutput,
@@ -17,7 +17,7 @@ type Options = QueryObserverOptions<
   Error,
   GetMainMarketsOutput,
   GetMainMarketsOutput,
-  FunctionKey.GET_ISOLATED_MARKETS
+  [FunctionKey.GET_ISOLATED_MARKETS]
 >;
 
 const useGetIsolatedMarkets = (options?: Options) => {
@@ -26,14 +26,13 @@ const useGetIsolatedMarkets = (options?: Options) => {
   const comptrollerAddress = getContractAddress('degen:comptroller');
   const comptroller = useComptrollerContract(comptrollerAddress);
 
-  const result = useQuery(
-    FunctionKey.GET_ISOLATED_MARKETS,
-    () => getMainMarkets({ multicall, venusLensContract, comptroller }),
-    {
-      refetchInterval: DEFAULT_REFETCH_INTERVAL_MS,
-      ...options,
-    }
-  );
+  const result = useQuery({
+    queryKey: [FunctionKey.GET_ISOLATED_MARKETS],
+    queryFn: () =>
+      getMainMarkets({ multicall, venusLensContract, comptroller }),
+    refetchInterval: DEFAULT_REFETCH_INTERVAL_MS,
+    ...(options ? options : {}),
+  });
 
   return result;
 };

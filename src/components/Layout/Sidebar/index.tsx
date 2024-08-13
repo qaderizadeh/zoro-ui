@@ -1,9 +1,10 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Icon } from '../../Icon';
 //import ClaimRewardButton from '../ClaimRewardButton';
 import ConnectButton from '../ConnectButton';
 import { Toolbar } from '../Toolbar';
-import LinkComponent from './Link';
+import { LinkComponent } from './LinkComponent';
 import { useStyles } from './styles';
 import useGetMenuItems from './useGetMenuItems';
 import Drawer from '@mui/material/Drawer';
@@ -11,9 +12,9 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
-import Typography from '@mui/material/Typography';
-import logo_mobile from '@/assets/img/Logo-01.svg';
-import logo_desktop from '@/assets/img/Logo-02.svg';
+import { Typography } from '@mui/material';
+// import LogoMobile from '@/assets/img/Logo-01.svg?url';
+// import LogoDesktop from '@/assets/img/Logo-02.svg?url';
 import React, { useState } from 'react';
 import { useTranslation } from '@/translation';
 
@@ -46,13 +47,13 @@ export const SidebarUi: React.FC = () => {
         >
           <Toolbar css={styles.toolbar} className='sidebar-logo'>
             <img
-              src={logo_desktop}
+              src={'/images/Logo-02.svg'}
               alt='Zoro Desktop Logo'
               css={styles.logo}
               title='Zoro Protocol'
             />
             <img
-              src={logo_mobile}
+              src={'/images/Logo-01.svg'}
               alt='Zoro Mobile Logo'
               css={styles.logoClosed}
               title='Zoro Protocol'
@@ -60,41 +61,43 @@ export const SidebarUi: React.FC = () => {
           </Toolbar>
 
           <List>
-            {menuItems.map((menuItem) => (
-              <ListItemButton
-                key={menuItem.i18nKey}
-                component='li'
-                css={styles.listItem}
-                disableRipple
-              >
-                <LinkComponent href={menuItem.href} target={menuItem?.target}>
-                  <div className='left-border' />
+            {menuItems.map((menuItem) => {
+              return (
+                <ListItemButton
+                  key={menuItem.i18nKey}
+                  component='li'
+                  css={styles.listItem}
+                  disableRipple
+                >
+                  <LinkComponent href={menuItem.href} target={menuItem?.target}>
+                    <div className='left-border' />
 
-                  <ListItemIcon css={styles.listItemIcon}>
-                    {menuItem?.svgIcon ? (
-                      menuItem?.svgIcon
-                    ) : (
-                      <Icon name={menuItem.icon} />
+                    <ListItemIcon css={styles.listItemIcon}>
+                      {menuItem?.svgIcon ? (
+                        menuItem?.svgIcon
+                      ) : (
+                        <Icon name={menuItem.icon} />
+                      )}
+                    </ListItemIcon>
+
+                    <Typography variant='body2' css={styles.listItemText}>
+                      {t(menuItem.i18nKey)}
+                    </Typography>
+
+                    {menuItem.isNew && (
+                      <div css={styles.listItemNewBadge}>
+                        <Typography
+                          variant='tiny'
+                          css={styles.listItemNewBadgeText}
+                        >
+                          {t('sidebar.newBadge')}
+                        </Typography>
+                      </div>
                     )}
-                  </ListItemIcon>
-
-                  <Typography variant='body2' css={styles.listItemText}>
-                    {t(menuItem.i18nKey)}
-                  </Typography>
-
-                  {menuItem.isNew && (
-                    <div css={styles.listItemNewBadge}>
-                      <Typography
-                        variant='body1'
-                        css={styles.listItemNewBadgeText}
-                      >
-                        {t('sidebar.newBadge')}
-                      </Typography>
-                    </div>
-                  )}
-                </LinkComponent>
-              </ListItemButton>
-            ))}
+                  </LinkComponent>
+                </ListItemButton>
+              );
+            })}
           </List>
         </div>
       </Drawer>
@@ -178,7 +181,7 @@ export const SidebarUi: React.FC = () => {
                       {isNew && (
                         <div css={styles.listItemNewBadge}>
                           <Typography
-                            variant='body1'
+                            variant='tiny'
                             css={styles.listItemNewBadgeText}
                           >
                             {t('sidebar.newBadge')}

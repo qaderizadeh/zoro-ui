@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import ReactMarkdown from '@uiw/react-markdown-preview';
 import React from 'react';
@@ -19,7 +20,7 @@ const Markdown: React.FC<MarkdownViewerProps> = ({ content, className }) => {
       source={content}
       css={styles.preview}
       {...previewOptions}
-      linkTarget="_blank"
+      linkTarget='_blank'
     />
   );
 };

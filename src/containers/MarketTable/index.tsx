@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Table, TableProps, switchAriaLabel, toast } from '@/components';
 import { VError, formatVErrorToReadableString } from '@/errors';

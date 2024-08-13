@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 
@@ -15,7 +16,7 @@ export const InfoIcon = ({ tooltip, className }: InfoIconProps) => {
 
   return (
     <Tooltip css={styles.container} className={className} title={tooltip}>
-      <Icon css={styles.icon} name="info" />
+      <Icon css={styles.icon} name='info' />
     </Tooltip>
   );
 };

@@ -1,7 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import { TertiaryButton } from "../Button";
-import useStyles from "./styles";
-import React from "react";
+import { TertiaryButton } from '../Button';
+import useStyles from './styles';
+import React from 'react';
 
 export interface ButtonGroupProps {
   buttonLabels: string[];
@@ -34,7 +35,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
             fullWidth,
           })}
           className={`${buttonClassName} ${
-            index === activeButtonIndex && "active"
+            index === activeButtonIndex && 'active'
           }`}
         >
           {label}

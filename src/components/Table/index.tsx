@@ -1,8 +1,11 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import Paper from '@mui/material/Paper';
 import MuiTable from '@mui/material/Table';
 import MuiTableBody from '@mui/material/TableBody';
-import MuiTableCell, { TableCellProps as MuiTableCellProps } from '@mui/material/TableCell';
+import MuiTableCell, {
+  TableCellProps as MuiTableCellProps,
+} from '@mui/material/TableCell';
 import MuiTableContainer from '@mui/material/TableContainer';
 import MuiTableRow from '@mui/material/TableRow';
 import React, { useMemo } from 'react';
@@ -53,7 +56,7 @@ export function Table<R>({
 
     return [...data].sort((rowA, rowB) =>
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      order.orderBy.sortRows!(rowA, rowB, order.orderDirection),
+      order.orderBy.sortRows!(rowA, rowB, order.orderDirection)
     );
   }, [data, order]);
 
@@ -64,7 +67,10 @@ export function Table<R>({
       {isFetching && <Spinner css={styles.loader} />}
 
       <MuiTableContainer css={styles.getTableContainer({ breakpoint })}>
-        <MuiTable css={styles.table({ minWidth: minWidth ?? '0' })} aria-label={title}>
+        <MuiTable
+          css={styles.table({ minWidth: minWidth ?? '0' })}
+          aria-label={title}
+        >
           <Head
             columns={columns}
             orderBy={order?.orderBy}
@@ -83,22 +89,25 @@ export function Table<R>({
                   css={styles.getTableRow({ clickable: !!rowOnClick })}
                   onClick={
                     !getRowHref && rowOnClick
-                      ? (e: React.MouseEvent<HTMLDivElement>) => rowOnClick(e, row)
+                      ? (e: React.MouseEvent<HTMLDivElement>) =>
+                          rowOnClick(e, row)
                       : undefined
                   }
                 >
-                  {columns.map(column => {
+                  {columns.map((column) => {
                     const cellContent = column.renderCell(row, rowIndex);
-                    const cellTitle = typeof cellContent === 'string' ? cellContent : undefined;
+                    const cellTitle =
+                      typeof cellContent === 'string' ? cellContent : undefined;
 
-                    const additionalProps: Partial<MuiTableCellProps> = getRowHref
-                      ? {
-                          component: 'a',
-                          // @ts-expect-error href is a valid prop when cell is rendered as an
-                          // anchor tag
-                          href: getRowHref(row),
-                        }
-                      : {};
+                    const additionalProps: Partial<MuiTableCellProps> =
+                      getRowHref
+                        ? {
+                            component: 'a',
+                            // @ts-expect-error href is a valid prop when cell is rendered as an
+                            // anchor tag
+                            href: getRowHref(row),
+                          }
+                        : {};
 
                     return (
                       <MuiTableCell

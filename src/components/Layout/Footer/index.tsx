@@ -1,6 +1,7 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { useStyles } from './styles';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 //import { generateZkScanUrl } from '@/utilities';
 import { useGetBlockNumber } from '@/clients/api';
 import { Icon } from '@/components/Icon';

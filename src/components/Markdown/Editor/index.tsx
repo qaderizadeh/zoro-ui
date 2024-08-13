@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import MdEditor, { commands } from '@uiw/react-md-editor';
@@ -43,8 +44,8 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
     <>
       {!!label && (
         <Typography
-          variant="small1"
-          component="label"
+          variant='small1'
+          component='label'
           css={styles.getLabel(hasError)}
           htmlFor={name}
         >

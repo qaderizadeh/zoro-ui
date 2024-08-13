@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React, { ReactElement } from 'react';
 
 import { Button } from '../Button';
@@ -13,10 +14,19 @@ interface PaginationButtonProps {
   children: number | ReactElement;
 }
 
-const PaginationButton: React.FC<PaginationButtonProps> = ({ className, onClick, children }) => {
+const PaginationButton: React.FC<PaginationButtonProps> = ({
+  className,
+  onClick,
+  children,
+}) => {
   const styles = useStyles();
   return (
-    <Button variant="text" css={styles.button} className={className} onClick={onClick}>
+    <Button
+      variant='text'
+      css={styles.button}
+      className={className}
+      onClick={onClick}
+    >
       {children}
     </Button>
   );
@@ -65,7 +75,10 @@ export const Pagination = ({
       {pagesArray.map((page, index) => {
         if (index === maxPageIndexToShow) {
           return (
-            <PaginationButton key={page} onClick={() => goToPageByIndex(activePageIndex + 1)}>
+            <PaginationButton
+              key={page}
+              onClick={() => goToPageByIndex(activePageIndex + 1)}
+            >
               <Icon css={styles.iconArrow} {...iconProps} />
             </PaginationButton>
           );
@@ -73,8 +86,14 @@ export const Pagination = ({
 
         if (index === minPageIndexToShow) {
           return (
-            <PaginationButton key={page} onClick={() => goToPageByIndex(activePageIndex - 1)}>
-              <Icon css={[styles.iconArrow, styles.iconReverted]} {...iconProps} />
+            <PaginationButton
+              key={page}
+              onClick={() => goToPageByIndex(activePageIndex - 1)}
+            >
+              <Icon
+                css={[styles.iconArrow, styles.iconReverted]}
+                {...iconProps}
+              />
             </PaginationButton>
           );
         }
@@ -87,7 +106,9 @@ export const Pagination = ({
           <PaginationButton
             key={page}
             onClick={() => goToPageByIndex(index)}
-            css={styles.getButtonStyles({ isActive: index === activePageIndex })}
+            css={styles.getButtonStyles({
+              isActive: index === activePageIndex,
+            })}
           >
             {page}
           </PaginationButton>

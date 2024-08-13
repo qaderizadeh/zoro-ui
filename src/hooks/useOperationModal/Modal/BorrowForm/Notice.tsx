@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import BigNumber from 'bignumber.js';
 import { NoticeError, NoticeWarning } from '@/components';

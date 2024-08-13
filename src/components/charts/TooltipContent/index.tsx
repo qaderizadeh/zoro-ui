@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React from 'react';
 
 import { useStyles } from './styles';
@@ -18,13 +19,13 @@ const TooltipContent: React.FC<TooltipContentProps> = ({ items }) => {
 
   return (
     <div css={styles.container}>
-      {items.map(item => (
+      {items.map((item) => (
         <div css={styles.item} key={`tooltip-content-item-${item.label}`}>
-          <Typography css={styles.itemLabel} variant="tiny">
+          <Typography css={styles.itemLabel} variant='tiny'>
             {item.label}
           </Typography>
 
-          <Typography css={styles.itemValue} variant="small1">
+          <Typography css={styles.itemValue} variant='small1'>
             {item.value}
           </Typography>
         </div>

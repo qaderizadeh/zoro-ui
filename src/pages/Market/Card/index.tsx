@@ -1,6 +1,7 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React from 'react';
 
 import { Stat } from '../types';
@@ -36,11 +37,16 @@ const Card: React.FC<CardProps> = ({
 
         {legends.length > 0 && (
           <div css={styles.row}>
-            {legends.map(legend => (
-              <div css={styles.legend} key={`card-${title}-legend-${legend.label}`}>
-                <div css={styles.getLegendColorIndicator({ color: legend.color })} />
+            {legends.map((legend) => (
+              <div
+                css={styles.legend}
+                key={`card-${title}-legend-${legend.label}`}
+              >
+                <div
+                  css={styles.getLegendColorIndicator({ color: legend.color })}
+                />
 
-                <Typography css={styles.legendLabel} variant="small2">
+                <Typography css={styles.legendLabel} variant='small2'>
                   {legend.label}
                 </Typography>
               </div>
@@ -51,13 +57,17 @@ const Card: React.FC<CardProps> = ({
 
       {stats.length > 0 && (
         <div css={styles.row}>
-          {stats.map(stat => (
+          {stats.map((stat) => (
             <div css={styles.stat} key={`card-${title}-legend-${stat.label}`}>
-              <Typography variant="small2" component="div" css={styles.statLabel}>
+              <Typography
+                variant='small2'
+                component='div'
+                css={styles.statLabel}
+              >
                 {stat.label}
               </Typography>
 
-              <Typography variant="h4" css={styles.statValue}>
+              <Typography variant='h4' css={styles.statValue}>
                 {stat.value}
               </Typography>
             </div>

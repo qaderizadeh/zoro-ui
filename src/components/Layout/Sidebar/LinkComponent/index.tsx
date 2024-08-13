@@ -1,6 +1,10 @@
+'use client';
+
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { PropsWithChildren } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export interface LinkProps {
   href: string;
@@ -16,31 +20,19 @@ export const LinkComponent = ({
   isMobile = false,
   target = true,
 }: PropsWithChildren<LinkProps>) => {
+  const pathname = usePathname();
   if (href[0] === '/') {
     const activeClassName = isMobile
       ? 'active-mobile-menu-item'
       : 'active-menu-item';
 
+    const isActive = pathname === href;
+
     return (
       <Link
         href={href}
-        // exact={href === '/'}
-        // isActive={(_match, location) => {
-        //   // Handle home page
-        //   if (location.pathname === "/" && href !== "/") {
-        //     return false;
-        //   }
-
-        //   // Only match against the first part of the pathname since the sidebar
-        //   // nav items represent the top level pages
-        //   const formattedPathname = location.pathname
-        //     .split("/")
-        //     .slice(0, 2)
-        //     .join("/");
-        //   return !!matchPath(href, formattedPathname);
-        // }}
         onClick={onClick}
-        // activeClassName={activeClassName}
+        className={isActive ? activeClassName : undefined}
       >
         {children}
       </Link>
@@ -61,5 +53,3 @@ export const LinkComponent = ({
     </>
   );
 };
-
-export default Link;

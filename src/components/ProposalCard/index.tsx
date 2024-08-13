@@ -1,7 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React from 'react';
 import Link from 'next/link';
 import { VoteSupport } from '@/types';

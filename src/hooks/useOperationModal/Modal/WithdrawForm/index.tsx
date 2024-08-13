@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { useStyles as useSharedStyles } from '../styles';
 import SubmitSection from './SubmitSection';

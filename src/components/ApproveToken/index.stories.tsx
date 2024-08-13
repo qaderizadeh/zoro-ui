@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import { Meta } from '@storybook/react';
 import React from 'react';
 

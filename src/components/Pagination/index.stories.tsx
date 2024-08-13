@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Meta, StoryFn } from '@storybook/react';
 import noop from 'noop-ts';

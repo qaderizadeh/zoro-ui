@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import { Icon, Modal, ModalProps } from '@/components';
 import React from 'react';
 import { useTranslation } from '@/translation';

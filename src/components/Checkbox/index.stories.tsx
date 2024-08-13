@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Meta, StoryFn } from '@storybook/react';
@@ -11,7 +12,10 @@ import { Checkbox, CheckboxProps } from '.';
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,
-  decorators: [withCenterStory({ width: 250 }), withOnChange(e => e.target.checked)],
+  decorators: [
+    withCenterStory({ width: 250 }),
+    withOnChange((e) => e.target.checked),
+  ],
   parameters: {
     backgrounds: {
       default: 'White',
@@ -19,7 +23,9 @@ export default {
   },
 } as Meta<typeof Checkbox>;
 
-const Template: StoryFn<CheckboxProps> = (args: CheckboxProps) => <Checkbox {...args} />;
+const Template: StoryFn<CheckboxProps> = (args: CheckboxProps) => (
+  <Checkbox {...args} />
+);
 
 export const Checked = Template.bind({});
 Checked.args = {

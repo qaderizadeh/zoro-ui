@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 import { VToken } from '@/types';
 
 import getVTokenApySimulations, {
@@ -34,12 +34,12 @@ const useGetVTokenApySimulations = (
     vToken,
   });
 
-  return useQuery(
-    [
+  return useQuery({
+    queryKey: [
       FunctionKey.GET_V_TOKEN_APY_SIMULATIONS,
       { vTokenAddress: vToken.address },
     ],
-    () =>
+    queryFn: () =>
       getVTokenApySimulations({
         multicall,
         reserveFactorMantissa: reserveFactorMantissa || new BigNumber(0),
@@ -47,14 +47,12 @@ const useGetVTokenApySimulations = (
           interestRateModelData?.contractAddress || '',
         isIsolatedPoolMarket,
       }),
-    {
-      ...options,
-      enabled:
-        (options?.enabled === undefined || options?.enabled) &&
-        interestRateModelData?.contractAddress !== undefined &&
-        reserveFactorMantissa !== undefined,
-    }
-  );
+    enabled:
+      (options?.enabled === undefined || options?.enabled) &&
+      interestRateModelData?.contractAddress !== undefined &&
+      reserveFactorMantissa !== undefined,
+    ...(options ? options : {}),
+  });
 };
 
 export default useGetVTokenApySimulations;

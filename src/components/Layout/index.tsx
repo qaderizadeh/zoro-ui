@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import Box from '@mui/material/Box';
 import React, { PropsWithChildren, useContext, useState } from 'react';

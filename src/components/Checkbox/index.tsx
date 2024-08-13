@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import MuiCheckbox from '@mui/material/Checkbox';
 import React from 'react';
@@ -19,8 +20,8 @@ export const Checkbox = ({ value, onChange, className }: CheckboxProps) => {
       css={styles.root}
       checked={value}
       onChange={onChange}
-      icon={<Icon name="checkboxBorder" />}
-      checkedIcon={<Icon name="checked" />}
+      icon={<Icon name='checkboxBorder' />}
+      checkedIcon={<Icon name='checked' />}
       disableRipple
     />
   );

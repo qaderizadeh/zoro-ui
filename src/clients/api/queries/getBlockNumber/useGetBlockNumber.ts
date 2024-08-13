@@ -1,4 +1,4 @@
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 
 import { getBlockNumber } from '@/clients/api/';
 import { BLOCK_TIME_MS } from '@/constants/zk';
@@ -14,20 +14,18 @@ type Options = QueryObserverOptions<
   Error,
   GetBlockNumberOutput,
   GetBlockNumberOutput,
-  FunctionKey.GET_BLOCK_NUMBER
+  [FunctionKey.GET_BLOCK_NUMBER]
 >;
 
 const useGetBlockNumber = (options?: Options) => {
   const { provider } = useAuth();
 
-  return useQuery(
-    FunctionKey.GET_BLOCK_NUMBER,
-    () => getBlockNumber({ provider }),
-    {
-      refetchInterval: BLOCK_TIME_MS,
-      ...options,
-    }
-  );
+  return useQuery({
+    queryKey: [FunctionKey.GET_BLOCK_NUMBER],
+    queryFn: () => getBlockNumber({ provider }),
+    refetchInterval: BLOCK_TIME_MS,
+    ...(options ? options : {}),
+  });
 };
 
 export default useGetBlockNumber;

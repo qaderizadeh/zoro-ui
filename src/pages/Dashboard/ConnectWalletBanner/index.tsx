@@ -1,8 +1,9 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import illustration from './illustration.png';
 import { useStyles } from './styles';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import { PrimaryButton } from '@/components';
 import { useAuth } from '@/context/AuthContext';
 import React from 'react';

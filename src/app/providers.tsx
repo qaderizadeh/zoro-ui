@@ -1,7 +1,7 @@
 'use client';
 
-import icon from '@/assets/img/Logo-01.svg?url';
-import { queryClient } from '@/clients/api';
+// import Icon from '@/assets/img/Logo-01.svg?url';
+// import { queryClient } from '@/clients/api';
 import { Layout, ResetScrollOnRouteChange } from '@/components';
 import { AuthProvider } from '@/context/AuthContext';
 import { GeolocationProvider } from '@/context/GeolocationContext';
@@ -16,9 +16,9 @@ import trustModule from '@web3-onboard/trust';
 import walletConnectModule from '@web3-onboard/walletconnect';
 import '@/assets/styles/App.scss';
 import React, { PropsWithChildren } from 'react';
-import { QueryClientProvider } from 'react-query';
-// import { HashRouter } from 'react-router-dom';
-// import { ToastContainer } from 'react-toastify';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ToastContainer } from 'react-toastify';
+import { getQueryClient } from './get-query-client';
 
 const injected = injectedModule();
 const coinbase = coinbaseModule({ darkMode: true });
@@ -58,30 +58,32 @@ const web3Onboard = init({
   chains,
   appMetadata: {
     name: 'ZORO',
-    icon: '/android-chrome-192x192.png',
+    icon: '/images/Logo-01.svg',
     description: 'Main App',
   },
   theme: 'dark',
 });
 
-export const Providers = ({ children }: PropsWithChildren) => (
-  <GeolocationProvider>
-    <Web3OnboardProvider web3Onboard={web3Onboard}>
-      <QueryClientProvider client={queryClient}>
-        <MuiThemeProvider>
-          <AuthProvider>
-            <SuccessfulTransactionModalProvider>
-              {/* <HashRouter> */}
-              {/* <ToastContainer /> */}
-              <Layout>
-                {/* <Switch /> */}
-                {children}
-              </Layout>
-              {/* </HashRouter> */}
-            </SuccessfulTransactionModalProvider>
-          </AuthProvider>
-        </MuiThemeProvider>
-      </QueryClientProvider>
-    </Web3OnboardProvider>
-  </GeolocationProvider>
-);
+export const Providers = ({ children }: PropsWithChildren) => {
+  const queryClient = getQueryClient();
+
+  return (
+    <GeolocationProvider>
+      <Web3OnboardProvider web3Onboard={web3Onboard}>
+        <QueryClientProvider client={queryClient}>
+          <MuiThemeProvider>
+            <AuthProvider>
+              <SuccessfulTransactionModalProvider>
+                <ToastContainer />
+                <Layout>
+                  {/* <Switch /> */}
+                  {children}
+                </Layout>
+              </SuccessfulTransactionModalProvider>
+            </AuthProvider>
+          </MuiThemeProvider>
+        </QueryClientProvider>
+      </Web3OnboardProvider>
+    </GeolocationProvider>
+  );
+};

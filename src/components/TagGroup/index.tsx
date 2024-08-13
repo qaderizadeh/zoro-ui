@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import React, { ReactElement } from 'react';
 
@@ -16,7 +17,12 @@ export interface TagGroupProps {
   className?: string;
 }
 
-export const TagGroup = ({ tags, activeTagIndex, onTagClick, className }: TagGroupProps) => {
+export const TagGroup = ({
+  tags,
+  activeTagIndex,
+  onTagClick,
+  className,
+}: TagGroupProps) => {
   const styles = useStyles();
 
   return (

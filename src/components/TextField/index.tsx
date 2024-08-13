@@ -1,20 +1,22 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import { Icon, IconName } from "../Icon";
-import { TokenIcon } from "../TokenIcon";
-import { useStyles } from "./styles";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import React, { InputHTMLAttributes } from "react";
-import { Token } from "types";
+import { Icon, IconName } from '../Icon';
+import { TokenIcon } from '../TokenIcon';
+import { useStyles } from './styles';
+import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
+import React, { InputHTMLAttributes } from 'react';
+import { Token } from 'types';
 
-const generateRandomString = (length: number)=> {
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const generateRandomString = (length: number) => {
+  var characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var result = '';
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
-}
+};
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -24,7 +26,7 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   leftIconSrc?: IconName | Token;
   rightAdornment?: React.ReactElement;
   isSmall?: boolean;
-  variant?: "primary" | "secondary";
+  variant?: 'primary' | 'secondary';
 }
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -40,29 +42,29 @@ export const TextField: React.FC<TextFieldProps> = ({
   type,
   disabled,
   isSmall = false,
-  variant = "primary",
+  variant = 'primary',
   ...inputProps
 }) => {
   const styles = useStyles();
 
-  const handleChange: InputHTMLAttributes<HTMLInputElement>["onChange"] = (
+  const handleChange: InputHTMLAttributes<HTMLInputElement>['onChange'] = (
     e
   ) => {
     let safeValue = e.currentTarget.value;
-    if (type === "number" && safeValue.startsWith(".")) {
+    if (type === 'number' && safeValue.startsWith('.')) {
       safeValue = `0${safeValue}`;
     }
     // Prevent value from being updated if it does not follow the rules
     const followsMaxRule =
       !safeValue ||
       max === undefined ||
-      type !== "number" ||
+      type !== 'number' ||
       parseInt(safeValue, 10) <= +max;
 
     const followsMinRule =
       !safeValue ||
       min === undefined ||
-      type !== "number" ||
+      type !== 'number' ||
       parseInt(safeValue, 10) >= +min;
     if (onChange && followsMaxRule && followsMinRule) {
       onChange(e);
@@ -73,8 +75,8 @@ export const TextField: React.FC<TextFieldProps> = ({
     <Box className={className}>
       {!!label && (
         <Typography
-          variant="small1"
-          component="label"
+          variant='small1'
+          component='label'
           css={styles.getLabel({ hasError })}
           htmlFor={inputProps.id}
         >
@@ -85,11 +87,11 @@ export const TextField: React.FC<TextFieldProps> = ({
       <Box
         css={styles.getInputContainer({ hasError, disabled, variant, isSmall })}
       >
-        {typeof leftIconSrc === "string" && (
+        {typeof leftIconSrc === 'string' && (
           <Icon name={leftIconSrc} css={styles.getLeftIcon({ isSmall })} />
         )}
 
-        {!!leftIconSrc && typeof leftIconSrc !== "string" && (
+        {!!leftIconSrc && typeof leftIconSrc !== 'string' && (
           <TokenIcon
             token={leftIconSrc}
             css={styles.getLeftIcon({ isSmall })}
@@ -114,7 +116,7 @@ export const TextField: React.FC<TextFieldProps> = ({
       </Box>
 
       {!!description && (
-        <Typography variant="small2" css={styles.description}>
+        <Typography variant='small2' css={styles.description}>
           {description}
         </Typography>
       )}

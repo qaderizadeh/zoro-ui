@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { ProgressCircle, Tag, TagGroup, Tooltip } from '@/components';
 import React, { useMemo, useState } from 'react';

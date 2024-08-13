@@ -33,63 +33,63 @@ export interface TokenBalance {
   balanceWei: BigNumber;
 }
 
-//export interface AssetDistribution {
-//token: Token;
-//dailyDistributedTokens: BigNumber;
-//borrowApyPercentage: BigNumber;
-//supplyApyPercentage: BigNumber;
-//}
+export interface AssetDistribution {
+  token: Token;
+  dailyDistributedTokens: BigNumber;
+  borrowApyPercentage: BigNumber;
+  supplyApyPercentage: BigNumber;
+}
 
-//export interface Asset {
-//vToken: VToken;
-//tokenPriceCents: BigNumber;
-//reserveFactor: number;
-//collateralFactor: number;
-//liquidityCents: BigNumber;
-//reserveTokens: BigNumber;
-//cashTokens: BigNumber;
-//exchangeRateVTokens: BigNumber;
-//supplierCount: number;
-//borrowerCount: number;
-//borrowApyPercentage: BigNumber;
-//supplyApyPercentage: BigNumber;
-//supplyBalanceTokens: BigNumber;
-//supplyBalanceCents: BigNumber;
-//borrowBalanceTokens: BigNumber;
-//borrowBalanceCents: BigNumber;
-//supplyRatePerBlockTokens: BigNumber;
-//borrowRatePerBlockTokens: BigNumber;
-//distributions: AssetDistribution[];
-//borrowCapTokens?: BigNumber;
-//supplyCapTokens?: BigNumber;
-//// User-specific props
-//// TODO: make these optional so they can be set to undefined when no wallet is
-//// connected
-//userSupplyBalanceTokens: BigNumber;
-//userSupplyBalanceCents: BigNumber;
-//userBorrowBalanceTokens: BigNumber;
-//userBorrowBalanceCents: BigNumber;
-//userWalletBalanceTokens: BigNumber;
-//userWalletBalanceCents: BigNumber;
-//userPercentOfLimit: number;
-//isCollateralOfUser: boolean;
-//}
+export interface Asset {
+  vToken: VToken;
+  tokenPriceCents: BigNumber;
+  reserveFactor: number;
+  collateralFactor: number;
+  liquidityCents: BigNumber;
+  reserveTokens: BigNumber;
+  cashTokens: BigNumber;
+  exchangeRateVTokens: BigNumber;
+  supplierCount: number;
+  borrowerCount: number;
+  borrowApyPercentage: BigNumber;
+  supplyApyPercentage: BigNumber;
+  supplyBalanceTokens: BigNumber;
+  supplyBalanceCents: BigNumber;
+  borrowBalanceTokens: BigNumber;
+  borrowBalanceCents: BigNumber;
+  supplyRatePerBlockTokens: BigNumber;
+  borrowRatePerBlockTokens: BigNumber;
+  distributions: AssetDistribution[];
+  borrowCapTokens?: BigNumber;
+  supplyCapTokens?: BigNumber;
+  // User-specific props
+  // TODO: make these optional so they can be set to undefined when no wallet is
+  // connected
+  userSupplyBalanceTokens: BigNumber;
+  userSupplyBalanceCents: BigNumber;
+  userBorrowBalanceTokens: BigNumber;
+  userBorrowBalanceCents: BigNumber;
+  userWalletBalanceTokens: BigNumber;
+  userWalletBalanceCents: BigNumber;
+  userPercentOfLimit: number;
+  isCollateralOfUser: boolean;
+}
 
 //export interface SwapRouterAddressMapping {
 //[poolComptrollerAddress: string]: string;
 //}
 
-//export interface Pool {
-//comptrollerAddress: string;
-//name: string;
-//description: string;
-//isIsolated: boolean;
-//assets: Asset[];
-//// User-specific props
-//userSupplyBalanceCents?: BigNumber;
-//userBorrowBalanceCents?: BigNumber;
-//userBorrowLimitCents?: BigNumber;
-//}
+export interface Pool {
+  comptrollerAddress: string;
+  name: string;
+  description: string;
+  isIsolated: boolean;
+  assets: Asset[];
+  // User-specific props
+  userSupplyBalanceCents?: BigNumber;
+  userBorrowBalanceCents?: BigNumber;
+  userBorrowLimitCents?: BigNumber;
+}
 
 //export type ProposalState =
 //| 'Pending'

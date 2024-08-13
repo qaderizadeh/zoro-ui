@@ -1,4 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
+
 import { Typography } from '@mui/material';
 import { VError, formatVErrorToReadableString } from '@/errors';
 import React from 'react';

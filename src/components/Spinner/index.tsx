@@ -1,16 +1,17 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import { Spinner as SpinnerAnimation } from "../LottieAnimation";
-import { useStyles } from "./styles";
-import TEST_IDS from "./testIds";
-import React from "react";
+import { Spinner as SpinnerAnimation } from '../LottieAnimation';
+import { useStyles } from './styles';
+import TEST_IDS from './testIds';
+import React from 'react';
 
 interface SpinnerProps {
-  variant?: "large" | "small";
+  variant?: 'large' | 'small';
   className?: string;
 }
 
 export const Spinner: React.FC<SpinnerProps> = ({
-  variant = "large",
+  variant = 'large',
   className,
 }) => {
   const styles = useStyles({ variant });

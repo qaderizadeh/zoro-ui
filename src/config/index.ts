@@ -25,10 +25,7 @@ export interface Config {
 // to reference each of them by their full name
 export const ENV_VARIABLES = {
   NODE_ENV: typeof process !== 'undefined' ? process.env.NODE_ENV : undefined,
-  VITE_ENVIRONMENT:
-    typeof process !== 'undefined'
-      ? process.env.VITE_ENVIRONMENT
-      : import.meta.env.VITE_ENVIRONMENT,
+  NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
 
   // Third-parties
   //VITE_SENTRY_DSN:
@@ -43,18 +40,19 @@ export const ENV_VARIABLES = {
   //: import.meta.env.VITE_POSTHOG_HOST_URL,
 
   //// Feature flags
-  //VITE_FF_ISOLATED_POOLS:
+  //NEXT_PUBLIC_FF_ISOLATED_POOLS:
   //typeof process !== 'undefined'
-  //? process.env.VITE_FF_ISOLATED_POOLS
-  //: import.meta.env.VITE_FF_ISOLATED_POOLS,
-  //VITE_FF_INTEGRATED_SWAP:
+  //? process.env.NEXT_PUBLIC_FF_ISOLATED_POOLS
+  //: import.meta.env.NEXT_PUBLIC_FF_ISOLATED_POOLS,
+  //NEXT_PUBLIC_FF_INTEGRATED_SWAP:
   //typeof process !== 'undefined'
-  //? process.env.VITE_FF_INTEGRATED_SWAP
-  //: import.meta.env.VITE_FF_INTEGRATED_SWAP,
+  //? process.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP
+  //: import.meta.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP,
 };
 
 const environment: Environment =
-  (ENV_VARIABLES.VITE_ENVIRONMENT as Environment | undefined) || 'mainnet';
+  (ENV_VARIABLES.NEXT_PUBLIC_ENVIRONMENT as Environment | undefined) ||
+  'mainnet';
 
 const isOnTestnet =
   environment === 'testnet' ||

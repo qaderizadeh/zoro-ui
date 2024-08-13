@@ -1,4 +1,4 @@
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 import { Token } from '@/types';
 
 import getAllowance, {
@@ -37,8 +37,8 @@ const useGetAllowance = (
 ) => {
   const tokenContract = useTokenContract(token);
 
-  return useQuery(
-    [
+  return useQuery({
+    queryKey: [
       FunctionKey.GET_TOKEN_ALLOWANCE,
       {
         tokenAddress: token.address,
@@ -47,14 +47,14 @@ const useGetAllowance = (
         isValidAllowance,
       },
     ],
-    () =>
+    queryFn: () =>
       getAllowance({
         tokenContract,
         spenderAddress,
         accountAddress,
       }),
-    options
-  );
+    ...(options ? options : {}),
+  });
 };
 
 export default useGetAllowance;

@@ -1,10 +1,11 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { SecondaryButton } from '../../Button';
 import { EllipseAddress } from '../../EllipseAddress';
 import { Icon } from '../../Icon';
 import { ZkLink } from '../../ZkLink';
 import { useStyles } from './styles';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from '@/translation';
 

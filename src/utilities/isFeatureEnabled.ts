@@ -3,8 +3,8 @@ import { ENV_VARIABLES } from '@/config';
 export type FeatureFlag = 'isolatedPools' | 'integratedSwap';
 
 const featureFlags = {
-  isolatedPools: ENV_VARIABLES.VITE_FF_ISOLATED_POOLS === 'true',
-  integratedSwap: ENV_VARIABLES.VITE_FF_INTEGRATED_SWAP === 'true',
+  isolatedPools: ENV_VARIABLES.NEXT_PUBLIC_FF_ISOLATED_POOLS === 'true',
+  integratedSwap: ENV_VARIABLES.NEXT_PUBLIC_FF_INTEGRATED_SWAP === 'true',
 };
 
 const isFeatureEnabled = (featureFlag: FeatureFlag) =>

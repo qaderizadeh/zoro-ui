@@ -1,12 +1,13 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import { ButtonProps, TertiaryButton } from "../Button";
-import { TextField, TextFieldProps } from "../TextField";
-import BigNumber from "bignumber.js";
-import React from "react";
-import { Token } from "types";
+import { ButtonProps, TertiaryButton } from '../Button';
+import { TextField, TextFieldProps } from '../TextField';
+import BigNumber from 'bignumber.js';
+import React from 'react';
+import { Token } from 'types';
 
 export interface RightMaxButton
-  extends Omit<ButtonProps, "variant" | "children" | "small"> {
+  extends Omit<ButtonProps, 'variant' | 'children' | 'small'> {
   label: string;
   className: string;
 }
@@ -15,7 +16,7 @@ export interface RightMaxButton
 // the given token) to the user, the underlying values (maxWei, value) are
 // expressed in wei to make them easier to use with contracts
 export interface TokenTextFieldProps
-  extends Omit<TextFieldProps, "onChange" | "value" | "max" | "min"> {
+  extends Omit<TextFieldProps, 'onChange' | 'value' | 'max' | 'min'> {
   token: Token;
   value: string;
   onChange: (newValue: string) => void;
@@ -40,11 +41,11 @@ export const TokenTextField: React.FC<TokenTextFieldProps> = ({
     return tmpOneWeiInTokens.toFixed();
   }, [token.decimals]);
 
-  const handleChange: TextFieldProps["onChange"] = ({
+  const handleChange: TextFieldProps['onChange'] = ({
     currentTarget: { value },
   }) => {
     // Forbid values with more decimals than the token provided supports
-    const valueDecimals = value.includes(".") ? value.split(".")[1].length : 0;
+    const valueDecimals = value.includes('.') ? value.split('.')[1].length : 0;
 
     if (valueDecimals <= token.decimals) {
       onChange(value);
@@ -53,12 +54,12 @@ export const TokenTextField: React.FC<TokenTextFieldProps> = ({
 
   return (
     <TextField
-      placeholder="0.00"
+      placeholder='0.00'
       min={0}
       max={max}
       step={step}
       onChange={handleChange}
-      type="number"
+      type='number'
       leftIconSrc={displayTokenIcon ? token : undefined}
       rightAdornment={
         rightMaxButton ? (

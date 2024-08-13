@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import React from 'react';
 
 import { ProgressBar, ProgressBarProps } from '..';
@@ -27,13 +28,21 @@ export const LabeledProgressBar: React.FC<LabeledProgressBarProps> = ({
       <div className={className} css={styles.topProgressBarLegend}>
         <div css={[styles.inlineContainer, styles.leftColumn]}>
           {greyLeftText && (
-            <Typography component="span" variant="small2" css={styles.inlineLabel}>
+            <Typography
+              component='span'
+              variant='small2'
+              css={styles.inlineLabel}
+            >
               {greyLeftText}
             </Typography>
           )}
 
           {whiteLeftText && (
-            <Typography component="span" variant="small1" css={styles.inlineValue}>
+            <Typography
+              component='span'
+              variant='small1'
+              css={styles.inlineValue}
+            >
               {whiteLeftText}
             </Typography>
           )}
@@ -41,13 +50,21 @@ export const LabeledProgressBar: React.FC<LabeledProgressBarProps> = ({
 
         <div css={styles.inlineContainer}>
           {greyRightText && (
-            <Typography component="span" variant="small2" css={styles.inlineLabel}>
+            <Typography
+              component='span'
+              variant='small2'
+              css={styles.inlineLabel}
+            >
               {greyRightText}
             </Typography>
           )}
 
           {whiteRightText && (
-            <Typography component="span" variant="small1" css={styles.inlineValue}>
+            <Typography
+              component='span'
+              variant='small1'
+              css={styles.inlineValue}
+            >
               {whiteRightText}
             </Typography>
           )}

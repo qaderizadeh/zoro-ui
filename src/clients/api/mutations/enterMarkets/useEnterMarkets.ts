@@ -1,12 +1,13 @@
-import { MutationObserverOptions, useMutation } from 'react-query';
+import { MutationObserverOptions, useMutation } from '@tanstack/react-query';
 
 import {
   EnterMarketsInput,
   EnterMarketsOutput,
   enterMarkets,
-  queryClient,
 } from '@/clients/api';
 import FunctionKey from '@/constants/functionKey';
+import { getQueryClient } from '@/app/get-query-client';
+const queryClient = getQueryClient();
 
 const useEnterMarkets = (
   options?: MutationObserverOptions<
@@ -15,11 +16,17 @@ const useEnterMarkets = (
     EnterMarketsInput
   >
 ) =>
-  useMutation(FunctionKey.ENTER_MARKETS, enterMarkets, {
+  useMutation({
+    mutationKey: [FunctionKey.ENTER_MARKETS],
+    mutationFn: enterMarkets,
     ...options,
     onSuccess: (...onSuccessParams) => {
-      queryClient.invalidateQueries(FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT);
-      queryClient.invalidateQueries(FunctionKey.GET_ISOLATED_POOLS);
+      queryClient.invalidateQueries({
+        queryKey: [FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [FunctionKey.GET_ISOLATED_POOLS],
+      });
 
       if (options?.onSuccess) {
         options.onSuccess(...onSuccessParams);

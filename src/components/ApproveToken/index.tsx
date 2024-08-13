@@ -1,6 +1,7 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
+/** @jsxImportSource @emotion/react */
 'use client';
 
-/** @jsxImportSource @emotion/react */
 import { SecondaryButton } from '../Button';
 import {
   LabeledInlineContent,
@@ -10,7 +11,6 @@ import { Spinner } from '../Spinner';
 import { toast } from '../Toast';
 import { TokenIcon } from '../TokenIcon';
 import useStyles from './styles';
-import Typography from '@mui/material/Typography';
 import { useAuth } from '@/context/AuthContext';
 import { GeolocationContext } from '@/context/GeolocationContext';
 import { VError, formatVErrorToReadableString } from '@/errors';
@@ -24,6 +24,7 @@ import React, {
 } from 'react';
 import { useTranslation } from '@/translation';
 import { Token } from '@/types';
+import { Typography } from '@mui/material';
 
 export interface ApproveTokenUiProps {
   token: Token;
@@ -34,7 +35,7 @@ export interface ApproveTokenUiProps {
   isApproveTokenLoading?: boolean;
   assetInfo?: LabeledInlineContentProps[];
   disabled?: boolean;
-  setIsValidAllowance: () => void;
+  setIsValidAllowance?: (v?: boolean) => void;
   isValidAllowance?: boolean;
 }
 
@@ -60,7 +61,7 @@ export const ApproveTokenUi = ({
       setLoading(true);
       await approveToken();
       setLoading(false);
-      setIsValidAllowance(true);
+      if (setIsValidAllowance) setIsValidAllowance(true);
     } catch (error) {
       setLoading(false);
 

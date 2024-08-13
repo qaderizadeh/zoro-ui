@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { GlobalStyles } from '@mui/material';
 import React from 'react';
@@ -24,8 +25,8 @@ const CloseButton: React.FC<CloseButtonProps> = ({ closeToast }) => {
   const styles = useStyles();
 
   return (
-    <Button css={styles.btnClose} onClick={closeToast} variant="text">
-      <Icon name="close" size={`${styles.iconSize}`} />
+    <Button css={styles.btnClose} onClick={closeToast} variant='text'>
+      <Icon name='close' size={`${styles.iconSize}`} />
     </Button>
   );
 };
@@ -36,7 +37,11 @@ const ToastComponent: React.FC<ToastProps> = ({ message, type = 'info' }) => {
   return (
     <>
       <GlobalStyles styles={customToastGlobalStyles} />
-      <Notice css={styles.noticeContainer} description={message} variant={type} />
+      <Notice
+        css={styles.noticeContainer}
+        description={message}
+        variant={type}
+      />
     </>
   );
 };
@@ -52,7 +57,10 @@ const defaultOptions: ToastOptions = {
   closeButton: CloseButton as ToastOptions['closeButton'],
 };
 
-export const toast = ({ message, type = 'info' }: ToastProps, options?: ToastOptions) =>
+export const toast = (
+  { message, type = 'info' }: ToastProps,
+  options?: ToastOptions
+) =>
   toastify(<ToastComponent message={message} type={type} />, {
     ...defaultOptions,
     ...options,

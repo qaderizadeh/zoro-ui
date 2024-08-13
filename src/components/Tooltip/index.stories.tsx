@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import { Meta } from '@storybook/react';
 import React from 'react';
 
@@ -18,7 +18,7 @@ export default {
 } as Meta<typeof Tooltip>;
 
 export const TooltipDefault = () => (
-  <Tooltip title="hello from tooltip" open>
-    <Typography display="inline-flex">Hello from storybook</Typography>
+  <Tooltip title='hello from tooltip' open>
+    <Typography display='inline-flex'>Hello from storybook</Typography>
   </Tooltip>
 );

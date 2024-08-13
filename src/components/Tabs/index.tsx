@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { ButtonGroup } from '../ButtonGroup';
 import useStyles from './styles';

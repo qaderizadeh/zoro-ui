@@ -1,27 +1,18 @@
-'use client';
-
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import alertImg from './../../assets/img/alert.png';
+'use client';
 import ConnectWalletBanner from './ConnectWalletBanner';
 import { useStyles } from './styles';
 import TEST_IDS from './testIds';
 import useFormatPools from './useFormatPools';
-import { useGetPools } from '@/clients/api';
-import {
-  ButtonGroup,
-  NoticeWarning,
-  Tag,
-  TagGroup,
-  TextField,
-  TokenAnnouncement,
-  Tooltip,
-} from '@/components';
-import { TOKENS } from '@/constants/tokens';
+// import { useGetPools } from '@/clients/api';
+import { ButtonGroup, Tag, TagGroup, TextField, Tooltip } from '@/components';
+// import { TOKENS } from '@/constants/tokens';
 import { MarketTable, MarketTableProps } from '@/containers/MarketTable';
-import { useAuth } from '@/context/AuthContext';
+// import { useAuth } from '@/context/AuthContext';
 import { useHideXlDownCss, useShowXlDownCss } from '@/hooks/responsive';
 import { useTranslation } from '@/translation';
-// import { Pool } from '@/types';
+import { Pool } from '@/types';
 import { isFeatureEnabled } from '@/utilities';
 import React, { InputHTMLAttributes, useMemo, useState } from 'react';
 
@@ -116,6 +107,8 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
   //<NoticeWarning css={styles.banner} description={t('dashboard.banner.borrowApyChange')} />
 
   //<TokenAnnouncement css={styles.banner} token={MAINNET_TOKENS.tusdold} />
+
+  console.log('formattedPools', formattedPools);
   return (
     <>
       <ConnectWalletBanner />
@@ -130,7 +123,7 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
                   <div className='tooltip-details-wrap'>
                     {/* <div className="d-align">
                       <h4>Core pools are risky</h4>
-                      <img src={alertImg} />
+                      <img src='/images/alert.png' />
                     </div> */}
                     <p>
                       Assets in isolated pools cannot be used as collateral.
@@ -292,7 +285,7 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
                   <div className='tooltip-details-wrap'>
                     <div className='d-align'>
                       <h4>Isolated pools are risky</h4>
-                      <img src={alertImg} />
+                      <img src='/images/alert.png' />
                     </div>
                     <p>
                       Assets in isolated pools cannot be used as collateral.

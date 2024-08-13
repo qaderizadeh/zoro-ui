@@ -1,9 +1,10 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import MuiAccordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { Icon } from '../Icon';
 import { useStyles } from './styles';
@@ -17,7 +18,7 @@ export interface AccordionProps {
   rightAdornment?: React.ReactElement;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({
+export const Accordion = ({
   className,
   expanded,
   onChange,
@@ -25,11 +26,12 @@ export const Accordion: React.FC<AccordionProps> = ({
   title,
   rightAdornment,
   children,
-}) => {
+}: PropsWithChildren<AccordionProps>) => {
   const styles = useStyles();
 
   const handleChange =
-    (actionIdx: number) => (event: React.SyntheticEvent, newExpandedIdx: boolean) => {
+    (actionIdx: number) =>
+    (event: React.SyntheticEvent, newExpandedIdx: boolean) => {
       onChange(newExpandedIdx ? actionIdx : undefined);
     };
   return (
@@ -45,8 +47,10 @@ export const Accordion: React.FC<AccordionProps> = ({
         css={styles.accordionSummary}
       >
         <div css={styles.accordionLeft}>
-          <Icon name="arrowUp" css={styles.arrow(expanded)} />
-          <Typography color={expanded ? 'textPrimary' : 'textSecondary'}>{title}</Typography>
+          <Icon name='arrowUp' css={styles.arrow(expanded)} />
+          <Typography color={expanded ? 'textPrimary' : 'textSecondary'}>
+            {title}
+          </Typography>
         </div>
         {rightAdornment || <div />}
       </AccordionSummary>

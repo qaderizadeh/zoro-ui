@@ -23,7 +23,7 @@ const GeolocationProvider = ({ children }: PropsWithChildren<{}>) => {
     const fetchGeolocation = async () => {
       try {
         const response = await fetch(
-          `https://pro.ip-api.com/json?key=${import.meta.env.VITE_FF_IPAPI_KEY}`
+          `https://pro.ip-api.com/json?key=${process.env.NEXT_PUBLIC_FF_IPAPI_KEY}`
         );
         const { countryCode } = await response.json();
         setGeolocation(BlockedRegions.includes(countryCode));

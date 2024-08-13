@@ -1,4 +1,4 @@
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 
 import getVTokenBalancesAll, {
   GetVTokenBalancesAllInput,
@@ -36,14 +36,16 @@ const useGetVTokenBalancesAll = (
   options?: Options
 ) => {
   const venusLensContract = useVenusLensContract();
-  const result = useQuery(
-    [FunctionKey.GET_V_TOKEN_BALANCES_ALL, { account, vTokenAddresses }],
-    () => getVTokenBalancesAll({ venusLensContract, account, vTokenAddresses }),
-    {
-      refetchInterval: DEFAULT_REFETCH_INTERVAL_MS,
-      ...options,
-    }
-  );
+  const result = useQuery({
+    queryKey: [
+      FunctionKey.GET_V_TOKEN_BALANCES_ALL,
+      { account, vTokenAddresses },
+    ],
+    queryFn: () =>
+      getVTokenBalancesAll({ venusLensContract, account, vTokenAddresses }),
+    refetchInterval: DEFAULT_REFETCH_INTERVAL_MS,
+    ...(options ? options : {}),
+  });
   //const { provider } = useAuth();
 
   //const tokenContract = getTokenContract(TOKENS.usdc);

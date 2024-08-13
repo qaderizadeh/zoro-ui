@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { ButtonProps, SecondaryButton } from '../../Button';
 import { useConnectWallet } from '@web3-onboard/react';
