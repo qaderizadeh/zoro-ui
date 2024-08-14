@@ -7,85 +7,83 @@ import { isFeatureEnabled } from '@/utilities';
 export const useStyles = () => {
   const theme = useTheme();
 
-  return {
-    container: css`
-      padding: ${theme.spacing(2)};
-      background-color: ${theme.palette.secondary.main};
-      border-radius: ${theme.spacing(6)};
-      margin-bottom: ${theme.spacing(6)};
-      border: 1px ${theme.palette.secondary.light} solid;
-    `,
-    header: css`
-      margin-bottom: ${theme.spacing(6)};
+  const styles = {
+    container: {
+      padding: `${theme.spacing(2)}`,
+      backgroundColor: `${theme.palette.secondary.main}`,
+      borderRadius: `${theme.spacing(6)}`,
+      marginBottom: `${theme.spacing(6)}`,
+      border: `1px ${theme.palette.secondary.light} solid`,
+    },
+    header: {
+      marginBottom: `${
+        !isFeatureEnabled('isolatedPools') && theme.breakpoints.down('xl')
+          ? theme.spacing(6)
+          : 0
+      }`,
+    },
+    headerBottomRow: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+    },
+    tags: {
+      display: `flex`,
+      alignItems: `center`,
+      flexWrap: `wrap`,
+      marginRight: `${theme.spacing(4)}`,
+      marginTop: `${theme.spacing(-2)}`,
+      [theme.breakpoints.down('xl')]: {
+        marginRight: 0,
+      },
+      [theme.breakpoints.down('md')]: {
+        flexWrap: 'nowrap',
+        overflowY: 'auto',
+        msOverflowStyle: 'none',
+        scrollbarWidth: 'none',
 
-      ${!isFeatureEnabled('isolatedPools') && theme.breakpoints.down('xl')} {
-        margin-bottom: 0;
-      }
-    `,
-    headerBottomRow: css`
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      ${theme.breakpoints.down('md')} {
-        display: block;
-      }
-    `,
-    tags: css`
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-right: ${theme.spacing(4)};
-      margin-top: ${theme.spacing(-2)};
-
-      ${theme.breakpoints.down('xl')} {
-        margin-right: 0;
-      }
-
-      ${theme.breakpoints.down('md')} {
-        flex-wrap: nowrap;
-        overflow-y: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-
-        ::-webkit-scrollbar {
-          display: none;
-        }
-      }
-    `,
-    tag: css`
-      border-radius: ${theme.spacing(6)};
-      padding: ${theme.spacing(2, 5)};
-      white-space: nowrap;
-      margin-top: ${theme.spacing(2)};
-
-      :not(:last-of-type) {
-        margin-right: ${theme.spacing(2)};
-      }
-    `,
-    rightColumn: css`
-      display: flex;
-      align-items: center;
-      margin-left: auto;
-      justify-self: flex-end;
-    `,
-    tabletButtonGroup: css`
-      margin-bottom: ${theme.spacing(6)};
-    `,
-    tabletSearchTextField: css`
-      width: 100%;
-      margin-bottom: ${theme.spacing(6)};
-    `,
-    desktopSearchTextField: css`
-      min-width: ${theme.spacing(75)};
-    `,
-    banner: css`
-      margin-bottom: ${theme.spacing(6)};
-    `,
-    desktopMarketTables: css`
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: ${theme.spacing(10)};
-    `,
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+      },
+    },
+    tag: {
+      borderRadius: `${theme.spacing(6)}`,
+      padding: `${theme.spacing(2, 5)}`,
+      whiteSpace: 'nowrap',
+      marginTop: `${theme.spacing(2)}`,
+      ':not(:last-of-type)': {
+        marginRight: `${theme.spacing(2)}`,
+      },
+    },
+    rightColumn: {
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: 'auto',
+      justifySelf: 'flex-end',
+    },
+    tabletButtonGroup: {
+      marginBottom: `${theme.spacing(6)}`,
+    },
+    tabletSearchTextField: {
+      width: '100%',
+      marginBottom: `${theme.spacing(6)}`,
+    },
+    desktopSearchTextField: {
+      minWidth: `${theme.spacing(75)}`,
+    },
+    banner: {
+      marginBottom: `${theme.spacing(6)}`,
+    },
+    desktopMarketTables: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gridGap: `${theme.spacing(10)}`,
+    },
   };
+
+  return styles;
 };

@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
-import { useTheme } from '@mui/material';
-
+import { Interpolation, Theme, useTheme } from '@mui/material';
 import { SPACING } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const useStyles = () => {
@@ -24,9 +22,9 @@ export const useStyles = () => {
     lineStrokeWidth: theme.spacing(0.5),
     axis: theme.typography.tiny,
     tickMargin: SPACING * 2,
-    container: css`
-      width: 100%;
-      height: ${theme.spacing(62)};
-    `,
+    container: {
+      width: '100%',
+      height: theme.spacing(62),
+    },
   };
 };

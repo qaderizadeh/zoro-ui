@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
+
 import { Icon } from '../../Icon';
 //import ClaimRewardButton from '../ClaimRewardButton';
 import ConnectButton from '../ConnectButton';
