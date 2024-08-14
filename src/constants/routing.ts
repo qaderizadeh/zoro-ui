@@ -44,11 +44,13 @@ const routeSubdirectories = {
 
 type RouteName = keyof typeof routeSubdirectories;
 
+export interface IRoute {
+  path: string;
+  subdirectories: Subdirectory[];
+}
+
 type Routes = {
-  [key in RouteName]: {
-    path: string;
-    subdirectories: Subdirectory[];
-  };
+  [key in RouteName]: IRoute;
 };
 
 export const routes = Object.keys(routeSubdirectories).reduce<Routes>(

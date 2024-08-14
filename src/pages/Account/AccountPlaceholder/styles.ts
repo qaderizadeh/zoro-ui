@@ -20,6 +20,7 @@ export const useStyles = () => {
       height: ${theme.spacing(24)};
       background-color: rgba(40, 41, 49, 1);
       border-radius: 50%;
+      width: ${theme.spacing(24)};
     `,
   };
 };

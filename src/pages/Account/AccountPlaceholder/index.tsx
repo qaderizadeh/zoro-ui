@@ -8,7 +8,8 @@ import { useTranslation } from '@/translation';
 import { routes } from '@/constants/routing';
 
 import { useStyles } from './styles';
-import wallet from './../../../assets/img/wallet.webp';
+import wallet from '@/assets/img/wallet.webp';
+import Image from 'next/image';
 
 const AccountPlaceholder: React.FC = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const AccountPlaceholder: React.FC = () => {
   return (
     <div css={styles.placeholderContainer}>
       <div>
-        <img
+        <Image
           src={wallet}
           css={styles.wallet}
           alt={t('dashboard.connectWalletBanner.illustration.alt')}

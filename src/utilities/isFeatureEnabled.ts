@@ -1,10 +1,8 @@
-import { ENV_VARIABLES } from '@/config';
-
 export type FeatureFlag = 'isolatedPools' | 'integratedSwap';
 
 const featureFlags = {
-  isolatedPools: ENV_VARIABLES.NEXT_PUBLIC_FF_ISOLATED_POOLS === 'true',
-  integratedSwap: ENV_VARIABLES.NEXT_PUBLIC_FF_INTEGRATED_SWAP === 'true',
+  isolatedPools: process.env.NEXT_PUBLIC_FF_ISOLATED_POOLS === 'true',
+  integratedSwap: process.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP === 'true',
 };
 
 const isFeatureEnabled = (featureFlag: FeatureFlag) =>

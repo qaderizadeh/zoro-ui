@@ -90,23 +90,23 @@ export type PoolPageProps = RouteComponentProps<{
   poolComptrollerAddress: string;
 }>;
 
-const PoolPage: React.FC<PoolPageProps> = ({
-  match: {
-    params: { poolComptrollerAddress },
-  },
-}) => {
-  const { accountAddress } = useAuth();
+// const PoolPage: React.FC<PoolPageProps> = ({
+//   match: {
+//     params: { poolComptrollerAddress },
+//   },
+// }) => {
+//   const { accountAddress } = useAuth();
 
-  const { data: getPoolData, isLoading: isGetPoolLoading } = useGetPools({
-    accountAddress,
-  });
+//   const { data: getPoolData, isLoading: isGetPoolLoading } = useGetPools({
+//     accountAddress,
+//   });
 
-  // Redirect to Dashboard page if pool Comptroller address is incorrect
-  if (!isGetPoolLoading && !getPoolData?.pools) {
-    <Redirect to={routes.dashboard.path} />;
-  }
+//   // Redirect to Dashboard page if pool Comptroller address is incorrect
+//   if (!isGetPoolLoading && !getPoolData?.pools) {
+//     <Redirect to={routes.dashboard.path} />;
+//   }
 
-  return getPoolData?.pools.map((pool) => <PoolUi pool={pool} />);
-};
+//   return getPoolData?.pools.map((pool) => <PoolUi pool={pool} />);
+// };
 
-export default PoolPage;
+// export default PoolPage;

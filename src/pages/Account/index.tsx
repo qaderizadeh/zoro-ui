@@ -38,7 +38,7 @@ export const AccountUi: React.FC<AccountUiProps> = ({
   //() => vaults.filter(vault => vault.userStakedWei?.isGreaterThan(0)),
   //[vaults],
   //);
-  const filteredVaults = [];
+  const filteredVaults: any[] = [];
 
   // Filter out pools user has not supplied in or borrowed from
   const filteredPools = useMemo(
@@ -107,26 +107,26 @@ export const AccountUi: React.FC<AccountUiProps> = ({
   );
 };
 
-const Account: React.FC = () => {
-  const { accountAddress } = useAuth();
-  const { data: getPoolsData, isLoading: isGetPoolsLoading } = useGetPools({
-    accountAddress,
-  });
+// const Account: React.FC = () => {
+//   const { accountAddress } = useAuth();
+//   const { data: getPoolsData, isLoading: isGetPoolsLoading } = useGetPools({
+//     accountAddress,
+//   });
 
-  //const { data: getVaultsData, isLoading: isGetVaultsLoading } = useGetVaults({
-  //accountAddress,
-  //});
+//   //const { data: getVaultsData, isLoading: isGetVaultsLoading } = useGetVaults({
+//   //accountAddress,
+//   //});
 
-  //const isFetching = isGetPoolsLoading || isGetVaultsLoading;
-  const isFetching = isGetPoolsLoading;
+//   //const isFetching = isGetPoolsLoading || isGetVaultsLoading;
+//   const isFetching = isGetPoolsLoading;
 
-  return (
-    <AccountUi
-      isFetching={isFetching}
-      pools={getPoolsData?.pools || []}
-      vaults={[]}
-    />
-  );
-};
+//   return (
+//     <AccountUi
+//       isFetching={isFetching}
+//       pools={getPoolsData?.pools || []}
+//       vaults={[]}
+//     />
+//   );
+// };
 
-export default Account;
+// export default Account;

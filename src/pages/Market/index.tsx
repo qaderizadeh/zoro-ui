@@ -71,7 +71,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useHideXlDownCss, useShowXlDownCss } from '@/hooks/responsive';
 import useOperationModal from '@/hooks/useOperationModal';
 import React, { useMemo } from 'react';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+// import { Redirect, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from '@/translation';
 import { Asset } from '@/types';
 >>>>>>> 2df7027 (first steps, render dashboard)
@@ -522,79 +522,3 @@ export const MarketUi: React.FC<MarketUiProps> = ({
     </>
   );
 };
-
-export type MarketProps = RouteComponentProps<{
-  vTokenAddress: string;
-  poolComptrollerAddress: string;
-}>;
-
-const Market: React.FC<MarketProps> = ({
-  match: {
-    params: { vTokenAddress, poolComptrollerAddress },
-  },
-}) => {
-  const { accountAddress } = useAuth();
-  const vToken = getVTokenByAddress(vTokenAddress);
-
-  //console.log("vToken in Market", vToken);
-  //console.log("poolComptrollerAddress in Market", poolComptrollerAddress);
-
-  // Redirect to markets page if params are invalid
-  if (!vToken || !poolComptrollerAddress) {
-    return <Redirect to={routes.pools.path} />;
-  }
-
-  const mainPoolComptrollerAddress = getContractAddress('comptroller');
-
-  const isIsolatedPoolMarket = !areAddressesEqual(
-    mainPoolComptrollerAddress,
-    poolComptrollerAddress
-  );
-
-  const { data: getAssetData } = useGetAsset({
-    vToken,
-    accountAddress,
-  });
-
-  //const { data: chartData, isLoading: isChartDataLoading } = useGetChartData({
-  //vToken,
-  //});
-  const isChartDataLoading = false;
-  const chartData = {
-    supplyChartData: [],
-    borrowChartData: [],
-  };
-
-  const reserveFactorMantissa = useMemo(
-    () =>
-      getAssetData?.asset &&
-      new BigNumber(getAssetData.asset.reserveFactor).multipliedBy(
-        COMPOUND_MANTISSA
-      ),
-    [getAssetData?.asset?.reserveFactor]
-  );
-
-  const {
-    isLoading: isInterestRateChartDataLoading,
-    data: interestRateChartData = {
-      apySimulations: [],
-    },
-  } = useGetVTokenApySimulations({
-    vToken,
-    reserveFactorMantissa,
-    isIsolatedPoolMarket,
-  });
-
-  return (
-    <MarketUi
-      asset={getAssetData?.asset}
-      poolComptrollerAddress={poolComptrollerAddress}
-      isChartDataLoading={isChartDataLoading}
-      {...chartData}
-      isInterestRateChartDataLoading={isInterestRateChartDataLoading}
-      interestRateChartData={interestRateChartData.apySimulations}
-    />
-  );
-};
-
-export default Market;

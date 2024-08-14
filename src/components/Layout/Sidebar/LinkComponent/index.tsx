@@ -21,7 +21,7 @@ export const LinkComponent = ({
   target = true,
 }: PropsWithChildren<LinkProps>) => {
   const pathname = usePathname();
-  if (href[0] === '/') {
+  if (href === '/') {
     const activeClassName = isMobile
       ? 'active-mobile-menu-item'
       : 'active-menu-item';

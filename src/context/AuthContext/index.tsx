@@ -11,6 +11,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
 } from 'react';
 import { useTranslation } from '@/translation';
 import config from '@/config';
@@ -38,13 +39,20 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [{ connectedChain }, setChain] = useSetChain();
 
-  let provider = null;
-  if (wallet?.provider) {
-    provider = new ethers.providers.Web3Provider(wallet.provider);
-  } else {
-    provider = new ethers.providers.JsonRpcProvider('https://eth.llamarpc.com');
-  }
-  const signer = provider.getSigner();
+  const walletProvider = wallet?.provider;
+  const provider = useMemo(() => {
+    let provider = null;
+    if (walletProvider) {
+      provider = new ethers.providers.Web3Provider(wallet.provider);
+    } else {
+      provider = new ethers.providers.JsonRpcProvider(
+        'https://eth.llamarpc.com'
+      );
+    }
+    return provider;
+  }, [walletProvider]);
+
+  const signer = useMemo(() => provider.getSigner(), [provider]);
 
   const accountAddress = wallet ? wallet.accounts[0].address : '';
 

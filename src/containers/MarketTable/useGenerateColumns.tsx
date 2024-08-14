@@ -9,8 +9,7 @@ import {
   Toggle,
   TokenIconWithSymbol,
 } from '@/components';
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
 import { useTranslation } from '@/translation';
 import {
   compareBigNumbers,
@@ -27,6 +26,7 @@ import { routes } from '@/constants/routing';
 
 import { useStyles } from './styles';
 import { ColumnKey, PoolAsset } from './types';
+import Link from 'next/link';
 
 // Translation keys: do not remove this comment
 // t('marketTable.columnKeys.asset')
@@ -149,7 +149,7 @@ const useGenerateColumns = ({
             return (
               <div>
                 <Link
-                  to={routes.pool.path.replace(
+                  href={routes.pool.path.replace(
                     ':poolComptrollerAddress',
                     poolAsset.pool.comptrollerAddress
                   )}

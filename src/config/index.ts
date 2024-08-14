@@ -23,36 +23,35 @@ export interface Config {
 
 // Note: because Vite statically replaces env variables when building, we need
 // to reference each of them by their full name
-export const ENV_VARIABLES = {
-  NODE_ENV: typeof process !== 'undefined' ? process.env.NODE_ENV : undefined,
-  NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
+// export const ENV_VARIABLES = {
+//   NODE_ENV: typeof process !== 'undefined' ? process.env.NODE_ENV : undefined,
+//   NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
 
-  // Third-parties
-  //VITE_SENTRY_DSN:
-  //typeof process !== 'undefined' ? process.env.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
-  //VITE_POSTHOG_API_KEY:
-  //typeof process !== 'undefined'
-  //? process.env.VITE_POSTHOG_API_KEY
-  //: import.meta.env.VITE_POSTHOG_API_KEY,
-  //VITE_POSTHOG_HOST_URL:
-  //typeof process !== 'undefined'
-  //? process.env.VITE_POSTHOG_HOST_URL
-  //: import.meta.env.VITE_POSTHOG_HOST_URL,
+//   // Third-parties
+//   //VITE_SENTRY_DSN:
+//   //typeof process !== 'undefined' ? process.env.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
+//   //VITE_POSTHOG_API_KEY:
+//   //typeof process !== 'undefined'
+//   //? process.env.VITE_POSTHOG_API_KEY
+//   //: import.meta.env.VITE_POSTHOG_API_KEY,
+//   //VITE_POSTHOG_HOST_URL:
+//   //typeof process !== 'undefined'
+//   //? process.env.VITE_POSTHOG_HOST_URL
+//   //: import.meta.env.VITE_POSTHOG_HOST_URL,
 
-  //// Feature flags
-  //NEXT_PUBLIC_FF_ISOLATED_POOLS:
-  //typeof process !== 'undefined'
-  //? process.env.NEXT_PUBLIC_FF_ISOLATED_POOLS
-  //: import.meta.env.NEXT_PUBLIC_FF_ISOLATED_POOLS,
-  //NEXT_PUBLIC_FF_INTEGRATED_SWAP:
-  //typeof process !== 'undefined'
-  //? process.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP
-  //: import.meta.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP,
-};
+//   //// Feature flags
+//   //NEXT_PUBLIC_FF_ISOLATED_POOLS:
+//   //typeof process !== 'undefined'
+//   //? process.env.NEXT_PUBLIC_FF_ISOLATED_POOLS
+//   //: import.meta.env.NEXT_PUBLIC_FF_ISOLATED_POOLS,
+//   //NEXT_PUBLIC_FF_INTEGRATED_SWAP:
+//   //typeof process !== 'undefined'
+//   //? process.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP
+//   //: import.meta.env.NEXT_PUBLIC_FF_INTEGRATED_SWAP,
+// };
 
 const environment: Environment =
-  (ENV_VARIABLES.NEXT_PUBLIC_ENVIRONMENT as Environment | undefined) ||
-  'mainnet';
+  (process.env.NEXT_PUBLIC_ENVIRONMENT as Environment | undefined) || 'mainnet';
 
 const isOnTestnet =
   environment === 'testnet' ||

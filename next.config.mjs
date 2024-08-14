@@ -27,7 +27,29 @@ const nextConfig = {
 
     return config;
   },
+  async redirects() {
+    if (process.env.NEXT_PUBLIC_FF_ISOLATED_POOLS === 'true') {
+      return [
+        {
+          source: '/markets',
+          destination: '/',
+          permanent: false,
+        },
+        {
+          source: '/markets/:poolComptrollerAddress/market/:vTokenAddress',
+          destination: '/',
+          permanent: false,
+        },
+      ];
+    }
 
-  // ...other config
+    return [
+      {
+        source: '/pools/pool/:poolComptrollerAddress/market/:vTokenAddress',
+        destination: '/',
+        permanent: false,
+      },
+    ];
+  },
 };
 export default nextConfig;

@@ -2,20 +2,16 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import React, { useMemo } from 'react';
-// import { Link, matchPath, useLocation } from 'react-router-dom';
 import Link from 'next/link';
 import { useTranslation } from '@/translation';
 import { getVTokenByAddress } from '@/utilities';
-
 import addTokenToWallet, {
   canRegisterToken,
 } from '@/clients/web3/addTokenToWallet';
-import { Subdirectory, routes } from '@/constants/routing';
+import { IRoute, Subdirectory, routes } from '@/constants/routing';
 import { useAuth } from '@/context/AuthContext';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
-
 import { TertiaryButton } from '../../../Button';
-import { EllipseAddress } from '../../../EllipseAddress';
 import { Icon } from '../../../Icon';
 import PoolName from './PoolName';
 import { useStyles } from './styles';
@@ -38,32 +34,44 @@ const Breadcrumbs: React.FC = () => {
   );
 
   const pathNodes = useMemo(() => {
-    // Get active route
-    let params: Record<string, string> = {};
-    const activeRouteKey = Object.keys(routes).find((key) => {
-      // const routeMatch = matchPath(pathname, {
-      //   path: routes[key as keyof typeof routes].path,
-      //   exact: true,
-      // });
+    let href = '';
+    let activeRoute: IRoute | null = null;
 
-      const routeMatch = pathname === routes[key as keyof typeof routes].path;
-
-      // if (routeMatch) {
-      //   const { params: routeParams } = routeMatch;
-      //   params = routeParams;
-      // }
-
-      return routeMatch;
-    });
-
-    if (!activeRouteKey) {
-      return [];
+    if (pathname === routes.dashboard.path) {
+      activeRoute = routes.dashboard;
     }
 
-    const activeRoute = routes[activeRouteKey as keyof typeof routes];
-    let href = '';
+    if (pathname === routes.account.path) {
+      activeRoute = routes.account;
+    }
 
-    // Generate path nodes
+    if (
+      params?.poolComptrollerAddress &&
+      pathname ===
+        routes.markets.path.replace(
+          ':poolComptrollerAddress',
+          params.poolComptrollerAddress as string
+        )
+    ) {
+      activeRoute = routes.markets;
+    }
+
+    if (
+      params?.poolComptrollerAddress &&
+      params?.vTokenAddress &&
+      pathname ===
+        routes.market.path
+          .replace(
+            ':poolComptrollerAddress',
+            params.poolComptrollerAddress as string
+          )
+          .replace(':vTokenAddress', params.vTokenAddress as string)
+    ) {
+      activeRoute = routes.market;
+    }
+
+    if (!activeRoute) return [];
+
     return activeRoute.subdirectories.reduce<PathNode[]>(
       (acc, subdirectory) => {
         let dom: React.ReactNode;
@@ -79,7 +87,7 @@ const Breadcrumbs: React.FC = () => {
           case Subdirectory.MARKETS:
             hrefFragment = Subdirectory.MARKETS.replace(
               ':poolComptrollerAddress',
-              params.poolComptrollerAddress
+              params?.poolComptrollerAddress as string
             );
 
             dom = t('breadcrumbs.markets');
@@ -90,12 +98,14 @@ const Breadcrumbs: React.FC = () => {
           case Subdirectory.POOL:
             hrefFragment = Subdirectory.POOL.replace(
               ':poolComptrollerAddress',
-              params.poolComptrollerAddress
+              params?.poolComptrollerAddress as string
             );
 
             dom = (
               <PoolName
-                poolComptrollerAddress={params.poolComptrollerAddress}
+                poolComptrollerAddress={
+                  params?.poolComptrollerAddress as string
+                }
               />
             );
             break;
@@ -103,10 +113,12 @@ const Breadcrumbs: React.FC = () => {
             {
               hrefFragment = Subdirectory.MARKET.replace(
                 ':vTokenAddress',
-                params.vTokenAddress
+                params?.vTokenAddress as string
               );
 
-              const vToken = getVTokenByAddress(params.vTokenAddress);
+              const vToken = getVTokenByAddress(
+                params?.vTokenAddress as string
+              );
 
               if (vToken) {
                 dom = (

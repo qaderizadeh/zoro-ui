@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { Stat } from '../types';
 import { useStyles } from './styles';
@@ -20,14 +20,14 @@ export interface CardProps {
   testId?: string;
 }
 
-const Card: React.FC<CardProps> = ({
+const Card = ({
   children,
   title,
   legends = [],
   stats = [],
   className,
   testId,
-}) => {
+}: PropsWithChildren<CardProps>) => {
   const styles = useStyles();
 
   return (
