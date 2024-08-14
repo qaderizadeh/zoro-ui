@@ -24,8 +24,8 @@ const routeSubdirectories = {
   dashboard: [Subdirectory.DASHBOARD],
   account: [Subdirectory.ACCOUNT],
   //xvs: [Subdirectory.XVS],
-  //pools: [Subdirectory.POOLS],
-  //pool: [Subdirectory.POOLS, Subdirectory.POOL],
+  pools: [Subdirectory.POOLS],
+  pool: [Subdirectory.POOLS, Subdirectory.POOL],
   markets: [Subdirectory.MARKETS],
   market: isFeatureEnabled('isolatedPools')
     ? [Subdirectory.POOLS, Subdirectory.POOL, Subdirectory.MARKET]

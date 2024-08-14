@@ -1,9 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import React from 'react';
-import { Token } from '@/types';
 
 import { useStyles } from './styles';
+import { Token } from '@/types';
+import React from 'react';
 
 export interface TokenIconProps {
   token: Token;
@@ -13,9 +13,14 @@ export interface TokenIconProps {
 export const TokenIcon: React.FC<TokenIconProps> = ({ className, token }) => {
   const styles = useStyles();
 
+  const Icon = token.asset;
+
+  if (!Icon) {
+    return null;
+  }
+
   return (
-    <img
-      src={token.asset}
+    <Icon
       css={styles.icon}
       alt={token.symbol}
       className={className}

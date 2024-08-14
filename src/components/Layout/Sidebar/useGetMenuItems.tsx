@@ -80,6 +80,7 @@ const useGetMenuItems = () => {
     );
     menuItems.push({
       href: ZORO_LIQUIDATOR_URL,
+      target: true,
       // Translation key: do not remove this comment
       // t('layout.menuItems.discord')
       i18nKey: 'layout.menuItems.liquidator',
@@ -117,7 +118,6 @@ const useGetMenuItems = () => {
           </defs>
         </svg>
       ),
-      target: false,
     });
 
     menuItems

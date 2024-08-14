@@ -109,7 +109,6 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
 
   //<TokenAnnouncement css={styles.banner} token={MAINNET_TOKENS.tusdold} />
 
-  console.log('formattedPools', formattedPools);
   return (
     <>
       <ConnectWalletBanner />

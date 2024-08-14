@@ -15,6 +15,7 @@ import React, {
 } from 'react';
 import { useTranslation } from '@/translation';
 import config from '@/config';
+import { useRouter } from 'next/navigation';
 export interface AuthContextValue {
   login: (connector: Connector) => Promise<void>;
   logOut: () => void;
@@ -35,6 +36,7 @@ export const AuthContext = React.createContext<AuthContextValue>({
 });
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const router = useRouter();
   const [isAuthModalOpen, setIsAuthModalOpen] = React.useState(false);
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [{ connectedChain }, setChain] = useSetChain();

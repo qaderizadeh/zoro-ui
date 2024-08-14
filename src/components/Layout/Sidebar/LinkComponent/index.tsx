@@ -18,38 +18,30 @@ export const LinkComponent = ({
   onClick,
   href,
   isMobile = false,
-  target = true,
+  target = false,
 }: PropsWithChildren<LinkProps>) => {
   const pathname = usePathname();
-  if (href === '/') {
-    const activeClassName = isMobile
-      ? 'active-mobile-menu-item'
-      : 'active-menu-item';
+  const activeClassName = isMobile
+    ? 'active-mobile-menu-item'
+    : 'active-menu-item';
 
-    const isActive = pathname === href;
+  const isActive = pathname === href;
 
+  if (!!target) {
     return (
-      <Link
-        href={href}
-        onClick={onClick}
-        className={isActive ? activeClassName : undefined}
-      >
+      <a href={href} target='_blank' rel='noreferrer'>
         {children}
-      </Link>
+      </a>
     );
   }
 
   return (
-    <>
-      {!target ? (
-        <a href={href} rel='noreferrer'>
-          {children}
-        </a>
-      ) : (
-        <a href={href} target='_blank' rel='noreferrer'>
-          {children}
-        </a>
-      )}
-    </>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={isActive ? activeClassName : undefined}
+    >
+      {children}
+    </Link>
   );
 };

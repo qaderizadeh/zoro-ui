@@ -89,7 +89,6 @@ export const LinkButton = ({
     href: string;
   }
 >) => {
-  console.log('props', props);
   const styles = useStyles({ fullWidth, variant });
   return (
     <Link
