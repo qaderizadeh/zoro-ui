@@ -1,3 +1,5 @@
+import '@/assets/styles/index.scss';
+
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Providers } from './providers';
 import { Metadata } from 'next';

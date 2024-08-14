@@ -3,7 +3,8 @@
 
 import { useStyles } from './styles';
 import { Token } from '@/types';
-import React from 'react';
+import { SerializedStyles } from '@emotion/react';
+import React, { ReactComponentElement } from 'react';
 
 export interface TokenIconProps {
   token: Token;
@@ -13,14 +14,22 @@ export interface TokenIconProps {
 export const TokenIcon: React.FC<TokenIconProps> = ({ className, token }) => {
   const styles = useStyles();
 
-  const Icon = token.asset;
+  if (typeof token.asset === 'function') {
+    const Icon = token.asset as React.ComponentType<{
+      css: SerializedStyles;
+      className: string | undefined;
+    }>;
 
-  if (!Icon) {
-    return null;
+    if (!Icon) {
+      return null;
+    }
+
+    return <Icon css={styles.icon} className={className} />;
   }
 
   return (
-    <Icon
+    <img
+      src={(token.asset as any).src}
       css={styles.icon}
       alt={token.symbol}
       className={className}

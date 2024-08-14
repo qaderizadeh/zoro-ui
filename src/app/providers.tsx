@@ -1,6 +1,6 @@
 'use client';
 
-// import Icon from '@/assets/img/Logo-01.svg?url';
+import Icon from '@/assets/img/Logo-01.svg?url';
 // import { queryClient } from '@/clients/api';
 import { Layout, ResetScrollOnRouteChange } from '@/components';
 import { AuthProvider } from '@/context/AuthContext';
@@ -58,7 +58,7 @@ const web3Onboard = init({
   chains,
   appMetadata: {
     name: 'ZORO',
-    icon: '/images/Logo-01.svg',
+    icon: Icon.src,
     description: 'Main App',
   },
   theme: 'dark',

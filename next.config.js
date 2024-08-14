@@ -1,4 +1,6 @@
-const nextConfig = {
+const path = require('path');
+
+module.exports = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -51,5 +53,7 @@ const nextConfig = {
       },
     ];
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'src', 'assets', 'styles')],
+  },
 };
-export default nextConfig;
