@@ -1,8 +1,8 @@
-'use client';
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
+'use client';
 import Box from '@mui/material/Box';
-import React, { PropsWithChildren, useContext, useState } from 'react';
+import { PropsWithChildren, useContext, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import Header from './Header';
@@ -27,7 +27,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   if (isLayout) return <>{children}</>;
 
   return (
-    <div css={styles.layout}>
+    <div css={styles.layout as any}>
       <Sidebar />
 
       <Box display='flex' flexDirection='column' flex='1'>
@@ -45,7 +45,9 @@ export const Layout = ({ children }: PropsWithChildren) => {
         )}
         <div
           css={
-            geolocation && !close ? styles.contentWith : styles.contentWithout
+            (geolocation && !close
+              ? styles.contentWith
+              : styles.contentWithout) as any
           }
         >
           <Header />

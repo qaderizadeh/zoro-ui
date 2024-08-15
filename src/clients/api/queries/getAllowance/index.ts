@@ -1,9 +1,7 @@
 import BigNumber from 'bignumber.js';
 
-import { Bep20, VaiToken, VrtToken, XvsToken } from '@/types/contracts';
-
 export interface GetAllowanceInput {
-  tokenContract: VrtToken | XvsToken | Bep20 | VaiToken;
+  tokenContract: any;
   accountAddress: string;
   spenderAddress: string;
   isValidAllowance?: boolean;

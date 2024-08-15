@@ -1,5 +1,6 @@
 //import { Token as PSToken } from '@pancakeswap/sdk/dist/index.js';
 import BigNumber from 'bignumber.js';
+import { StaticImageData } from 'next/image';
 
 export type Environment =
   | 'storybook'
@@ -16,7 +17,7 @@ export enum ZkChainId {
 export interface Token {
   symbol: string;
   decimals: number;
-  asset: string;
+  asset: string | StaticImageData;
   address: string | '';
   isNative?: boolean;
 }
@@ -217,6 +218,7 @@ export interface Market {
   venusSupplyIndex: string;
   borrowBalanceCents: BigNumber;
   supplyBalanceCents: BigNumber;
+  supplyCaps: BigNumber;
 }
 
 //export interface MarketSnapshot {

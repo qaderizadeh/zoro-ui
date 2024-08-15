@@ -7,10 +7,14 @@ export const useStyles = () => {
   const theme = useTheme();
 
   return {
-    getAddress: ({ ellipseBreakpoint }: { ellipseBreakpoint?: Breakpoint }) => css`
+    getAddress: ({
+      ellipseBreakpoint,
+    }: {
+      ellipseBreakpoint?: number | Breakpoint;
+    }) => css`
       ${ellipseBreakpoint
         ? css`
-            ${theme.breakpoints.down(ellipseBreakpoint)} {
+            ${theme.breakpoints.down(ellipseBreakpoint as any)} {
               display: none;
             }
           `
@@ -18,12 +22,16 @@ export const useStyles = () => {
             display: none;
           `}
     `,
-    getFormattedAddress: ({ ellipseBreakpoint }: { ellipseBreakpoint?: Breakpoint }) => css`
+    getFormattedAddress: ({
+      ellipseBreakpoint,
+    }: {
+      ellipseBreakpoint?: number | Breakpoint;
+    }) => css`
       ${ellipseBreakpoint &&
       css`
         display: none;
 
-        ${theme.breakpoints.down(ellipseBreakpoint)} {
+        ${theme.breakpoints.down(ellipseBreakpoint as any)} {
           display: block;
         }
       `}

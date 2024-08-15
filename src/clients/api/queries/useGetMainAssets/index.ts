@@ -11,7 +11,6 @@ import {
 } from '@/utilities';
 
 import {
-  GetVTokenBalancesAllOutput,
   useGetMainAssetsInAccount,
   useGetMainMarkets,
   useGetVTokenBalancesAll,
@@ -20,6 +19,7 @@ import {
 import { COMPOUND_MANTISSA } from '@/constants/compoundMantissa';
 import MAX_UINT256 from '@/constants/maxUint256';
 import { TOKENS, VBEP_TOKENS } from '@/constants/tokens';
+import { GetVTokenBalancesAllOutput } from '../getVTokenBalancesAll';
 
 export interface Data {
   assets: Asset[];
@@ -86,7 +86,7 @@ const useGetMainAssets = ({
       indexBy(
         (item: GetVTokenBalancesAllOutput['balances'][number]) =>
           item.vToken.toLowerCase(), // index by vToken address
-        vTokenBalancesAccount.balances
+        (vTokenBalancesAccount as GetVTokenBalancesAllOutput).balances
       ),
     [vTokenBalancesAccount]
   );
@@ -118,7 +118,13 @@ const useGetMainAssets = ({
         }
 
         const vTokenAddress = vToken.address.toLowerCase();
-        const isCollateralOfUser = (assetsInAccount.tokenAddresses || [])
+        const isCollateralOfUser = (
+          (
+            assetsInAccount as {
+              tokenAddresses: string[];
+            }
+          ).tokenAddresses || []
+        )
           .map((address) => address.toLowerCase())
           .includes(vTokenAddress);
 

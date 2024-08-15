@@ -1,3 +1,5 @@
+// next.config.js
+/** @type {import('next').NextConfig} */
 const path = require('path');
 
 module.exports = {
@@ -22,6 +24,16 @@ module.exports = {
         use: ['@svgr/webpack'],
       }
     );
+
+    config.module.rules.push({
+      test: /\.spec\.tsx?$/,
+      use: 'ignore-loader',
+    });
+
+    config.module.rules.push({
+      test: /\.stories\.tsx?$/,
+      use: 'ignore-loader',
+    });
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;

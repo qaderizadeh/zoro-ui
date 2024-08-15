@@ -6,8 +6,6 @@ import React from 'react';
 import { useTranslation } from '@/translation';
 import { Asset } from '@/types';
 
-import { ReactComponent as TransactionGraphics } from '@/assets/img/Transaction_Graphics.svg';
-
 import { useStyles } from './styles';
 
 export interface ConfirmCollateralModalProps {

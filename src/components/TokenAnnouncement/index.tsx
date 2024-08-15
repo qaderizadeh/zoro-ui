@@ -21,7 +21,7 @@ export const TokenAnnouncement: React.FC<TokenAnnouncementProps> = ({
   const { Trans, t } = useTranslation();
 
   // TUSD migration
-  if (areTokensEqual(token, TOKENS.tusdold)) {
+  if (areTokensEqual(token, (TOKENS as any).tusdold)) {
     return (
       <NoticeInfo
         css={className}
@@ -45,7 +45,7 @@ export const TokenAnnouncement: React.FC<TokenAnnouncementProps> = ({
   }
 
   // TRX migration
-  if (areTokensEqual(token, TOKENS.trxold)) {
+  if (areTokensEqual(token, (TOKENS as any).trxold)) {
     return (
       <NoticeWarning
         css={className}
@@ -68,7 +68,7 @@ export const TokenAnnouncement: React.FC<TokenAnnouncementProps> = ({
   }
 
   // SXP disabling
-  if (areTokensEqual(token, TOKENS.sxp)) {
+  if (areTokensEqual(token, (TOKENS as any).sxp)) {
     return (
       <NoticeWarning
         css={className}
@@ -78,7 +78,7 @@ export const TokenAnnouncement: React.FC<TokenAnnouncementProps> = ({
   }
 
   // BETH update
-  if (areTokensEqual(token, TOKENS.beth)) {
+  if (areTokensEqual(token, (TOKENS as any).beth)) {
     return (
       <NoticeWarning
         css={className}

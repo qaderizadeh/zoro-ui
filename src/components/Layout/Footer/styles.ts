@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -6,7 +7,7 @@ export const useStyles = () => {
 
   return {
     container: css`
-      height: ${theme.shape.footerHeight};
+      height: ${SHAPE.footerHeight};
       padding: 0 ${theme.spacing(10)};
       background-color: var(--color-bg-main);
       display: flex;

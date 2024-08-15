@@ -139,17 +139,17 @@ export interface ApproveTokenProps
     'assetInfo' | 'disabled' | 'title' | 'token'
   > {
   spenderAddress: string;
-  setIsValidAllowance: () => void;
-  isValidAllowance: boolean;
+  setIsValidAllowance?: () => void;
+  isValidAllowance?: boolean;
 }
 
-export const ApproveToken: React.FC<ApproveTokenProps> = ({
+export const ApproveToken = ({
   token,
   spenderAddress,
   isValidAllowance,
   setIsValidAllowance,
   ...rest
-}) => {
+}: PropsWithChildren<ApproveTokenProps>) => {
   const { accountAddress } = useAuth();
 
   const {

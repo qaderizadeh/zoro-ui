@@ -36,9 +36,14 @@ function getTokenData(address: any) {
   return tokenData;
 }
 
-const dataToString = (i, d) => ethers.BigNumber.from(d?.[i])?.toString();
+const dataToString = (i: any, d: any) =>
+  ethers.BigNumber.from(d?.[i])?.toString();
 
-function parseMarketMetadata(data, underlyingPrice, vTokenDecimal) {
+function parseMarketMetadata(
+  data: any,
+  underlyingPrice: any,
+  vTokenDecimal: any
+) {
   const paramMapping = {
     exchangeRate: 1,
     supplyRatePerBlock: 2,
@@ -60,16 +65,16 @@ function parseMarketMetadata(data, underlyingPrice, vTokenDecimal) {
     dataToString(i, data)
   );
 
-  marketMetadata['underlyingPrice'] = underlyingPrice;
+  (marketMetadata as any)['underlyingPrice'] = underlyingPrice;
 
   const { underlyingDecimal, exchangeRate } = marketMetadata;
 
-  const formatSupplyUnderlying = (amount) =>
+  const formatSupplyUnderlying = (amount: any) =>
     ethers.utils.formatUnits(amount, vTokenDecimal);
-  const formatBorrowUnderlying = (amount) =>
+  const formatBorrowUnderlying = (amount: any) =>
     ethers.utils.formatUnits(amount, underlyingDecimal);
 
-  const usdSupplyValue = (amount) => {
+  const usdSupplyValue = (amount: any) => {
     const totalSupply = new BigNumber(amount);
 
     const underlyingSupplyRaw = totalSupply.times(exchangeRate).div('1e18');
@@ -86,36 +91,36 @@ function parseMarketMetadata(data, underlyingPrice, vTokenDecimal) {
     return underlyingUsd;
   };
 
-  const usdBorrowValue = (amount) => {
+  const usdBorrowValue = (amount: any) => {
     const base = ethers.constants.WeiPerEther.toString(); // 1e18
     return new BigNumber(amount).times(underlyingPrice).div(base).div(base);
   };
 
-  marketMetadata['totalSupply2'] = formatSupplyUnderlying(
-    marketMetadata['totalSupply']
+  (marketMetadata as any)['totalSupply2'] = formatSupplyUnderlying(
+    (marketMetadata as any)['totalSupply']
   );
-  marketMetadata['totalSupplyUsd'] = usdSupplyValue(
-    marketMetadata['totalSupply']
+  (marketMetadata as any)['totalSupplyUsd'] = usdSupplyValue(
+    (marketMetadata as any)['totalSupply']
   );
 
-  marketMetadata['totalBorrows2'] = formatBorrowUnderlying(
-    marketMetadata['totalBorrows']
+  (marketMetadata as any)['totalBorrows2'] = formatBorrowUnderlying(
+    (marketMetadata as any)['totalBorrows']
   );
-  marketMetadata['totalBorrowsUsd'] = usdBorrowValue(
-    marketMetadata['totalBorrows']
+  (marketMetadata as any)['totalBorrowsUsd'] = usdBorrowValue(
+    (marketMetadata as any)['totalBorrows']
   );
 
   return marketMetadata;
 }
 
-function parseComptrollerData(returnContext, tokenAddress) {
+function parseComptrollerData(returnContext: any, tokenAddress: any) {
   const comptrollerDataKeys = {
     venusBorrowIndex: 0,
     venusSupplyIndex: 1,
     venusSpeeds: 2,
   };
 
-  const tokenReturnContext = returnContext.filter((context) => {
+  const tokenReturnContext = returnContext.filter((context: any) => {
     return context?.methodParameters?.[0] === tokenAddress;
   });
 
@@ -127,12 +132,12 @@ function parseComptrollerData(returnContext, tokenAddress) {
 }
 
 function getContractCallContexts(
-  multicallAddress,
-  venusLensContract,
-  comptroller,
-  vTokenAddresses
+  multicallAddress: any,
+  venusLensContract: any,
+  comptroller: any,
+  vTokenAddresses: any
 ) {
-  const erc20BalanceContext = (token, account) => {
+  const erc20BalanceContext = (token: any, account: any) => {
     return {
       reference: token,
       contractAddress: token,
@@ -147,7 +152,7 @@ function getContractCallContexts(
     };
   };
 
-  const ethBalanceContext = (account) => {
+  const ethBalanceContext = (account: any) => {
     return {
       reference: multicallAddress,
       contractAddress: multicallAddress,
@@ -172,7 +177,7 @@ function getContractCallContexts(
     };
   };
 
-  const erc20Balances = vTokenAddresses.map((tokenAddress) => {
+  const erc20Balances = vTokenAddresses.map((tokenAddress: any) => {
     const tokenConfig = VBEP_TOKENS[tokenAddress.toLowerCase()];
     const underlyingAddress = tokenConfig.underlyingToken.address;
 
@@ -205,7 +210,7 @@ function getContractCallContexts(
       reference: comptroller.address,
       contractAddress: comptroller.address,
       abi: comptrollerAbi,
-      calls: vTokenAddresses.flatMap((tokenAddress) => {
+      calls: vTokenAddresses.flatMap((tokenAddress: any) => {
         return [
           {
             reference: 'compBorrowState',
@@ -231,7 +236,7 @@ function getContractCallContexts(
   return contractCallContexts;
 }
 
-function getApyData(marketMetadata) {
+function getApyData(marketMetadata: any) {
   const { borrowRatePerBlock, supplyRatePerBlock } = marketMetadata;
 
   // Replace this with most recent average block confirmation time
@@ -258,6 +263,10 @@ const getMainMarkets = async ({
   multicall,
   venusLensContract,
   comptroller,
+}: {
+  multicall: any;
+  venusLensContract: any;
+  comptroller: any;
 }): Promise<GetMainMarketsOutput> => {
   const comptrollerCTokens = await comptroller.getAllMarkets();
   const configuredCTokens = _.map(VBEP_TOKENS, 'address');

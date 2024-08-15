@@ -8,14 +8,14 @@ export const useStyles = () => {
   const theme = useTheme();
 
   return {
-    lineBorrowApyColor: theme.palette.interactive.error,
-    lineSupplyApyColor: theme.palette.interactive.success,
+    lineBorrowApyColor: (theme.palette as any).interactive.error,
+    lineSupplyApyColor: (theme.palette as any).interactive.success,
     lineActiveDot: { r: SPACING * 1.5, strokeWidth: 0 },
     container: css`
       width: 100%;
       height: ${theme.spacing(95)};
     `,
-    referenceLineColor: theme.palette.interactive.primary,
+    referenceLineColor: (theme.palette as any).interactive.primary,
     referenceLineLabel: {
       position: {
         y: -10,

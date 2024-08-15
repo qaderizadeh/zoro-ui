@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Token, VToken } from '@/types';
 
 import { useAuth } from '@/context/AuthContext';
+import { Signer } from 'zksync-web3';
 
 import {
   getComptrollerContract,
@@ -23,7 +24,7 @@ import {
 export const useTokenContract = (token: Token) => {
   const { signer } = useAuth();
   return useMemo(
-    () => getTokenContract(token, signer || undefined),
+    () => getTokenContract(token, signer as Signer | undefined),
     [signer, token]
   );
 };
@@ -31,32 +32,35 @@ export const useTokenContract = (token: Token) => {
 export const useVTokenContract = (vToken: VToken) => {
   const { signer } = useAuth();
   return useMemo(
-    () => getVTokenContract(vToken, signer || undefined),
+    () => getVTokenContract(vToken, signer as Signer | undefined),
     [signer, vToken]
   );
 };
 
-export const useVaiControllerContract = () => {
-  const { signer } = useAuth();
-  return useMemo(() => getVaiControllerContract(signer || undefined), [signer]);
-};
+// export const useVaiControllerContract = () => {
+//   const { signer } = useAuth();
+//   return useMemo(() => getVaiControllerContract(signer || undefined), [signer]);
+// };
 
-export const useVaiVaultContract = () => {
-  const { signer } = useAuth();
-  return useMemo(() => getVaiVaultContract(signer || undefined), [signer]);
-};
+// export const useVaiVaultContract = () => {
+//   const { signer } = useAuth();
+//   return useMemo(() => getVaiVaultContract(signer || undefined), [signer]);
+// };
 
 export const useComptrollerContract = (address: string) => {
   const { signer } = useAuth();
   return useMemo(
-    () => getComptrollerContract(address, signer || undefined),
+    () => getComptrollerContract(address, signer as Signer | undefined),
     [signer]
   );
 };
 
 export const useVenusLensContract = () => {
   const { signer } = useAuth();
-  return useMemo(() => getVenusLensContract(signer || undefined), [signer]);
+  return useMemo(
+    () => getVenusLensContract(signer as Signer | undefined),
+    [signer]
+  );
 };
 
 //export const useXvsVaultContract = () => {
@@ -93,12 +97,18 @@ export const useVenusLensContract = () => {
 //);
 //};
 
-export const useMulticallContract = () => {
-  const { signer } = useAuth();
-  return useMemo(() => getMulticallContract(signer || undefined), [signer]);
-};
+// export const useMulticallContract = () => {
+//   const { signer } = useAuth();
+//   return useMemo(
+//     () => getMulticallContract(signer as Signer | undefined),
+//     [signer]
+//   );
+// };
 
-export const useGetPoolLensContract = () => {
-  const { signer } = useAuth();
-  return useMemo(() => getPoolLensContract(signer || undefined), [signer]);
-};
+// export const useGetPoolLensContract = () => {
+//   const { signer } = useAuth();
+//   return useMemo(
+//     () => getPoolLensContract(signer as Signer | undefined),
+//     [signer]
+//   );
+// };

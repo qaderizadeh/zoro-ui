@@ -27,13 +27,13 @@ export const FooterUi: React.FC<FooterUiProps> = ({ currentBlockNumber }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const toggleModalTos = (e) => {
-    e.preventDefault();
+  const toggleModalTos = (e?: any) => {
+    e?.preventDefault();
     setOpenTos(!openTos);
   };
 
-  const toggleModalPP = (e) => {
-    e.preventDefault();
+  const toggleModalPP = (e?: any) => {
+    e?.preventDefault();
     setOpenPP(!openPP);
   };
 
@@ -148,7 +148,7 @@ export const FooterUi: React.FC<FooterUiProps> = ({ currentBlockNumber }) => {
           {t('pp.title')}
         </Typography>
       </div>
-      <TosModal open={openTos} handleClose={toggleModalTos} />
+      <TosModal open={openTos} handleClose={toggleModalTos} title='' />
       <PPModal open={openPP} handleClose={toggleModalPP} />
     </div>
   );

@@ -27,7 +27,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "svgr.d.ts",
-    "typography.d.ts"
+    "globals.d.ts"
   ],
   "exclude": ["node_modules"]
 }

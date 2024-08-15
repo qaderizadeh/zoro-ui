@@ -4,6 +4,7 @@ import { TokenBalance } from '@/types';
 import { useGetTokenBalances } from '@/clients/api';
 import { Options as UseGetTokenBalancesOptions } from '@/clients/api/queries/getTokenBalances/useGetTokenBalances';
 import { SWAP_TOKENS } from '@/constants/tokens';
+import { UseQueryOptions } from '@tanstack/react-query';
 
 const tokens = Object.values(SWAP_TOKENS);
 
@@ -13,7 +14,7 @@ const useGetSwapTokenUserBalances = (
   }: {
     accountAddress?: string;
   },
-  options: UseGetTokenBalancesOptions = {}
+  options: Partial<UseQueryOptions>
 ) => {
   // By default we return the list of tokens with undefined balances so they can
   // still be listed while balances are being fetched
@@ -34,7 +35,7 @@ const useGetSwapTokenUserBalances = (
   );
 
   return {
-    data: data?.tokenBalances || defaultTokenBalances,
+    data: (data as any)?.tokenBalances || defaultTokenBalances,
   };
 };
 

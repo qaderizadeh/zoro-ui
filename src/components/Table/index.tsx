@@ -15,6 +15,7 @@ import Head from './Head';
 import TableCards from './TableCards';
 import { useStyles } from './styles';
 import { Order, TableColumn, TableProps } from './types';
+import { Breakpoint } from '@mui/material';
 
 export * from './types';
 
@@ -61,14 +62,23 @@ export function Table<R>({
   }, [data, order]);
 
   return (
-    <Paper css={styles.getRoot({ breakpoint })} className={className}>
-      {title && <h4 css={styles.getTitle({ breakpoint })}>{title}</h4>}
+    <Paper
+      css={styles.getRoot({ breakpoint: breakpoint as Breakpoint })}
+      className={className}
+    >
+      {title && (
+        <h4 css={styles.getTitle({ breakpoint: breakpoint as Breakpoint })}>
+          {title}
+        </h4>
+      )}
 
       {isFetching && <Spinner css={styles.loader} />}
 
-      <MuiTableContainer css={styles.getTableContainer({ breakpoint })}>
+      <MuiTableContainer
+        css={styles.getTableContainer({ breakpoint: breakpoint as Breakpoint })}
+      >
         <MuiTable
-          css={styles.table({ minWidth: minWidth ?? '0' })}
+          css={{ ...(styles.table as any), minWidth: minWidth || 0 }}
           aria-label={title}
         >
           <Head

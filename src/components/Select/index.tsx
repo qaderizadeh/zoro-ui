@@ -1,6 +1,6 @@
-'use client';
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
+'use client';
 import { Select as MuiSelect } from '@mui/material';
 import { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -77,7 +77,10 @@ export const Select: React.FC<SelectProps> = ({
   }, [isSmDown]);
 
   return (
-    <div className={className} css={styles.getContainer({ placeLabelToLeft })}>
+    <div
+      className={className}
+      css={styles.getContainer({ placeLabelToLeft }) as any}
+    >
       {!!label && (
         <div css={styles.getLabel({ placeLabelToLeft })}>
           <Typography variant='small1' component='label' htmlFor='proposalType'>
@@ -99,19 +102,19 @@ export const Select: React.FC<SelectProps> = ({
         inputProps={{ 'aria-label': ariaLabel }}
         IconComponent={() => (
           <Icon
-            css={styles.getArrowIcon({ isMenuOpened: isOpen })}
+            css={styles.getArrowIcon({ isMenuOpened: isOpen }) as any}
             name='arrowUp'
           />
         )}
         MenuProps={menuProps}
         autoWidth={isSmDown}
       >
-        <div css={styles.mobileHeader}>
+        <div css={styles.mobileHeader as any}>
           <Typography variant='h4'>
             {label || t('select.defaultLabel')}
           </Typography>
 
-          <TextButton css={styles.closeMenuButton} onClick={handleClose}>
+          <TextButton css={styles.closeMenuButton as any} onClick={handleClose}>
             <Icon name='closeRounded' />
           </TextButton>
         </div>

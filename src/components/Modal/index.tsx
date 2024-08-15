@@ -8,7 +8,7 @@ import {
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import config from '@/config';
-import React, { ReactElement } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 
 import { Icon } from '../Icon';
 import { useModalStyles } from './styles';
@@ -22,7 +22,7 @@ export interface ModalProps extends Omit<MUIModalProps, 'title' | 'open'> {
   noHorizontalPadding?: boolean;
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal = ({
   className,
   children,
   handleClose,
@@ -31,7 +31,7 @@ export const Modal: React.FC<ModalProps> = ({
   title,
   noHorizontalPadding,
   ...otherModalProps
-}) => {
+}: PropsWithChildren<ModalProps>) => {
   const s = useModalStyles({
     hasTitleComponent: Boolean(title),
     noHorizontalPadding,

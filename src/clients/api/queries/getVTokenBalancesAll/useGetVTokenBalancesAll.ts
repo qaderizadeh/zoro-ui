@@ -1,4 +1,8 @@
-import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 
 import getVTokenBalancesAll, {
   GetVTokenBalancesAllInput,
@@ -33,7 +37,7 @@ const useGetVTokenBalancesAll = (
     account,
     vTokenAddresses,
   }: Omit<GetVTokenBalancesAllInput, 'venusLensContract'>,
-  options?: Options
+  options?: Partial<UseQueryOptions>
 ) => {
   const venusLensContract = useVenusLensContract();
   const result = useQuery({

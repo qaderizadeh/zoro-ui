@@ -20,7 +20,7 @@ export const TESTNET_VBEP_TOKENS = {
     address: '0xb76eD02Dea1ba444609602BE5D587c4bFfd67153',
     decimals: 8,
     symbol: 'vTEST',
-    underlyingToken: TESTNET_TOKENS.test,
+    underlyingToken: (TESTNET_TOKENS as any).test,
   } as VToken,
   // '0xb7526572ffe56ab9d7489838bf2e18e3323b441a': {
   // address: '0xb7526572FFE56AB9D7489838Bf2E18e3323b441A',

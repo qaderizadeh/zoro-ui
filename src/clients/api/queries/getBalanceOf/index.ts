@@ -1,4 +1,3 @@
-import type { Provider } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
 import { Token } from '@/types';
 
@@ -7,7 +6,7 @@ import { getTokenContract } from '@/clients/contracts';
 export interface GetBalanceOfInput {
   accountAddress: string;
   token: Token;
-  provider: Provider;
+  provider: any;
 }
 
 export type GetBalanceOfOutput = {

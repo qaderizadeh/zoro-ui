@@ -1,5 +1,11 @@
 import React from 'react';
 
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+
 declare module '@mui/material/styles' {
   interface TypographyVariants {
     small1: React.CSSProperties;
@@ -12,6 +18,15 @@ declare module '@mui/material/styles' {
     small1?: React.CSSProperties;
     small2?: React.CSSProperties;
     tiny?: React.CSSProperties;
+  }
+
+  interface Palette {
+    interactive: PaletteColor;
+    button: PaletteColor;
+  }
+  interface PaletteOptions {
+    interactive?: PaletteColor;
+    button?: PaletteColor;
   }
 }
 

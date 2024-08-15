@@ -177,7 +177,7 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
             <div css={styles.headerBottomRow}>
               {isFeatureEnabled('isolatedPools') && pools.length > 0 && (
                 <TagGroup
-                  css={styles.tags}
+                  css={styles.tags as any}
                   tags={poolTags}
                   activeTagIndex={selectedPoolTagIndex}
                   onTagClick={setSelectedPoolTagIndex}

@@ -1,5 +1,9 @@
 import BigNumber from 'bignumber.js';
-import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 import { VToken } from '@/types';
 
 import getVTokenApySimulations, {
@@ -27,7 +31,7 @@ const useGetVTokenApySimulations = (
     isIsolatedPoolMarket: boolean;
     reserveFactorMantissa?: BigNumber;
   },
-  options?: Options
+  options?: Partial<UseQueryOptions>
 ) => {
   const multicall = useMulticall();
   const { data: interestRateModelData } = useGetVTokenInterestRateModel({
@@ -44,12 +48,20 @@ const useGetVTokenApySimulations = (
         multicall,
         reserveFactorMantissa: reserveFactorMantissa || new BigNumber(0),
         interestRateModelContractAddress:
-          interestRateModelData?.contractAddress || '',
+          (
+            interestRateModelData as {
+              contractAddress: string;
+            }
+          )?.contractAddress || '',
         isIsolatedPoolMarket,
       }),
     enabled:
       (options?.enabled === undefined || options?.enabled) &&
-      interestRateModelData?.contractAddress !== undefined &&
+      (
+        interestRateModelData as {
+          contractAddress: string;
+        }
+      )?.contractAddress !== undefined &&
       reserveFactorMantissa !== undefined,
     ...(options ? options : {}),
   });

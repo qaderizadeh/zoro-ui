@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useTranslation } from '@/translation';
 
 import { useAuth } from '@/context/AuthContext';
@@ -17,13 +17,13 @@ export interface PromptProps {
   connected: boolean;
 }
 
-export const Prompt: React.FC<PromptProps> = ({
+export const Prompt = ({
   message,
   openAuthModal,
   className,
   children,
   connected,
-}) => {
+}: PropsWithChildren<PromptProps>) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -47,9 +47,9 @@ export const Prompt: React.FC<PromptProps> = ({
   );
 };
 
-export const ConnectWallet: React.FC<
-  Omit<PromptProps, 'connected' | 'openAuthModal'>
-> = (props) => {
+export const ConnectWallet = (
+  props: PropsWithChildren<Omit<PromptProps, 'connected' | 'openAuthModal'>>
+) => {
   const { accountAddress, openAuthModal } = useAuth();
   return (
     <Prompt

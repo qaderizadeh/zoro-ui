@@ -17,7 +17,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
 
   return (
     <TosPPModal
-      isOpen={open}
+      open={open}
       handleClose={handleClose}
       title={t('pp.header')}
       css={styles.ppModal}
@@ -42,7 +42,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start='2'>
+        <ol start={2}>
           <li>
             <strong>Data processing in connection with the Site&nbsp;</strong>
           </li>
@@ -221,7 +221,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             to processing of your personal data at any time.
           </span>
         </p>
-        <ol start='3'>
+        <ol start={3}>
           <li>
             <strong>International transfers</strong>
             <span>
@@ -234,7 +234,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start='4'>
+        <ol start={4}>
           <li>
             <strong>Data security</strong>
             <span>
@@ -252,7 +252,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start='5'>
+        <ol start={5}>
           <li>
             <strong>Duration of data processing</strong>
             <span>
@@ -264,7 +264,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start='6'>
+        <ol start={6}>
           <li>
             <strong>Amendments to this Policy</strong>
             <span>
@@ -276,7 +276,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start='7'>
+        <ol start={7}>
           <li>
             <strong>Contact </strong>
             <span>

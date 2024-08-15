@@ -4,8 +4,8 @@ import React from 'react';
 
 import { useTranslation } from '@/translation';
 import { useStyles } from './styles';
-import { ReactComponent as LogoMobile } from '@/assets/img/Logo-01.svg';
-import { ReactComponent as LogoDesktop } from '@/assets/img/Logo-02.svg';
+import LogoMobile from '@/assets/img/Logo-01.svg';
+import LogoDesktop from '@/assets/img/Logo-02.svg';
 import notfound404 from '@/assets/img/404.webp';
 
 const NotFound: React.FC = () => {

@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -31,7 +32,7 @@ export const useStyles = () => {
       background-color: transparent;
       box-shadow: none;
       border: 0;
-      border-radius: ${theme.shape.borderRadius.small}px;
+      border-radius: ${SHAPE.borderRadius.small}px;
       padding: ${theme.spacing(2)};
       color: ${theme.palette.text.primary};
       text-align: center;

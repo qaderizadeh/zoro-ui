@@ -4,7 +4,7 @@
 import { useStyles } from './styles';
 import { Token } from '@/types';
 import { SerializedStyles } from '@emotion/react';
-import React, { ReactComponentElement } from 'react';
+import React from 'react';
 
 export interface TokenIconProps {
   token: Token;
@@ -24,7 +24,7 @@ export const TokenIcon: React.FC<TokenIconProps> = ({ className, token }) => {
       return null;
     }
 
-    return <Icon css={styles.icon} className={className} />;
+    return <Icon css={styles.icon as any} className={className} />;
   }
 
   return (

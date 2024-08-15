@@ -1,10 +1,9 @@
-import { MenuItem } from '../types';
 import { routes } from '@/constants/routing';
 import {
   ZORO_DISCORD_URL,
-  ZORO_GITHUB_URL,
-  ZORO_SUBSTACK_URL,
-  ZORO_TWITTER_URL,
+  // ZORO_GITHUB_URL,
+  // ZORO_SUBSTACK_URL,
+  // ZORO_TWITTER_URL,
   ZORO_GITBOOK_URL,
   ZORO_LIQUIDATOR_URL,
 } from '@/constants/urls';
@@ -13,6 +12,15 @@ import { useMemo } from 'react';
 import { getContractAddress, isFeatureEnabled } from '@/utilities';
 
 const MAIN_POOL_COMPTROLLER_ADDRESS = getContractAddress('comptroller');
+
+interface MenuItem {
+  href: string;
+  i18nKey: string;
+  icon: string;
+  target?: boolean;
+  isNew?: boolean;
+  svgIcon?: JSX.Element;
+}
 
 const useGetMenuItems = () => {
   const { accountAddress } = useAuth();

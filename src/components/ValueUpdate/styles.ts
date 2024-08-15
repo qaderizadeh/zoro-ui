@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -10,10 +11,12 @@ export const useStyles = ({ isImprovement }: { isImprovement: boolean }) => {
       align-items: center;
     `,
     icon: css`
-      color: ${isImprovement ? theme.palette.interactive.success : theme.palette.interactive.error};
+      color: ${isImprovement
+        ? theme.palette.interactive.success
+        : theme.palette.interactive.error};
       margin: 0 ${theme.spacing(2.5)};
-      width: ${theme.shape.iconSize.medium}px;
-      height: ${theme.shape.iconSize.medium}px;
+      width: ${SHAPE.iconSize.medium}px;
+      height: ${SHAPE.iconSize.medium}px;
     `,
   };
 };

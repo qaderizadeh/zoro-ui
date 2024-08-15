@@ -57,7 +57,7 @@ export const Toggle = ({
 
       <Switch
         name={`switch_toggle_${generateRandomString(10)}`}
-        css={styles.getSwitch({ isLight })}
+        css={styles.getSwitch({ isLight }) as any}
         focusVisibleClassName='.Mui-focusVisible'
         disableRipple
         onChange={onChange}

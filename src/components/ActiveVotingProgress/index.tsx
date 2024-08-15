@@ -23,7 +23,7 @@ const getValueString = (valueWei?: BigNumber) => {
   if (!valueWei) return undefined;
   return convertWeiToTokens({
     valueWei,
-    token: TOKENS.xvs,
+    token: (TOKENS as any).xvs,
     returnInReadableFormat: true,
   });
 };

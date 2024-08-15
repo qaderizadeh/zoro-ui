@@ -68,15 +68,15 @@ export const useStyles = () => {
       line-height: 0;
 
       :hover > svg {
-        color: ${theme.palette.button.medium};
+        color: ${(theme.palette as any).button.medium};
       }
 
       :active > svg {
-        color: ${theme.palette.button.dark};
+        color: ${(theme.palette as any).button.dark};
       }
     `,
     copyButtonIcon: css`
-      color: ${theme.palette.button.main};
+      color: ${(theme.palette as any).button.main};
       width: ${theme.spacing(6)};
       height: ${theme.spacing(6)};
       transition: color 0.3s;

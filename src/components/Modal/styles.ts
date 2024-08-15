@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -14,12 +15,18 @@ export const useModalStyles = ({
     box: css`
       position: absolute;
       top: 50%;
-      left: calc(50% + ${theme.shape.drawerWidthDesktop});
-      transform: translate(calc(-50% - (${theme.shape.drawerWidthDesktop}) / 2), -50%);
+      left: calc(50% + ${SHAPE.drawerWidthDesktop});
+      transform: translate(
+        calc(-50% - (${SHAPE.drawerWidthDesktop}) / 2),
+        -50%
+      );
       border: 1px ${theme.palette.secondary.light} solid;
       ${theme.breakpoints.down('lg')} {
-        left: calc(50% + ${theme.shape.drawerWidthTablet});
-        transform: translate(calc(-50% - (${theme.shape.drawerWidthTablet}) / 2), -50%);
+        left: calc(50% + ${SHAPE.drawerWidthTablet});
+        transform: translate(
+          calc(-50% - (${SHAPE.drawerWidthTablet}) / 2),
+          -50%
+        );
       }
       ${theme.breakpoints.down('md')} {
         left: 50%;
@@ -37,11 +44,15 @@ export const useModalStyles = ({
       padding-right: ${theme.spacing(6)};
       padding-top: ${theme.spacing(6)};
       padding-bottom: ${hasTitleComponent ? theme.spacing(6) : 0};
-      border-bottom: ${hasTitleComponent ? `1px solid ${theme.palette.secondary.light}` : 0};
+      border-bottom: ${hasTitleComponent
+        ? `1px solid ${theme.palette.secondary.light}`
+        : 0};
       position: sticky;
       top: 0;
       z-index: 10;
-      background-color: ${hasTitleComponent ? theme.palette.background.paper : 'transparent'};
+      background-color: ${hasTitleComponent
+        ? theme.palette.background.paper
+        : 'transparent'};
       margin-bottom: ${hasTitleComponent ? theme.spacing(6) : 0};
       display: flex;
       align-items: center;
@@ -63,8 +74,8 @@ export const useModalStyles = ({
     `,
     backArrow: css`
       transform: rotate(180deg);
-      height: ${theme.shape.iconSize.xLarge}px;
-      width: ${theme.shape.iconSize.xLarge}px;
+      height: ${SHAPE.iconSize.xLarge}px;
+      width: ${SHAPE.iconSize.xLarge}px;
       color: ${theme.palette.text.primary};
     `,
     titleComponent: css`
@@ -72,19 +83,19 @@ export const useModalStyles = ({
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: ${theme.shape.iconSize.xLarge}px;
-      padding-left: ${theme.shape.iconSize.xLarge}px;
-      padding-right: ${theme.shape.iconSize.xLarge}px;
+      min-height: ${SHAPE.iconSize.xLarge}px;
+      padding-left: ${SHAPE.iconSize.xLarge}px;
+      padding-right: ${SHAPE.iconSize.xLarge}px;
       font-size: ${theme.typography.h4.fontSize};
       font-weight: ${theme.typography.h4.fontWeight};
     `,
     closeIcon: css`
       right: ${theme.spacing(6)};
       top: 50%;
-      margin-top: ${-theme.shape.iconSize.xLarge / 2}px;
+      margin-top: ${-SHAPE.iconSize.xLarge / 2}px;
       position: absolute;
-      height: ${theme.shape.iconSize.xLarge}px;
-      width: ${theme.shape.iconSize.xLarge}px;
+      height: ${SHAPE.iconSize.xLarge}px;
+      width: ${SHAPE.iconSize.xLarge}px;
       margin-left: auto;
       min-width: 0;
       padding: 0;
@@ -94,7 +105,7 @@ export const useModalStyles = ({
         background-color: transparent;
       }
     `,
-    closeIconSize: theme.shape.iconSize,
+    closeIconSize: SHAPE.iconSize,
     contentWrapper: css`
       padding-bottom: ${theme.spacing(10)};
       padding-left: ${noHorizontalPadding ? 0 : theme.spacing(10)};

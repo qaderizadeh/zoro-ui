@@ -1,4 +1,4 @@
-import { Contract, ContractInterface, Signer } from 'zksync-web3';
+import { Contract, Signer } from 'zksync-web3';
 import { Token, VToken } from '@/types';
 import { areTokensEqual, getContractAddress } from '@/utilities';
 //import { areTokensEqual, getContractAddress, getSwapRouterContractAddress } from '@/utilities';
@@ -26,6 +26,8 @@ import venusLensAbi from '@/constants/contracts/abis/venusLens.json';
 //import { TOKENS } from '@/constants/tokens';
 import {
   Comptroller,
+  VBep20,
+  VBnbToken,
   //GovernorBravoDelegate,
   //Maximillion,
   //Multicall,
@@ -39,8 +41,7 @@ import {
   //XvsVaultStore,
   //XvsVesting,
 } from '@/types/contracts';
-
-import { TokenContract, VTokenContract } from './types';
+import { ContractInterface } from 'ethers';
 
 export const getContract = ({
   abi,
@@ -51,7 +52,8 @@ export const getContract = ({
   address: string;
   signer?: Signer;
 }) => {
-  const signerOrProvider = signer ?? provider({ chainId: chain.id });
+  // const signerOrProvider = signer ?? provider({ chainId: chain.id });
+  const signerOrProvider = signer;
   return new Contract(address, abi, signerOrProvider);
 };
 
@@ -84,7 +86,7 @@ export const getTokenContract = (token: Token, signer?: Signer) => {
     abi: erc20Abi,
     address: token.address,
     signer,
-  }) as TokenContract;
+  });
 };
 
 export const getVTokenContract = (vToken: VToken, signer?: Signer) => {
@@ -93,14 +95,14 @@ export const getVTokenContract = (vToken: VToken, signer?: Signer) => {
       abi: vEtherAbi,
       address: vToken.address,
       signer,
-    }) as VTokenContract<'bnb'>;
+    }) as VBep20 | VBnbToken;
   }
 
   return getContract({
     abi: vBep20Abi,
     address: vToken.address,
     signer,
-  }) as VTokenContract;
+  });
 };
 
 //export const getVaiControllerContract = (signer?: Signer) =>
@@ -164,7 +166,7 @@ export const getMaximillionContract = (signer?: Signer) =>
     abi: maximillionAbi,
     address: getContractAddress('maximillion'),
     signer,
-  }) as Maximillion;
+  });
 
 //// VRT conversion
 //export const getXvsVestingProxyContract = (signer?: Signer) =>

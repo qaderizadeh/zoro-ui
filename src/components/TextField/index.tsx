@@ -6,7 +6,7 @@ import { useStyles } from './styles';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import React, { InputHTMLAttributes } from 'react';
-import { Token } from 'types';
+import { Token } from '@/types';
 
 const generateRandomString = (length: number) => {
   var characters =

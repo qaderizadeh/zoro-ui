@@ -4,7 +4,7 @@ import { ButtonProps, TertiaryButton } from '../Button';
 import { TextField, TextFieldProps } from '../TextField';
 import BigNumber from 'bignumber.js';
 import React from 'react';
-import { Token } from 'types';
+import { Token } from '@/types';
 
 export interface RightMaxButton
   extends Omit<ButtonProps, 'variant' | 'children' | 'small'> {

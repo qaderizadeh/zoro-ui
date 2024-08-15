@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -6,7 +7,7 @@ export const useStyles = () => {
 
   return {
     container: css`
-      border-radius: ${theme.shape.borderRadius.small}px;
+      border-radius: ${SHAPE.borderRadius.small}px;
       background-color: ${theme.palette.background.default};
       padding: ${theme.spacing(3)};
     `,

@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -11,8 +12,8 @@ export const useStyles = () => {
     `,
     icon: css`
       margin-right: ${theme.spacing(2)};
-      width: ${theme.shape.iconSize.xLarge}px;
-      height: ${theme.shape.iconSize.xLarge}px;
+      width: ${SHAPE.iconSize.xLarge}px;
+      height: ${SHAPE.iconSize.xLarge}px;
     `,
   };
 };

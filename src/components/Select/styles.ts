@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 import imgMark from '@/assets/img/mark.svg';
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const SELECTED_MENU_ITEM_CLASSNAME = 'SELECTED_MENU_ITEM_CLASSNAME';
 export const useStyles = () => {
@@ -29,7 +29,7 @@ export const useStyles = () => {
     select: ({ isOpen }: any) => ({
       flex: 1,
       backgroundColor: theme.palette.secondary.light,
-      borderRadius: `${theme.shape.borderRadius.small}px`,
+      borderRadius: `${SHAPE.borderRadius.small}px`,
       border: `1px solid ${
         isOpen ? theme.palette.interactive.primary : 'transparent'
       }`,

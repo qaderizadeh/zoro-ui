@@ -5,6 +5,7 @@ import _uniqueId from 'lodash/uniqueId';
 import React, { useId, useRef } from 'react';
 
 import * as icons from './icons';
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 
 export type IconName = keyof typeof icons;
 
@@ -25,7 +26,7 @@ export const Icon: React.FC<IconProps> = ({
   const id = useId();
 
   const theme = useTheme();
-  const sanitizedSize = size ?? theme.shape.iconSize.medium;
+  const sanitizedSize = size ?? SHAPE.iconSize.medium;
   const sanitizedColor = color ?? theme.palette.text.secondary;
   // Because "name" could come from fetched data, we use a default icon in case
   // the one requested isn't found

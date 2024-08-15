@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -16,7 +17,9 @@ export const useStyles = () => {
       }
     `,
     getNetApyColor: ({ netApyPercentage }: { netApyPercentage: number }) =>
-      netApyPercentage > 0 ? theme.palette.interactive.success : theme.palette.interactive.error,
+      netApyPercentage > 0
+        ? theme.palette.interactive.success
+        : theme.palette.interactive.error,
     cellGroup: css`
       padding: 0;
 
@@ -28,7 +31,7 @@ export const useStyles = () => {
       ${theme.breakpoints.down('xl')} {
         padding: ${theme.spacing(4)};
         background-color: ${theme.palette.background.paper};
-        border-radius: ${theme.shape.borderRadius.large}px;
+        border-radius: ${SHAPE.borderRadius.large}px;
       }
     `,
     accountHealthProgressBar: css`

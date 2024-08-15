@@ -1,11 +1,11 @@
 import { useTheme } from '@mui/material';
-import { FONTS } from '@/theme/MuiThemeProvider/muiTheme';
+import { FONTS, SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const useStyles = () => {
   const theme = useTheme();
 
   return {
-    iconSize: theme.shape.iconSize.large,
+    iconSize: SHAPE.iconSize.large,
     btnClose: {
       position: 'absolute',
       padding: 0,

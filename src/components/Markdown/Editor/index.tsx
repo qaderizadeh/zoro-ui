@@ -64,7 +64,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
           id: name,
           onBlur,
         }}
-        placeholder={placeholder}
+        // placeholder={placeholder}
         css={styles.hasError(hasError)}
       />
     </>

@@ -7,12 +7,12 @@ export const useStyles = () => {
   const theme = useTheme();
 
   return {
-    supplyChartColor: theme.palette.interactive.success,
-    borrowChartColor: theme.palette.interactive.error,
+    supplyChartColor: (theme.palette as any).interactive.success,
+    borrowChartColor: (theme.palette as any).interactive.error,
     areaActiveDot: { r: SPACING * 2, strokeWidth: SPACING },
-    container: css`
-      width: 100%;
-      height: ${theme.spacing(62)};
-    `,
+    container: {
+      width: '100%',
+      height: theme.spacing(62),
+    },
   };
 };

@@ -1,5 +1,4 @@
 'use client';
-import type { Provider } from '@wagmi/core';
 import { useConnectWallet, useSetChain } from '@web3-onboard/react';
 import { Connector } from '@/clients/web3';
 import { AuthModal } from '@/components/AuthModal';
@@ -21,7 +20,7 @@ export interface AuthContextValue {
   logOut: () => void;
   openAuthModal: () => void;
   closeAuthModal: () => void;
-  provider: Provider;
+  provider: any;
   accountAddress: string;
   signer?: Signer;
 }

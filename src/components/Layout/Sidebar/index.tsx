@@ -43,7 +43,7 @@ export const SidebarUi: React.FC = () => {
         className='custom-sidebar-wrap'
       >
         <div
-          css={styles.drawerContent}
+          css={styles.drawerContent as any}
           className='sidebar-menu-logo-option-list-wrap'
         >
           <Toolbar css={styles.toolbar} className='sidebar-logo'>
@@ -66,7 +66,7 @@ export const SidebarUi: React.FC = () => {
                       {menuItem?.svgIcon ? (
                         menuItem?.svgIcon
                       ) : (
-                        <Icon name={menuItem.icon} />
+                        <Icon name={menuItem.icon as any} />
                       )}
                     </ListItemIcon>
 
@@ -93,8 +93,8 @@ export const SidebarUi: React.FC = () => {
       </Drawer>
 
       {/* Mobile menu */}
-      <div css={styles.mobileMenuBox}>
-        <div css={styles.flexRow}>
+      <div css={styles.mobileMenuBox as any}>
+        <div css={styles.flexRow as any}>
           <Icon name='logoMobile' css={styles.mobileLogo} />
 
           <ConnectButton
@@ -115,7 +115,7 @@ export const SidebarUi: React.FC = () => {
         </div>
 
         <Menu
-          css={styles.mobileMenu}
+          css={styles.mobileMenu as any}
           className='mobile-menu'
           anchorEl={anchorEl}
           id='account-menu'
@@ -127,7 +127,7 @@ export const SidebarUi: React.FC = () => {
           anchorReference='anchorPosition'
           anchorPosition={{ top: 0, left: 0 }}
         >
-          <div css={[styles.flexRow, styles.doublePadding]}>
+          <div css={[styles.flexRow as any, styles.doublePadding]}>
             <Icon name='logoMobile' css={styles.mobileLogo} />
 
             <ConnectButton
@@ -147,7 +147,7 @@ export const SidebarUi: React.FC = () => {
                 <ListItemButton
                   key={i18nKey}
                   component='li'
-                  css={[styles.listItem, styles.mobileListItem]}
+                  css={[styles.listItem, styles.mobileListItem as any]}
                   disableRipple
                 >
                   <LinkComponent
@@ -155,9 +155,9 @@ export const SidebarUi: React.FC = () => {
                     href={href}
                     target={target}
                   >
-                    <div css={styles.mobileLabel}>
+                    <div css={styles.mobileLabel as any}>
                       <ListItemIcon css={styles.listItemIcon}>
-                        {svgIcon ? svgIcon : <Icon name={icon} />}
+                        {svgIcon ? svgIcon : <Icon name={icon as any} />}
                       </ListItemIcon>
 
                       <Typography

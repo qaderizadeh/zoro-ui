@@ -1,4 +1,8 @@
-import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 import { getContractAddress } from '@/utilities';
 
 import getMainAssetsInAccount, {
@@ -23,7 +27,7 @@ type Options = QueryObserverOptions<
 
 const useGetMainAssetsInAccount = (
   { accountAddress }: Omit<GetMainAssetsInAccountInput, 'comptrollerContract'>,
-  options?: Options
+  options?: Partial<UseQueryOptions>
 ) => {
   const comptrollerContract = useComptrollerContract(
     mainPoolComptrollerAddress

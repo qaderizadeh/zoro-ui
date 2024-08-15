@@ -2,13 +2,14 @@ import { css } from '@emotion/react';
 import { alpha, useTheme } from '@mui/material';
 
 import { NoticeVariant } from './types';
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const useStyles = () => {
   const theme = useTheme();
 
   return {
     root: css`
-      border-radius: ${theme.shape.borderRadius.small}px;
+      border-radius: ${SHAPE.borderRadius.small}px;
       border: 1px solid ${theme.palette.secondary.light};
       overflow: hidden;
       position: relative;
@@ -42,17 +43,26 @@ export const useStyles = () => {
         case 'error':
           return css`
             border-color: ${theme.palette.interactive.error};
-            background-color: ${alpha(theme.palette.interactive.error as string, 0.05)};
+            background-color: ${alpha(
+              theme.palette.interactive.error as string,
+              0.05
+            )};
           `;
         case 'success':
           return css`
             border-color: ${theme.palette.interactive.success};
-            background-color: ${alpha(theme.palette.interactive.success as string, 0.1)};
+            background-color: ${alpha(
+              theme.palette.interactive.success as string,
+              0.1
+            )};
           `;
         case 'warning':
           return css`
             border-color: ${theme.palette.interactive.warning};
-            background-color: ${alpha(theme.palette.interactive.warning as string, 0.05)};
+            background-color: ${alpha(
+              theme.palette.interactive.warning as string,
+              0.05
+            )};
           `;
       }
     },
@@ -80,7 +90,7 @@ export const useStyles = () => {
           `;
       }
     },
-    iconSize: theme.shape.iconSize.large,
+    iconSize: SHAPE.iconSize.large,
     content: css`
       flex: 1;
       display: flex;

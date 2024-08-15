@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { Interpolation, Theme, useTheme } from '@mui/material';
 
 export const useStyles = () => {
@@ -5,12 +6,12 @@ export const useStyles = () => {
   const styles = {
     drawer: {
       display: 'block',
-      width: theme.shape.drawerWidthDesktop,
+      width: SHAPE.drawerWidthDesktop,
       '> .MuiDrawer-paper': {
         borderRight: 'none',
       },
       [theme.breakpoints.down('xl')]: {
-        width: theme.shape.drawerWidthTablet,
+        width: SHAPE.drawerWidthTablet,
       },
       [theme.breakpoints.down('lg')]: {
         display: 'none',
@@ -19,7 +20,7 @@ export const useStyles = () => {
     drawerContent: {
       width: '100%',
       [theme.breakpoints.down('xl')]: {
-        width: theme.shape.drawerWidthTablet,
+        width: SHAPE.drawerWidthTablet,
       },
       display: 'block',
       zIndex: 1000,
@@ -68,7 +69,7 @@ export const useStyles = () => {
         [theme.breakpoints.down('xl')]: {
           width: 'auto',
           margin: 'auto',
-          borderRadius: `${theme.shape.borderRadius.medium}px`,
+          borderRadius: `${SHAPE.borderRadius.medium}px`,
           padding: theme.spacing(4),
           justifyContent: 'center',
         },

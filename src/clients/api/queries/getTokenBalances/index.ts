@@ -1,4 +1,3 @@
-import type { Provider } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
 import {
   ContractCallContext,
@@ -14,7 +13,7 @@ import getBalanceOf from '../getBalanceOf';
 
 export interface GetTokenBalancesInput {
   multicall: Multicall;
-  provider: Provider;
+  provider: any;
   accountAddress: string;
   tokens: Token[];
 }

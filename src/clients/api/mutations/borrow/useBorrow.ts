@@ -22,7 +22,7 @@ const useBorrow = ({ vToken }: { vToken: VToken }, options?: Options) => {
       borrow({
         vTokenContract,
         ...params,
-      }),
+      } as BorrowInput),
     ...options,
     onSuccess: async (...onSuccessParams) => {
       const accountAddress = await vTokenContract.signer.getAddress();

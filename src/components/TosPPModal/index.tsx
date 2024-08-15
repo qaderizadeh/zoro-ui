@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Modal, ModalProps } from '@/components';
-import React from 'react';
+import { PropsWithChildren } from 'react';
 
 export interface TosPPModalProps {
   title: string;
@@ -9,16 +9,21 @@ export interface TosPPModalProps {
   handleClose: ModalProps['handleClose'];
 }
 
-const TosPPModal: React.FC<TosPPModalProps> = ({
+const TosPPModal = ({
   title,
-  isOpen,
   handleClose,
   children,
+  open,
   ...otherProps
-}) => {
+}: PropsWithChildren<
+  TosPPModalProps & {
+    css: any;
+    disableEscapeKeyDown?: boolean;
+  }
+>) => {
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={open}
       handleClose={handleClose}
       title={title}
       {...otherProps}

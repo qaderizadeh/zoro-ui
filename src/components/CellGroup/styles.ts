@@ -36,7 +36,7 @@ export const useStyles = () => {
       }
 
       :not(:last-of-type) {
-        border-right: 1px solid ${theme.palette.interactive.delimiter};
+        border-right: 1px solid ${(theme.palette as any).interactive.delimiter};
       }
 
       ${theme.breakpoints.down('xl')} {

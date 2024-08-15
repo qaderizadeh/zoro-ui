@@ -34,20 +34,21 @@ export const Accordion = ({
     (event: React.SyntheticEvent, newExpandedIdx: boolean) => {
       onChange(newExpandedIdx ? actionIdx : undefined);
     };
+
   return (
     <MuiAccordion
       className={className}
       expanded={expanded}
       onChange={handleChange(id)}
-      css={styles.accordionRoot}
+      css={styles.accordionRoot as any}
     >
       <AccordionSummary
         aria-controls={`panel${id}-content`}
         id={`panel${id}-header`}
-        css={styles.accordionSummary}
+        css={styles.accordionSummary as any}
       >
-        <div css={styles.accordionLeft}>
-          <Icon name='arrowUp' css={styles.arrow(expanded)} />
+        <div css={styles.accordionLeft as any}>
+          <Icon name='arrowUp' css={styles.arrow(expanded) as any} />
           <Typography color={expanded ? 'textPrimary' : 'textSecondary'}>
             {title}
           </Typography>

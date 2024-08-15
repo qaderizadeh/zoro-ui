@@ -25,7 +25,7 @@ const CloseButton: React.FC<CloseButtonProps> = ({ closeToast }) => {
   const styles = useStyles();
 
   return (
-    <Button css={styles.btnClose} onClick={closeToast} variant='text'>
+    <Button css={styles.btnClose as any} onClick={closeToast} variant='text'>
       <Icon name='close' size={`${styles.iconSize}`} />
     </Button>
   );
@@ -54,7 +54,7 @@ const defaultOptions: ToastOptions = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  closeButton: CloseButton as ToastOptions['closeButton'],
+  closeButton: CloseButton as any,
 };
 
 export const toast = (

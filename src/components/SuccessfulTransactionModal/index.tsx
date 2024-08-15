@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import BigNumber from 'bignumber.js';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Token } from '@/types';
 import { convertWeiToTokens } from '@/utilities';
 
@@ -13,7 +13,7 @@ import { TokenIcon } from '../TokenIcon';
 import { useStyles } from './styles';
 
 export interface SuccessfulTransactionModalProps
-  extends Omit<ModalProps, 'children'> {
+  extends Omit<ModalProps, 'content'> {
   title: string;
   content?: string | React.ReactElement;
   transactionHash: string;
@@ -24,9 +24,7 @@ export interface SuccessfulTransactionModalProps
   className?: string;
 }
 
-export const SuccessfulTransactionModal: React.FC<
-  SuccessfulTransactionModalProps
-> = ({
+export const SuccessfulTransactionModal = ({
   className,
   title,
   content,
@@ -34,7 +32,7 @@ export const SuccessfulTransactionModal: React.FC<
   transactionHash,
   isOpen,
   handleClose,
-}) => {
+}: Omit<SuccessfulTransactionModalProps, 'children'>) => {
   const styles = useStyles();
 
   return (

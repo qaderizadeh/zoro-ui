@@ -21,7 +21,12 @@ export interface TokenListProps {
   'data-testid'?: string;
 }
 
-const COMMON_TOKENS = [TOKENS.xvs, TOKENS.bnb, TOKENS.usdt, TOKENS.btcb];
+const COMMON_TOKENS = [
+  (TOKENS as any).xvs,
+  TOKENS.bnb,
+  TOKENS.usdt,
+  (TOKENS as any).btcb,
+];
 
 export const TokenList: React.FC<TokenListProps> = ({
   tokenBalances,

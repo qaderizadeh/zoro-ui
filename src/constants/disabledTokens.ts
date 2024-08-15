@@ -1,8 +1,6 @@
 import config from '@/config';
 import { Token, TokenAction } from '@/types';
 
-import { MAINNET_TOKENS, TESTNET_TOKENS } from '@/constants/tokens';
-
 interface DisabledToken {
   token: Token;
   disabledActions: TokenAction[];

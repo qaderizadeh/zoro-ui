@@ -108,8 +108,7 @@ export const useStyles = () => {
     loader: {
       marginBottom: theme.spacing(6),
     },
-    table: ({ minWidth }: { minWidth: string }) => ({
-      minWidth: minWidth,
+    table: {
       tableLayout: 'fixed',
 
       '.MuiTableCell-root': {
@@ -127,7 +126,7 @@ export const useStyles = () => {
       '.MuiTableCell-root:last-child': {
         paddingRight: theme.spacing(6),
       },
-    }),
+    },
     tableSortLabel: ({ orderable }: { orderable: boolean }) => ({
       cursor: orderable ? 'pointer' : 'auto',
 

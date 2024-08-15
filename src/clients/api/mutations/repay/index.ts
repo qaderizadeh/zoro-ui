@@ -26,7 +26,7 @@ const repay = async ({
 }: RepayInput): Promise<RepayOutput> => {
   // Handle repaying tokens other than BNB
   if (!vToken.underlyingToken.isNative) {
-    const vTokenContract = getVTokenContract(vToken, signer) as VBep20;
+    const vTokenContract = getVTokenContract(vToken, signer as any) as VBep20;
 
     const transaction = await vTokenContract.repayBorrow(
       isRepayingFullLoan ? MAX_UINT256.toFixed() : amountWei.toFixed()
@@ -41,7 +41,7 @@ const repay = async ({
 
   // Handle repaying full BNB loan
   if (isRepayingFullLoan) {
-    const maximillionContract = getMaximillionContract(signer);
+    const maximillionContract = getMaximillionContract(signer as any);
     const amountWithBufferWei = amountWei.multipliedBy(
       1 + REPAYMENT_BNB_BUFFER_PERCENTAGE
     );
@@ -58,7 +58,7 @@ const repay = async ({
   }
 
   // Handle repaying partial BNB loan
-  const vBnbContract = getVTokenContract(vToken, signer) as VBnbToken;
+  const vBnbContract = getVTokenContract(vToken, signer as any) as VBnbToken;
   const transaction = await vBnbContract.repayBorrow({
     value: amountWei.toFixed(),
   });

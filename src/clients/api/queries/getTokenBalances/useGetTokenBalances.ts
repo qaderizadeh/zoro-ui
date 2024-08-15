@@ -1,4 +1,8 @@
-import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 
 import {
   GetTokenBalancesInput,
@@ -28,7 +32,7 @@ const useGetTokenBalances = (
     accountAddress,
     tokens,
   }: Omit<GetTokenBalancesInput, 'multicall' | 'provider'>,
-  options?: Options
+  options?: Partial<UseQueryOptions>
 ) => {
   const multicall = useMulticall();
   const { provider } = useAuth();

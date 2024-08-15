@@ -1,13 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import type {
-  SliderUnstyledMarkSlotProps,
-  SliderUnstyledTrackSlotProps,
-} from '@mui/base/SliderUnstyled';
+
 import Box from '@mui/material/Box';
 import MaterialSlider from '@mui/material/Slider';
 import { SliderTypeMap } from '@mui/material/Slider/Slider';
-import React from 'react';
 
 import { PALETTE } from '@/theme/MuiThemeProvider/muiTheme';
 
@@ -53,13 +49,12 @@ export const ProgressBar = ({
   });
 
   const renderMark = (
-    props?: NonNullable<SliderTypeMap['props']['componentsProps']>['mark'] &
-      SliderUnstyledMarkSlotProps
+    props?: NonNullable<SliderTypeMap['props']['componentsProps']>['mark']
   ) => (
     <Box
       component='span'
-      style={props?.style}
-      className={props?.className}
+      style={(props as any)?.style}
+      className={(props as any)?.className}
       css={[styles.mark, markTooltip ? styles.hasTooltip : undefined]}
     >
       {markTooltip && (
@@ -71,12 +66,11 @@ export const ProgressBar = ({
   );
 
   const renderTrack = (
-    props?: NonNullable<SliderTypeMap['props']['componentsProps']>['track'] &
-      SliderUnstyledTrackSlotProps
+    props?: NonNullable<SliderTypeMap['props']['componentsProps']>['track']
   ) => {
     const primaryRail = (
       <Box
-        style={props?.style}
+        style={(props as any)?.style}
         css={[
           styles.trackWrapper,
           trackTooltip ? styles.hasTooltip : undefined,
@@ -84,10 +78,10 @@ export const ProgressBar = ({
       >
         {trackTooltip ? (
           <Tooltip placement={tooltipPlacement} title={trackTooltip}>
-            <Box className={props?.className} />
+            <Box className={(props as any)?.className} />
           </Tooltip>
         ) : (
-          <Box className={props?.className} />
+          <Box className={(props as any)?.className} />
         )}
       </Box>
     );
@@ -101,7 +95,7 @@ export const ProgressBar = ({
             css={styles.secondaryRail(
               secondaryValue < max ? secondaryValue : max
             )}
-            className={props?.className}
+            className={(props as any)?.className}
           />
         )}
       </>

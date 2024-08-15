@@ -1,6 +1,6 @@
-'use client';
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
+'use client';
 import { Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Token, TokenBalance } from '@/types';

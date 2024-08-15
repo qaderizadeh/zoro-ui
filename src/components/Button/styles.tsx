@@ -1,6 +1,6 @@
-import { Variant } from "./types";
-import { css } from "@emotion/react";
-import { useTheme } from "@mui/material";
+import { Variant } from './types';
+import { css } from '@emotion/react';
+import { useTheme } from '@mui/material';
 
 export const styles = ({
   fullWidth,
@@ -17,219 +17,219 @@ export const styles = ({
     variant: Variant;
     active: boolean;
   }) => {
-    if (refVariant === "secondary") {
+    if (refVariant === 'secondary') {
       return css`
-        border-color: ${theme.palette.button.medium};
+        border-color: ${(theme.palette as any).button.medium};
 
         :disabled {
-          border-color: ${theme.palette.secondary.light};
+          border-color: ${(theme.palette as any).secondary.light};
         }
 
         ${!active &&
         css`
           :hover:not(:disabled) {
-            background-color: ${theme.palette.button.main};
-            border-color: ${theme.palette.button.main};
+            background-color: ${(theme.palette as any).button.main};
+            border-color: ${(theme.palette as any).button.main};
           }
         `}
 
         ${active &&
         css`
-          background-color: ${theme.palette.button.main};
-          border-color: ${theme.palette.button.main};
+          background-color: ${(theme.palette as any).button.main};
+          border-color: ${(theme.palette as any).button.main};
         `}
 
         :active:not(:disabled) {
-          background-color: ${theme.palette.button.medium};
-          border-color: ${theme.palette.button.medium};
+          background-color: ${(theme.palette as any).button.medium};
+          border-color: ${(theme.palette as any).button.medium};
         }
       `;
     }
 
-    if (refVariant === "tertiary") {
+    if (refVariant === 'tertiary') {
       return css`
         padding-left: ${theme.spacing(3)};
         padding-right: ${theme.spacing(3)};
         height: ${theme.spacing(10)};
-        background-color: ${theme.palette.secondary.light};
-        border-color: ${theme.palette.secondary.light};
+        background-color: ${(theme.palette as any).secondary.light};
+        border-color: ${(theme.palette as any).secondary.light};
 
         :disabled {
-          background-color: ${theme.palette.secondary.light};
-          border-color: ${theme.palette.secondary.light};
+          background-color: ${(theme.palette as any).secondary.light};
+          border-color: ${(theme.palette as any).secondary.light};
         }
 
         ${!active &&
         css`
           :hover:not(:disabled) {
-            background-color: ${theme.palette.secondary.light};
-            border-color: ${theme.palette.interactive.primary};
+            background-color: ${(theme.palette as any).secondary.light};
+            border-color: ${(theme.palette as any).interactive.primary};
           }
         `}
 
         ${active &&
         css`
-          background-color: ${theme.palette.text.secondary};
-          border-color: ${theme.palette.text.secondary};
+          background-color: ${(theme.palette as any).text.secondary};
+          border-color: ${(theme.palette as any).text.secondary};
         `}
 
         :active:not(:disabled) {
-          background-color: ${theme.palette.text.secondary};
-          border-color: ${theme.palette.text.secondary};
+          background-color: ${(theme.palette as any).text.secondary};
+          border-color: ${(theme.palette as any).text.secondary};
         }
       `;
     }
 
-    if (refVariant === "quaternary") {
+    if (refVariant === 'quaternary') {
       return css`
         padding: ${theme.spacing(1, 6)};
         height: ${theme.spacing(8)};
         border-radius: ${theme.spacing(5)};
-        background-color: ${theme.palette.secondary.light};
-        border-color: ${theme.palette.secondary.light};
+        background-color: ${(theme.palette as any).secondary.light};
+        border-color: ${(theme.palette as any).secondary.light};
 
         :disabled {
-          background-color: ${theme.palette.secondary.light};
-          border-color: ${theme.palette.secondary.light};
+          background-color: ${(theme.palette as any).secondary.light};
+          border-color: ${(theme.palette as any).secondary.light};
         }
 
         ${!active &&
         css`
           :hover:not(:disabled) {
-            background-color: ${theme.palette.secondary.light};
-            border-color: ${theme.palette.interactive.primary};
+            background-color: ${(theme.palette as any).secondary.light};
+            border-color: ${(theme.palette as any).interactive.primary};
           }
         `}
 
         ${active &&
         css`
-          background-color: ${theme.palette.text.secondary};
-          border-color: ${theme.palette.text.secondary};
+          background-color: ${(theme.palette as any).text.secondary};
+          border-color: ${(theme.palette as any).text.secondary};
         `}
 
         :active:not(:disabled) {
-          background-color: ${theme.palette.text.secondary};
-          border-color: ${theme.palette.text.secondary};
+          background-color: ${(theme.palette as any).text.secondary};
+          border-color: ${(theme.palette as any).text.secondary};
         }
       `;
     }
 
-    if (refVariant === "quinary") {
+    if (refVariant === 'quinary') {
       return css`
         padding: ${theme.spacing(1, 5)};
         height: ${theme.spacing(8)};
-        background-color: ${theme.palette.background.paper};
-        border-color: ${theme.palette.secondary.light};
+        background-color: ${(theme.palette as any).background.paper};
+        border-color: ${(theme.palette as any).secondary.light};
 
         :disabled {
-          background-color: ${theme.palette.secondary.main};
-          border-color: ${theme.palette.secondary.light};
+          background-color: ${(theme.palette as any).secondary.main};
+          border-color: ${(theme.palette as any).secondary.light};
         }
 
         ${!active &&
         css`
           :hover:not(:disabled) {
-            background-color: ${theme.palette.secondary.light};
-            border-color: ${theme.palette.secondary.light};
+            background-color: ${(theme.palette as any).secondary.light};
+            border-color: ${(theme.palette as any).secondary.light};
           }
         `}
 
         ${active &&
         css`
-          background-color: ${theme.palette.interactive.primary};
-          border-color: ${theme.palette.interactive.primary};
+          background-color: ${(theme.palette as any).interactive.primary};
+          border-color: ${(theme.palette as any).interactive.primary};
         `}
 
         :active:not(:disabled) {
-          background-color: ${theme.palette.interactive.primary};
-          border-color: ${theme.palette.interactive.primary};
+          background-color: ${(theme.palette as any).interactive.primary};
+          border-color: ${(theme.palette as any).interactive.primary};
         }
       `;
     }
 
-    if (refVariant === "senary") {
+    if (refVariant === 'senary') {
       return css`
         padding: ${theme.spacing(1, 2)};
         height: ${theme.spacing(8)};
-        background-color: ${theme.palette.background.paper};
-        border-color: ${theme.palette.secondary.light};
+        background-color: ${(theme.palette as any).background.paper};
+        border-color: ${(theme.palette as any).secondary.light};
 
         :disabled {
-          background-color: ${theme.palette.secondary.main};
-          border-color: ${theme.palette.secondary.light};
+          background-color: ${(theme.palette as any).secondary.main};
+          border-color: ${(theme.palette as any).secondary.light};
         }
 
         ${!active &&
         css`
           :hover:not(:disabled) {
-            background-color: ${theme.palette.secondary.main};
-            border-color: ${theme.palette.interactive.primary};
+            background-color: ${(theme.palette as any).secondary.main};
+            border-color: ${(theme.palette as any).interactive.primary};
           }
         `}
 
         ${active &&
         css`
-          background-color: ${theme.palette.secondary.main};
-          border-color: ${theme.palette.interactive.primary};
+          background-color: ${(theme.palette as any).secondary.main};
+          border-color: ${(theme.palette as any).interactive.primary};
         `}
 
         :active:not(:disabled) {
-          background-color: ${theme.palette.secondary.main};
-          border-color: ${theme.palette.interactive.primary};
+          background-color: ${(theme.palette as any).secondary.main};
+          border-color: ${(theme.palette as any).interactive.primary};
         }
       `;
     }
 
-    if (refVariant === "text") {
+    if (refVariant === 'text') {
       return css`
         background-color: transparent;
-        color: ${theme.palette.button.main};
+        color: ${(theme.palette as any).button.main};
 
         ${!active &&
         css`
           :hover:not(:disabled) {
-            color: ${theme.palette.button.medium};
+            color: ${(theme.palette as any).button.medium};
           }
         `}
 
         ${active &&
         css`
-          color: ${theme.palette.button.medium};
+          color: ${(theme.palette as any).button.medium};
         `}
 
         :active:not(:disabled) {
-          color: ${theme.palette.button.dark};
+          color: ${(theme.palette as any).button.dark};
         }
       `;
     }
 
     // Primary variant
     return css`
-      background-color: ${theme.palette.button.main};
-      border-color: ${theme.palette.button.main};
+      background-color: ${(theme.palette as any).button.main};
+      border-color: ${(theme.palette as any).button.main};
 
       :disabled {
-        background-color: ${theme.palette.secondary.light};
-        border-color: ${theme.palette.secondary.light};
+        background-color: ${(theme.palette as any).secondary.light};
+        border-color: ${(theme.palette as any).secondary.light};
       }
 
       ${!active &&
       css`
         :hover:not(:disabled) {
-          background-color: ${theme.palette.button.medium};
-          border-color: ${theme.palette.button.medium};
+          background-color: ${(theme.palette as any).button.medium};
+          border-color: ${(theme.palette as any).button.medium};
         }
       `}
 
       ${active &&
       css`
-        background-color: ${theme.palette.button.medium};
-        border-color: ${theme.palette.button.medium};
+        background-color: ${(theme.palette as any).button.medium};
+        border-color: ${(theme.palette as any).button.medium};
       `}
 
       :active:not(:disabled) {
-        background-color: ${theme.palette.button.dark};
-        border-color: ${theme.palette.button.dark};
+        background-color: ${(theme.palette as any).button.dark};
+        border-color: ${(theme.palette as any).button.dark};
       }
     `;
   };
@@ -282,7 +282,7 @@ export const styles = ({
       align-items: center;
       font-weight: 600;
       color: inherit;
-      font-size: ${variant === "primary" || variant === "secondary"
+      font-size: ${variant === 'primary' || variant === 'secondary'
         ? theme.typography.body1.fontSize
         : theme.typography.small1.fontSize};
     `,

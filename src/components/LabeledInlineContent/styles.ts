@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -26,8 +27,8 @@ export const useStyles = () => {
       }
     `,
     icon: css`
-      width: ${theme.shape.iconSize.large}px;
-      height: ${theme.shape.iconSize.large}px;
+      width: ${SHAPE.iconSize.large}px;
+      height: ${SHAPE.iconSize.large}px;
       margin-top: -2px;
       margin-right: ${theme.spacing(2)};
     `,
@@ -40,7 +41,9 @@ export const useStyles = () => {
       cursor: help;
     `,
     getLabel: ({ invertTextColors }: { invertTextColors: boolean }) => css`
-      color: ${invertTextColors ? theme.palette.text.primary : theme.palette.text.secondary};
+      color: ${invertTextColors
+        ? theme.palette.text.primary
+        : theme.palette.text.secondary};
     `,
     getContent: ({
       invertTextColors,
@@ -49,7 +52,9 @@ export const useStyles = () => {
       invertTextColors: boolean;
       hasIcon: boolean;
     }) => css`
-      color: ${invertTextColors ? theme.palette.text.secondary : theme.palette.text.primary};
+      color: ${invertTextColors
+        ? theme.palette.text.secondary
+        : theme.palette.text.primary};
 
       ${hasIcon &&
       css`

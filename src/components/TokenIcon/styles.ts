@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { useTheme } from '@mui/material';
 
 export const useStyles = () => {
@@ -6,8 +7,8 @@ export const useStyles = () => {
   return {
     icon: {
       marginTop: '-2px',
-      width: `${theme.shape.iconSize.xLarge}px`,
-      height: `${theme.shape.iconSize.xLarge}px`,
+      width: `${SHAPE.iconSize.xLarge}px`,
+      height: `${SHAPE.iconSize.xLarge}px`,
     },
   };
 };

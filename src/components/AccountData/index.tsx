@@ -3,7 +3,7 @@
 import BigNumber from 'bignumber.js';
 import React from 'react';
 import { useTranslation } from '@/translation';
-import { Asset, Pool, Swap, TokenAction } from '@/types';
+import { Asset, Pool, TokenAction } from '@/types';
 import {
   formatToReadablePercentage,
   formatTokensToReadableValue,
@@ -25,7 +25,7 @@ export interface AccountDataProps {
   action: TokenAction;
   amountTokens: BigNumber;
   isUsingSwap?: boolean;
-  swap?: Swap;
+  swap?: any;
 }
 
 export const AccountData: React.FC<AccountDataProps> = ({

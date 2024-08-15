@@ -6,6 +6,7 @@ import { Asset } from '@/types';
 import {
   getHypotheticalAccountLiquidity,
   getVTokenBalanceOf,
+  GetVTokenBalanceOfInput,
   useEnterMarkets,
   useExitMarket,
 } from '@/clients/api';
@@ -15,6 +16,7 @@ import { useAuth } from '@/context/AuthContext';
 //import { DisableLunaUstWarningContext } from '@/context/DisableLunaUstWarning';
 
 import { CollateralConfirmModal } from './CollateralConfirmModal';
+import { Signer } from 'zksync-web3';
 
 const useCollateral = () => {
   const { accountAddress, signer } = useAuth();
@@ -35,17 +37,17 @@ const useCollateral = () => {
   }) => {
     const comptrollerContract = getComptrollerContract(
       comptrollerAddress,
-      signer
+      signer as Signer
     );
 
     if (asset.isCollateralOfUser) {
-      const vTokenContract = getVTokenContract(asset.vToken, signer);
+      const vTokenContract = getVTokenContract(asset.vToken, signer as Signer);
 
       try {
         const vTokenBalanceOf = await getVTokenBalanceOf({
           vTokenContract,
           accountAddress,
-        });
+        } as GetVTokenBalanceOfInput);
 
         const assetHypotheticalLiquidity =
           await getHypotheticalAccountLiquidity({

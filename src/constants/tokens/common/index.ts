@@ -50,13 +50,13 @@ export const TOKEN_INFO = {
     decimals: 18,
     symbol: 'PEPE',
     asset: pepe,
-  } as Token,
+  } as any,
   uni: {
     address: '',
     decimals: 18,
     symbol: 'UNI',
     asset: uni,
-  } as Token,
+  } as any,
   usdc: {
     address: '',
     decimals: 6,

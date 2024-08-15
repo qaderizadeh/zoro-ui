@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import { Paper, Typography } from '@mui/material';
+import { Breakpoint, Paper, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from '@/translation';
 import Link from 'next/link';
@@ -80,7 +80,9 @@ export function TableCards<R>({
   };
 
   return (
-    <div css={styles.getCardsContainer({ breakpoint })}>
+    <div
+      css={styles.getCardsContainer({ breakpoint: breakpoint as Breakpoint })}
+    >
       {selectOptions.length > 0 && (
         <Select
           label={t('table.cardsSelect.label')}
@@ -136,7 +138,10 @@ export function TableCards<R>({
                 css={styles.rowWrapperMobile}
               >
                 {otherColumns.map((column) => (
-                  <div key={`${rowKey}-${column.key}`} css={styles.cellMobile}>
+                  <div
+                    key={`${rowKey}-${column.key}`}
+                    css={styles.cellMobile as any}
+                  >
                     <Typography variant='body1' css={styles.cellTitleMobile}>
                       {column.label}
                     </Typography>

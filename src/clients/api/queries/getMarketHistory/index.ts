@@ -1,5 +1,5 @@
 import { VError } from '@/errors';
-import { MarketSnapshot, VToken } from '@/types';
+import { VToken } from '@/types';
 import { restService } from '@/utilities';
 
 const ENTRIES_PER_HOUR = 2;
@@ -12,7 +12,7 @@ export type MarketHistoryType = '1 day' | '1 week' | '1 month' | '1 year';
 
 export interface GetMarketHistoryResponse {
   asset: string;
-  data: MarketSnapshot[];
+  data: any[];
   updatedAt: string;
 }
 
@@ -22,7 +22,7 @@ export interface GetMarketHistoryInput {
 }
 
 export type GetMarketHistoryOutput = {
-  marketSnapshots: MarketSnapshot[];
+  marketSnapshots: any[];
 };
 
 const getMarketHistory = async ({

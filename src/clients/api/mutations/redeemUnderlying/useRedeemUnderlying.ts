@@ -26,7 +26,7 @@ const useRedeemUnderlying = (
       redeemUnderlying({
         vTokenContract,
         ...params,
-      }),
+      } as RedeemUnderlyingInput),
     ...options,
     onSuccess: async (...onSuccessParams) => {
       const accountAddress = await vTokenContract.signer.getAddress();

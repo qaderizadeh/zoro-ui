@@ -47,7 +47,7 @@ export const useTableStyles = () => {
 
 export const data = [
   {
-    token: TOKENS.sxp,
+    token: (TOKENS as any).sxp,
     apy: 0.18,
     wallet: 0,
     collateral: true,
@@ -55,7 +55,7 @@ export const data = [
   { token: TOKENS.usdc, apy: 12.05, wallet: 90, collateral: false },
   { token: TOKENS.usdt, apy: 0.8, wallet: 160, collateral: true },
   { token: TOKENS.bnb, apy: 1.18, wallet: 37, collateral: false },
-  { token: TOKENS.xvs, apy: 0.15, wallet: 160, collateral: true },
+  { token: (TOKENS as any).xvs, apy: 0.15, wallet: 160, collateral: true },
 ];
 
 type Row = (typeof data)[number];

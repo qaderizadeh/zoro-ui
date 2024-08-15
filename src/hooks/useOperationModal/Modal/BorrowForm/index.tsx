@@ -223,11 +223,9 @@ const BorrowForm: React.FC<BorrowFormProps> = ({
     fromToken: asset.vToken.underlyingToken,
   });
 
-  const { mutateAsync: supply, isLoading: isBorrowLoading } = useBorrow({
+  const { mutateAsync: supply, isPending: isBorrowLoading } = useBorrow({
     vToken: asset.vToken,
   });
-
-  const isSubmitting = isBorrowLoading;
 
   const onSubmit: BorrowFormUiProps['onSubmit'] = async ({
     fromToken,
@@ -249,7 +247,7 @@ const BorrowForm: React.FC<BorrowFormProps> = ({
       setFormValues={setFormValues}
       onCloseModal={onCloseModal}
       onSubmit={onSubmit}
-      isSubmitting={isSubmitting}
+      isSubmitting={isBorrowLoading}
     />
   );
 };

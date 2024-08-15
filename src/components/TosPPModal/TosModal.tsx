@@ -24,11 +24,11 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
   };
   return (
     <TosPPModal
-      isOpen={open}
-      handleClose={onClose}
+      open={open}
+      handleClose={onClose as any}
       title={t('tos.header')}
       css={styles.tosModal}
-      disableEscapeKeyDown={true}
+      disableEscapeKeyDown
     >
       <div css={styles.tosContent} className='tosContent'>
         <ol>
@@ -168,7 +168,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='2'>
+        <ol start={2}>
           <li>
             <strong> Services</strong>
           </li>
@@ -296,7 +296,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='3'>
+        <ol start={3}>
           <li>
             <strong> Assumption of Risk</strong>
           </li>
@@ -478,7 +478,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='5'>
+        <ol start={5}>
           <li>
             <strong> Ownership</strong>
           </li>
@@ -626,7 +626,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='7'>
+        <ol start={7}>
           <li>
             <strong> Disclaimers and Limitations of Liability</strong>
           </li>
@@ -793,7 +793,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='8'>
+        <ol start={8}>
           <li>
             <strong> Indemnification</strong>
           </li>
@@ -828,7 +828,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='9'>
+        <ol start={9}>
           <li>
             <strong>
               {' '}
@@ -921,7 +921,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='10'>
+        <ol start={10}>
           <li>
             <strong> Waiver of Injunctive or Other Equitable Relief</strong>
           </li>
@@ -938,7 +938,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='11'>
+        <ol start={11}>
           <li>
             <strong> Termination; Cancellation</strong>
           </li>
@@ -974,7 +974,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='12'>
+        <ol start={12}>
           <li>
             <strong> Severability</strong>
           </li>
@@ -991,7 +991,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='13'>
+        <ol start={13}>
           <li>
             <strong> Assignment</strong>
           </li>
@@ -1007,7 +1007,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='14'>
+        <ol start={14}>
           <li>
             <strong> Entire Agreement</strong>
           </li>
@@ -1027,7 +1027,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='15'>
+        <ol start={15}>
           <li>
             <strong> Governing Law</strong>
           </li>
@@ -1040,7 +1040,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start='16'>
+        <ol start={16}>
           <li>
             <strong> Contact Us</strong>
           </li>

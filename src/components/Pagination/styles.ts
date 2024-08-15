@@ -1,3 +1,4 @@
+import { SHAPE } from '@/theme/MuiThemeProvider/muiTheme';
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
@@ -33,18 +34,20 @@ export const useStyles = () => {
       margin-left: ${theme.spacing(1)};
       margin-right: ${theme.spacing(1)};
       transition: color 0.3s;
-      border-radius: ${theme.shape.borderRadius.verySmall}px;
+      border-radius: ${SHAPE.borderRadius.verySmall}px;
 
       &:hover {
         color: ${theme.palette.text.primary}!important;
       }
     `,
     getButtonStyles: ({ isActive }: { isActive: boolean }) => css`
-      color: ${isActive ? theme.palette.text.primary : theme.palette.text.secondary};
+      color: ${isActive
+        ? theme.palette.text.primary
+        : theme.palette.text.secondary};
     `,
     iconArrow: css`
-      width: ${theme.shape.iconSize.xLarge}px;
-      height: ${theme.shape.iconSize.xLarge}px;
+      width: ${(theme.shape as any).iconSize.xLarge}px;
+      height: ${(theme.shape as any).iconSize.xLarge}px;
     `,
     iconReverted: css`
       transform: rotate(180deg);

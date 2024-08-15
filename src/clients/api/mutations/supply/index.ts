@@ -20,7 +20,7 @@ const supply = async ({
 }: SupplyInput): Promise<SupplyOutput> => {
   // Handle supplying ETH
   if (vToken.underlyingToken.isNative) {
-    const tokenContract = getVTokenContract(vToken, signer) as VBnbToken;
+    const tokenContract = getVTokenContract(vToken, signer as any) as VBnbToken;
 
     const transaction = await tokenContract.mint({
       value: amountWei.toFixed(),
@@ -29,7 +29,7 @@ const supply = async ({
   }
 
   // Handle supplying tokens other that ETH
-  const tokenContract = getVTokenContract(vToken, signer) as VBep20;
+  const tokenContract = getVTokenContract(vToken, signer as any) as VBep20;
   const transaction = await tokenContract.mint(amountWei.toFixed());
   return transaction.wait(1);
 };
