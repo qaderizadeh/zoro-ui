@@ -5,7 +5,7 @@ import { FormError } from '../useForm/types';
 import { ApproveTokenSteps, PrimaryButton } from '@/components';
 import React, { useContext, useMemo } from 'react';
 import { useTranslation } from '@/translation';
-import { Swap, Token } from '@/types';
+import { Token } from '@/types';
 //import { areTokensEqual, getSwapRouterContractAddress } from '@/utilities';
 import { areTokensEqual } from '@/utilities';
 import { GeolocationContext } from '@/context/GeolocationContext';
@@ -17,8 +17,8 @@ export interface SubmitSectionProps {
   fromToken: Token;
   poolComptrollerAddress: string;
   fromTokenAmountTokens: string;
-  isSwapLoading: boolean;
-  swap?: Swap;
+  isSwapLoading?: boolean;
+  swap?: any;
   formError?: FormError;
   isApprove: boolean;
 }

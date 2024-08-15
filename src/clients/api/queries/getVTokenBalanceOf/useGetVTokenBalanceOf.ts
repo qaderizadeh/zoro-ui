@@ -1,4 +1,8 @@
-import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 import { VToken } from '@/types';
 
 import getVTokenBalanceOf, {
@@ -26,7 +30,7 @@ type Options = QueryObserverOptions<
 
 const useGetVTokenBalanceOf = (
   { accountAddress, vToken }: TrimmedParams,
-  options?: Options
+  options?: Partial<UseQueryOptions>
 ) => {
   const vTokenContract = useVTokenContract(vToken);
 

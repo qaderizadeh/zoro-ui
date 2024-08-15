@@ -3,7 +3,6 @@
 import { Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from '@/translation';
-import { Swap } from '@/types';
 import { convertWeiToTokens } from '@/utilities';
 
 import { useStyles } from './styles';
@@ -11,7 +10,7 @@ import TEST_IDS from './testIds';
 
 export interface SwapSummaryProps {
   type: 'supply' | 'repay';
-  swap?: Swap;
+  swap?: any;
 }
 
 export const SwapSummary: React.FC<SwapSummaryProps> = ({ swap, type }) => {

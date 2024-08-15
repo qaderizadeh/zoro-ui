@@ -35,7 +35,7 @@ export interface ApproveTokenUiProps {
   isApproveTokenLoading?: boolean;
   assetInfo?: LabeledInlineContentProps[];
   disabled?: boolean;
-  setIsValidAllowance?: (v?: boolean) => void;
+  setIsValidAllowance?: (v: boolean) => void;
   isValidAllowance?: boolean;
 }
 
@@ -139,7 +139,7 @@ export interface ApproveTokenProps
     'assetInfo' | 'disabled' | 'title' | 'token'
   > {
   spenderAddress: string;
-  setIsValidAllowance?: () => void;
+  setIsValidAllowance?: (v: boolean) => void;
   isValidAllowance?: boolean;
 }
 

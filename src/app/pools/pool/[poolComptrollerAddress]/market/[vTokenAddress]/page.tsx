@@ -3,7 +3,7 @@
 
 'use client';
 import { useMarketPage } from '@/hooks/useMarketPage';
-import { MarketPage } from '@/pages/Market/MarketPage';
+import { MarketPage } from '@/views/Market/MarketPage';
 
 const Market = () => {
   const { vToken, poolComptrollerAddress, accountAddress } = useMarketPage();

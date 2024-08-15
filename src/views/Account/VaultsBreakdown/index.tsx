@@ -2,10 +2,10 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { useTranslation } from '@/translation';
-import { Vault } from '@/types';
 
 import Section from '../Section';
 import Table from './Table';
+import { Vault } from '@/types';
 
 export interface VaultsBreakdownProps {
   vaults: Vault[];

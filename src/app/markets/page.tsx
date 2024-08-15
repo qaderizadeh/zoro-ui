@@ -2,7 +2,7 @@
 
 import { useGetPools } from '@/clients/api';
 import { useAuth } from '@/context/AuthContext';
-import { PoolUi } from '@/pages/Pool';
+import { PoolUi } from '@/views/Pool';
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 

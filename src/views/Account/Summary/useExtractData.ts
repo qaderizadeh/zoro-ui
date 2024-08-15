@@ -56,7 +56,7 @@ const useExtractData = ({
           valueWei: new BigNumber(vault.userStakedWei || 0),
           token: vault.stakedToken,
         }).multipliedBy(
-          areTokensEqual(vault.stakedToken, TOKENS.xvs)
+          areTokensEqual(vault.stakedToken, (TOKENS as any).xvs)
             ? xvsPriceCents
             : vaiPriceCents
         );

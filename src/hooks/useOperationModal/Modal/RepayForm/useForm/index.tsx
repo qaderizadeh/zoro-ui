@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
-import { ContractReceipt } from 'ethers';
+// import { ContractReceipt } from 'ethers';
 import { useEffect } from 'react';
 import { useTranslation } from '@/translation';
-import { Swap, SwapError, Token, VToken } from '@/types';
+import { Token, VToken } from '@/types';
 import {
   areTokensEqual,
   convertTokensToWei,
@@ -24,9 +24,9 @@ export interface UseFormInput {
     toVToken: VToken;
     fromToken: Token;
     fromTokenAmountTokens: string;
-    swap?: Swap;
+    swap?: any;
     fixedRepayPercentage?: number;
-  }) => Promise<ContractReceipt>;
+  }) => void;
   onCloseModal: () => void;
   formValues: FormValues;
   setFormValues: (
@@ -34,8 +34,8 @@ export interface UseFormInput {
   ) => void;
   fromTokenUserBorrowBalanceTokens?: BigNumber;
   fromTokenUserWalletBalanceTokens?: BigNumber;
-  swap?: Swap;
-  swapError?: SwapError;
+  swap?: any;
+  swapError?: any;
 }
 
 interface UseFormOutput {

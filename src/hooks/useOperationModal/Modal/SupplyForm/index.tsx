@@ -28,7 +28,7 @@ import useGetSwapTokenUserBalances from '@/hooks/useGetSwapTokenUserBalances';
 import { useGetAllowance } from '@/clients/api';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from '@/translation';
-import { Asset, Pool, Swap, SwapError, TokenBalance } from '@/types';
+import { Asset, Pool, TokenBalance } from '@/types';
 import {
   areTokensEqual,
   convertTokensToWei,
@@ -49,11 +49,11 @@ export interface SupplyFormUiProps {
     setter: (currentFormValues: FormValues) => FormValues
   ) => void;
   formValues: FormValues;
-  isSwapLoading: boolean;
-  swap?: Swap;
-  swapError?: SwapError;
+  isSwapLoading?: boolean;
+  swap?: any;
+  swapError?: any;
   isValidAllowance: boolean;
-  setIsValidAllowance: () => void;
+  setIsValidAllowance?: (v: boolean) => void;
 }
 
 export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
@@ -133,7 +133,8 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
   const tokenAllowance = useMemo(
     () =>
       convertWeiToTokens({
-        valueWei: getTokenAllowanceData?.allowanceWei || new BigNumber(0),
+        valueWei:
+          (getTokenAllowanceData as any)?.allowanceWei || new BigNumber(0),
         token: formValues.fromToken,
       }),
     [formValues.fromToken, isValidAllowance]
@@ -185,7 +186,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
 
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: fromTokenUserWalletBalanceTokens.toFixed(),
+      amountTokens: (fromTokenUserWalletBalanceTokens || 0).toFixed(),
     }));
   }, [fromTokenUserWalletBalanceTokens]);
 
@@ -197,7 +198,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
       if (
         new BigNumber(formValues.amountTokens).isGreaterThan(tokenAllowance)
       ) {
-        setIsValidAllowance(false);
+        if (setIsValidAllowance) setIsValidAllowance(false);
       } else handleSubmit();
     }
   };
@@ -346,7 +347,7 @@ export interface SupplyFormProps {
   pool: Pool;
   onCloseModal: () => void;
   isValidAllowance: boolean;
-  setIsValidAllowance: () => void;
+  setIsValidAllowance?: (v: boolean) => void;
 }
 
 const SupplyForm: React.FC<SupplyFormProps> = ({
@@ -372,7 +373,7 @@ const SupplyForm: React.FC<SupplyFormProps> = ({
     }
   );
 
-  const { mutateAsync: supply, isLoading: isSupplyLoading } = useSupply({
+  const { mutateAsync: supply, isPending: isSupplyLoading } = useSupply({
     vToken: asset.vToken,
   });
 

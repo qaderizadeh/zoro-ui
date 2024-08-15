@@ -198,15 +198,15 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({
       enabled: !!accountAddress,
     }
   );
-  const vTokenBalanceWei = getVTokenBalanceData?.balanceWei;
+  const vTokenBalanceWei = (getVTokenBalanceData as any)?.balanceWei;
 
-  const { mutateAsync: redeem, isLoading: isRedeemLoading } = useRedeem({
+  const { mutateAsync: redeem, isPending: isRedeemLoading } = useRedeem({
     vToken: asset.vToken,
   });
 
   const {
     mutateAsync: redeemUnderlying,
-    isLoading: isRedeemUnderlyingLoading,
+    isPending: isRedeemUnderlyingLoading,
   } = useRedeemUnderlying({
     vToken: asset.vToken,
   });

@@ -1,10 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
-import MdEditor, { commands } from '@uiw/react-md-editor';
+// import {
+// MdEditor,
+// commands,
+// } from '@uiw/react-md-editor';
 import React from 'react';
 
-import previewOptions from '../previewOptions';
+// import previewOptions from '../previewOptions';
 import { useStyles } from './styles';
 import './styles-overrides.scss';
 
@@ -19,23 +22,23 @@ export interface MarkdownEditorProps {
   onBlur: (e: React.FocusEvent<HTMLTextAreaElement, Element>) => void;
 }
 const allowedCommands = [
-  commands.title1,
-  commands.title2,
-  commands.title3,
-  commands.title4,
-  commands.unorderedListCommand,
-  commands.link,
-  commands.bold,
-  commands.italic,
+  // commands.title1,
+  // commands.title2,
+  // commands.title3,
+  // commands.title4,
+  // commands.unorderedListCommand,
+  // commands.link,
+  // commands.bold,
+  // commands.italic,
 ];
 
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
-  value,
-  onChange,
+  // value,
+  // onChange,
   name,
-  placeholder,
+  // placeholder,
   hasError,
-  className,
+  // className,
   label,
   onBlur,
 }) => {
@@ -52,7 +55,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
           {label}
         </Typography>
       )}
-      <MdEditor
+      {/* <MdEditor
         className={className}
         value={value}
         onChange={onChange}
@@ -66,7 +69,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
         }}
         // placeholder={placeholder}
         css={styles.hasError(hasError)}
-      />
+      /> */}
     </>
   );
 };

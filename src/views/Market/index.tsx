@@ -186,7 +186,7 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             {
               label: t('market.supplyInfo.stats.apy'),
               value: formatToReadablePercentage(
-                Math.abs(asset?.supplyApyPercentage)
+                Math.abs(asset?.supplyApyPercentage as unknown as number)
               ),
             },
             {
@@ -228,7 +228,7 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             {
               label: t('market.borrowInfo.stats.apy'),
               value: formatToReadablePercentage(
-                Math.abs(asset.borrowApyPercentage)
+                Math.abs(asset.borrowApyPercentage as unknown as number)
               ),
             },
             {
@@ -284,7 +284,7 @@ export const MarketUi: React.FC<MarketUiProps> = ({
       value: formatTokensToReadableValue({
         value: distribution.dailyDistributedTokens,
         addSymbol: false,
-        token: TOKENS.xvs,
+        token: (TOKENS as any).xvs,
       }),
     }));
 

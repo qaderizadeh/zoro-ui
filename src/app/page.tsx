@@ -2,7 +2,7 @@
 
 import { useGetPools } from '@/clients/api';
 import { useAuth } from '@/context/AuthContext';
-import { DashboardUi } from '@/pages/Dashboard';
+import { DashboardUi } from '@/views/Dashboard';
 import { useState } from 'react';
 
 const Dashboard: React.FC = () => {

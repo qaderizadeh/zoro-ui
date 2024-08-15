@@ -1,4 +1,8 @@
-import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  UseQueryOptions,
+} from '@tanstack/react-query';
 import { Token } from '@/types';
 
 import getAllowance, {
@@ -33,7 +37,7 @@ const useGetAllowance = (
     accountAddress,
     isValidAllowance,
   }: Omit<GetAllowanceInput, 'tokenContract'> & { token: Token },
-  options?: Options
+  options?: Partial<UseQueryOptions>
 ) => {
   const tokenContract = useTokenContract(token);
 

@@ -2,7 +2,7 @@
 
 import { useGetPools } from '@/clients/api';
 import { useAuth } from '@/context/AuthContext';
-import { AccountUi } from '@/pages/Account';
+import { AccountUi } from '@/views/Account';
 
 const Account: React.FC = () => {
   const { accountAddress } = useAuth();

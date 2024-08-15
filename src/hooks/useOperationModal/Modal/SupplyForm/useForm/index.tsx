@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { ContractReceipt } from 'ethers';
 import { useTranslation } from '@/translation';
-import { Asset, Swap, SwapError, Token, VToken } from '@/types';
+import { Asset, Token, VToken } from '@/types';
 import { convertTokensToWei } from '@/utilities';
 
 import useHandleTransactionMutation from '@/hooks/useHandleTransactionMutation';
@@ -17,7 +17,7 @@ export interface UseFormInput {
     toVToken: VToken;
     fromToken: Token;
     fromTokenAmountTokens: string;
-    swap?: Swap;
+    swap?: any;
   }) => Promise<ContractReceipt>;
   onCloseModal: () => void;
   formValues: FormValues;
@@ -25,8 +25,8 @@ export interface UseFormInput {
     setter: (currentFormValues: FormValues) => FormValues | FormValues
   ) => void;
   fromTokenUserWalletBalanceTokens?: BigNumber;
-  swap?: Swap;
-  swapError?: SwapError;
+  swap?: any;
+  swapError?: any;
 }
 
 interface UseFormOutput {

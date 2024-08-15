@@ -1,9 +1,18 @@
 import '@/assets/styles/index.scss';
+import initializeLibraries from '@/initializeLibraries';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Providers } from './providers';
 import { Metadata } from 'next';
 import type { Viewport } from 'next';
+import * as buffer from 'buffer';
+
+if (typeof window !== 'undefined') {
+  window.Buffer = buffer.Buffer;
+}
+
+initializeLibraries();
+
 export default function RootLayout({
   children,
 }: Readonly<{

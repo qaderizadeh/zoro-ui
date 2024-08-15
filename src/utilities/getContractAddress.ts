@@ -5,7 +5,11 @@ import mainContractChainAddresses from '@/constants/contracts/addresses/main.jso
 const mainContractAddresses = Object.entries(mainContractChainAddresses).reduce(
   (accContractAddresses, [contractName, addresses]) => ({
     ...accContractAddresses,
-    [contractName]: addresses[config.chainId],
+    [contractName]: (
+      addresses as {
+        [key: string]: string;
+      }
+    )[config.chainId],
   }),
   {} as Record<keyof typeof mainContractChainAddresses, string>
 );

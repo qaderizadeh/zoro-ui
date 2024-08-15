@@ -4,7 +4,6 @@ import BigNumber from 'bignumber.js';
 import { Table, TableProps, TokenIconWithSymbol } from '@/components';
 import React, { useMemo } from 'react';
 import { useTranslation } from '@/translation';
-import { Vault } from '@/types';
 import {
   compareBigNumbers,
   compareNumbers,
@@ -12,9 +11,10 @@ import {
   formatToReadablePercentage,
 } from '@/utilities';
 
-import { routes } from '@/constants/routing';
+// import { routes } from '@/constants/routing';
 
 import { useStyles } from './styles';
+import { Vault } from '@/types';
 
 export interface VaultTableProps {
   vaults: Vault[];
@@ -78,7 +78,7 @@ export const VaultTable: React.FC<VaultTableProps> = ({ vaults }) => {
         orderBy: tableColumns[2], // Order by stake initially
         orderDirection: 'desc',
       }}
-      getRowHref={() => routes.vaults.path}
+      // getRowHref={() => routes.vaults.path}
       breakpoint='xs'
     />
   );

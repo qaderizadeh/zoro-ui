@@ -47,12 +47,14 @@ const useTokenApproval = ({
       return undefined;
     }
 
-    return getTokenAllowanceData.allowanceWei.isGreaterThan(0);
+    return ((getTokenAllowanceData as any).allowanceWei as any).isGreaterThan(
+      0
+    );
   }, [token.isNative, getTokenAllowanceData]);
 
   const {
     mutateAsync: approveTokenMutation,
-    isLoading: isApproveTokenLoading,
+    isPending: isApproveTokenLoading,
   } = useApproveToken({
     token,
   });

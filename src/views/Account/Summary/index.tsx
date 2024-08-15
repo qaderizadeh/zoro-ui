@@ -11,7 +11,7 @@ import {
 } from '@/components';
 import React from 'react';
 import { useTranslation } from '@/translation';
-import { Pool, Vault } from '@/types';
+import { Pool } from '@/types';
 import {
   formatCentsToReadableValue,
   formatToReadablePercentage,
@@ -25,7 +25,7 @@ import useExtractData from './useExtractData';
 
 export interface SummaryProps {
   pools: Pool[];
-  vaults?: Vault[];
+  vaults?: any[];
   xvsPriceCents?: BigNumber;
   vaiPriceCents?: BigNumber;
   displayAccountHealth?: boolean;

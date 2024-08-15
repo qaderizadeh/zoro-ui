@@ -16,7 +16,7 @@ export interface AssetAccessorProps {
   approveTokenMessage: string;
   action: TokenAction;
   children: (props: { asset: Asset; pool: Pool }) => React.ReactNode;
-  setIsValidAllowance?: () => void;
+  setIsValidAllowance?: (v: boolean) => void;
   isValidAllowance?: boolean;
 }
 

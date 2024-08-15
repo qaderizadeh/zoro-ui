@@ -3,7 +3,7 @@ import { COMPOUND_MANTISSA } from '@/constants/compoundMantissa';
 import { VToken } from '@/types';
 import { getContractAddress, areAddressesEqual } from '@/utilities';
 import BigNumber from 'bignumber.js';
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { MarketUi } from '.';
 
 export const MarketPage = ({
@@ -63,7 +63,7 @@ export const MarketPage = ({
       isChartDataLoading={isChartDataLoading}
       {...chartData}
       isInterestRateChartDataLoading={isInterestRateChartDataLoading}
-      interestRateChartData={interestRateChartData.apySimulations}
+      interestRateChartData={(interestRateChartData as any).apySimulations}
     />
   );
 };

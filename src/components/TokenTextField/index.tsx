@@ -9,7 +9,7 @@ import { Token } from '@/types';
 export interface RightMaxButton
   extends Omit<ButtonProps, 'variant' | 'children' | 'small'> {
   label: string;
-  className: string;
+  className?: string;
 }
 
 // Note: although we display all the values in tokens (equivalent of ether for

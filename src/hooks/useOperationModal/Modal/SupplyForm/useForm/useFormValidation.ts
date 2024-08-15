@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
-import { Asset, Swap, SwapError } from '@/types';
+import { Asset } from '@/types';
 import { areTokensEqual, convertWeiToTokens } from '@/utilities';
 
 import { FormError, FormValues } from './types';
@@ -9,8 +9,8 @@ interface UseFormValidationInput {
   asset: Asset;
   formValues: FormValues;
   fromTokenUserWalletBalanceTokens?: BigNumber;
-  swap?: Swap;
-  swapError?: SwapError;
+  swap?: any;
+  swapError?: any;
 }
 
 interface UseFormValidationOutput {
@@ -18,7 +18,7 @@ interface UseFormValidationOutput {
   formError?: FormError;
 }
 
-const getSwapToTokenAmountReceivedTokens = (swap?: Swap) => {
+const getSwapToTokenAmountReceivedTokens = (swap?: any) => {
   let swapToTokenAmountReceivedTokens;
 
   if (swap) {

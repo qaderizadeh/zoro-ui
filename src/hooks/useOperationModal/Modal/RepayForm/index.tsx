@@ -50,10 +50,10 @@ export interface RepayFormUiProps {
   ) => void;
   formValues: FormValues;
   isValidAllowance: boolean;
-  setIsValidAllowance: () => void;
-  isSwapLoading: boolean;
-  // swap?: Swap;
-  // swapError?: SwapError;
+  setIsValidAllowance: (v: boolean) => void;
+  isSwapLoading?: boolean;
+  swap?: any;
+  swapError?: any;
 }
 
 export const RepayFormUi: React.FC<RepayFormUiProps> = ({
@@ -173,7 +173,8 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
   const tokenAllowance = useMemo(
     () =>
       convertWeiToTokens({
-        valueWei: getTokenAllowanceData?.allowanceWei || new BigNumber(0),
+        valueWei:
+          (getTokenAllowanceData as any)?.allowanceWei || new BigNumber(0),
         token: formValues.fromToken,
       }),
     [formValues.fromToken, isValidAllowance]
@@ -371,7 +372,7 @@ export interface RepayFormProps {
   pool: Pool;
   onCloseModal: () => void;
   isValidAllowance: boolean;
-  setIsValidAllowance: () => void;
+  setIsValidAllowance: (v: boolean) => void;
 }
 
 const RepayForm: React.FC<RepayFormProps> = ({
@@ -389,7 +390,7 @@ const RepayForm: React.FC<RepayFormProps> = ({
     fixedRepayPercentage: undefined,
   });
 
-  const { mutateAsync: onRepay, isLoading: isRepayLoading } = useRepay({
+  const { mutateAsync: onRepay, isPending: isRepayLoading } = useRepay({
     vToken: asset.vToken,
   });
 
@@ -441,11 +442,11 @@ const RepayForm: React.FC<RepayFormProps> = ({
       throw new VError({ type: 'unexpected', code: 'somethingWentWrong' });
     }
 
-    // Handle swap and repay flow
-    return onSwapAndRepay({
-      isRepayingFullLoan,
-      swap,
-    });
+    // // Handle swap and repay flow
+    // return onSwapAndRepay({
+    //   isRepayingFullLoan,
+    //   swap,
+    // });
   };
 
   const swapDirection = formValues.fixedRepayPercentage

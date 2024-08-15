@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import ReactMarkdown from '@uiw/react-markdown-preview';
+// import ReactMarkdown from '@uiw/react-markdown-preview';
 import React from 'react';
 
 import previewOptions from '../previewOptions';
@@ -14,15 +14,17 @@ export interface MarkdownViewerProps {
 const Markdown: React.FC<MarkdownViewerProps> = ({ content, className }) => {
   const styles = useStyles();
 
-  return (
-    <ReactMarkdown
-      className={className}
-      source={content}
-      css={styles.preview}
-      {...previewOptions}
-      linkTarget='_blank'
-    />
-  );
+  return null;
+
+  // return (
+  //   <ReactMarkdown
+  //     className={className}
+  //     source={content}
+  //     css={styles.preview}
+  //     {...previewOptions}
+  //     linkTarget='_blank'
+  //   />
+  // );
 };
 
 export default Markdown;
