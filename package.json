@@ -6,8 +6,10 @@
     "node": ">=18.x.x"
   },
   "scripts": {
-    "serve": "vite preview",
-    "test": "TZ=UTC NEXT_PUBLIC_ENVIRONMENT=testnet vitest run",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "lint:format": "yarn prettier \"src/**/*.{js,jsx,ts,tsx,html,json,md}\" public/**/*.html --cache --check",
     "lint:ts": "export NODE_OPTIONS=\"--max-old-space-size=4096\" && eslint . --cache",
     "lint:styles": "stylelint 'src/**/*.{css,scss,ts,tsx,js,jsx}'",
@@ -20,11 +22,7 @@
     "generate-contract-types": "rimraf src/types/contracts && typechain --target=ethers-v5 --out-dir=src/types/contracts 'src/constants/contracts/abis/*.json'",
     "generate-version-file": "genversion --es6 --semi src/constants/version.ts",
     "postinstall": "npm-run-all --parallel generate-contract-types generate-version-file",
-    "regression": "reg-suit run",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "regression": "reg-suit run"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
