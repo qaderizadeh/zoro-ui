@@ -1,9 +1,9 @@
 import BigNumber from 'bignumber.js';
 import { ContractReceipt, Signer } from 'ethers';
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
-import { getVTokenContract } from 'clients/contracts';
-import { VBep20, VBnbToken } from 'types/contracts';
+import { getVTokenContract } from '@/clients/contracts';
+import { VBep20, VBnbToken } from '@/types/contracts';
 
 export interface SupplyInput {
   vToken: VToken;
@@ -13,7 +13,11 @@ export interface SupplyInput {
 
 export type SupplyOutput = ContractReceipt;
 
-const supply = async ({ signer, vToken, amountWei }: SupplyInput): Promise<SupplyOutput> => {
+const supply = async ({
+  signer,
+  vToken,
+  amountWei,
+}: SupplyInput): Promise<SupplyOutput> => {
   // Handle supplying ETH
   if (vToken.underlyingToken.isNative) {
     const tokenContract = getVTokenContract(vToken, signer) as VBnbToken;

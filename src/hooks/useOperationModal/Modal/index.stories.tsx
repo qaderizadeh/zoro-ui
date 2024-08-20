@@ -5,9 +5,13 @@ import React from 'react';
 import fakeAddress from '__mocks__/models/address';
 import { assetData } from '__mocks__/models/asset';
 import fakeProvider from '__mocks__/models/provider';
-import { TESTNET_VBEP_TOKENS } from 'constants/tokens';
-import { AuthContextValue } from 'context/AuthContext';
-import { withApprovedToken, withAuthContext, withCenterStory } from 'stories/decorators';
+import { TESTNET_VBEP_TOKENS } from '@/constants/tokens';
+import { AuthContextValue } from '@/context/AuthContext';
+import {
+  withApprovedToken,
+  withAuthContext,
+  withCenterStory,
+} from 'stories/decorators';
 
 import OperationModal, { OperationModalProps } from '.';
 
@@ -22,7 +26,9 @@ export default {
   },
 } as Meta<typeof OperationModal>;
 
-const Template: StoryFn<OperationModalProps> = args => <OperationModal {...args} />;
+const Template: StoryFn<OperationModalProps> = (args) => (
+  <OperationModal {...args} />
+);
 
 const context: AuthContextValue = {
   login: noop,

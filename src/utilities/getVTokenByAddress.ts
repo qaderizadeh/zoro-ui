@@ -1,6 +1,6 @@
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
-import { VBEP_TOKENS } from 'constants/tokens';
+import { VBEP_TOKENS } from '@/constants/tokens';
 
 const getVTokenByAddress = (address: string) =>
   address.toLowerCase() in VBEP_TOKENS

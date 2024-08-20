@@ -1,8 +1,10 @@
-import { Token } from 'types';
+import { Token } from '@/types';
 
 export const canRegisterToken = () =>
   typeof window !== 'undefined' &&
-  (window?.ethereum?.isMetaMask || window?.ethereum?.isTrust || window?.ethereum?.isCoinbaseWallet);
+  (window?.ethereum?.isMetaMask ||
+    window?.ethereum?.isTrust ||
+    window?.ethereum?.isCoinbaseWallet);
 
 const addTokenToWallet = async (token: Token) =>
   window.ethereum?.request({

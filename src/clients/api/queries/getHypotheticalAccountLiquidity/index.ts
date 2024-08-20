@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 
-import { Comptroller } from 'types/contracts';
+import { Comptroller } from '@/types/contracts';
 
 export interface GetHypotheticalAccountLiquidityInput {
   comptrollerContract: Comptroller;
@@ -10,7 +10,11 @@ export interface GetHypotheticalAccountLiquidityInput {
   vTokenBorrowAmountWei?: BigNumber;
 }
 
-export type GetHypotheticalAccountLiquidityOutput = [BigNumber, BigNumber, BigNumber];
+export type GetHypotheticalAccountLiquidityOutput = [
+  BigNumber,
+  BigNumber,
+  BigNumber
+];
 
 const getHypotheticalAccountLiquidity = async ({
   comptrollerContract,
@@ -23,7 +27,7 @@ const getHypotheticalAccountLiquidity = async ({
     accountAddress.toLowerCase(),
     vTokenAddress,
     vTokenBalanceOfWei.toFixed(),
-    vTokenBorrowAmountWei.toFixed(),
+    vTokenBorrowAmountWei.toFixed()
   );
 
   return [

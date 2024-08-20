@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
-import { shortenValueWithSuffix } from 'utilities';
+import { shortenValueWithSuffix } from '@/utilities';
 
-import PLACEHOLDER_KEY from 'constants/placeholderKey';
+import PLACEHOLDER_KEY from '@/constants/placeholderKey';
 
 const THRESHOLDS = {
   DEFAULT: {

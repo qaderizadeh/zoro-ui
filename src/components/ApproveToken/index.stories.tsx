@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react';
 import React from 'react';
 
 import fakeContractReceipt from '__mocks__/models/contractReceipt';
-import { TOKENS } from 'constants/tokens';
+import { TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { ApproveTokenUi } from '.';
@@ -16,7 +16,7 @@ export default {
 
 export const Disabled = () => (
   <ApproveTokenUi
-    title="To withdraw XVS to the Zoro Protocol, you need to approve it first."
+    title='To withdraw XVS to the Zoro Protocol, you need to approve it first.'
     token={TOKENS.xvs}
     isTokenApproved={false}
     approveToken={async () => fakeContractReceipt}
@@ -27,7 +27,7 @@ export const Disabled = () => (
 
 export const DisabledWithTokenInfo = () => (
   <ApproveTokenUi
-    title="To withdraw USDC to the Zoro Protocol, you need to approve it first."
+    title='To withdraw USDC to the Zoro Protocol, you need to approve it first.'
     token={TOKENS.usdc}
     isTokenApproved={false}
     assetInfo={[
@@ -42,7 +42,7 @@ export const DisabledWithTokenInfo = () => (
 
 export const Enabled = () => (
   <ApproveTokenUi
-    title="Enable Token"
+    title='Enable Token'
     isTokenApproved
     token={TOKENS.usdc}
     assetInfo={[]}

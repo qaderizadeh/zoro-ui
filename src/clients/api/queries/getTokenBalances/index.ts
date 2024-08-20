@@ -1,10 +1,14 @@
 import type { Provider } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
-import { ContractCallContext, ContractCallReturnContext, Multicall } from 'ethereum-multicall';
-import { Token, TokenBalance } from 'types';
+import {
+  ContractCallContext,
+  ContractCallReturnContext,
+  Multicall,
+} from 'ethereum-multicall';
+import { Token, TokenBalance } from '@/types';
 
-import erc20Abi from 'constants/contracts/abis/erc20.json';
-import { TOKENS } from 'constants/tokens';
+import erc20Abi from '@/constants/contracts/abis/erc20.json';
+import { TOKENS } from '@/constants/tokens';
 
 import getBalanceOf from '../getBalanceOf';
 
@@ -55,11 +59,14 @@ const getTokenBalances = async ({
   // Handle fetching non-native token balances
   const getBep20Balances: GetTokenBalancesPromise = async () => {
     const unformattedResults = await multicall.call(contractCallContexts);
-    const results: ContractCallReturnContext[] = Object.values(unformattedResults.results);
+    const results: ContractCallReturnContext[] = Object.values(
+      unformattedResults.results
+    );
 
     return results.reduce((acc, result) => {
       const token = tokens.find(
-        inputToken => result.originalContractCallContext.reference === inputToken.address,
+        (inputToken) =>
+          result.originalContractCallContext.reference === inputToken.address
       );
 
       const returnContext = result.callsReturnContext[0];
@@ -84,7 +91,11 @@ const getTokenBalances = async ({
   // Handle fetching BNB balance if it was requested
   if (nativeTokenToRequest) {
     const getNativeBalance: GetTokenBalancesPromise = async () => {
-      const { balanceWei } = await getBalanceOf({ provider, accountAddress, token: TOKENS.bnb });
+      const { balanceWei } = await getBalanceOf({
+        provider,
+        accountAddress,
+        token: TOKENS.bnb,
+      });
 
       return [
         {

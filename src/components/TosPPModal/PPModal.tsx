@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import TosPPModal from ".";
-import { useStyles } from "./styles";
-import { Modal, ModalProps } from "components";
-import React from "react";
-import { useTranslation } from "translation";
+import TosPPModal from '.';
+import { useStyles } from './styles';
+import { Modal, ModalProps } from '@/components';
+import React from 'react';
+import { useTranslation } from '@/translation';
 
 export interface PPModalProps {
   open: boolean;
-  handleClose: ModalProps["handleClose"];
+  handleClose: ModalProps['handleClose'];
 }
 
 const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
@@ -18,10 +18,10 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
     <TosPPModal
       isOpen={open}
       handleClose={handleClose}
-      title={t("pp.header")}
+      title={t('pp.header')}
       css={styles.ppModal}
     >
-      <div css={styles.ppContent} className="ppContent">
+      <div css={styles.ppContent} className='ppContent'>
         <ol>
           <li>
             <strong>Preface </strong>
@@ -41,7 +41,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start="2">
+        <ol start='2'>
           <li>
             <strong>Data processing in connection with the Site&nbsp;</strong>
           </li>
@@ -50,7 +50,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
           <span>2.1 </span>
           <strong>Use of Cookies and Similar Technologies</strong>
           <span>
-            {" "}
+            {' '}
             The Site is using cookies. Cookies are small text files that are
             placed on your computer by websites that you visit. They are widely
             used in order to make websites work, or work more efficiently, as
@@ -102,7 +102,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
           <span>2.3 </span>
           <strong>Your inquiries</strong>
           <span>
-            {" "}
+            {' '}
             You may contact us by e-mail to the following e-mail address:
             help@zoroprotocol.com. We use the data that you provide in an email
             to us, which you may give voluntarily, only in order to answer your
@@ -114,7 +114,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
           <span>2.4 </span>
           <strong>Social media</strong>
           <span>
-            {" "}
+            {' '}
             We may use plugins from social networks such as GitHub, Twitter,
             Telegram, Medium on the Site. When you activate them (by clicking on
             them), the operators of the respective social networks may record
@@ -168,7 +168,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
           <span>2.5.3 </span>
           <strong>Right to be forgotten</strong>
           <span>
-            {" "}
+            {' '}
             You have the right to obtain from us the erasure of personal data
             concerning you as soon as possible, and we shall have the obligation
             to erase personal data without undue delay where required by the
@@ -215,16 +215,16 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
           <span>2.5.6</span>
           <strong> Right to withdraw</strong>
           <span>
-            {" "}
+            {' '}
             data protection consent You have the right to withdraw your consent
             to processing of your personal data at any time.
           </span>
         </p>
-        <ol start="3">
+        <ol start='3'>
           <li>
             <strong>International transfers</strong>
             <span>
-              {" "}
+              {' '}
               We are entitled to transfer your personal data to third parties
               abroad for the purposes of the data processing. As personal data
               processors, they are obliged to protect data privacy to the same
@@ -233,11 +233,11 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start="4">
+        <ol start='4'>
           <li>
             <strong>Data security</strong>
             <span>
-              {" "}
+              {' '}
               We use appropriate technical and organizational security measures
               to protect your personal data. Our security measures are
               continuously being improved in line with technical developments.
@@ -251,11 +251,11 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start="5">
+        <ol start='5'>
           <li>
             <strong>Duration of data processing</strong>
             <span>
-              {" "}
+              {' '}
               We will process your personal data only for the period necessary
               to achieve the purpose of the processing, or as required by
               applicable laws. After the period the personal data will be
@@ -263,11 +263,11 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start="6">
+        <ol start='6'>
           <li>
             <strong>Amendments to this Policy</strong>
             <span>
-              {" "}
+              {' '}
               We may amend this Privacy Policy at any time by posting the
               amended version on the Site including the effective date of the
               amended version. The current version of the Privacy Policy, as
@@ -275,7 +275,7 @@ const PPModal: React.FC<PPModalProps> = ({ open, handleClose }) => {
             </span>
           </li>
         </ol>
-        <ol start="7">
+        <ol start='7'>
           <li>
             <strong>Contact </strong>
             <span>

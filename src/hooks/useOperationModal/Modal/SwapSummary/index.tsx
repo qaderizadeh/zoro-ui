@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import React, { useMemo } from 'react';
-import { useTranslation } from 'translation';
-import { Swap } from 'types';
-import { convertWeiToTokens } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Swap } from '@/types';
+import { convertWeiToTokens } from '@/utilities';
 
 import { useStyles } from './styles';
 import TEST_IDS from './testIds';
@@ -61,8 +61,8 @@ export const SwapSummary: React.FC<SwapSummaryProps> = ({ swap, type }) => {
     <Typography
       data-testid={TEST_IDS.swapSummary}
       css={styles.swapSummary}
-      variant="small2"
-      component="div"
+      variant='small2'
+      component='div'
     >
       {swapSummary}
     </Typography>

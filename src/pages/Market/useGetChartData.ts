@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
-import { ApyChartProps } from 'components';
+import { ApyChartProps } from '@/components';
 import React from 'react';
-import { VToken } from 'types';
-import { formatPercentage } from 'utilities';
+import { VToken } from '@/types';
+import { formatPercentage } from '@/utilities';
 
-import { useGetMarketHistory } from 'clients/api';
+import { useGetMarketHistory } from '@/clients/api';
 
 const useGetChartData = ({ vToken }: { vToken: VToken }) => {
   const {
@@ -22,7 +22,7 @@ const useGetChartData = ({ vToken }: { vToken: VToken }) => {
 
     [...marketSnapshotsData.marketSnapshots]
       // Snapshots are already reversed, due to the negative slice
-      .forEach(marketSnapshot => {
+      .forEach((marketSnapshot) => {
         const timestampMs = marketSnapshot.blockTimestamp * 1000;
 
         supplyChartData.push({

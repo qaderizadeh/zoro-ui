@@ -1,21 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import { Icon } from "../../Icon";
+import { Icon } from '../../Icon';
 //import ClaimRewardButton from '../ClaimRewardButton';
-import ConnectButton from "../ConnectButton";
-import { Toolbar } from "../Toolbar";
-import Link from "./Link";
-import { useStyles } from "./styles";
-import useGetMenuItems from "./useGetMenuItems";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Menu from "@mui/material/Menu";
-import Typography from "@mui/material/Typography";
-import logo_mobile from "assets/img/Logo-01.svg";
-import logo_desktop from "assets/img/Logo-02.svg";
-import React, { useState } from "react";
-import { useTranslation } from "translation";
+import ConnectButton from '../ConnectButton';
+import { Toolbar } from '../Toolbar';
+import LinkComponent from './Link';
+import { useStyles } from './styles';
+import useGetMenuItems from './useGetMenuItems';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Menu from '@mui/material/Menu';
+import Typography from '@mui/material/Typography';
+import logo_mobile from '@/assets/img/Logo-01.svg';
+import logo_desktop from '@/assets/img/Logo-02.svg';
+import React, { useState } from 'react';
+import { useTranslation } from '@/translation';
 
 export const SidebarUi: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
@@ -36,53 +36,63 @@ export const SidebarUi: React.FC = () => {
     <>
       {/* Desktop and tablet menu */}
       <Drawer
-        variant="permanent"
+        variant='permanent'
         css={styles.drawer}
-        className="custom-sidebar-wrap"
+        className='custom-sidebar-wrap'
       >
         <div
           css={styles.drawerContent}
-          className="sidebar-menu-logo-option-list-wrap"
+          className='sidebar-menu-logo-option-list-wrap'
         >
-          <Toolbar css={styles.toolbar} className="sidebar-logo">
-            <img src={logo_desktop} alt="Zoro Desktop Logo" css={styles.logo} title="Zoro Protocol" />
-            <img src={logo_mobile} alt="Zoro Mobile Logo" css={styles.logoClosed} title="Zoro Protocol" />
+          <Toolbar css={styles.toolbar} className='sidebar-logo'>
+            <img
+              src={logo_desktop}
+              alt='Zoro Desktop Logo'
+              css={styles.logo}
+              title='Zoro Protocol'
+            />
+            <img
+              src={logo_mobile}
+              alt='Zoro Mobile Logo'
+              css={styles.logoClosed}
+              title='Zoro Protocol'
+            />
           </Toolbar>
 
           <List>
             {menuItems.map((menuItem) => (
               <ListItemButton
                 key={menuItem.i18nKey}
-                component="li"
+                component='li'
                 css={styles.listItem}
                 disableRipple
               >
-                <Link href={menuItem.href} target={menuItem?.target}>
-                  <div className="left-border" />
+                <LinkComponent href={menuItem.href} target={menuItem?.target}>
+                  <div className='left-border' />
 
                   <ListItemIcon css={styles.listItemIcon}>
-                    {
-                      menuItem?.svgIcon ?
-                        menuItem?.svgIcon :
-                        (<Icon name={menuItem.icon} />)
-                    }
+                    {menuItem?.svgIcon ? (
+                      menuItem?.svgIcon
+                    ) : (
+                      <Icon name={menuItem.icon} />
+                    )}
                   </ListItemIcon>
 
-                  <Typography variant="body2" css={styles.listItemText}>
+                  <Typography variant='body2' css={styles.listItemText}>
                     {t(menuItem.i18nKey)}
                   </Typography>
 
                   {menuItem.isNew && (
                     <div css={styles.listItemNewBadge}>
                       <Typography
-                        variant="tiny"
+                        variant='body1'
                         css={styles.listItemNewBadgeText}
                       >
-                        {t("sidebar.newBadge")}
+                        {t('sidebar.newBadge')}
                       </Typography>
                     </div>
                   )}
-                </Link>
+                </LinkComponent>
               </ListItemButton>
             ))}
           </List>
@@ -92,88 +102,96 @@ export const SidebarUi: React.FC = () => {
       {/* Mobile menu */}
       <div css={styles.mobileMenuBox}>
         <div css={styles.flexRow}>
-          <Icon name="logoMobile" css={styles.mobileLogo} />
+          <Icon name='logoMobile' css={styles.mobileLogo} />
 
           <ConnectButton
             fullWidth
             css={styles.mobileConnectButton}
-            className="custom-btn-wrap"
+            className='custom-btn-wrap'
           />
 
-          <button id="mobile_burger" title="Burger Menu" type="button" onClick={openMenu} css={styles.actionButton}>
-            <Icon name="burger" css={styles.burger} />
+          <button
+            id='mobile_burger'
+            title='Burger Menu'
+            type='button'
+            onClick={openMenu}
+            css={styles.actionButton}
+          >
+            <Icon name='burger' css={styles.burger} />
           </button>
         </div>
 
         <Menu
           css={styles.mobileMenu}
-          className="mobile-menu"
+          className='mobile-menu'
           anchorEl={anchorEl}
-          id="account-menu"
+          id='account-menu'
           open={open}
           onClose={closeMenu}
           transitionDuration={0}
           marginThreshold={0}
-          TransitionProps={{ style: { transition: "background 0.2s linear" } }}
-          anchorReference="anchorPosition"
+          TransitionProps={{ style: { transition: 'background 0.2s linear' } }}
+          anchorReference='anchorPosition'
           anchorPosition={{ top: 0, left: 0 }}
         >
           <div css={[styles.flexRow, styles.doublePadding]}>
-            <Icon name="logoMobile" css={styles.mobileLogo} />
+            <Icon name='logoMobile' css={styles.mobileLogo} />
 
             <ConnectButton
               fullWidth
               css={styles.mobileConnectButton}
-              className="custom-btn-wrap"
+              className='custom-btn-wrap'
             />
 
-            <button type="button" onClick={closeMenu} css={styles.actionButton}>
-              <Icon name="closeRounded" css={styles.burger} />
+            <button type='button' onClick={closeMenu} css={styles.actionButton}>
+              <Icon name='closeRounded' css={styles.burger} />
             </button>
           </div>
 
           <List>
-            {menuItems.map(({ href, icon, i18nKey, isNew, svgIcon,target }) => (
-              <ListItemButton
-                key={i18nKey}
-                component="li"
-                css={[styles.listItem, styles.mobileListItem]}
-                disableRipple
-              >
-                <Link onClick={closeMenu} href={href} target={target}>
-                  <div css={styles.mobileLabel}>
-                    <ListItemIcon css={styles.listItemIcon}>
-                      {
-                        svgIcon ?
-                          svgIcon :
-                          (<Icon name={icon} />)
-                      }
-                    </ListItemIcon>
+            {menuItems.map(
+              ({ href, icon, i18nKey, isNew, svgIcon, target }) => (
+                <ListItemButton
+                  key={i18nKey}
+                  component='li'
+                  css={[styles.listItem, styles.mobileListItem]}
+                  disableRipple
+                >
+                  <LinkComponent
+                    onClick={closeMenu}
+                    href={href}
+                    target={target}
+                  >
+                    <div css={styles.mobileLabel}>
+                      <ListItemIcon css={styles.listItemIcon}>
+                        {svgIcon ? svgIcon : <Icon name={icon} />}
+                      </ListItemIcon>
 
-                    <Typography
-                      variant="body2"
-                      component="span"
-                      css={[styles.listItemText, styles.mobileListItemText]}
-                    >
-                      {t(i18nKey)}
-                    </Typography>
+                      <Typography
+                        variant='body2'
+                        component='span'
+                        css={[styles.listItemText, styles.mobileListItemText]}
+                      >
+                        {t(i18nKey)}
+                      </Typography>
 
-                    {isNew && (
-                      <div css={styles.listItemNewBadge}>
-                        <Typography
-                          variant="tiny"
-                          css={styles.listItemNewBadgeText}
-                        >
-                          {t("sidebar.newBadge")}
-                        </Typography>
-                      </div>
-                    )}
-                  </div>
+                      {isNew && (
+                        <div css={styles.listItemNewBadge}>
+                          <Typography
+                            variant='body1'
+                            css={styles.listItemNewBadgeText}
+                          >
+                            {t('sidebar.newBadge')}
+                          </Typography>
+                        </div>
+                      )}
+                    </div>
 
-                  <Icon name="arrowRight" css={styles.mobileArrow} />
-                </Link>
-              </ListItemButton>
-            ))}
+                    <Icon name='arrowRight' css={styles.mobileArrow} />
+                  </LinkComponent>
+                </ListItemButton>
+              )
+            )}
           </List>
 
           {/*<ClaimRewardButton css={styles.claimRewardButton} />*/}

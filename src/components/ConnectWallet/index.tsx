@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 
-import { useAuth } from 'context/AuthContext';
-import { useConnectWallet } from "@web3-onboard/react";
-
+import { useAuth } from '@/context/AuthContext';
+import { useConnectWallet } from '@web3-onboard/react';
 
 import { SecondaryButton } from '../Button';
 import { NoticeInfo } from '../Notice';
@@ -36,14 +35,26 @@ export const Prompt: React.FC<PromptProps> = ({
     <div css={styles.container} className={className}>
       <NoticeInfo css={styles.notice} description={message} />
 
-      <SecondaryButton fullWidth onClick={wallet ? openAuthModal : async () => await connect()} className='custom-btn-wrap'>
+      <SecondaryButton
+        fullWidth
+        onClick={wallet ? openAuthModal : async () => await connect()}
+        className='custom-btn-wrap'
+      >
         {t('connectWallet.connectButton')}
       </SecondaryButton>
     </div>
   );
 };
 
-export const ConnectWallet: React.FC<Omit<PromptProps, 'connected' | 'openAuthModal'>> = props => {
+export const ConnectWallet: React.FC<
+  Omit<PromptProps, 'connected' | 'openAuthModal'>
+> = (props) => {
   const { accountAddress, openAuthModal } = useAuth();
-  return <Prompt {...props} openAuthModal={openAuthModal} connected={!!accountAddress} />;
+  return (
+    <Prompt
+      {...props}
+      openAuthModal={openAuthModal}
+      connected={!!accountAddress}
+    />
+  );
 };

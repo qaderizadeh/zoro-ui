@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
-import { BREAKPOINTS } from 'theme/MuiThemeProvider/muiTheme';
+import { BREAKPOINTS } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const useStyles = () => {
   const theme = useTheme();
   return {
-    getRoot: ({ breakpoint }: { breakpoint: keyof typeof BREAKPOINTS['values'] }) => css`
+    getRoot: ({
+      breakpoint,
+    }: {
+      breakpoint: keyof (typeof BREAKPOINTS)['values'];
+    }) => css`
       padding-left: 0;
       padding-right: 0;
       background-color: ${theme.palette.secondary.light};
@@ -17,7 +21,11 @@ export const useStyles = () => {
         padding-bottom: 0;
       }
     `,
-    getTitle: ({ breakpoint }: { breakpoint: keyof typeof BREAKPOINTS['values'] }) => css`
+    getTitle: ({
+      breakpoint,
+    }: {
+      breakpoint: keyof (typeof BREAKPOINTS)['values'];
+    }) => css`
       margin-bottom: ${theme.spacing(4)};
       padding: ${theme.spacing(0, 6)};
 
@@ -25,13 +33,21 @@ export const useStyles = () => {
         padding: 0;
       }
     `,
-    getTableContainer: ({ breakpoint }: { breakpoint: keyof typeof BREAKPOINTS['values'] }) =>
+    getTableContainer: ({
+      breakpoint,
+    }: {
+      breakpoint: keyof (typeof BREAKPOINTS)['values'];
+    }) =>
       css`
         ${theme.breakpoints.down(breakpoint)} {
           display: none;
         }
       `,
-    getCardsContainer: ({ breakpoint }: { breakpoint: keyof typeof BREAKPOINTS['values'] }) =>
+    getCardsContainer: ({
+      breakpoint,
+    }: {
+      breakpoint: keyof (typeof BREAKPOINTS)['values'];
+    }) =>
       css`
         display: none;
 
@@ -167,8 +183,12 @@ export const useStyles = () => {
         fill: ${theme.palette.text.primary};
       }
       .Mui-active &.MuiTableSortLabel-icon {
-        fill: ${active ? theme.palette.interactive.success : theme.palette.text.primary};
-        color: ${active ? theme.palette.interactive.success : theme.palette.text.primary};
+        fill: ${active
+          ? theme.palette.interactive.success
+          : theme.palette.text.primary};
+        color: ${active
+          ? theme.palette.interactive.success
+          : theme.palette.text.primary};
       }
     `,
     cellWrapper: css`

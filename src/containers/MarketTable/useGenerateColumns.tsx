@@ -1,10 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import BigNumber from 'bignumber.js';
-import { LayeredValues, ProgressBar, TableColumn, Toggle, TokenIconWithSymbol } from 'components';
+import {
+  LayeredValues,
+  ProgressBar,
+  TableColumn,
+  Toggle,
+  TokenIconWithSymbol,
+} from '@/components';
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 import {
   compareBigNumbers,
   compareBooleans,
@@ -13,10 +19,10 @@ import {
   formatToReadablePercentage,
   formatTokensToReadableValue,
   getCombinedDistributionApys,
-} from 'utilities';
+} from '@/utilities';
 
-import PLACEHOLDER_KEY from 'constants/placeholderKey';
-import { routes } from 'constants/routing';
+import PLACEHOLDER_KEY from '@/constants/placeholderKey';
+import { routes } from '@/constants/routing';
 
 import { useStyles } from './styles';
 import { ColumnKey, PoolAsset } from './types';
@@ -58,24 +64,33 @@ const useGenerateColumns = ({
         key: column,
         label: t(`marketTable.columnKeys.${column}`),
         align: index === 0 ? 'left' : 'right',
-        renderCell: poolAsset => {
+        renderCell: (poolAsset) => {
           if (column === 'asset') {
-            return <TokenIconWithSymbol token={poolAsset.vToken.underlyingToken} />;
+            return (
+              <TokenIconWithSymbol token={poolAsset.vToken.underlyingToken} />
+            );
           }
 
           if (column === 'borrowApy' || column === 'labeledBorrowApy') {
-            const combinedDistributionApys = getCombinedDistributionApys({ asset: poolAsset });
+            const combinedDistributionApys = getCombinedDistributionApys({
+              asset: poolAsset,
+            });
 
-            const borrowApy = combinedDistributionApys.borrowApyPercentage.minus(poolAsset.borrowApyPercentage);
+            const borrowApy =
+              combinedDistributionApys.borrowApyPercentage.minus(
+                poolAsset.borrowApyPercentage
+              );
 
             return formatToReadablePercentage(borrowApy);
           }
 
           if (column === 'supplyApyLtv' || column === 'labeledSupplyApyLtv') {
-            const combinedDistributionApys = getCombinedDistributionApys({ asset: poolAsset });
+            const combinedDistributionApys = getCombinedDistributionApys({
+              asset: poolAsset,
+            });
 
             const supplyApy = poolAsset.supplyApyPercentage.plus(
-              combinedDistributionApys.supplyApyPercentage,
+              combinedDistributionApys.supplyApyPercentage
             );
 
             const ltv = +poolAsset.collateralFactor * 100;
@@ -89,7 +104,8 @@ const useGenerateColumns = ({
           }
 
           if (column === 'collateral') {
-            return poolAsset.collateralFactor || poolAsset.isCollateralOfUser ? (
+            return poolAsset.collateralFactor ||
+              poolAsset.isCollateralOfUser ? (
               <Toggle
                 onChange={() => collateralOnChange(poolAsset)}
                 value={poolAsset.isCollateralOfUser}
@@ -134,11 +150,13 @@ const useGenerateColumns = ({
                 <Link
                   to={routes.pool.path.replace(
                     ':poolComptrollerAddress',
-                    poolAsset.pool.comptrollerAddress,
+                    poolAsset.pool.comptrollerAddress
                   )}
                   css={styles.marketLink}
                 >
-                  <Typography variant="small2">{poolAsset.pool.name}</Typography>
+                  <Typography variant='small2'>
+                    {poolAsset.pool.name}
+                  </Typography>
                 </Link>
               </div>
             );
@@ -230,7 +248,7 @@ const useGenerateColumns = ({
                   css={styles.percentOfLimitProgressBar}
                 />
 
-                <Typography variant="small2" css={styles.white}>
+                <Typography variant='small2' css={styles.white}>
                   {formatToReadablePercentage(poolAsset.userPercentOfLimit)}
                 </Typography>
               </div>
@@ -243,56 +261,85 @@ const useGenerateColumns = ({
             : (rowA, rowB, direction) => {
                 if (column === 'borrowApy' || column === 'labeledBorrowApy') {
                   const roaABorrowApy = rowA.borrowApyPercentage.minus(
-                    getCombinedDistributionApys({ asset: rowA }).borrowApyPercentage,
+                    getCombinedDistributionApys({ asset: rowA })
+                      .borrowApyPercentage
                   );
                   const roaBBorrowApy = rowB.borrowApyPercentage.minus(
-                    getCombinedDistributionApys({ asset: rowB }).borrowApyPercentage,
+                    getCombinedDistributionApys({ asset: rowB })
+                      .borrowApyPercentage
                   );
 
-                  return compareBigNumbers(roaABorrowApy, roaBBorrowApy, direction);
+                  return compareBigNumbers(
+                    roaABorrowApy,
+                    roaBBorrowApy,
+                    direction
+                  );
                 }
 
-                if (column === 'supplyApyLtv' || column === 'labeledSupplyApyLtv') {
+                if (
+                  column === 'supplyApyLtv' ||
+                  column === 'labeledSupplyApyLtv'
+                ) {
                   const roaASupplyApy = rowA.supplyApyPercentage.plus(
-                    getCombinedDistributionApys({ asset: rowA }).supplyApyPercentage,
+                    getCombinedDistributionApys({ asset: rowA })
+                      .supplyApyPercentage
                   );
                   const roaBSupplyApy = rowB.supplyApyPercentage.plus(
-                    getCombinedDistributionApys({ asset: rowB }).supplyApyPercentage,
+                    getCombinedDistributionApys({ asset: rowB })
+                      .supplyApyPercentage
                   );
 
-                  return compareBigNumbers(roaASupplyApy, roaBSupplyApy, direction);
+                  return compareBigNumbers(
+                    roaASupplyApy,
+                    roaBSupplyApy,
+                    direction
+                  );
                 }
 
                 // Put rows of tokens that can't be enabled as collateral at the
                 // bottom of the list
-                if (column === 'collateral' && rowA.collateralFactor === 0) return 1;
-                if (column === 'collateral' && rowB.collateralFactor === 0) return -1;
+                if (column === 'collateral' && rowA.collateralFactor === 0)
+                  return 1;
+                if (column === 'collateral' && rowB.collateralFactor === 0)
+                  return -1;
                 // Sort other rows normally
                 if (column === 'collateral') {
                   return compareBooleans(
                     rowA.isCollateralOfUser,
                     rowB.isCollateralOfUser,
-                    direction,
+                    direction
                   );
                 }
 
                 if (column === 'liquidity') {
-                  return compareBigNumbers(rowA.liquidityCents, rowB.liquidityCents, direction);
+                  return compareBigNumbers(
+                    rowA.liquidityCents,
+                    rowB.liquidityCents,
+                    direction
+                  );
                 }
 
                 if (column === 'price') {
-                  return compareBigNumbers(rowA.tokenPriceCents, rowB.tokenPriceCents, direction);
+                  return compareBigNumbers(
+                    rowA.tokenPriceCents,
+                    rowB.tokenPriceCents,
+                    direction
+                  );
                 }
 
                 if (column === 'pool') {
-                  return compareStrings(rowA.pool.name, rowB.pool.name, direction);
+                  return compareStrings(
+                    rowA.pool.name,
+                    rowB.pool.name,
+                    direction
+                  );
                 }
 
                 if (column === 'userWalletBalance') {
                   return compareBigNumbers(
                     rowA.userWalletBalanceCents,
                     rowB.userWalletBalanceCents,
-                    direction,
+                    direction
                   );
                 }
 
@@ -300,15 +347,18 @@ const useGenerateColumns = ({
                   return compareBigNumbers(
                     rowA.userSupplyBalanceCents,
                     rowB.userSupplyBalanceCents,
-                    direction,
+                    direction
                   );
                 }
 
-                if (column === 'userBorrowBalance' || column === 'userPercentOfLimit') {
+                if (
+                  column === 'userBorrowBalance' ||
+                  column === 'userPercentOfLimit'
+                ) {
                   return compareBigNumbers(
                     rowA.userBorrowBalanceCents,
                     rowB.userBorrowBalanceCents,
-                    direction,
+                    direction
                   );
                 }
 
@@ -316,7 +366,7 @@ const useGenerateColumns = ({
                   return compareBigNumbers(
                     rowA.supplyBalanceCents,
                     rowB.supplyBalanceCents,
-                    direction,
+                    direction
                   );
                 }
 
@@ -324,14 +374,14 @@ const useGenerateColumns = ({
                   return compareBigNumbers(
                     rowA.borrowBalanceCents,
                     rowB.borrowBalanceCents,
-                    direction,
+                    direction
                   );
                 }
 
                 return 0;
               },
       })),
-    [poolAssets, columnKeys],
+    [poolAssets, columnKeys]
   );
 
   return columns;

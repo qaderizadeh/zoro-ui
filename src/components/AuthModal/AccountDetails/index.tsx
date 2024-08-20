@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { SecondaryButton } from "../../Button";
-import { EllipseAddress } from "../../EllipseAddress";
-import { Icon } from "../../Icon";
-import { ZkLink } from "../../ZkLink";
-import { useStyles } from "./styles";
-import Typography from "@mui/material/Typography";
-import React from "react";
-import { useTranslation } from "translation";
+import { SecondaryButton } from '../../Button';
+import { EllipseAddress } from '../../EllipseAddress';
+import { Icon } from '../../Icon';
+import { ZkLink } from '../../ZkLink';
+import { useStyles } from './styles';
+import Typography from '@mui/material/Typography';
+import React from 'react';
+import { useTranslation } from '@/translation';
 
 export interface AccountDetailsProps {
   onLogOut: () => void;
@@ -27,16 +27,16 @@ export const AccountDetails: React.FC<AccountDetailsProps> = ({
       <div css={styles.infoContainer}>
         <div css={styles.infoRightColumn}>
           <div css={styles.accountAddressContainer}>
-            <Typography component="span" css={styles.accountAddress}>
-              <EllipseAddress ellipseBreakpoint="md" address={accountAddress} />
+            <Typography component='span' css={styles.accountAddress}>
+              <EllipseAddress ellipseBreakpoint='md' address={accountAddress} />
             </Typography>
 
             <button
               onClick={() => onCopyAccountAddress(accountAddress)}
-              type="button"
+              type='button'
               css={styles.copyButton}
             >
-              <Icon name="copy" css={styles.copyButtonIcon} />
+              <Icon name='copy' css={styles.copyButtonIcon} />
             </button>
           </div>
         </div>
@@ -44,8 +44,8 @@ export const AccountDetails: React.FC<AccountDetailsProps> = ({
 
       <ZkLink css={styles.zkScanLinkContainer} hash={accountAddress} />
 
-      <SecondaryButton onClick={onLogOut} fullWidth className="custom-btn-wrap">
-        {t("authModal.accountDetails.logOutButtonLabel")}
+      <SecondaryButton onClick={onLogOut} fullWidth className='custom-btn-wrap'>
+        {t('authModal.accountDetails.logOutButtonLabel')}
       </SecondaryButton>
     </div>
   );

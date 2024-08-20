@@ -1,8 +1,8 @@
 import { Multicall } from 'ethereum-multicall';
 import { useMemo } from 'react';
-import { getContractAddress } from 'utilities';
+import { getContractAddress } from '@/utilities';
 
-import { useAuth } from 'context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 
 const useMulticall = () => {
   const { provider } = useAuth();
@@ -14,7 +14,7 @@ const useMulticall = () => {
         ethersProvider: provider,
         tryAggregate: true,
       }),
-    [provider],
+    [provider]
   );
 };
 

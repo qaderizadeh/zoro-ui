@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { Token } from 'types';
+import { Token } from '@/types';
 
 const calculatePercentageOfUserBorrowBalance = ({
   userBorrowBalanceTokens,

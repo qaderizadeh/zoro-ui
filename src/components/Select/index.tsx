@@ -1,3 +1,4 @@
+'use client';
 /** @jsxImportSource @emotion/react */
 import { Select as MuiSelect } from '@mui/material';
 import { MenuProps } from '@mui/material/Menu';
@@ -5,9 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 import React, { useMemo, useState } from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 
-import { useIsSmDown } from 'hooks/responsive';
+import { useIsSmDown } from '@/hooks/responsive';
 
 import { TextButton } from '../Button';
 import { Icon } from '../Icon';
@@ -78,7 +79,7 @@ export const Select: React.FC<SelectProps> = ({
     <div className={className} css={styles.getContainer({ placeLabelToLeft })}>
       {!!label && (
         <div css={styles.getLabel({ placeLabelToLeft })}>
-          <Typography variant="small1" component="label" htmlFor="proposalType">
+          <Typography variant='small1' component='label' htmlFor='proposalType'>
             {label || t('select.defaultLabel')}
           </Typography>
         </div>
@@ -96,16 +97,21 @@ export const Select: React.FC<SelectProps> = ({
         displayEmpty
         inputProps={{ 'aria-label': ariaLabel }}
         IconComponent={() => (
-          <Icon css={styles.getArrowIcon({ isMenuOpened: isOpen })} name="arrowUp" />
+          <Icon
+            css={styles.getArrowIcon({ isMenuOpened: isOpen })}
+            name='arrowUp'
+          />
         )}
         MenuProps={menuProps}
         autoWidth={isSmDown}
       >
         <div css={styles.mobileHeader}>
-          <Typography variant="h4">{label || t('select.defaultLabel')}</Typography>
+          <Typography variant='h4'>
+            {label || t('select.defaultLabel')}
+          </Typography>
 
           <TextButton css={styles.closeMenuButton} onClick={handleClose}>
-            <Icon name="closeRounded" />
+            <Icon name='closeRounded' />
           </TextButton>
         </div>
 

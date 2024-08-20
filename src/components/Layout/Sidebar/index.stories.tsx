@@ -5,8 +5,12 @@ import { MemoryRouter, Route } from 'react-router';
 
 import fakeAddress from '__mocks__/models/address';
 import fakeProvider from '__mocks__/models/provider';
-import { AuthContextValue } from 'context/AuthContext';
-import { withAuthContext, withRouter, withThemeProvider } from 'stories/decorators';
+import { AuthContextValue } from '@/context/AuthContext';
+import {
+  withAuthContext,
+  withRouter,
+  withThemeProvider,
+} from 'stories/decorators';
 
 import { SidebarUi } from '.';
 
@@ -32,6 +36,6 @@ export default {
 
 export const SidebarDefault = () => (
   <MemoryRouter initialEntries={['/dashboard']}>
-    <Route component={SidebarUi} path="/dashboard" />
+    <Route component={SidebarUi} path='/dashboard' />
   </MemoryRouter>
 );

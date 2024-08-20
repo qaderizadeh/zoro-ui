@@ -1,31 +1,31 @@
 /** @jsxImportSource @emotion/react */
 import type {
   SliderUnstyledMarkSlotProps,
-  SliderUnstyledTrackSlotProps
-} from '@mui/base/SliderUnstyled'
-import Box from '@mui/material/Box'
-import MaterialSlider from '@mui/material/Slider'
-import { SliderTypeMap } from '@mui/material/Slider/Slider'
-import React from 'react'
+  SliderUnstyledTrackSlotProps,
+} from '@mui/base/SliderUnstyled';
+import Box from '@mui/material/Box';
+import MaterialSlider from '@mui/material/Slider';
+import { SliderTypeMap } from '@mui/material/Slider/Slider';
+import React from 'react';
 
-import { PALETTE } from 'theme/MuiThemeProvider/muiTheme'
+import { PALETTE } from '@/theme/MuiThemeProvider/muiTheme';
 
-import { Tooltip, TooltipProps } from '../Tooltip'
-import { useStyles } from './styles'
+import { Tooltip, TooltipProps } from '../Tooltip';
+import { useStyles } from './styles';
 
 export interface ProgressBarProps {
-  value: number
-  secondaryValue?: number
-  mark?: number
-  step: number
-  ariaLabel: string
-  min: number
-  max: number
-  trackTooltip?: TooltipProps['title']
-  markTooltip?: TooltipProps['title']
-  className?: string
-  tooltipPlacement?: TooltipProps['placement']
-  progressBarColor?: string
+  value: number;
+  secondaryValue?: number;
+  mark?: number;
+  step: number;
+  ariaLabel: string;
+  min: number;
+  max: number;
+  trackTooltip?: TooltipProps['title'];
+  markTooltip?: TooltipProps['title'];
+  className?: string;
+  tooltipPlacement?: TooltipProps['placement'];
+  progressBarColor?: string;
 }
 
 export const ProgressBar = ({
@@ -40,16 +40,16 @@ export const ProgressBar = ({
   markTooltip,
   className,
   tooltipPlacement = 'top',
-  progressBarColor = PALETTE.interactive.success
+  progressBarColor = PALETTE.interactive.success,
 }: ProgressBarProps) => {
-  const safeValue = value < max ? value : max
+  const safeValue = value < max ? value : max;
 
-  const marks = mark ? [{ value: mark }] : undefined
+  const marks = mark ? [{ value: mark }] : undefined;
   const styles = useStyles({
     over: mark ? safeValue > mark : false,
     secondaryOver: mark ? !!(secondaryValue && secondaryValue > mark) : false,
-    progressBarColor
-  })
+    progressBarColor,
+  });
 
   const renderMark = (
     props?: NonNullable<SliderTypeMap['props']['componentsProps']>['mark'] &
@@ -67,7 +67,7 @@ export const ProgressBar = ({
         </Tooltip>
       )}
     </Box>
-  )
+  );
 
   const renderTrack = (
     props?: NonNullable<SliderTypeMap['props']['componentsProps']>['track'] &
@@ -78,7 +78,7 @@ export const ProgressBar = ({
         style={props?.style}
         css={[
           styles.trackWrapper,
-          trackTooltip ? styles.hasTooltip : undefined
+          trackTooltip ? styles.hasTooltip : undefined,
         ]}
       >
         {trackTooltip ? (
@@ -89,7 +89,7 @@ export const ProgressBar = ({
           <Box className={props?.className} />
         )}
       </Box>
-    )
+    );
 
     return (
       <>
@@ -104,8 +104,8 @@ export const ProgressBar = ({
           />
         )}
       </>
-    )
-  }
+    );
+  };
 
   return (
     <MaterialSlider
@@ -114,7 +114,7 @@ export const ProgressBar = ({
       components={{
         Thumb: undefined,
         Mark: mark ? renderMark : undefined,
-        Track: renderTrack
+        Track: renderTrack,
       }}
       value={safeValue}
       marks={marks}
@@ -125,5 +125,5 @@ export const ProgressBar = ({
       size='medium'
       disabled
     />
-  )
-}
+  );
+};

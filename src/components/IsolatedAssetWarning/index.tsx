@@ -1,7 +1,8 @@
+'use client';
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
-import { useTranslation } from 'translation';
-import { Pool, Token } from 'types';
+import { useTranslation } from '@/translation';
+import { Pool, Token } from '@/types';
 
 import { TextButton } from '../Button';
 import { Notice } from '../Notice';
@@ -9,7 +10,8 @@ import AssetTable from './AssetTable';
 import { useStyles } from './styles';
 import { WarningType } from './types';
 
-export interface IsolatedAssetWarningProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IsolatedAssetWarningProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   type: WarningType;
   token: Token;
   pool?: Pool;
@@ -43,7 +45,7 @@ export const IsolatedAssetWarning: React.FC<IsolatedAssetWarningProps> = ({
     <div css={styles.container} className={className} {...otherProps}>
       <Notice
         css={styles.notice}
-        variant="warning"
+        variant='warning'
         description={
           <>
             <div css={styles.description}>
@@ -62,7 +64,11 @@ export const IsolatedAssetWarning: React.FC<IsolatedAssetWarningProps> = ({
       />
 
       {showAssets && (
-        <AssetTable assets={pool.assets} type={type} onHideAssetsButtonClick={handleHideAssets} />
+        <AssetTable
+          assets={pool.assets}
+          type={type}
+          onHideAssetsButtonClick={handleHideAssets}
+        />
       )}
     </div>
   );

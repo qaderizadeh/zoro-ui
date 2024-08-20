@@ -3,7 +3,7 @@ import noop from 'noop-ts';
 import React from 'react';
 import { State } from 'react-powerplug';
 
-import { TOKENS } from 'constants/tokens';
+import { TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { TokenTextField } from '.';
@@ -27,7 +27,7 @@ export const Default = () => (
       <TokenTextField
         token={TOKENS.xvs}
         value={state.value}
-        onChange={value => setState({ value })}
+        onChange={(value) => setState({ value })}
       />
     )}
   </State>
@@ -39,8 +39,8 @@ export const WithMaxTokens = () => (
       <TokenTextField
         token={TOKENS.xvs}
         value={state.value}
-        onChange={value => setState({ value })}
-        max="10"
+        onChange={(value) => setState({ value })}
+        max='10'
       />
     )}
   </State>
@@ -52,8 +52,8 @@ export const WithRightMaxButtonLabel = () => (
       <TokenTextField
         token={TOKENS.xvs}
         value={state.value}
-        onChange={value => setState({ value })}
-        max="10"
+        onChange={(value) => setState({ value })}
+        max='10'
         rightMaxButton={{
           label: '80% limit',
           onClick: noop,

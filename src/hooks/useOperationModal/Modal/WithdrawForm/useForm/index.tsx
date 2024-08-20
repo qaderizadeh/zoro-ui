@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
 import { ContractReceipt } from 'ethers';
-import { useTranslation } from 'translation';
-import { Asset, Token } from 'types';
-import { convertTokensToWei } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Asset, Token } from '@/types';
+import { convertTokensToWei } from '@/utilities';
 
-import useHandleTransactionMutation from 'hooks/useHandleTransactionMutation';
+import useHandleTransactionMutation from '@/hooks/useHandleTransactionMutation';
 
 import { FormError, FormValues } from './types';
 import useFormValidation from './useFormValidation';
@@ -19,7 +19,9 @@ export interface UseFormInput {
   }) => Promise<ContractReceipt>;
   onCloseModal: () => void;
   formValues: FormValues;
-  setFormValues: (setter: (currentFormValues: FormValues) => FormValues | FormValues) => void;
+  setFormValues: (
+    setter: (currentFormValues: FormValues) => FormValues | FormValues
+  ) => void;
   userBorrowLimitCents?: number;
 }
 
@@ -67,7 +69,7 @@ const useForm = ({
 
         return contractReceipt;
       },
-      successTransactionModalProps: contractReceipt => {
+      successTransactionModalProps: (contractReceipt) => {
         const amountWei = convertTokensToWei({
           value: new BigNumber(formValues.amountTokens),
           token: asset.vToken.underlyingToken,
@@ -75,7 +77,9 @@ const useForm = ({
 
         return {
           title: t('operationModal.withdraw.successfulTransactionModal.title'),
-          content: t('operationModal.withdraw.successfulTransactionModal.message'),
+          content: t(
+            'operationModal.withdraw.successfulTransactionModal.message'
+          ),
           amount: {
             valueWei: amountWei,
             token: asset.vToken.underlyingToken,

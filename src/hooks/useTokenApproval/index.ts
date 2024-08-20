@@ -1,8 +1,8 @@
 import { ContractReceipt } from 'ethers';
 import { useMemo } from 'react';
-import { Token } from 'types';
+import { Token } from '@/types';
 
-import { useApproveToken, useGetAllowance } from 'clients/api';
+import { useApproveToken, useGetAllowance } from '@/clients/api';
 
 interface UseTokenApprovalInput {
   token: Token;
@@ -24,7 +24,10 @@ const useTokenApproval = ({
   spenderAddress,
   accountAddress,
 }: UseTokenApprovalInput): UseTokenApprovalOutput => {
-  const { data: getTokenAllowanceData, isLoading: isTokenApprovalStatusLoading } = useGetAllowance(
+  const {
+    data: getTokenAllowanceData,
+    isLoading: isTokenApprovalStatusLoading,
+  } = useGetAllowance(
     {
       accountAddress: accountAddress || '',
       spenderAddress,
@@ -32,7 +35,7 @@ const useTokenApproval = ({
     },
     {
       enabled: !!accountAddress && !token.isNative,
-    },
+    }
   );
 
   const isTokenApproved = useMemo(() => {
@@ -47,7 +50,10 @@ const useTokenApproval = ({
     return getTokenAllowanceData.allowanceWei.isGreaterThan(0);
   }, [token.isNative, getTokenAllowanceData]);
 
-  const { mutateAsync: approveTokenMutation, isLoading: isApproveTokenLoading } = useApproveToken({
+  const {
+    mutateAsync: approveTokenMutation,
+    isLoading: isApproveTokenLoading,
+  } = useApproveToken({
     token,
   });
 

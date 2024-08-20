@@ -1,11 +1,11 @@
 import BigNumber from 'bignumber.js';
-import { VError, checkForTokenTransactionError } from 'errors';
+import { VError, checkForTokenTransactionError } from '@/errors';
 import { ContractReceipt, Signer } from 'ethers';
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
-import { getMaximillionContract, getVTokenContract } from 'clients/contracts';
-import MAX_UINT256 from 'constants/maxUint256';
-import { VBep20, VBnbToken } from 'types/contracts';
+import { getMaximillionContract, getVTokenContract } from '@/clients/contracts';
+import MAX_UINT256 from '@/constants/maxUint256';
+import { VBep20, VBnbToken } from '@/types/contracts';
 
 export interface RepayInput {
   signer?: Signer;
@@ -29,7 +29,7 @@ const repay = async ({
     const vTokenContract = getVTokenContract(vToken, signer) as VBep20;
 
     const transaction = await vTokenContract.repayBorrow(
-      isRepayingFullLoan ? MAX_UINT256.toFixed() : amountWei.toFixed(),
+      isRepayingFullLoan ? MAX_UINT256.toFixed() : amountWei.toFixed()
     );
     const receipt = await transaction.wait(1);
     return checkForTokenTransactionError(receipt);
@@ -42,7 +42,9 @@ const repay = async ({
   // Handle repaying full BNB loan
   if (isRepayingFullLoan) {
     const maximillionContract = getMaximillionContract(signer);
-    const amountWithBufferWei = amountWei.multipliedBy(1 + REPAYMENT_BNB_BUFFER_PERCENTAGE);
+    const amountWithBufferWei = amountWei.multipliedBy(
+      1 + REPAYMENT_BNB_BUFFER_PERCENTAGE
+    );
     const accountAddress = await signer!.getAddress();
 
     const transaction = await maximillionContract.repayBehalfExplicit(
@@ -50,7 +52,7 @@ const repay = async ({
       vToken.address,
       {
         value: amountWithBufferWei.toFixed(0),
-      },
+      }
     );
     return transaction.wait(1);
   }

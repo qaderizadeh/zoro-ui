@@ -1,18 +1,22 @@
 import { MutationObserverOptions, useMutation } from 'react-query';
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
-import { BorrowInput, BorrowOutput, borrow, queryClient } from 'clients/api';
-import { useVTokenContract } from 'clients/contracts/hooks';
-import FunctionKey from 'constants/functionKey';
+import { BorrowInput, BorrowOutput, borrow, queryClient } from '@/clients/api';
+import { useVTokenContract } from '@/clients/contracts/hooks';
+import FunctionKey from '@/constants/functionKey';
 
-type Options = MutationObserverOptions<BorrowOutput, Error, Omit<BorrowInput, 'vTokenContract'>>;
+type Options = MutationObserverOptions<
+  BorrowOutput,
+  Error,
+  Omit<BorrowInput, 'vTokenContract'>
+>;
 
 const useBorrow = ({ vToken }: { vToken: VToken }, options?: Options) => {
   const vTokenContract = useVTokenContract(vToken);
 
   return useMutation(
     FunctionKey.BORROW,
-    params =>
+    (params) =>
       borrow({
         vTokenContract,
         ...params,
@@ -37,7 +41,7 @@ const useBorrow = ({ vToken }: { vToken: VToken }, options?: Options) => {
           options.onSuccess(...onSuccessParams);
         }
       },
-    },
+    }
   );
 };
 

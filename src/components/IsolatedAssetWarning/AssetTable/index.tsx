@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { useTranslation } from 'translation';
-import { Asset } from 'types';
+import { useTranslation } from '@/translation';
+import { Asset } from '@/types';
 import {
   compareBigNumbers,
   formatCentsToReadableValue,
   formatToReadablePercentage,
-} from 'utilities';
+} from '@/utilities';
 
 import { TextButton } from '../../Button';
 import { Icon } from '../../Icon';
@@ -41,39 +41,47 @@ export const AssetTable: React.FC<AssetTableProps> = ({
   ];
 
   const sortedAssets = [...assets].sort((a, b) =>
-    compareBigNumbers(a.liquidityCents, b.liquidityCents, 'desc'),
+    compareBigNumbers(a.liquidityCents, b.liquidityCents, 'desc')
   );
 
   return (
     <div css={styles.container}>
       <div css={[styles.row, styles.headerRow]}>
-        {headerColumnLabels.map(headerColumnLabel => (
-          <div css={styles.cell} key={`isolated-asset-warning-header-column-${headerColumnLabel}`}>
-            <Typography variant="small2">{headerColumnLabel}</Typography>
+        {headerColumnLabels.map((headerColumnLabel) => (
+          <div
+            css={styles.cell}
+            key={`isolated-asset-warning-header-column-${headerColumnLabel}`}
+          >
+            <Typography variant='small2'>{headerColumnLabel}</Typography>
           </div>
         ))}
       </div>
 
       <div css={styles.dataRowList} data-testid={TEST_IDS.assetTable}>
-        {sortedAssets.map(asset => (
+        {sortedAssets.map((asset) => (
           <div
             css={[styles.row, styles.dataRow]}
             key={`isolated-asset-warning-asset-table-data-row-${asset.vToken.underlyingToken.address}`}
           >
             <div css={styles.cell}>
-              <TokenIconWithSymbol token={asset.vToken.underlyingToken} variant="small2" />
+              <TokenIconWithSymbol
+                token={asset.vToken.underlyingToken}
+                variant='small2'
+              />
             </div>
 
             <div css={styles.cell}>
-              <Typography variant="small2">
+              <Typography variant='small2'>
                 {formatToReadablePercentage(
-                  type === 'borrow' ? asset.borrowApyPercentage : asset.supplyApyPercentage,
+                  type === 'borrow'
+                    ? asset.borrowApyPercentage
+                    : asset.supplyApyPercentage
                 )}
               </Typography>
             </div>
 
             <div css={styles.cell}>
-              <Typography variant="small2">
+              <Typography variant='small2'>
                 {formatCentsToReadableValue({
                   value: asset.liquidityCents,
                 })}
@@ -84,11 +92,14 @@ export const AssetTable: React.FC<AssetTableProps> = ({
       </div>
 
       <div css={[styles.row, styles.footer]}>
-        <TextButton css={parentStyles.inlineButton} onClick={onHideAssetsButtonClick}>
+        <TextButton
+          css={parentStyles.inlineButton}
+          onClick={onHideAssetsButtonClick}
+        >
           <div css={styles.hideAssetButtonContent}>
             <span>{t('isolatedAssetWarning.hideAssetsButtonLabel')}</span>
 
-            <Icon name="arrowUp" css={styles.hideAssetButtonIcon} />
+            <Icon name='arrowUp' css={styles.hideAssetButtonIcon} />
           </div>
         </TextButton>
       </div>

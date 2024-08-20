@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import BigNumber from 'bignumber.js';
-import { NoticeError, NoticeWarning } from 'components';
+import { NoticeError, NoticeWarning } from '@/components';
 import React from 'react';
-import { useTranslation } from 'translation';
-import { Asset } from 'types';
-import { formatTokensToReadableValue } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Asset } from '@/types';
+import { formatTokensToReadableValue } from '@/utilities';
 
 import { useStyles as useSharedStyles } from '../styles';
 import TEST_IDS from './testIds';
@@ -52,9 +52,12 @@ const Notice: React.FC<NoticeProps> = ({
       <NoticeWarning
         css={styles.notice}
         data-testid={TEST_IDS.notice}
-        description={t('operationModal.borrow.noCollateralizedSuppliedAssetWarning', {
-          tokenSymbol: asset.vToken.underlyingToken.symbol,
-        })}
+        description={t(
+          'operationModal.borrow.noCollateralizedSuppliedAssetWarning',
+          {
+            tokenSymbol: asset.vToken.underlyingToken.symbol,
+          }
+        )}
       />
     );
   }
@@ -83,7 +86,9 @@ const Notice: React.FC<NoticeProps> = ({
     );
   }
 
-  const assetLiquidityTokens = new BigNumber(asset.liquidityCents).dividedBy(asset.tokenPriceCents);
+  const assetLiquidityTokens = new BigNumber(asset.liquidityCents).dividedBy(
+    asset.tokenPriceCents
+  );
 
   if (new BigNumber(amount).isGreaterThan(assetLiquidityTokens)) {
     // User is trying to borrow more than available liquidities

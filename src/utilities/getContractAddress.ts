@@ -1,29 +1,29 @@
-import config from 'config';
+import config from '@/config';
 
-import mainContractChainAddresses from 'constants/contracts/addresses/main.json';
+import mainContractChainAddresses from '@/constants/contracts/addresses/main.json';
 
 const mainContractAddresses = Object.entries(mainContractChainAddresses).reduce(
   (accContractAddresses, [contractName, addresses]) => ({
     ...accContractAddresses,
     [contractName]: addresses[config.chainId],
   }),
-  {} as Record<keyof typeof mainContractChainAddresses, string>,
+  {} as Record<keyof typeof mainContractChainAddresses, string>
 );
 
 //const isolatedLendingContractChainAddresses = config.isOnTestnet
-  //? isolatedLendingTestnetDeployments.contracts
-  //: isolatedLendingMainnetDeployments.contracts;
+//? isolatedLendingTestnetDeployments.contracts
+//: isolatedLendingMainnetDeployments.contracts;
 
 //type IsolatedLendingContractName = keyof typeof isolatedLendingContractChainAddresses;
 
 //const isolatedLendingContractAddresses = Object.entries(
-  //isolatedLendingContractChainAddresses,
+//isolatedLendingContractChainAddresses,
 //).reduce(
-  //(accContractAddresses, [contractName, contractInfo]) => ({
-    //...accContractAddresses,
-    //[contractName]: contractInfo.address,
-  //}),
-  //{},
+//(accContractAddresses, [contractName, contractInfo]) => ({
+//...accContractAddresses,
+//[contractName]: contractInfo.address,
+//}),
+//{},
 //) as Record<IsolatedLendingContractName, string>;
 
 const contractAddresses = {
@@ -32,6 +32,6 @@ const contractAddresses = {
 };
 
 const getContractAddress = (contractName: keyof typeof contractAddresses) =>
-    contractAddresses[contractName];
+  contractAddresses[contractName];
 
 export default getContractAddress;

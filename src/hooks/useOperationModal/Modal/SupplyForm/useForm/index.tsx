@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
 import { ContractReceipt } from 'ethers';
-import { useTranslation } from 'translation';
-import { Asset, Swap, SwapError, Token, VToken } from 'types';
-import { convertTokensToWei } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Asset, Swap, SwapError, Token, VToken } from '@/types';
+import { convertTokensToWei } from '@/utilities';
 
-import useHandleTransactionMutation from 'hooks/useHandleTransactionMutation';
+import useHandleTransactionMutation from '@/hooks/useHandleTransactionMutation';
 
 import { FormError, FormValues } from './types';
 import useFormValidation from './useFormValidation';
@@ -21,7 +21,9 @@ export interface UseFormInput {
   }) => Promise<ContractReceipt>;
   onCloseModal: () => void;
   formValues: FormValues;
-  setFormValues: (setter: (currentFormValues: FormValues) => FormValues | FormValues) => void;
+  setFormValues: (
+    setter: (currentFormValues: FormValues) => FormValues | FormValues
+  ) => void;
   fromTokenUserWalletBalanceTokens?: BigNumber;
   swap?: Swap;
   swapError?: SwapError;
@@ -93,7 +95,7 @@ const useForm = ({
 
         return contractReceipt;
       },
-      successTransactionModalProps: contractReceipt => ({
+      successTransactionModalProps: (contractReceipt) => ({
         title: t('operationModal.supply.successfulTransactionModal.title'),
         content: t('operationModal.supply.successfulTransactionModal.message'),
         amount: {

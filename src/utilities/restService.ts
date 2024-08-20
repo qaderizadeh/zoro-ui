@@ -1,4 +1,4 @@
-import config from 'config';
+import config from '@/config';
 import { isEmpty, set } from 'lodash';
 
 interface RestServiceInput {
@@ -15,7 +15,7 @@ const createQueryParams = (params: Record<string, unknown>) => {
     }
     return '';
   });
-  return paramArray.filter(p => p).join('&');
+  return paramArray.filter((p) => p).join('&');
 };
 
 export async function restService<D>({
@@ -58,7 +58,7 @@ export async function restService<D>({
     path = `${path}?${queryParams}`;
   }
   return fetch(path)
-    .then(async response => {
+    .then(async (response) => {
       const { status } = response;
 
       let data: undefined;
@@ -71,7 +71,7 @@ export async function restService<D>({
 
       return { status, data };
     })
-    .catch(error => ({
+    .catch((error) => ({
       status: false,
       data: undefined,
       result: 'error',

@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import BigNumber from 'bignumber.js';
 import React from 'react';
-import { useTranslation } from 'translation';
-import { Asset, Pool, Swap, TokenAction } from 'types';
-import { formatToReadablePercentage, formatTokensToReadableValue } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Asset, Pool, Swap, TokenAction } from '@/types';
+import {
+  formatToReadablePercentage,
+  formatTokensToReadableValue,
+} from '@/utilities';
 
-import { SAFE_BORROW_LIMIT_PERCENTAGE } from 'constants/safeBorrowLimitPercentage';
-import useAssetInfo from 'hooks/useAssetInfo';
+import { SAFE_BORROW_LIMIT_PERCENTAGE } from '@/constants/safeBorrowLimitPercentage';
+import useAssetInfo from '@/hooks/useAssetInfo';
 
 import { Delimiter } from '../Delimiter';
 import { LabeledInlineContent } from '../LabeledInlineContent';
@@ -56,7 +59,7 @@ export const AccountData: React.FC<AccountDataProps> = ({
       {assetInfo.map((row, index) => (
         <LabeledInlineContent
           css={styles.getRow({ isLast: index === assetInfo.length - 1 })}
-          className="info-row"
+          className='info-row'
           {...row}
           key={row.label}
         />
@@ -68,7 +71,8 @@ export const AccountData: React.FC<AccountDataProps> = ({
         css={styles.getRow({ isLast: true })}
         borrowBalanceCents={pool.userBorrowBalanceCents?.toNumber()}
         borrowLimitCents={
-          hypotheticalPoolUserBorrowLimitCents?.toNumber() ?? pool.userBorrowLimitCents?.toNumber()
+          hypotheticalPoolUserBorrowLimitCents?.toNumber() ??
+          pool.userBorrowLimitCents?.toNumber()
         }
         hypotheticalBorrowBalanceCents={
           action === 'borrow' || action === 'repay'
@@ -107,7 +111,7 @@ export const AccountData: React.FC<AccountDataProps> = ({
           <ValueUpdate
             original={asset.userBorrowBalanceTokens}
             update={hypotheticalUserBorrowBalanceTokens}
-            positiveDirection="desc"
+            positiveDirection='desc'
             format={(value: BigNumber | undefined) =>
               formatTokensToReadableValue({
                 value,
@@ -137,7 +141,7 @@ export const AccountData: React.FC<AccountDataProps> = ({
           <ValueUpdate
             original={poolUserBorrowLimitUsedPercentage}
             update={hypotheticalPoolUserBorrowLimitUsedPercentage}
-            positiveDirection="desc"
+            positiveDirection='desc'
             format={formatToReadablePercentage}
           />
         </LabeledInlineContent>
@@ -146,7 +150,7 @@ export const AccountData: React.FC<AccountDataProps> = ({
       <LabeledInlineContent
         label={t('accountData.dailyEarnings')}
         css={styles.getRow({ isLast: true })}
-        className="info-row"
+        className='info-row'
       >
         <ValueUpdate
           original={poolUserDailyEarningsCents}

@@ -3,9 +3,9 @@ import BigNumber from 'bignumber.js';
 import noop from 'noop-ts';
 import React from 'react';
 import { State } from 'react-powerplug';
-import { Token, TokenBalance } from 'types';
+import { Token, TokenBalance } from '@/types';
 
-import { TESTNET_SWAP_TOKENS } from 'constants/tokens';
+import { TESTNET_SWAP_TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { SelectTokenTextField } from '.';
@@ -42,8 +42,8 @@ export const Default = () => (
       <SelectTokenTextField
         selectedToken={state.token}
         value={state.value}
-        onChange={value => setState({ value })}
-        onChangeSelectedToken={token => setState({ token })}
+        onChange={(value) => setState({ value })}
+        onChangeSelectedToken={(token) => setState({ token })}
         tokenBalances={tokenBalances}
       />
     )}
@@ -53,7 +53,7 @@ export const Default = () => (
 export const Disabled = () => (
   <SelectTokenTextField
     selectedToken={tokenBalances[0].token}
-    value=""
+    value=''
     onChange={noop}
     onChangeSelectedToken={noop}
     tokenBalances={tokenBalances}

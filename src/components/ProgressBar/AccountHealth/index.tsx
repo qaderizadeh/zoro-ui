@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 import {
   calculatePercentage,
   formatCentsToReadableValue,
   formatToReadablePercentage,
-} from 'utilities';
+} from '@/utilities';
 
-import PLACEHOLDER_KEY from 'constants/placeholderKey';
-import useProgressColor from 'hooks/useProgressColor';
+import PLACEHOLDER_KEY from '@/constants/placeholderKey';
+import useProgressColor from '@/hooks/useProgressColor';
 
 import { LabeledProgressBar } from '../LabeledProgressBar';
 
@@ -32,7 +32,8 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
   const { t, Trans } = useTranslation();
 
   const borrowLimitUsedPercentage =
-    typeof borrowBalanceCents === 'number' && typeof borrowLimitCents === 'number'
+    typeof borrowBalanceCents === 'number' &&
+    typeof borrowLimitCents === 'number'
       ? calculatePercentage({
           numerator: borrowBalanceCents,
           denominator: borrowLimitCents,
@@ -40,14 +41,17 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
       : undefined;
 
   const hypotheticalBorrowLimitUsedPercentage =
-    typeof hypotheticalBorrowBalanceCents === 'number' && typeof borrowLimitCents === 'number'
+    typeof hypotheticalBorrowBalanceCents === 'number' &&
+    typeof borrowLimitCents === 'number'
       ? calculatePercentage({
           numerator: hypotheticalBorrowBalanceCents,
           denominator: borrowLimitCents,
         })
       : undefined;
 
-  const readableBorrowLimitUsedPercentage = formatToReadablePercentage(borrowLimitUsedPercentage);
+  const readableBorrowLimitUsedPercentage = formatToReadablePercentage(
+    borrowLimitUsedPercentage
+  );
 
   const safeBorrowLimitCents =
     typeof borrowLimitCents === 'number'
@@ -78,10 +82,14 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
             : t('accountHealth.borrowLimitUsed')
         }
         whiteLeftText={
-          variant === 'borrowBalance' ? readableBorrowBalance : readableBorrowLimitUsedPercentage
+          variant === 'borrowBalance'
+            ? readableBorrowBalance
+            : readableBorrowLimitUsedPercentage
         }
         greyRightText={
-          variant === 'borrowBalance' ? t('accountHealth.max') : t('accountHealth.limit')
+          variant === 'borrowBalance'
+            ? t('accountHealth.max')
+            : t('accountHealth.limit')
         }
         whiteRightText={readableBorrowLimit}
         value={sanitizedBorrowLimitUsedPercentage}
@@ -95,7 +103,7 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
           readableBorrowBalance !== PLACEHOLDER_KEY &&
           readableBorrowLimitUsedPercentage !== PLACEHOLDER_KEY ? (
             <Trans
-              i18nKey="accountHealth.borrowLimitTooltip"
+              i18nKey='accountHealth.borrowLimitTooltip'
               components={{
                 LineBreak: <br />,
               }}
@@ -111,7 +119,7 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
           borrowBalanceCents &&
           borrowBalanceCents > 0 ? (
             <Trans
-              i18nKey="accountHealth.safeBorrowLimitTooltip"
+              i18nKey='accountHealth.safeBorrowLimitTooltip'
               components={{
                 LineBreak: <br />,
               }}
@@ -129,9 +137,9 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
 };
 
 export const BorrowBalanceAccountHealth = (props: AccountHealthProps) => (
-  <AccountHealth variant="borrowBalance" {...props} />
+  <AccountHealth variant='borrowBalance' {...props} />
 );
 
 export const BorrowLimitUsedAccountHealth = (props: AccountHealthProps) => (
-  <AccountHealth variant="borrowLimitUsed" {...props} />
+  <AccountHealth variant='borrowLimitUsed' {...props} />
 );

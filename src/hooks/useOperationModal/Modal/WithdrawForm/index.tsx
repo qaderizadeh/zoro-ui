@@ -1,27 +1,27 @@
 /** @jsxImportSource @emotion/react */
-import { useStyles as useSharedStyles } from "../styles";
-import SubmitSection from "./SubmitSection";
-import TEST_IDS from "./testIds";
-import useForm, { FormValues, UseFormInput } from "./useForm";
-import BigNumber from "bignumber.js";
+import { useStyles as useSharedStyles } from '../styles';
+import SubmitSection from './SubmitSection';
+import TEST_IDS from './testIds';
+import useForm, { FormValues, UseFormInput } from './useForm';
+import BigNumber from 'bignumber.js';
 import {
   useGetVTokenBalanceOf,
   useRedeem,
   useRedeemUnderlying,
-} from "clients/api";
-import { AccountData, TokenTextField } from "components";
-import { useAuth } from "context/AuthContext";
-import { VError } from "errors";
-import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue";
-import React, { useCallback, useState } from "react";
-import { useTranslation } from "translation";
-import { Asset, Pool } from "types";
-import { convertTokensToWei } from "utilities";
+} from '@/clients/api';
+import { AccountData, TokenTextField } from '@/components';
+import { useAuth } from '@/context/AuthContext';
+import { VError } from '@/errors';
+import useFormatTokensToReadableValue from '@/hooks/useFormatTokensToReadableValue';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from '@/translation';
+import { Asset, Pool } from '@/types';
+import { convertTokensToWei } from '@/utilities';
 
 export interface WithdrawFormUiProps {
   asset: Asset;
   pool: Pool;
-  onSubmit: UseFormInput["onSubmit"];
+  onSubmit: UseFormInput['onSubmit'];
   isSubmitting: boolean;
   onCloseModal: () => void;
   setFormValues: (
@@ -125,7 +125,7 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
     <form onSubmit={handleSubmit}>
       <TokenTextField
         data-testid={TEST_IDS.valueInput}
-        name="amountTokens"
+        name='amountTokens'
         css={sharedStyles.getRow({ isLast: true })}
         token={asset.vToken.underlyingToken}
         value={formValues.amountTokens}
@@ -137,14 +137,14 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
         }
         disabled={isSubmitting}
         rightMaxButton={{
-          label: t("operationModal.withdraw.rightMaxButtonLabel"),
+          label: t('operationModal.withdraw.rightMaxButtonLabel'),
           onClick: handleRightMaxButtonClick,
-          className: "custom-btn-wrap",
+          className: 'custom-btn-wrap',
         }}
         hasError={!!formError && Number(formValues.amountTokens) > 0}
         description={
           <Trans
-            i18nKey="operationModal.withdraw.withdrawableAmount"
+            i18nKey='operationModal.withdraw.withdrawableAmount'
             components={{
               White: <span css={sharedStyles.whiteLabel} />,
             }}
@@ -157,7 +157,7 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
         amountTokens={new BigNumber(formValues.amountTokens || 0)}
         asset={asset}
         pool={pool}
-        action="withdraw"
+        action='withdraw'
       />
 
       <SubmitSection
@@ -184,7 +184,7 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({
   const { accountAddress } = useAuth();
 
   const [formValues, setFormValues] = useState<FormValues>({
-    amountTokens: "",
+    amountTokens: '',
     fromToken: asset.vToken.underlyingToken,
   });
 
@@ -212,7 +212,7 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({
 
   const isWithdrawLoading = isRedeemLoading || isRedeemUnderlyingLoading;
 
-  const onSubmit: UseFormInput["onSubmit"] = async ({
+  const onSubmit: UseFormInput['onSubmit'] = async ({
     fromToken,
     fromTokenAmountTokens,
   }) => {
@@ -220,8 +220,8 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({
     // internal error
     if (!asset) {
       throw new VError({
-        type: "unexpected",
-        code: "somethingWentWrong",
+        type: 'unexpected',
+        code: 'somethingWentWrong',
       });
     }
 
@@ -249,8 +249,8 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({
     // This cose should never be reached, but just in case we throw a generic
     // internal error
     throw new VError({
-      type: "unexpected",
-      code: "somethingWentWrong",
+      type: 'unexpected',
+      code: 'somethingWentWrong',
     });
   };
 

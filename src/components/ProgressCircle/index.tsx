@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useMemo } from 'react';
 
-import useProgressColor from 'hooks/useProgressColor';
+import useProgressColor from '@/hooks/useProgressColor';
 
 import { useStyles } from './styles';
 
@@ -26,16 +26,22 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({ value }) => {
   }, [value]);
 
   return (
-    <svg viewBox="0 0 16px 16px" css={styles.container}>
-      <circle fill="transparent" r={radius} cx="8" cy="8" css={styles.circleBackground} />
+    <svg viewBox='0 0 16px 16px' css={styles.container}>
+      <circle
+        fill='transparent'
+        r={radius}
+        cx='8'
+        cy='8'
+        css={styles.circleBackground}
+      />
 
       <circle
         css={styles.getCircle({ circumference, offset })}
         stroke={progressColor}
-        fill="transparent"
+        fill='transparent'
         r={radius}
-        cx="8"
-        cy="8"
+        cx='8'
+        cy='8'
       />
     </svg>
   );

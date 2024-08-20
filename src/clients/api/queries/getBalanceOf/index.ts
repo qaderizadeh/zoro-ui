@@ -1,8 +1,8 @@
 import type { Provider } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
-import { Token } from 'types';
+import { Token } from '@/types';
 
-import { getTokenContract } from 'clients/contracts';
+import { getTokenContract } from '@/clients/contracts';
 
 export interface GetBalanceOfInput {
   accountAddress: string;

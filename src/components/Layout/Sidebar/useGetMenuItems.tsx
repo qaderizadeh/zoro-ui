@@ -1,21 +1,21 @@
-import { MenuItem } from '../types'
-import { routes } from 'constants/routing'
+import { MenuItem } from '../types';
+import { routes } from '@/constants/routing';
 import {
   ZORO_DISCORD_URL,
   ZORO_GITHUB_URL,
   ZORO_SUBSTACK_URL,
   ZORO_TWITTER_URL,
   ZORO_GITBOOK_URL,
-  ZORO_LIQUIDATOR_URL
-} from 'constants/urls'
-import { useAuth } from 'context/AuthContext'
-import { useMemo } from 'react'
-import { getContractAddress, isFeatureEnabled } from 'utilities'
+  ZORO_LIQUIDATOR_URL,
+} from '@/constants/urls';
+import { useAuth } from '@/context/AuthContext';
+import { useMemo } from 'react';
+import { getContractAddress, isFeatureEnabled } from '@/utilities';
 
-const MAIN_POOL_COMPTROLLER_ADDRESS = getContractAddress('comptroller')
+const MAIN_POOL_COMPTROLLER_ADDRESS = getContractAddress('comptroller');
 
 const useGetMenuItems = () => {
-  const { accountAddress } = useAuth()
+  const { accountAddress } = useAuth();
 
   return useMemo(() => {
     const menuItems: MenuItem[] = [
@@ -24,9 +24,9 @@ const useGetMenuItems = () => {
         // Translation key: do not remove this comment
         // t('layout.menuItems.dashboard')
         i18nKey: 'layout.menuItems.dashboard',
-        icon: 'dashboard'
-      }
-    ]
+        icon: 'dashboard',
+      },
+    ];
 
     // Insert account page if wallet is connected
     if (accountAddress) {
@@ -35,8 +35,8 @@ const useGetMenuItems = () => {
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')
         i18nKey: 'layout.menuItems.account',
-        icon: 'person'
-      })
+        icon: 'person',
+      });
     }
 
     // Add Pools or Markets page depending on isolated pools feature flag
@@ -47,7 +47,7 @@ const useGetMenuItems = () => {
             // Translation key: do not remove this comment
             // t('layout.menuItems.pools')
             i18nKey: 'layout.menuItems.pools',
-            icon: 'market'
+            icon: 'market',
           }
         : {
             href: routes.markets.path.replace(
@@ -57,9 +57,9 @@ const useGetMenuItems = () => {
             // Translation key: do not remove this comment
             // t('layout.menuItems.markets')
             i18nKey: 'layout.menuItems.markets',
-            icon: 'market'
+            icon: 'market',
           }
-    )
+    );
     menuItems.push(
       {
         href: ZORO_GITBOOK_URL,
@@ -67,7 +67,7 @@ const useGetMenuItems = () => {
         // t('layout.menuItems.gitbook')
         i18nKey: 'layout.menuItems.gitbook',
         icon: 'gitbook',
-        target: true
+        target: true,
       },
       {
         href: ZORO_DISCORD_URL,
@@ -75,9 +75,9 @@ const useGetMenuItems = () => {
         // t('layout.menuItems.discord')
         i18nKey: 'layout.menuItems.discord',
         icon: 'discord',
-        target: true
+        target: true,
       }
-    )
+    );
     menuItems.push({
       href: ZORO_LIQUIDATOR_URL,
       // Translation key: do not remove this comment
@@ -117,8 +117,8 @@ const useGetMenuItems = () => {
           </defs>
         </svg>
       ),
-      target: false
-    })
+      target: false,
+    });
 
     menuItems
       .push
@@ -180,10 +180,10 @@ const useGetMenuItems = () => {
       // i18nKey: 'layout.menuItems.predictions',
       // icon: 'predictions',
       // },
-      ()
+      ();
 
-    return menuItems
-  }, [accountAddress])
-}
+    return menuItems;
+  }, [accountAddress]);
+};
 
-export default useGetMenuItems
+export default useGetMenuItems;

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { Asset, VToken } from 'types';
-import { areTokensEqual } from 'utilities';
+import { Asset, VToken } from '@/types';
+import { areTokensEqual } from '@/utilities';
 
-import { useGetPools } from 'clients/api';
+import { useGetPools } from '@/clients/api';
 
 export interface UseGetAssetInput {
   vToken: VToken;
@@ -16,7 +16,10 @@ export interface UseGetAssetOutput {
   };
 }
 
-const useGetAsset = ({ vToken, accountAddress }: UseGetAssetInput): UseGetAssetOutput => {
+const useGetAsset = ({
+  vToken,
+  accountAddress,
+}: UseGetAssetInput): UseGetAssetOutput => {
   const { data: getPoolsData, isLoading } = useGetPools({
     accountAddress,
   });
@@ -31,7 +34,9 @@ const useGetAsset = ({ vToken, accountAddress }: UseGetAssetInput): UseGetAssetO
     for (let p = 0; p < getPoolsData.pools.length; p++) {
       const pool = getPoolsData.pools[p];
 
-      matchingAsset = pool.assets.find(poolAsset => areTokensEqual(poolAsset.vToken, vToken));
+      matchingAsset = pool.assets.find((poolAsset) =>
+        areTokensEqual(poolAsset.vToken, vToken)
+      );
 
       // Break loop if we find a matching asset
       if (matchingAsset) {

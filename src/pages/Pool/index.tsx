@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import BigNumber from 'bignumber.js';
-import { Cell, CellGroup, Notice, Spinner } from 'components';
+import { Cell, CellGroup, Notice, Spinner } from '@/components';
 import { Divider, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
-import { useTranslation } from 'translation';
-import { Pool } from 'types';
-import { formatCentsToReadableValue } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Pool } from '@/types';
+import { formatCentsToReadableValue } from '@/utilities';
 
-import { useGetPools } from 'clients/api';
-import PLACEHOLDER_KEY from 'constants/placeholderKey';
-import { routes } from 'constants/routing';
-import { useAuth } from 'context/AuthContext';
+import { useGetPools } from '@/clients/api';
+import PLACEHOLDER_KEY from '@/constants/placeholderKey';
+import { routes } from '@/constants/routing';
+import { useAuth } from '@/context/AuthContext';
 
 import Table from './Table';
 import { useStyles } from './styles';
@@ -33,7 +33,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
       {
         totalSupplyCents: new BigNumber(0),
         totalBorrowCents: new BigNumber(0),
-      },
+      }
     );
 
     return [
@@ -64,7 +64,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
 
   return pool ? (
     <>
-      <Typography css={styles.title} variant="h3">
+      <Typography css={styles.title} variant='h3'>
         {pool.name}
       </Typography>
       <CellGroup cells={cells} css={styles.header} />
@@ -72,7 +72,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
       {pool.isIsolated && (
         <Notice
           css={styles.isolatedPoolWarning}
-          variant="warning"
+          variant='warning'
           description={t('pool.isolatedPoolWarning')}
         />
       )}
@@ -85,7 +85,9 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
   );
 };
 
-export type PoolPageProps = RouteComponentProps<{ poolComptrollerAddress: string }>;
+export type PoolPageProps = RouteComponentProps<{
+  poolComptrollerAddress: string;
+}>;
 
 const PoolPage: React.FC<PoolPageProps> = ({
   match: {
@@ -95,7 +97,7 @@ const PoolPage: React.FC<PoolPageProps> = ({
   const { accountAddress } = useAuth();
 
   const { data: getPoolData, isLoading: isGetPoolLoading } = useGetPools({
-    accountAddress
+    accountAddress,
   });
 
   // Redirect to Dashboard page if pool Comptroller address is incorrect
@@ -103,7 +105,7 @@ const PoolPage: React.FC<PoolPageProps> = ({
     <Redirect to={routes.dashboard.path} />;
   }
 
-  return getPoolData?.pools.map(pool => <PoolUi pool={pool} />);
+  return getPoolData?.pools.map((pool) => <PoolUi pool={pool} />);
 };
 
 export default PoolPage;

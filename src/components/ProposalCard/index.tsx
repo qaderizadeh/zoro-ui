@@ -3,10 +3,10 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { VoteSupport } from 'types';
+import Link from 'next/link';
+import { VoteSupport } from '@/types';
 
-import { Chip } from '../Chip';
+import Chip from '@mui/material/Chip';
 import { useStyles } from './styles';
 
 interface ProposalCardProps {
@@ -38,9 +38,15 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
     <Paper
       className={className}
       css={styles.root}
-      component={({ children, ...props }) => (
+      component={({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode;
+        [key: string]: any;
+      }) => (
         <div {...props}>
-          <Link css={styles.link} to={linkTo}>
+          <Link css={styles.link} href={linkTo}>
             {children}
           </Link>
         </div>
@@ -51,14 +57,14 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
         <Grid css={[styles.gridItem, styles.gridItemLeft]} item xs={12} sm={8}>
           <div css={styles.cardHeader}>
             <div css={styles.cardHeaderLeft}>
-              <Chip text={`#${proposalNumber}`} />
+              <Chip label={`#${proposalNumber}`} />
               {headerLeftItem}
             </div>
 
             {headerRightItem}
           </div>
 
-          <Typography variant="h4" css={styles.cardTitle} color="textPrimary">
+          <Typography variant='h4' css={styles.cardTitle} color='textPrimary'>
             {title}
           </Typography>
 

@@ -1,8 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { fireEvent, getByTestId } from '@testing-library/react';
-import { Token } from 'types';
+import { Token } from '@/types';
 
-import { getTokenListItemTestId, getTokenSelectButtonTestId } from '../testIdGetters';
+import {
+  getTokenListItemTestId,
+  getTokenSelectButtonTestId,
+} from '../testIdGetters';
 
 export const selectToken = ({
   token,
@@ -17,8 +20,8 @@ export const selectToken = ({
   fireEvent.click(
     getByTestId(
       container,
-      getTokenSelectButtonTestId({ parentTestId: selectTokenTextFieldTestId }),
-    ),
+      getTokenSelectButtonTestId({ parentTestId: selectTokenTextFieldTestId })
+    )
   );
 
   // Select token
@@ -28,7 +31,7 @@ export const selectToken = ({
       getTokenListItemTestId({
         parentTestId: selectTokenTextFieldTestId,
         tokenAddress: token.address,
-      }),
-    ),
+      })
+    )
   );
 };

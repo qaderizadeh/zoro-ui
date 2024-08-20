@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
-import { Asset, Pool, Vault } from 'types';
+import { Asset, Pool, Vault } from '@/types';
 import {
   areTokensEqual,
   calculateDailyEarningsCents,
@@ -9,10 +9,10 @@ import {
   convertWeiToTokens,
   formatCentsToReadableValue,
   formatToReadablePercentage,
-} from 'utilities';
+} from '@/utilities';
 
-import { SAFE_BORROW_LIMIT_PERCENTAGE } from 'constants/safeBorrowLimitPercentage';
-import { TOKENS } from 'constants/tokens';
+import { SAFE_BORROW_LIMIT_PERCENTAGE } from '@/constants/safeBorrowLimitPercentage';
+import { TOKENS } from '@/constants/tokens';
 
 import calculateNetApy from './calculateNetApy';
 
@@ -23,20 +23,32 @@ interface UseExtractDataInput {
   vaiPriceCents: BigNumber;
 }
 
-const useExtractData = ({ pools, vaults, xvsPriceCents, vaiPriceCents }: UseExtractDataInput) =>
+const useExtractData = ({
+  pools,
+  vaults,
+  xvsPriceCents,
+  vaiPriceCents,
+}: UseExtractDataInput) =>
   useMemo(() => {
-    const { totalBorrowCents, totalSupplyCents, borrowLimitCents } = pools.reduce(
-      (acc, pool) => ({
-        totalBorrowCents: acc.totalBorrowCents.plus(pool.userBorrowBalanceCents || 0),
-        totalSupplyCents: acc.totalSupplyCents.plus(pool.userSupplyBalanceCents || 0),
-        borrowLimitCents: acc.borrowLimitCents.plus(pool.userBorrowLimitCents || 0),
-      }),
-      {
-        totalSupplyCents: new BigNumber(0),
-        totalBorrowCents: new BigNumber(0),
-        borrowLimitCents: new BigNumber(0),
-      },
-    );
+    const { totalBorrowCents, totalSupplyCents, borrowLimitCents } =
+      pools.reduce(
+        (acc, pool) => ({
+          totalBorrowCents: acc.totalBorrowCents.plus(
+            pool.userBorrowBalanceCents || 0
+          ),
+          totalSupplyCents: acc.totalSupplyCents.plus(
+            pool.userSupplyBalanceCents || 0
+          ),
+          borrowLimitCents: acc.borrowLimitCents.plus(
+            pool.userBorrowLimitCents || 0
+          ),
+        }),
+        {
+          totalSupplyCents: new BigNumber(0),
+          totalBorrowCents: new BigNumber(0),
+          borrowLimitCents: new BigNumber(0),
+        }
+      );
 
     const { totalVaultStakeCents, yearlyVaultEarningsCents } = vaults.reduce(
       (accTotalVaultStakeCents, vault) => {
@@ -44,32 +56,45 @@ const useExtractData = ({ pools, vaults, xvsPriceCents, vaiPriceCents }: UseExtr
           valueWei: new BigNumber(vault.userStakedWei || 0),
           token: vault.stakedToken,
         }).multipliedBy(
-          areTokensEqual(vault.stakedToken, TOKENS.xvs) ? xvsPriceCents : vaiPriceCents,
+          areTokensEqual(vault.stakedToken, TOKENS.xvs)
+            ? xvsPriceCents
+            : vaiPriceCents
         );
 
         return {
-          totalVaultStakeCents: accTotalVaultStakeCents.totalVaultStakeCents.plus(vaultStakeCents),
-          yearlyVaultEarningsCents: accTotalVaultStakeCents.yearlyVaultEarningsCents.plus(
-            calculateYearlyInterests({
-              balance: vaultStakeCents,
-              interestPercentage: new BigNumber(vault.stakingAprPercentage),
-            }),
-          ),
+          totalVaultStakeCents:
+            accTotalVaultStakeCents.totalVaultStakeCents.plus(vaultStakeCents),
+          yearlyVaultEarningsCents:
+            accTotalVaultStakeCents.yearlyVaultEarningsCents.plus(
+              calculateYearlyInterests({
+                balance: vaultStakeCents,
+                interestPercentage: new BigNumber(vault.stakingAprPercentage),
+              })
+            ),
         };
       },
-      { totalVaultStakeCents: new BigNumber(0), yearlyVaultEarningsCents: new BigNumber(0) },
+      {
+        totalVaultStakeCents: new BigNumber(0),
+        yearlyVaultEarningsCents: new BigNumber(0),
+      }
     );
 
-    const assets = pools.reduce((acc, pool) => [...acc, ...pool.assets], [] as Asset[]);
+    const assets = pools.reduce(
+      (acc, pool) => [...acc, ...pool.assets],
+      [] as Asset[]
+    );
 
     const yearlyAssetEarningsCents = new BigNumber(
       calculateYearlyEarningsForAssets({
         assets,
-      }) || 0,
+      }) || 0
     );
 
-    const yearlyEarningsCents = yearlyAssetEarningsCents.plus(yearlyVaultEarningsCents);
-    const dailyEarningsCentsTmp = calculateDailyEarningsCents(yearlyEarningsCents).toNumber();
+    const yearlyEarningsCents = yearlyAssetEarningsCents.plus(
+      yearlyVaultEarningsCents
+    );
+    const dailyEarningsCentsTmp =
+      calculateDailyEarningsCents(yearlyEarningsCents).toNumber();
 
     const netApyPercentageTmp =
       yearlyAssetEarningsCents &&
@@ -79,7 +104,7 @@ const useExtractData = ({ pools, vaults, xvsPriceCents, vaiPriceCents }: UseExtr
       });
 
     const safeBorrowLimitCentsTmp = borrowLimitCents.multipliedBy(
-      SAFE_BORROW_LIMIT_PERCENTAGE / 100,
+      SAFE_BORROW_LIMIT_PERCENTAGE / 100
     );
 
     const readableSafeBorrowLimitTmp = formatCentsToReadableValue({
@@ -87,7 +112,7 @@ const useExtractData = ({ pools, vaults, xvsPriceCents, vaiPriceCents }: UseExtr
     });
 
     const safeBorrowLimitPercentageTmp = formatToReadablePercentage(
-      safeBorrowLimitCentsTmp.multipliedBy(100).dividedBy(borrowLimitCents),
+      safeBorrowLimitCentsTmp.multipliedBy(100).dividedBy(borrowLimitCents)
     );
 
     return {

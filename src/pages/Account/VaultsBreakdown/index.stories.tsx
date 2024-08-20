@@ -3,7 +3,7 @@ import React from 'react';
 
 import { vaults } from '__mocks__/models/vaults';
 import { withCenterStory, withRouter } from 'stories/decorators';
-import { PALETTE } from 'theme/MuiThemeProvider/muiTheme';
+import { PALETTE } from '@/theme/MuiThemeProvider/muiTheme';
 
 import VaultsBreakdown from '.';
 

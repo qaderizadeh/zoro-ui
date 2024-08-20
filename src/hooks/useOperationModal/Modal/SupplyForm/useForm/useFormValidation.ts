@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
-import { Asset, Swap, SwapError } from 'types';
-import { areTokensEqual, convertWeiToTokens } from 'utilities';
+import { Asset, Swap, SwapError } from '@/types';
+import { areTokensEqual, convertWeiToTokens } from '@/utilities';
 
 import { FormError, FormValues } from './types';
 
@@ -67,7 +67,10 @@ const useFormValidation = ({
       ? new BigNumber(formValues.amountTokens)
       : undefined;
 
-    if (!fromTokenAmountTokens || fromTokenAmountTokens.isLessThanOrEqualTo(0)) {
+    if (
+      !fromTokenAmountTokens ||
+      fromTokenAmountTokens.isLessThanOrEqualTo(0)
+    ) {
       return 'INVALID_TOKEN_AMOUNT';
     }
 
@@ -78,7 +81,10 @@ const useFormValidation = ({
       return 'HIGHER_THAN_WALLET_BALANCE';
     }
 
-    const isUsingSwap = !areTokensEqual(formValues.fromToken, asset.vToken.underlyingToken);
+    const isUsingSwap = !areTokensEqual(
+      formValues.fromToken,
+      asset.vToken.underlyingToken
+    );
     const toTokensAmountSuppliedTokens = isUsingSwap
       ? getSwapToTokenAmountReceivedTokens(swap)
       : fromTokenAmountTokens;

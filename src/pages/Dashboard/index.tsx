@@ -1,10 +1,12 @@
+'use client';
+
 /** @jsxImportSource @emotion/react */
-import alertImg from './../../assets/img/alert.png'
-import ConnectWalletBanner from './ConnectWalletBanner'
-import { useStyles } from './styles'
-import TEST_IDS from './testIds'
-import useFormatPools from './useFormatPools'
-import { useGetPools } from 'clients/api'
+import alertImg from './../../assets/img/alert.png';
+import ConnectWalletBanner from './ConnectWalletBanner';
+import { useStyles } from './styles';
+import TEST_IDS from './testIds';
+import useFormatPools from './useFormatPools';
+import { useGetPools } from '@/clients/api';
 import {
   ButtonGroup,
   NoticeWarning,
@@ -12,68 +14,68 @@ import {
   TagGroup,
   TextField,
   TokenAnnouncement,
-  Tooltip
-} from 'components'
-import { TOKENS } from 'constants/tokens'
-import { MarketTable, MarketTableProps } from 'containers/MarketTable'
-import { useAuth } from 'context/AuthContext'
-import { useHideXlDownCss, useShowXlDownCss } from 'hooks/responsive'
-import React, { InputHTMLAttributes, useMemo, useState } from 'react'
-import { useTranslation } from 'translation'
-import { Pool } from 'types'
-import { isFeatureEnabled } from 'utilities'
+  Tooltip,
+} from '@/components';
+import { TOKENS } from '@/constants/tokens';
+import { MarketTable, MarketTableProps } from '@/containers/MarketTable';
+import { useAuth } from '@/context/AuthContext';
+import { useHideXlDownCss, useShowXlDownCss } from '@/hooks/responsive';
+import { useTranslation } from '@/translation';
+// import { Pool } from '@/types';
+import { isFeatureEnabled } from '@/utilities';
+import React, { InputHTMLAttributes, useMemo, useState } from 'react';
 
 interface DashboardUiProps {
-  searchValue: string
-  onSearchInputChange: (newValue: string) => void
-  pools: Pool[]
-  isFetchingPools?: boolean
+  searchValue: string;
+  onSearchInputChange: (newValue: string) => void;
+  pools: Pool[];
+  isFetchingPools?: boolean;
 }
 
 export const DashboardUi: React.FC<DashboardUiProps> = ({
   pools,
   isFetchingPools,
   searchValue,
-  onSearchInputChange
+  onSearchInputChange,
 }) => {
-  const { t } = useTranslation()
-  const styles = useStyles()
-  const [activeTabIndex, setActiveTabIndex] = useState(0)
-  const [selectedPoolTagIndex, setSelectedPoolTagIndex] = useState<number>(0)
+  const { t } = useTranslation();
+  const styles = useStyles();
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [selectedPoolTagIndex, setSelectedPoolTagIndex] = useState<number>(0);
 
-  const showXlDownCss = useShowXlDownCss()
-  const hideXlDownCss = useHideXlDownCss()
+  const showXlDownCss = useShowXlDownCss();
+  const hideXlDownCss = useHideXlDownCss();
 
   const handleSearchInputChange: InputHTMLAttributes<HTMLInputElement>['onChange'] =
-    changeEvent => onSearchInputChange(changeEvent.currentTarget.value)
+    (changeEvent) => onSearchInputChange(changeEvent.currentTarget.value);
 
   const formattedPools = useFormatPools({
     pools,
     searchValue,
-    selectedPoolIndex: 0
-  })
+    selectedPoolIndex: 0,
+  });
 
   const isolatedFormattedPools = useFormatPools({
     pools,
     searchValue,
-    selectedPoolIndex: 1
-  })
+    selectedPoolIndex: 1,
+  });
 
   const poolTags: Tag[] = useMemo(
     () =>
       [
         {
           id: 'all',
-          content: t('dashboard.allTag')
-        }
+          content: t('dashboard.allTag'),
+        },
       ].concat(
-        pools.map(pool => ({
+        pools.map((pool) => ({
           id: pool.comptrollerAddress,
-          content: pool.name
+          content: pool.name,
         }))
       ),
     [pools]
-  )
+  );
 
   const supplyMarketTableProps: MarketTableProps = {
     pools: formattedPools,
@@ -85,13 +87,13 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
       : ['asset', 'supplyApyLtv', 'userWalletBalance', 'collateral'],
     initialOrder: {
       orderBy: 'supplyApyLtv',
-      orderDirection: 'desc'
-    }
-  }
+      orderDirection: 'desc',
+    },
+  };
   const isolatedSupplyMarketTableProps: MarketTableProps = {
-    ...supplyMarketTableProps
-  }
-  isolatedSupplyMarketTableProps.pools = isolatedFormattedPools
+    ...supplyMarketTableProps,
+  };
+  isolatedSupplyMarketTableProps.pools = isolatedFormattedPools;
 
   const borrowMarketTableProps: MarketTableProps = {
     pools: formattedPools,
@@ -103,13 +105,13 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
       : ['asset', 'borrowApy', 'userWalletBalance', 'liquidity'],
     initialOrder: {
       orderBy: 'borrowApy',
-      orderDirection: 'asc'
-    }
-  }
+      orderDirection: 'asc',
+    },
+  };
   const isolatedBorrowMarketTableProps: MarketTableProps = {
-    ...borrowMarketTableProps
-  }
-  isolatedBorrowMarketTableProps.pools = isolatedFormattedPools
+    ...borrowMarketTableProps,
+  };
+  isolatedBorrowMarketTableProps.pools = isolatedFormattedPools;
 
   //<NoticeWarning css={styles.banner} description={t('dashboard.banner.borrowApyChange')} />
 
@@ -213,7 +215,7 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
                 fullWidth
                 buttonLabels={[
                   t('dashboard.supplyTabTitle'),
-                  t('dashboard.borrowTabTitle')
+                  t('dashboard.borrowTabTitle'),
                 ]}
                 activeButtonIndex={activeTabIndex}
                 onButtonClick={setActiveTabIndex}
@@ -234,12 +236,12 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
               'userWalletBalance',
               'labeledSupplyApyLtv',
               'labeledBorrowApy',
-              'liquidity'
+              'liquidity',
             ]}
             marketType='supply'
             initialOrder={{
               orderBy: 'userWalletBalance',
-              orderDirection: 'desc'
+              orderDirection: 'desc',
             }}
             testId={TEST_IDS.marketTable}
             key='dashboard-market-table'
@@ -337,12 +339,12 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
               'userWalletBalance',
               'labeledSupplyApyLtv',
               'labeledBorrowApy',
-              'liquidity'
+              'liquidity',
             ]}
             marketType='supply'
             initialOrder={{
               orderBy: 'userWalletBalance',
-              orderDirection: 'desc'
+              orderDirection: 'desc',
             }}
             testId={TEST_IDS.marketTable}
             key='dashboard-market-table'
@@ -383,26 +385,5 @@ export const DashboardUi: React.FC<DashboardUiProps> = ({
         )}
       </div>
     </>
-  )
-}
-
-const Dashboard: React.FC = () => {
-  const { accountAddress } = useAuth()
-
-  const [searchValue, setSearchValue] = useState('')
-
-  const { data: getPoolData, isLoading: isGetPoolsLoading } = useGetPools({
-    accountAddress
-  })
-
-  return (
-    <DashboardUi
-      pools={getPoolData?.pools || []}
-      isFetchingPools={isGetPoolsLoading}
-      searchValue={searchValue}
-      onSearchInputChange={setSearchValue}
-    />
-  )
-}
-
-export default Dashboard
+  );
+};

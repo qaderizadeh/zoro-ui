@@ -1,13 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import { ButtonGroup } from 'components';
+import { ButtonGroup } from '@/components';
 import React, { useMemo, useState } from 'react';
-import { useTranslation } from 'translation';
-import { Pool } from 'types';
+import { useTranslation } from '@/translation';
+import { Pool } from '@/types';
 
-import { MarketTable, MarketTableProps } from 'containers/MarketTable';
-import { useHideMdDownCss, useHideXlDownCss, useShowXlDownCss } from 'hooks/responsive';
+import { MarketTable, MarketTableProps } from '@/containers/MarketTable';
+import {
+  useHideMdDownCss,
+  useHideXlDownCss,
+  useShowXlDownCss,
+} from '@/hooks/responsive';
 
 import TEST_IDS from '../testIds';
 import { useStyles } from './styles';
@@ -34,7 +38,9 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
         pools: [
           {
             ...pool,
-            assets: pool.assets.filter(asset => asset.userSupplyBalanceTokens.isGreaterThan(0)),
+            assets: pool.assets.filter((asset) =>
+              asset.userSupplyBalanceTokens.isGreaterThan(0)
+            ),
           },
         ],
         marketType: 'supply',
@@ -49,19 +55,26 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
         pools: [
           {
             ...pool,
-            assets: pool.assets.filter(asset => asset.userBorrowBalanceTokens.isGreaterThan(0)),
+            assets: pool.assets.filter((asset) =>
+              asset.userBorrowBalanceTokens.isGreaterThan(0)
+            ),
           },
         ],
         marketType: 'borrow',
         breakpoint: 'md',
-        columns: ['asset', 'borrowApy', 'userBorrowBalance', 'userPercentOfLimit'],
+        columns: [
+          'asset',
+          'borrowApy',
+          'userBorrowBalance',
+          'userPercentOfLimit',
+        ],
         initialOrder: {
           orderBy: 'userBorrowBalance',
           orderDirection: 'desc',
         },
       },
     }),
-    [pool],
+    [pool]
   );
 
   return (
@@ -82,7 +95,10 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
       {/* Tablet/Mobile view */}
       <Paper css={[styles.tabletContainer, showXlDownCss]}>
         <div css={styles.tabletHeader}>
-          <Typography variant="h4" css={[styles.tabletHeaderTitle, hideMdDownCss]}>
+          <Typography
+            variant='h4'
+            css={[styles.tabletHeaderTitle, hideMdDownCss]}
+          >
             {t('account.marketBreakdown.tables.tabletTitle')}
           </Typography>
 
@@ -99,13 +115,13 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
 
         {activeTabIndex === 0 ? (
           <MarketTable
-            key="supply-market-table"
+            key='supply-market-table'
             {...marketTableProps.supply}
             css={styles.tabletMarketTable}
           />
         ) : (
           <MarketTable
-            key="borrow-market-table"
+            key='borrow-market-table'
             {...marketTableProps.borrow}
             css={styles.tabletMarketTable}
           />

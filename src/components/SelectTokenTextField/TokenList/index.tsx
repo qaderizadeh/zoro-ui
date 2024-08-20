@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import React, { InputHTMLAttributes, useMemo, useState } from 'react';
-import { useTranslation } from 'translation';
-import { Token, TokenBalance } from 'types';
-import { convertWeiToTokens } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Token, TokenBalance } from '@/types';
+import { convertWeiToTokens } from '@/utilities';
 
-import { TOKENS } from 'constants/tokens';
+import { TOKENS } from '@/constants/tokens';
 
 import { SenaryButton } from '../../Button';
 import { TextField } from '../../TextField';
@@ -33,8 +33,8 @@ export const TokenList: React.FC<TokenListProps> = ({
 
   const [searchValue, setSearchValue] = useState('');
 
-  const handleSearchInputChange: InputHTMLAttributes<HTMLInputElement>['onChange'] = event =>
-    setSearchValue(event.currentTarget.value);
+  const handleSearchInputChange: InputHTMLAttributes<HTMLInputElement>['onChange'] =
+    (event) => setSearchValue(event.currentTarget.value);
 
   // Sort tokens alphabetically, placing tokens with a non-zero balance at the
   // top of the list
@@ -57,7 +57,7 @@ export const TokenList: React.FC<TokenListProps> = ({
         // If b is non-negative and a is negative, b comes first
         return 1;
       }) as TokenBalance[],
-    [tokenBalances],
+    [tokenBalances]
   );
 
   // Filter tokens based on search
@@ -70,9 +70,11 @@ export const TokenList: React.FC<TokenListProps> = ({
 
     // Enable user to search by symbol or address
     return sortedTokenBalances.filter(
-      tokenBalance =>
-        tokenBalance.token.symbol.toLowerCase().includes(formattedSearchValue) ||
-        tokenBalance.token.address.toLowerCase().includes(formattedSearchValue),
+      (tokenBalance) =>
+        tokenBalance.token.symbol
+          .toLowerCase()
+          .includes(formattedSearchValue) ||
+        tokenBalance.token.address.toLowerCase().includes(formattedSearchValue)
     );
   }, [sortedTokenBalances, searchValue]);
 
@@ -86,24 +88,27 @@ export const TokenList: React.FC<TokenListProps> = ({
           value={searchValue}
           onChange={handleSearchInputChange}
           placeholder={t('selectTokenTextField.searchInput.placeholder')}
-          leftIconSrc="magnifier"
+          leftIconSrc='magnifier'
         />
 
         <div css={styles.commonTokenList}>
-          {COMMON_TOKENS.map(commonToken => (
+          {COMMON_TOKENS.map((commonToken) => (
             <SenaryButton
               onClick={() => onTokenClick(commonToken)}
               css={styles.commonTokenButton}
               key={`select-token-text-field-common-token-${commonToken.symbol}`}
             >
-              <TokenIconWithSymbol css={parentStyles.token} token={commonToken} />
+              <TokenIconWithSymbol
+                css={parentStyles.token}
+                token={commonToken}
+              />
             </SenaryButton>
           ))}
         </div>
       </div>
 
       <div css={styles.list}>
-        {filteredTokenBalances.map(tokenBalance => (
+        {filteredTokenBalances.map((tokenBalance) => (
           <div
             css={styles.item}
             onClick={() => onTokenClick(tokenBalance.token)}
@@ -116,9 +121,12 @@ export const TokenList: React.FC<TokenListProps> = ({
               })
             }
           >
-            <TokenIconWithSymbol css={parentStyles.token} token={tokenBalance.token} />
+            <TokenIconWithSymbol
+              css={parentStyles.token}
+              token={tokenBalance.token}
+            />
 
-            <Typography variant="small2">
+            <Typography variant='small2'>
               {convertWeiToTokens({
                 valueWei: tokenBalance.balanceWei,
                 token: tokenBalance.token,

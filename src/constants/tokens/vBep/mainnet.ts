@@ -1,4 +1,4 @@
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
 import { MAINNET_TOKENS } from '../common/mainnet';
 

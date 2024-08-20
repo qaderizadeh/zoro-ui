@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { BigNumber } from 'bignumber.js';
 import React, { useMemo } from 'react';
-import { useTranslation } from 'translation';
-import { convertWeiToTokens } from 'utilities';
+import { useTranslation } from '@/translation';
+import { convertWeiToTokens } from '@/utilities';
 
-import { TOKENS } from 'constants/tokens';
-import { PALETTE } from 'theme/MuiThemeProvider/muiTheme';
+import { TOKENS } from '@/constants/tokens';
+import { PALETTE } from '@/theme/MuiThemeProvider/muiTheme';
 
 import { LabeledProgressBar } from '../ProgressBar/LabeledProgressBar';
 import { useStyles } from './styles';
@@ -86,26 +86,28 @@ export const ActiveVotingProgress: React.FC<ActiveVotingProgressProps> = ({
         },
       },
     ],
-    [votedForWei, votedAgainstWei, abstainedWei],
+    [votedForWei, votedAgainstWei, abstainedWei]
   );
 
   return (
     <div css={styles.votesWrapper}>
-      {activeProposalVotingData.map(({ id, label, value, progressBarProps }) => {
-        if (!value) {
-          return null;
+      {activeProposalVotingData.map(
+        ({ id, label, value, progressBarProps }) => {
+          if (!value) {
+            return null;
+          }
+          return (
+            <div key={id} css={styles.bar}>
+              <LabeledProgressBar
+                greyLeftText={label}
+                whiteRightText={value}
+                {...defaultProgressbarProps}
+                {...progressBarProps}
+              />
+            </div>
+          );
         }
-        return (
-          <div key={id} css={styles.bar}>
-            <LabeledProgressBar
-              greyLeftText={label}
-              whiteRightText={value}
-              {...defaultProgressbarProps}
-              {...progressBarProps}
-            />
-          </div>
-        );
-      })}
+      )}
     </div>
   );
 };

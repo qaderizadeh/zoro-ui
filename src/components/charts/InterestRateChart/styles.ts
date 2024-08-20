@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 import { ReferenceLine } from 'recharts';
 
-import { SPACING } from 'theme/MuiThemeProvider/muiTheme';
+import { SPACING } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const useStyles = () => {
   const theme = useTheme();

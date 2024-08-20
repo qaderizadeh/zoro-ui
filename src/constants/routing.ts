@@ -1,4 +1,4 @@
-import { isFeatureEnabled } from 'utilities';
+import { isFeatureEnabled } from '@/utilities';
 
 export enum Subdirectory {
   DASHBOARD = '/',
@@ -62,5 +62,5 @@ export const routes = Object.keys(routeSubdirectories).reduce<Routes>(
           },
         }
       : obj,
-  {} as Routes,
+  {} as Routes
 );

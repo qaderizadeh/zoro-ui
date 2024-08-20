@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { Table, TableProps, switchAriaLabel, toast } from 'components';
-import { VError, formatVErrorToReadableString } from 'errors';
+import { Table, TableProps, switchAriaLabel, toast } from '@/components';
+import { VError, formatVErrorToReadableString } from '@/errors';
 import React, { useContext, useMemo } from 'react';
-import { Pool } from 'types';
+import { Pool } from '@/types';
 
-import { TOKENS } from 'constants/tokens';
-//import { DisableLunaUstWarningContext } from 'context/DisableLunaUstWarning';
-import useCollateral from 'hooks/useCollateral';
-import useOperationModal from 'hooks/useOperationModal';
+import { TOKENS } from '@/constants/tokens';
+//import { DisableLunaUstWarningContext } from '@/context/DisableLunaUstWarning';
+import useCollateral from '@/hooks/useCollateral';
+import useOperationModal from '@/hooks/useOperationModal';
 
 import { useStyles } from './styles';
 import { ColumnKey, PoolAsset } from './types';
@@ -15,7 +15,10 @@ import useGenerateColumns from './useGenerateColumns';
 
 export interface MarketTableProps
   extends Partial<
-      Omit<TableProps<PoolAsset>, 'columns' | 'rowKeyIndex' | 'breakpoint' | 'initialOrder'>
+      Omit<
+        TableProps<PoolAsset>,
+        'columns' | 'rowKeyIndex' | 'breakpoint' | 'initialOrder'
+      >
     >,
     Pick<TableProps<PoolAsset>, 'breakpoint'> {
   pools: Pool[];
@@ -44,7 +47,7 @@ export const MarketTable: React.FC<MarketTableProps> = ({
   const { CollateralModal, toggleCollateral } = useCollateral();
 
   //const { hasLunaOrUstCollateralEnabled, openLunaUstWarningModal } = useContext(
-    //DisableLunaUstWarningContext,
+  //DisableLunaUstWarningContext,
   //);
 
   const handleCollateralChange = async (poolAssetToUpdate: PoolAsset) => {
@@ -65,14 +68,14 @@ export const MarketTable: React.FC<MarketTableProps> = ({
   const poolAssets = useMemo(
     () =>
       pools.reduce((acc, pool) => {
-        const newPoolAssets: PoolAsset[] = pool.assets.map(asset => ({
+        const newPoolAssets: PoolAsset[] = pool.assets.map((asset) => ({
           ...asset,
           pool,
         }));
 
         return acc.concat(newPoolAssets);
       }, [] as PoolAsset[]),
-    [pools],
+    [pools]
   );
 
   const columns = useGenerateColumns({
@@ -86,7 +89,9 @@ export const MarketTable: React.FC<MarketTableProps> = ({
       return undefined;
     }
 
-    const oderByColumn = columns.find(column => column.key === initialOrder.orderBy);
+    const oderByColumn = columns.find(
+      (column) => column.key === initialOrder.orderBy
+    );
 
     return (
       oderByColumn && {
@@ -100,14 +105,14 @@ export const MarketTable: React.FC<MarketTableProps> = ({
     // Block action and show warning modal if user has LUNA or UST enabled as
     // collateral and is attempting to open the supply modal of other assets
     //if (
-      //hasLunaOrUstCollateralEnabled &&
-      //row.vToken.underlyingToken.address !== TOKENS.luna.address &&
-      //row.vToken.underlyingToken.address !== TOKENS.ust.address
+    //hasLunaOrUstCollateralEnabled &&
+    //row.vToken.underlyingToken.address !== TOKENS.luna.address &&
+    //row.vToken.underlyingToken.address !== TOKENS.ust.address
     //) {
-      //e.preventDefault();
-      //e.stopPropagation();
-      //openLunaUstWarningModal();
-      //return;
+    //e.preventDefault();
+    //e.stopPropagation();
+    //openLunaUstWarningModal();
+    //return;
     //}
 
     // Do nothing if user clicked on switch (the switch element will handle the
@@ -129,7 +134,9 @@ export const MarketTable: React.FC<MarketTableProps> = ({
         columns={columns}
         data={poolAssets}
         css={styles.cardContentGrid}
-        rowKeyExtractor={row => `market-table-row-${marketType}-${row.vToken.address}`}
+        rowKeyExtractor={(row) =>
+          `market-table-row-${marketType}-${row.vToken.address}`
+        }
         rowOnClick={getRowHref ? undefined : rowOnClick}
         getRowHref={getRowHref}
         initialOrder={formattedInitialOrder}

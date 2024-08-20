@@ -1,46 +1,46 @@
 /** @jsxImportSource @emotion/react */
-import { FormError } from '../useForm/types'
-import { PrimaryButton } from 'components'
-import React, { useContext, useMemo } from 'react'
-import { useTranslation } from 'translation'
-import { GeolocationContext } from 'context/GeolocationContext'
+import { FormError } from '../useForm/types';
+import { PrimaryButton } from '@/components';
+import React, { useContext, useMemo } from 'react';
+import { useTranslation } from '@/translation';
+import { GeolocationContext } from '@/context/GeolocationContext';
 export interface SubmitSectionProps {
-  isFormValid: boolean
-  isFormSubmitting: boolean
-  fromTokenAmountTokens: string
-  formError?: FormError
+  isFormValid: boolean;
+  isFormSubmitting: boolean;
+  fromTokenAmountTokens: string;
+  formError?: FormError;
 }
 
 export const SubmitSection: React.FC<SubmitSectionProps> = ({
   isFormValid,
   isFormSubmitting,
   fromTokenAmountTokens,
-  formError
+  formError,
 }) => {
-  const { t } = useTranslation()
-  const { geolocation } = useContext(GeolocationContext)
+  const { t } = useTranslation();
+  const { geolocation } = useContext(GeolocationContext);
 
   const submitButtonLabel = useMemo(() => {
     if (geolocation) {
-      return t('blockedRegion')
+      return t('blockedRegion');
     }
 
     if (!isFormSubmitting && formError === 'HIGHER_THAN_WITHDRAWABLE_AMOUNT') {
       return t(
         'operationModal.withdraw.submitButtonLabel.higherThanWithdrawableAmount'
-      )
+      );
     }
 
     if (!isFormValid) {
-      return t('operationModal.withdraw.submitButtonLabel.enterValidAmount')
+      return t('operationModal.withdraw.submitButtonLabel.enterValidAmount');
     }
 
     if (isFormSubmitting) {
-      return t('operationModal.withdraw.submitButtonLabel.withdrawing')
+      return t('operationModal.withdraw.submitButtonLabel.withdrawing');
     }
 
-    return t('operationModal.withdraw.submitButtonLabel.withdraw')
-  }, [fromTokenAmountTokens, isFormValid, formError, isFormSubmitting])
+    return t('operationModal.withdraw.submitButtonLabel.withdraw');
+  }, [fromTokenAmountTokens, isFormValid, formError, isFormSubmitting]);
 
   return (
     <PrimaryButton
@@ -52,12 +52,12 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
       style={{
         backgroundImage: isFormSubmitting
           ? 'linear-gradient(114deg, #ecaf54 0%, #e9bc11 100%)'
-          : ''
+          : '',
       }}
     >
       {submitButtonLabel}
     </PrimaryButton>
-  )
-}
+  );
+};
 
-export default SubmitSection
+export default SubmitSection;

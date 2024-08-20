@@ -1,61 +1,60 @@
 /** @jsxImportSource @emotion/react */
-import { MenuItem } from "../../types";
-import React from "react";
-import { NavLink, matchPath } from "react-router-dom";
+import { PropsWithChildren } from 'react';
+import Link from 'next/link';
 
 export interface LinkProps {
-  href: MenuItem["href"];
+  href: string;
   onClick?: () => void;
   isMobile?: boolean;
   target?: boolean;
 }
 
-export const Link: React.FC<LinkProps> = ({
+export const LinkComponent = ({
   children,
   onClick,
   href,
   isMobile = false,
   target = true,
-}) => {
-  if (href[0] === "/") {
+}: PropsWithChildren<LinkProps>) => {
+  if (href[0] === '/') {
     const activeClassName = isMobile
-      ? "active-mobile-menu-item"
-      : "active-menu-item";
+      ? 'active-mobile-menu-item'
+      : 'active-menu-item';
 
     return (
-      <NavLink
-        to={href}
-        exact={href === "/"}
-        isActive={(_match, location) => {
-          // Handle home page
-          if (location.pathname === "/" && href !== "/") {
-            return false;
-          }
+      <Link
+        href={href}
+        // exact={href === '/'}
+        // isActive={(_match, location) => {
+        //   // Handle home page
+        //   if (location.pathname === "/" && href !== "/") {
+        //     return false;
+        //   }
 
-          // Only match against the first part of the pathname since the sidebar
-          // nav items represent the top level pages
-          const formattedPathname = location.pathname
-            .split("/")
-            .slice(0, 2)
-            .join("/");
-          return !!matchPath(href, formattedPathname);
-        }}
+        //   // Only match against the first part of the pathname since the sidebar
+        //   // nav items represent the top level pages
+        //   const formattedPathname = location.pathname
+        //     .split("/")
+        //     .slice(0, 2)
+        //     .join("/");
+        //   return !!matchPath(href, formattedPathname);
+        // }}
         onClick={onClick}
-        activeClassName={activeClassName}
+        // activeClassName={activeClassName}
       >
         {children}
-      </NavLink>
+      </Link>
     );
   }
 
   return (
     <>
       {!target ? (
-        <a href={href} rel="noreferrer">
+        <a href={href} rel='noreferrer'>
           {children}
         </a>
       ) : (
-        <a href={href} target="_blank" rel="noreferrer">
+        <a href={href} target='_blank' rel='noreferrer'>
           {children}
         </a>
       )}

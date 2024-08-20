@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
-import { Swap, SwapError, Token } from 'types';
-import { areTokensEqual, convertWeiToTokens } from 'utilities';
+import { Swap, SwapError, Token } from '@/types';
+import { areTokensEqual, convertWeiToTokens } from '@/utilities';
 
 import { FormError, FormValues } from './types';
 
@@ -62,7 +62,10 @@ const useFormValidation = ({
       ? new BigNumber(formValues.amountTokens)
       : undefined;
 
-    if (!fromTokenAmountTokens || fromTokenAmountTokens.isLessThanOrEqualTo(0)) {
+    if (
+      !fromTokenAmountTokens ||
+      fromTokenAmountTokens.isLessThanOrEqualTo(0)
+    ) {
       return 'INVALID_TOKEN_AMOUNT';
     }
 

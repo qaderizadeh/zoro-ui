@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { NoticeError } from 'components';
+import { NoticeError } from '@/components';
 import React from 'react';
-import { useTranslation } from 'translation';
-import { Asset } from 'types';
-import { formatTokensToReadableValue } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Asset } from '@/types';
+import { formatTokensToReadableValue } from '@/utilities';
 
 import { useStyles as useSharedStyles } from '../styles';
 import TEST_IDS from './testIds';

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Asset } from 'types';
-//import { formatToReadablePercentage, getCombinedDistributionApys } from 'utilities';
-import { formatToReadablePercentage } from 'utilities';
+import { Asset } from '@/types';
+//import { formatToReadablePercentage, getCombinedDistributionApys } from '@/utilities';
+import { formatToReadablePercentage } from '@/utilities';
 
 export interface UseAssetInfoInput {
   asset?: Asset;
@@ -18,24 +18,33 @@ const useAssetInfo = ({ asset, type }: UseAssetInfoInput) => {
       return [];
     }
 
-    const distributionRows = asset.distributions.map(distribution => ({
-      label: t('assetInfo.distributionApy', { tokenSymbol: distribution.token.symbol }),
+    const distributionRows = asset.distributions.map((distribution) => ({
+      label: t('assetInfo.distributionApy', {
+        tokenSymbol: distribution.token.symbol,
+      }),
       iconSrc: distribution.token,
       children: formatToReadablePercentage(
-        type === 'borrow' ? distribution.borrowApyPercentage : distribution.supplyApyPercentage,
+        type === 'borrow'
+          ? distribution.borrowApyPercentage
+          : distribution.supplyApyPercentage
       ),
     }));
 
     //const combinedDistributionApys = getCombinedDistributionApys({
-      //asset,
+    //asset,
     //});
 
     return [
       {
-        label: type === 'borrow' ? t('assetInfo.borrowApy') : t('assetInfo.supplyApy'),
+        label:
+          type === 'borrow'
+            ? t('assetInfo.borrowApy')
+            : t('assetInfo.supplyApy'),
         iconSrc: asset.vToken.underlyingToken,
         children: formatToReadablePercentage(
-          type === 'borrow' ? asset.borrowApyPercentage : asset.supplyApyPercentage,
+          type === 'borrow'
+            ? asset.borrowApyPercentage
+            : asset.supplyApyPercentage
         ),
       },
       ...distributionRows,
@@ -48,7 +57,7 @@ const useAssetInfo = ({ asset, type }: UseAssetInfoInput) => {
         children: formatToReadablePercentage(
           type === 'borrow'
             ? asset.borrowApyPercentage.minus(0)
-            : asset.supplyApyPercentage.plus(0),
+            : asset.supplyApyPercentage.plus(0)
         ),
       },
     ];

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { truncateAddress } from 'utilities';
+import { truncateAddress } from '@/utilities';
 
 import { useStyles } from './styles';
 import { Breakpoint } from './types';
@@ -26,11 +26,17 @@ export const EllipseAddress: React.FC<AddressProps> = ({
 
   return (
     <>
-      <span className={className} css={styles.getAddress({ ellipseBreakpoint })}>
+      <span
+        className={className}
+        css={styles.getAddress({ ellipseBreakpoint })}
+      >
         {address}
       </span>
 
-      <span className={className} css={styles.getFormattedAddress({ ellipseBreakpoint })}>
+      <span
+        className={className}
+        css={styles.getFormattedAddress({ ellipseBreakpoint })}
+      >
         {truncatedAddress}
       </span>
     </>

@@ -4,7 +4,7 @@ import noop from 'noop-ts';
 import React from 'react';
 
 import { withCenterStory, withThemeProvider } from 'stories/decorators';
-import { PALETTE } from 'theme/MuiThemeProvider/muiTheme';
+import { PALETTE } from '@/theme/MuiThemeProvider/muiTheme';
 
 import { Pagination } from '.';
 
@@ -23,7 +23,11 @@ const PaginationTemplate: StoryFn<{
   itemsCount: number;
   itemsPerPageCount?: number;
 }> = ({ itemsPerPageCount }) => (
-  <Pagination itemsCount={25} onChange={noop} itemsPerPageCount={itemsPerPageCount} />
+  <Pagination
+    itemsCount={25}
+    onChange={noop}
+    itemsPerPageCount={itemsPerPageCount}
+  />
 );
 
 export const PaginationWithCustomContentPerPage = PaginationTemplate.bind({});

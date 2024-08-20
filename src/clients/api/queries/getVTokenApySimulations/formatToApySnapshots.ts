@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
 import { ContractCallResults } from 'ethereum-multicall';
 
-import { BLOCKS_PER_DAY } from 'constants/zk';
-import { SECONDS_PER_DAY } from 'constants/zk';
-import { COMPOUND_MANTISSA } from 'constants/compoundMantissa';
-import { DAYS_PER_YEAR } from 'constants/daysPerYear';
+import { BLOCKS_PER_DAY } from '@/constants/zk';
+import { SECONDS_PER_DAY } from '@/constants/zk';
+import { COMPOUND_MANTISSA } from '@/constants/compoundMantissa';
+import { DAYS_PER_YEAR } from '@/constants/daysPerYear';
 
 import { VTokenApySnapshot } from './types';
 
@@ -14,7 +14,8 @@ const formatToApySnapshots = ({
   vTokenBalanceCallResults: ContractCallResults;
 }): VTokenApySnapshot[] => {
   const apySimulations: VTokenApySnapshot[] = [];
-  const results = Object.values(vTokenBalanceCallResults.results)[0].callsReturnContext;
+  const results = Object.values(vTokenBalanceCallResults.results)[0]
+    .callsReturnContext;
   let utilizationRate = 1;
 
   for (let i = 0; i < results.length; i += 2) {

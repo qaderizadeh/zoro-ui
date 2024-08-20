@@ -1,13 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import { Paper, Typography } from '@mui/material';
 import BigNumber from 'bignumber.js';
-import { BorrowLimitUsedAccountHealth, Cell, CellGroup, Icon, Tooltip } from 'components';
+import {
+  BorrowLimitUsedAccountHealth,
+  Cell,
+  CellGroup,
+  Icon,
+  Tooltip,
+} from '@/components';
 import React from 'react';
-import { useTranslation } from 'translation';
-import { Pool, Vault } from 'types';
-import { formatCentsToReadableValue, formatToReadablePercentage } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Pool, Vault } from '@/types';
+import {
+  formatCentsToReadableValue,
+  formatToReadablePercentage,
+} from '@/utilities';
 
-import { SAFE_BORROW_LIMIT_PERCENTAGE } from 'constants/safeBorrowLimitPercentage';
+import { SAFE_BORROW_LIMIT_PERCENTAGE } from '@/constants/safeBorrowLimitPercentage';
 
 import { useStyles } from './styles';
 import TEST_IDS from './testIds';
@@ -75,14 +84,18 @@ export const Summary: React.FC<SummaryProps> = ({
   ];
 
   //if (displayTotalVaultStake) {
-    //cells.push({
-      //label: t('account.marketBreakdown.cellGroup.totalVaultStake'),
-      //value: formatCentsToReadableValue({ value: totalVaultStakeCents }),
-    //});
+  //cells.push({
+  //label: t('account.marketBreakdown.cellGroup.totalVaultStake'),
+  //value: formatCentsToReadableValue({ value: totalVaultStakeCents }),
+  //});
   //}
 
   return (
-    <Paper css={styles.container} className={className} data-testid={TEST_IDS.container}>
+    <Paper
+      css={styles.container}
+      className={className}
+      data-testid={TEST_IDS.container}
+    >
       <CellGroup
         smallValues={displayAccountHealth}
         cells={cells}
@@ -93,7 +106,7 @@ export const Summary: React.FC<SummaryProps> = ({
       {displayAccountHealth && (
         <div css={styles.accountHealth} data-testid={TEST_IDS.accountHealth}>
           <BorrowLimitUsedAccountHealth
-            variant="borrowLimitUsed"
+            variant='borrowLimitUsed'
             borrowBalanceCents={totalBorrowCents.toNumber()}
             borrowLimitCents={borrowLimitCents.toNumber()}
             safeBorrowLimitPercentage={SAFE_BORROW_LIMIT_PERCENTAGE}
@@ -101,16 +114,20 @@ export const Summary: React.FC<SummaryProps> = ({
           />
 
           <div css={styles.accountHealthFooter}>
-            <Icon name="shield" css={styles.shieldIcon} />
+            <Icon name='shield' css={styles.shieldIcon} />
 
-            <Typography component="span" variant="small2" css={styles.inlineLabel}>
+            <Typography
+              component='span'
+              variant='small2'
+              css={styles.inlineLabel}
+            >
               {t('myAccount.safeLimit')}
             </Typography>
 
             <Typography
-              component="span"
-              variant="small1"
-              color="text.primary"
+              component='span'
+              variant='small1'
+              color='text.primary'
               css={styles.safeLimit}
               className=''
             >
@@ -119,9 +136,11 @@ export const Summary: React.FC<SummaryProps> = ({
 
             <Tooltip
               css={styles.tooltip}
-              title={t('myAccount.safeLimitTooltip', { safeBorrowLimitPercentage })}
+              title={t('myAccount.safeLimitTooltip', {
+                safeBorrowLimitPercentage,
+              })}
             >
-              <Icon css={styles.infoIcon} name="info" />
+              <Icon css={styles.infoIcon} name='info' />
             </Tooltip>
           </div>
         </div>

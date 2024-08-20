@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { Token, VToken } from 'types';
+import { Token, VToken } from '@/types';
 
-import { useAuth } from 'context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 
 import {
   getComptrollerContract,
@@ -22,12 +22,18 @@ import {
 
 export const useTokenContract = (token: Token) => {
   const { signer } = useAuth();
-  return useMemo(() => getTokenContract(token, signer || undefined), [signer, token]);
+  return useMemo(
+    () => getTokenContract(token, signer || undefined),
+    [signer, token]
+  );
 };
 
 export const useVTokenContract = (vToken: VToken) => {
   const { signer } = useAuth();
-  return useMemo(() => getVTokenContract(vToken, signer || undefined), [signer, vToken]);
+  return useMemo(
+    () => getVTokenContract(vToken, signer || undefined),
+    [signer, vToken]
+  );
 };
 
 export const useVaiControllerContract = () => {
@@ -42,7 +48,10 @@ export const useVaiVaultContract = () => {
 
 export const useComptrollerContract = (address: string) => {
   const { signer } = useAuth();
-  return useMemo(() => getComptrollerContract(address, signer || undefined), [signer]);
+  return useMemo(
+    () => getComptrollerContract(address, signer || undefined),
+    [signer]
+  );
 };
 
 export const useVenusLensContract = () => {
@@ -51,37 +60,37 @@ export const useVenusLensContract = () => {
 };
 
 //export const useXvsVaultContract = () => {
-  //const { signer } = useAuth();
-  //return useMemo(() => getXvsVaultContract(signer || undefined), [signer]);
+//const { signer } = useAuth();
+//return useMemo(() => getXvsVaultContract(signer || undefined), [signer]);
 //};
 
 //export const useXvsVaultProxyContract = () => {
-  //const { signer } = useAuth();
-  //return useMemo(() => getXvsVaultProxyContract(signer || undefined), [signer]);
+//const { signer } = useAuth();
+//return useMemo(() => getXvsVaultProxyContract(signer || undefined), [signer]);
 //};
 
 //export const useGovernorBravoDelegateContract = () => {
-  //const { signer } = useAuth();
-  //return useMemo(() => getGovernorBravoDelegateContract(signer || undefined), [signer]);
+//const { signer } = useAuth();
+//return useMemo(() => getGovernorBravoDelegateContract(signer || undefined), [signer]);
 //};
 
 // VRT conversion
 //export const useVrtConverterProxyContract = () => {
-  //const { signer } = useAuth();
-  //return useMemo(() => getVrtConverterProxyContract(signer || undefined), [signer]);
+//const { signer } = useAuth();
+//return useMemo(() => getVrtConverterProxyContract(signer || undefined), [signer]);
 //};
 
 //export const useXvsVestingProxyContract = () => {
-  //const { signer } = useAuth();
-  //return useMemo(() => getXvsVestingProxyContract(signer || undefined), [signer]);
+//const { signer } = useAuth();
+//return useMemo(() => getXvsVestingProxyContract(signer || undefined), [signer]);
 //};
 
 //export const useSwapRouterContract = (poolComptrollerAddress: string) => {
-  //const { signer } = useAuth();
-  //return useMemo(
-    //() => getSwapRouterContract(poolComptrollerAddress, signer || undefined),
-    //[signer],
-  //);
+//const { signer } = useAuth();
+//return useMemo(
+//() => getSwapRouterContract(poolComptrollerAddress, signer || undefined),
+//[signer],
+//);
 //};
 
 export const useMulticallContract = () => {

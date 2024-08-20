@@ -12,7 +12,7 @@ import {
   VaiVaultErrorReporterInfo,
   XvsVaultProxyErrorReporterError,
   XvsVaultProxyErrorReporterInfo,
-} from 'constants/contracts/errorReporter';
+} from '@/constants/contracts/errorReporter';
 
 import { VError, VErrorPhraseMap } from './VError';
 
@@ -33,9 +33,11 @@ const checkForTransactionError = (
     | typeof TokenErrorReporterFailureInfo
     | typeof VaiControllerErrorReporterFailureInfo
     | typeof VaiVaultErrorReporterInfo
-    | typeof XvsVaultProxyErrorReporterInfo,
+    | typeof XvsVaultProxyErrorReporterInfo
 ) => {
-  const failureEvent = receipt.events?.find(event => event.event === 'Failure');
+  const failureEvent = receipt.events?.find(
+    (event) => event.event === 'Failure'
+  );
 
   if (failureEvent) {
     const errorIndex = failureEvent.args?.error
@@ -59,25 +61,37 @@ export const checkForComptrollerTransactionError = (receipt: ContractReceipt) =>
   checkForTransactionError(
     receipt,
     ComptrollerErrorReporterError,
-    ComptrollerErrorReporterFailureInfo,
+    ComptrollerErrorReporterFailureInfo
   );
 
 export const checkForTokenTransactionError = (receipt: ContractReceipt) =>
-  checkForTransactionError(receipt, TokenErrorReporterError, TokenErrorReporterFailureInfo);
+  checkForTransactionError(
+    receipt,
+    TokenErrorReporterError,
+    TokenErrorReporterFailureInfo
+  );
 
-export const checkForVaiControllerTransactionError = (receipt: ContractReceipt) =>
+export const checkForVaiControllerTransactionError = (
+  receipt: ContractReceipt
+) =>
   checkForTransactionError(
     receipt,
     VaiControllerErrorReporterError,
-    VaiControllerErrorReporterFailureInfo,
+    VaiControllerErrorReporterFailureInfo
   );
 
 export const checkForVaiVaultTransactionError = (receipt: ContractReceipt) =>
-  checkForTransactionError(receipt, VaiVaultErrorReporterError, VaiVaultErrorReporterInfo);
+  checkForTransactionError(
+    receipt,
+    VaiVaultErrorReporterError,
+    VaiVaultErrorReporterInfo
+  );
 
-export const checkForXvsVaultProxyTransactionError = (receipt: ContractReceipt) =>
+export const checkForXvsVaultProxyTransactionError = (
+  receipt: ContractReceipt
+) =>
   checkForTransactionError(
     receipt,
     XvsVaultProxyErrorReporterError,
-    XvsVaultProxyErrorReporterInfo,
+    XvsVaultProxyErrorReporterInfo
   );

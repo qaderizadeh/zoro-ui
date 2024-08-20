@@ -1,4 +1,4 @@
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
 import { TESTNET_TOKENS } from '../common/testnet';
 
@@ -11,10 +11,10 @@ export const TESTNET_VBEP_TOKENS = {
   // underlyingToken: TESTNET_TOKENS.sxp,
   // } as VToken,
   //'0xd5c4c2e2facbeb59d0216d0595d63fcdc6f9a1a7': {
-    //address: '0xD5C4C2e2facBEB59D0216D0595d63FcDc6F9A1a7',
-    //decimals: 8,
-    //symbol: 'vUSDC',
-    //underlyingToken: TESTNET_TOKENS.usdc,
+  //address: '0xD5C4C2e2facBEB59D0216D0595d63FcDc6F9A1a7',
+  //decimals: 8,
+  //symbol: 'vUSDC',
+  //underlyingToken: TESTNET_TOKENS.usdc,
   //} as VToken,
   '0xb76ed02dea1ba444609602be5d587c4bffd67153': {
     address: '0xb76eD02Dea1ba444609602BE5D587c4bFfd67153',
@@ -40,12 +40,12 @@ export const TESTNET_VBEP_TOKENS = {
   // symbol: 'vBNB',
   // underlyingToken: TESTNET_TOKENS.bnb,
   // } as VToken,
-   //'0x6d6f697e34145bb95c54e77482d97cc261dc237e': {
-   //address: '0x6d6F697e34145Bb95c54E77482d97cc261Dc237E',
-   //decimals: 8,
-   //symbol: 'vXVS',
-   //underlyingToken: TESTNET_TOKENS.xvs,
-   //} as VToken,
+  //'0x6d6f697e34145bb95c54e77482d97cc261dc237e': {
+  //address: '0x6d6F697e34145Bb95c54E77482d97cc261Dc237E',
+  //decimals: 8,
+  //symbol: 'vXVS',
+  //underlyingToken: TESTNET_TOKENS.xvs,
+  //} as VToken,
   // '0xb6e9322c49fd75a367fcb17b0fcd62c5070ebcbe': {
   // address: '0xb6e9322C49FD75a367Fcb17B0Fcd62C5070EbCBe',
   // decimals: 8,
@@ -53,10 +53,10 @@ export const TESTNET_VBEP_TOKENS = {
   // underlyingToken: TESTNET_TOKENS.btcb,
   // } as VToken,
   //'0x162d005f0fff510e54958cfc5cf32a3180a84aab': {
-    //address: '0x162D005F0Fff510E54958Cfc5CF32A3180A84aab',
-    //decimals: 8,
-    //symbol: 'vETH',
-    //underlyingToken: TESTNET_TOKENS.eth,
+  //address: '0x162D005F0Fff510E54958Cfc5CF32A3180A84aab',
+  //decimals: 8,
+  //symbol: 'vETH',
+  //underlyingToken: TESTNET_TOKENS.eth,
   //} as VToken,
   // '0xafc13bc065abee838540823431055d2ea52eba52': {
   // address: '0xAfc13BC065ABeE838540823431055D2ea52eBA52',

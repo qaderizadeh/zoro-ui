@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { Token } from 'types';
+import { Token } from '@/types';
 
-import { TESTNET_TOKENS } from 'constants/tokens';
+import { TESTNET_TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { TokenGroup } from '.';

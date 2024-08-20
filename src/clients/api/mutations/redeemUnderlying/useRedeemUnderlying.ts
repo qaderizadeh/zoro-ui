@@ -1,13 +1,13 @@
 import { MutationObserverOptions, useMutation } from 'react-query';
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
-import { queryClient } from 'clients/api';
+import { queryClient } from '@/clients/api';
 import redeemUnderlying, {
   RedeemUnderlyingInput,
   RedeemUnderlyingOutput,
-} from 'clients/api/mutations/redeemUnderlying';
-import { useVTokenContract } from 'clients/contracts/hooks';
-import FunctionKey from 'constants/functionKey';
+} from '@/clients/api/mutations/redeemUnderlying';
+import { useVTokenContract } from '@/clients/contracts/hooks';
+import FunctionKey from '@/constants/functionKey';
 
 const useRedeemUnderlying = (
   { vToken }: { vToken: VToken },
@@ -15,13 +15,13 @@ const useRedeemUnderlying = (
     RedeemUnderlyingOutput,
     Error,
     Omit<RedeemUnderlyingInput, 'vTokenContract' | 'accountAddress'>
-  >,
+  >
 ) => {
   const vTokenContract = useVTokenContract(vToken);
 
   return useMutation(
     FunctionKey.REDEEM_UNDERLYING,
-    params =>
+    (params) =>
       redeemUnderlying({
         vTokenContract,
         ...params,
@@ -46,7 +46,7 @@ const useRedeemUnderlying = (
           options.onSuccess(...onSuccessParams);
         }
       },
-    },
+    }
   );
 };
 

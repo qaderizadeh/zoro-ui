@@ -1,29 +1,29 @@
 import { Contract, ContractInterface, Signer } from 'zksync-web3';
-import { Token, VToken } from 'types';
-import { areTokensEqual, getContractAddress } from 'utilities';
-//import { areTokensEqual, getContractAddress, getSwapRouterContractAddress } from 'utilities';
+import { Token, VToken } from '@/types';
+import { areTokensEqual, getContractAddress } from '@/utilities';
+//import { areTokensEqual, getContractAddress, getSwapRouterContractAddress } from '@/utilities';
 
-// import { chain, provider } from 'clients/web3';
-import erc20Abi from 'constants/contracts/abis/erc20.json';
-import comptrollerAbi from 'constants/contracts/abis/comptroller.json';
-//import governorBravoDelegateAbi from 'constants/contracts/abis/governorBravoDelegate.json';
-import maximillionAbi from 'constants/contracts/abis/maximillion.json';
-//import multicallAbi from 'constants/contracts/abis/multicall.json';
-//import swapRouterAbi from 'constants/contracts/abis/swapRouter.json';
-import vBep20Abi from 'constants/contracts/abis/vBep20.json';
-import vBnbTokenAbi from 'constants/contracts/abis/vBnbToken.json';
-import vEtherAbi from 'constants/contracts/abis/vEther.json';
-//import vaiControllerAbi from 'constants/contracts/abis/vaiController.json';
-//import vaiTokenAbi from 'constants/contracts/abis/vaiToken.json';
-//import vaiVaultAbi from 'constants/contracts/abis/vaiVault.json';
-import venusLensAbi from 'constants/contracts/abis/venusLens.json';
-//import vrtConverterAbi from 'constants/contracts/abis/vrtConverter.json';
-//import vrtTokenAbi from 'constants/contracts/abis/vrtToken.json';
-//import xvsTokenAbi from 'constants/contracts/abis/xvsToken.json';
-//import xvsVaultAbi from 'constants/contracts/abis/xvsVault.json';
-//import xvsVaultStoreAbi from 'constants/contracts/abis/xvsVaultStore.json';
-//import xvsVestingAbi from 'constants/contracts/abis/xvsVesting.json';
-//import { TOKENS } from 'constants/tokens';
+// import { chain, provider } from '@/clients/web3';
+import erc20Abi from '@/constants/contracts/abis/erc20.json';
+import comptrollerAbi from '@/constants/contracts/abis/comptroller.json';
+//import governorBravoDelegateAbi from '@/constants/contracts/abis/governorBravoDelegate.json';
+import maximillionAbi from '@/constants/contracts/abis/maximillion.json';
+//import multicallAbi from '@/constants/contracts/abis/multicall.json';
+//import swapRouterAbi from '@/constants/contracts/abis/swapRouter.json';
+import vBep20Abi from '@/constants/contracts/abis/vBep20.json';
+import vBnbTokenAbi from '@/constants/contracts/abis/vBnbToken.json';
+import vEtherAbi from '@/constants/contracts/abis/vEther.json';
+//import vaiControllerAbi from '@/constants/contracts/abis/vaiController.json';
+//import vaiTokenAbi from '@/constants/contracts/abis/vaiToken.json';
+//import vaiVaultAbi from '@/constants/contracts/abis/vaiVault.json';
+import venusLensAbi from '@/constants/contracts/abis/venusLens.json';
+//import vrtConverterAbi from '@/constants/contracts/abis/vrtConverter.json';
+//import vrtTokenAbi from '@/constants/contracts/abis/vrtToken.json';
+//import xvsTokenAbi from '@/constants/contracts/abis/xvsToken.json';
+//import xvsVaultAbi from '@/constants/contracts/abis/xvsVault.json';
+//import xvsVaultStoreAbi from '@/constants/contracts/abis/xvsVaultStore.json';
+//import xvsVestingAbi from '@/constants/contracts/abis/xvsVesting.json';
+//import { TOKENS } from '@/constants/tokens';
 import {
   Comptroller,
   //GovernorBravoDelegate,
@@ -38,7 +38,7 @@ import {
   //XvsVault,
   //XvsVaultStore,
   //XvsVesting,
-} from 'types/contracts';
+} from '@/types/contracts';
 
 import { TokenContract, VTokenContract } from './types';
 
@@ -57,27 +57,27 @@ export const getContract = ({
 
 export const getTokenContract = (token: Token, signer?: Signer) => {
   //if (areTokensEqual(token, TOKENS.xvs)) {
-    //return getContract({
-      //abi: xvsTokenAbi,
-      //address: token.address,
-      //signer,
-    //}) as TokenContract<'xvs'>;
+  //return getContract({
+  //abi: xvsTokenAbi,
+  //address: token.address,
+  //signer,
+  //}) as TokenContract<'xvs'>;
   //}
 
   //if (areTokensEqual(token, TOKENS.vai)) {
-    //return getContract({
-      //abi: vaiTokenAbi,
-      //address: token.address,
-      //signer,
-    //}) as TokenContract<'vai'>;
+  //return getContract({
+  //abi: vaiTokenAbi,
+  //address: token.address,
+  //signer,
+  //}) as TokenContract<'vai'>;
   //}
 
   //if (areTokensEqual(token, TOKENS.vrt)) {
-    //return getContract({
-      //abi: vrtTokenAbi,
-      //address: token.address,
-      //signer,
-    //}) as TokenContract<'vrt'>;
+  //return getContract({
+  //abi: vrtTokenAbi,
+  //address: token.address,
+  //signer,
+  //}) as TokenContract<'vrt'>;
   //}
 
   return getContract({
@@ -104,39 +104,39 @@ export const getVTokenContract = (vToken: VToken, signer?: Signer) => {
 };
 
 //export const getVaiControllerContract = (signer?: Signer) =>
-  //getContract({
-    //abi: vaiControllerAbi,
-    //address: getContractAddress('vaiController'),
-    //signer,
-  //}) as VaiController;
+//getContract({
+//abi: vaiControllerAbi,
+//address: getContractAddress('vaiController'),
+//signer,
+//}) as VaiController;
 
 //export const getVaiVaultContract = (signer?: Signer) =>
-  //getContract({
-    //abi: vaiVaultAbi,
-    //address: getContractAddress('vaiVault'),
-    //signer,
-  //}) as VaiVault;
+//getContract({
+//abi: vaiVaultAbi,
+//address: getContractAddress('vaiVault'),
+//signer,
+//}) as VaiVault;
 
 //export const getXvsVaultContract = (signer?: Signer) =>
-  //getContract({
-    //abi: xvsVaultAbi,
-    //address: getContractAddress('xvsVault'),
-    //signer,
-  //}) as XvsVault;
+//getContract({
+//abi: xvsVaultAbi,
+//address: getContractAddress('xvsVault'),
+//signer,
+//}) as XvsVault;
 
 //export const getXvsVaultProxyContract = (signer?: Signer) =>
-  //getContract({
-    //abi: xvsVaultAbi,
-    //address: getContractAddress('xvsVaultProxy'),
-    //signer,
-  //}) as XvsVault;
+//getContract({
+//abi: xvsVaultAbi,
+//address: getContractAddress('xvsVaultProxy'),
+//signer,
+//}) as XvsVault;
 
 //export const getXvsVaultStoreContract = (signer?: Signer) =>
-  //getContract({
-    //abi: xvsVaultStoreAbi,
-    //address: getContractAddress('xvsVaultStore'),
-    //signer,
-  //}) as XvsVaultStore;
+//getContract({
+//abi: xvsVaultStoreAbi,
+//address: getContractAddress('xvsVaultStore'),
+//signer,
+//}) as XvsVaultStore;
 
 export const getComptrollerContract = (address: string, signer?: Signer) =>
   getContract({
@@ -153,11 +153,11 @@ export const getVenusLensContract = (signer?: Signer) =>
   }) as VenusLens;
 
 //export const getGovernorBravoDelegateContract = (signer?: Signer) =>
-  //getContract({
-    //abi: governorBravoDelegateAbi,
-    //address: getContractAddress('governorBravoDelegator'),
-    //signer,
-  //}) as GovernorBravoDelegate;
+//getContract({
+//abi: governorBravoDelegateAbi,
+//address: getContractAddress('governorBravoDelegator'),
+//signer,
+//}) as GovernorBravoDelegate;
 
 export const getMaximillionContract = (signer?: Signer) =>
   getContract({
@@ -168,41 +168,41 @@ export const getMaximillionContract = (signer?: Signer) =>
 
 //// VRT conversion
 //export const getXvsVestingProxyContract = (signer?: Signer) =>
-  //getContract({
-    //abi: xvsVestingAbi,
-    //address: getContractAddress('xvsVestingProxy'),
-    //signer,
-  //}) as XvsVesting;
+//getContract({
+//abi: xvsVestingAbi,
+//address: getContractAddress('xvsVestingProxy'),
+//signer,
+//}) as XvsVesting;
 
 //export const getVrtConverterProxyContract = (signer?: Signer) =>
-  //getContract({
-    //abi: vrtConverterAbi,
-    //address: getContractAddress('vrtConverterProxy'),
-    //signer,
-  //}) as VrtConverter;
+//getContract({
+//abi: vrtConverterAbi,
+//address: getContractAddress('vrtConverterProxy'),
+//signer,
+//}) as VrtConverter;
 
 //// Swap router
 //export const getSwapRouterContract = (poolComptrollerAddress: string, signer?: Signer) => {
-  //const swapRouterAddress = getSwapRouterContractAddress(poolComptrollerAddress);
+//const swapRouterAddress = getSwapRouterContractAddress(poolComptrollerAddress);
 
-  //return getContract({
-    //abi: swapRouterAbi,
-    //address: swapRouterAddress,
-    //signer,
-  //}) as SwapRouter;
+//return getContract({
+//abi: swapRouterAbi,
+//address: swapRouterAddress,
+//signer,
+//}) as SwapRouter;
 //};
 
 //// Multicall
 //export const getMulticallContract = (signer?: Signer) =>
-  //getContract({
-    //abi: multicallAbi,
-    //address: getContractAddress('multicall'),
-    //signer,
-  //}) as Multicall;
+//getContract({
+//abi: multicallAbi,
+//address: getContractAddress('multicall'),
+//signer,
+//}) as Multicall;
 
 //export const getPoolLensContract = (signer?: Signer) =>
-  //getContract({
-    //abi: poolLensAbi,
-    //address: getContractAddress('PoolLens'),
-    //signer,
-  //}) as PoolLens;
+//getContract({
+//abi: poolLensAbi,
+//address: getContractAddress('PoolLens'),
+//signer,
+//}) as PoolLens;

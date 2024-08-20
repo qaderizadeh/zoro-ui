@@ -1,7 +1,8 @@
+'use client';
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Token, TokenBalance } from 'types';
+import { Token, TokenBalance } from '@/types';
 
 import { TertiaryButton } from '../Button';
 import { Icon } from '../Icon';
@@ -15,7 +16,8 @@ import {
   getTokenTextFieldTestId,
 } from './testIdGetters';
 
-export interface SelectTokenTextFieldProps extends Omit<TokenTextFieldProps, 'max' | 'token'> {
+export interface SelectTokenTextFieldProps
+  extends Omit<TokenTextFieldProps, 'max' | 'token'> {
   selectedToken: Token;
   tokenBalances: TokenBalance[];
   onChangeSelectedToken: (token: Token) => void;
@@ -38,7 +40,8 @@ export const SelectTokenTextField: React.FC<SelectTokenTextFieldProps> = ({
   const styles = useStyles();
   const [isTokenListShown, setIsTokenListShown] = useState(false);
 
-  const handleButtonClick = () => setIsTokenListShown(isShowing => !isShowing);
+  const handleButtonClick = () =>
+    setIsTokenListShown((isShowing) => !isShowing);
 
   const handleChangeSelectedToken = (newSelectedToken: Token) => {
     setIsTokenListShown(false);
@@ -59,18 +62,25 @@ export const SelectTokenTextField: React.FC<SelectTokenTextFieldProps> = ({
               onClick={handleButtonClick}
               css={styles.getButton({ isTokenListShown })}
               disabled={disabled}
-              data-testid={!!testId && getTokenSelectButtonTestId({ parentTestId: testId })}
+              data-testid={
+                !!testId && getTokenSelectButtonTestId({ parentTestId: testId })
+              }
             >
               <TokenIconWithSymbol token={selectedToken} css={styles.token} />
 
-              <Icon css={styles.getArrowIcon({ isTokenListShown })} name="arrowUp" />
+              <Icon
+                css={styles.getArrowIcon({ isTokenListShown })}
+                name='arrowUp'
+              />
             </TertiaryButton>
 
             {rightMaxButton && (
               <TertiaryButton
                 disabled={disabled}
                 css={styles.maxButton}
-                data-testid={!!testId && getTokenMaxButtonTestId({ parentTestId: testId })}
+                data-testid={
+                  !!testId && getTokenMaxButtonTestId({ parentTestId: testId })
+                }
                 {...rightMaxButton}
               >
                 {rightMaxButton.label}
@@ -78,7 +88,9 @@ export const SelectTokenTextField: React.FC<SelectTokenTextFieldProps> = ({
             )}
           </>
         }
-        data-testid={!!testId && getTokenTextFieldTestId({ parentTestId: testId })}
+        data-testid={
+          !!testId && getTokenTextFieldTestId({ parentTestId: testId })
+        }
         {...otherTokenTextFieldProps}
       />
 
@@ -92,7 +104,7 @@ export const SelectTokenTextField: React.FC<SelectTokenTextFieldProps> = ({
         )}
       </div>
 
-      <Typography variant="small2" css={styles.description}>
+      <Typography variant='small2' css={styles.description}>
         {description}
       </Typography>
 

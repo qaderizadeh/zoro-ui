@@ -1,5 +1,5 @@
 import { IPlayerProps, Player } from '@lottiefiles/react-lottie-player';
-import config from 'config';
+import config from '@/config';
 import React from 'react';
 
 import * as files from './files';
@@ -20,15 +20,17 @@ export const LottieAnimation: React.FC<LottieAnimationProps> = ({
   className,
 }) => {
   const src = files[name];
-  return <Player className={className} autoplay={autoplay} loop={loop} src={src} />;
+  return (
+    <Player className={className} autoplay={autoplay} loop={loop} src={src} />
+  );
 };
 
-export const Spinner: React.FC<Omit<LottieAnimationProps, 'name'>> = props => (
-  <LottieAnimation name="spinner" {...props} />
-);
+export const Spinner: React.FC<Omit<LottieAnimationProps, 'name'>> = (
+  props
+) => <LottieAnimation name='spinner' {...props} />;
 
-export const GreenPulse: React.FC<Omit<LottieAnimationProps, 'name'>> = props => (
-  <LottieAnimation name="greenPulse" {...props} />
-);
+export const GreenPulse: React.FC<Omit<LottieAnimationProps, 'name'>> = (
+  props
+) => <LottieAnimation name='greenPulse' {...props} />;
 
 export default LottieAnimation;

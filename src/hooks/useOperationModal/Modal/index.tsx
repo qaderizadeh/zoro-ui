@@ -1,17 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import BorrowForm from "./BorrowForm";
-import RepayForm from "./RepayForm";
-import SupplyForm from "./SupplyForm";
-import WithdrawForm from "./WithdrawForm";
-import { Modal, ModalProps, TabContent, Tabs, TokenIconWithSymbol } from "components";
-import AssetAccessor from "containers/AssetAccessor";
-import React, { useState } from "react";
-import { useTranslation } from "translation";
-import { VToken } from "types";
-
+import BorrowForm from './BorrowForm';
+import RepayForm from './RepayForm';
+import SupplyForm from './SupplyForm';
+import WithdrawForm from './WithdrawForm';
+import {
+  Modal,
+  ModalProps,
+  TabContent,
+  Tabs,
+  TokenIconWithSymbol,
+} from '@/components';
+import AssetAccessor from '@/containers/AssetAccessor';
+import React, { useState } from 'react';
+import { useTranslation } from '@/translation';
+import { VToken } from '@/types';
 
 export interface OperationModalProps {
-  onClose: ModalProps["handleClose"];
+  onClose: ModalProps['handleClose'];
   vToken: VToken;
   poolComptrollerAddress: string;
   initialActiveTabIndex?: number;
@@ -24,22 +29,22 @@ const OperationModal: React.FC<OperationModalProps> = ({
   initialActiveTabIndex = 0,
 }) => {
   const { t } = useTranslation();
-  const [ isValidAllowance, setIsValidAllowance ] = useState(true);
+  const [isValidAllowance, setIsValidAllowance] = useState(true);
 
   const tabsContent: TabContent[] = [
     {
-      title: t("operationModal.supplyTabTitle"),
+      title: t('operationModal.supplyTabTitle'),
       content: (
         <AssetAccessor
           vToken={vToken}
           poolComptrollerAddress={poolComptrollerAddress}
-          connectWalletMessage={t("operationModal.supply.connectWalletMessage")}
-          approveTokenMessage={t("operationModal.supply.enableToken.title", {
+          connectWalletMessage={t('operationModal.supply.connectWalletMessage')}
+          approveTokenMessage={t('operationModal.supply.enableToken.title', {
             symbol: vToken.underlyingToken.symbol,
           })}
           setIsValidAllowance={setIsValidAllowance}
           isValidAllowance={isValidAllowance}
-          action="supply"
+          action='supply'
         >
           {({ asset, pool }) => (
             <SupplyForm
@@ -54,18 +59,18 @@ const OperationModal: React.FC<OperationModalProps> = ({
       ),
     },
     {
-      title: t("operationModal.withdrawTabTitle"),
+      title: t('operationModal.withdrawTabTitle'),
       content: (
         <AssetAccessor
           vToken={vToken}
           poolComptrollerAddress={poolComptrollerAddress}
           connectWalletMessage={t(
-            "operationModal.withdraw.connectWalletMessage"
+            'operationModal.withdraw.connectWalletMessage'
           )}
-          approveTokenMessage={t("operationModal.withdraw.enableToken.title", {
+          approveTokenMessage={t('operationModal.withdraw.enableToken.title', {
             symbol: vToken.underlyingToken.symbol,
           })}
-          action="withdraw"
+          action='withdraw'
         >
           {({ asset, pool }) => (
             <WithdrawForm asset={asset} pool={pool} onCloseModal={onClose} />
@@ -74,16 +79,16 @@ const OperationModal: React.FC<OperationModalProps> = ({
       ),
     },
     {
-      title: t("operationModal.borrowTabTitle"),
+      title: t('operationModal.borrowTabTitle'),
       content: (
         <AssetAccessor
           vToken={vToken}
           poolComptrollerAddress={poolComptrollerAddress}
-          connectWalletMessage={t("operationModal.borrow.connectWalletMessage")}
-          approveTokenMessage={t("operationModal.borrow.enableToken.title", {
+          connectWalletMessage={t('operationModal.borrow.connectWalletMessage')}
+          approveTokenMessage={t('operationModal.borrow.enableToken.title', {
             symbol: vToken.underlyingToken.symbol,
           })}
-          action="borrow"
+          action='borrow'
         >
           {({ asset, pool }) => (
             <BorrowForm asset={asset} pool={pool} onCloseModal={onClose} />
@@ -92,16 +97,16 @@ const OperationModal: React.FC<OperationModalProps> = ({
       ),
     },
     {
-      title: t("operationModal.repayTabTitle"),
+      title: t('operationModal.repayTabTitle'),
       content: (
         <AssetAccessor
           vToken={vToken}
           poolComptrollerAddress={poolComptrollerAddress}
-          connectWalletMessage={t("operationModal.repay.connectWalletMessage")}
-          approveTokenMessage={t("operationModal.repay.enableToken.title", {
+          connectWalletMessage={t('operationModal.repay.connectWalletMessage')}
+          approveTokenMessage={t('operationModal.repay.enableToken.title', {
             symbol: vToken.underlyingToken.symbol,
           })}
-          action="repay"
+          action='repay'
           setIsValidAllowance={setIsValidAllowance}
           isValidAllowance={isValidAllowance}
         >
@@ -123,7 +128,7 @@ const OperationModal: React.FC<OperationModalProps> = ({
     <Modal
       isOpen
       title={
-        <TokenIconWithSymbol token={vToken.underlyingToken} variant="h4" />
+        <TokenIconWithSymbol token={vToken.underlyingToken} variant='h4' />
       }
       handleClose={onClose}
     >

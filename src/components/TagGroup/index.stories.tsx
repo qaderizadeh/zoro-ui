@@ -3,7 +3,7 @@ import React from 'react';
 import { State } from 'react-powerplug';
 
 import { withCenterStory } from 'stories/decorators';
-import { PALETTE } from 'theme/MuiThemeProvider/muiTheme';
+import { PALETTE } from '@/theme/MuiThemeProvider/muiTheme';
 
 import { TagGroup } from '.';
 
@@ -33,7 +33,7 @@ export const Default = () => (
           { id: 4, content: 'Tag 4' },
         ]}
         activeTagIndex={state.activeTagIndex}
-        onTagClick={newIndex => setState({ activeTagIndex: newIndex })}
+        onTagClick={(newIndex) => setState({ activeTagIndex: newIndex })}
       />
     )}
   </State>

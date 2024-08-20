@@ -1,23 +1,27 @@
 /** @jsxImportSource @emotion/react */
-import { useStyles as useSharedStyles } from "../styles";
-import Notice from "./Notice";
-import SubmitSection from "./SubmitSection";
-import TEST_IDS from "./testIds";
-import useForm, { FormValues, UseFormInput } from "./useForm";
-import BigNumber from "bignumber.js";
-import { useBorrow } from "clients/api";
-import { AccountData, IsolatedAssetWarning, TokenTextField } from "components";
-import { SAFE_BORROW_LIMIT_PERCENTAGE } from "constants/safeBorrowLimitPercentage";
-import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue";
-import React, { useCallback, useState } from "react";
-import { useTranslation } from "translation";
-import { Asset, Pool } from "types";
-import { convertTokensToWei } from "utilities";
+import { useStyles as useSharedStyles } from '../styles';
+import Notice from './Notice';
+import SubmitSection from './SubmitSection';
+import TEST_IDS from './testIds';
+import useForm, { FormValues, UseFormInput } from './useForm';
+import BigNumber from 'bignumber.js';
+import { useBorrow } from '@/clients/api';
+import {
+  AccountData,
+  IsolatedAssetWarning,
+  TokenTextField,
+} from '@/components';
+import { SAFE_BORROW_LIMIT_PERCENTAGE } from '@/constants/safeBorrowLimitPercentage';
+import useFormatTokensToReadableValue from '@/hooks/useFormatTokensToReadableValue';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from '@/translation';
+import { Asset, Pool } from '@/types';
+import { convertTokensToWei } from '@/utilities';
 
 export interface BorrowFormUiProps {
   asset: Asset;
   pool: Pool;
-  onSubmit: UseFormInput["onSubmit"];
+  onSubmit: UseFormInput['onSubmit'];
   isSubmitting: boolean;
   onCloseModal: () => void;
   setFormValues: (
@@ -39,11 +43,11 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
   const sharedStyles = useSharedStyles();
 
   const formatValue = (value: BigNumber) =>
-  value
-    .dp(asset.vToken.underlyingToken.decimals, BigNumber.ROUND_DOWN)
-    .toFixed();
+    value
+      .dp(asset.vToken.underlyingToken.decimals, BigNumber.ROUND_DOWN)
+      .toFixed();
 
-    // Calculate maximum and safe maximum amount of tokens user can borrow
+  // Calculate maximum and safe maximum amount of tokens user can borrow
   const [limitTokens, safeLimitTokens] = React.useMemo(() => {
     // Return 0 values while asset is loading or if borrow limit has been
     // reached
@@ -56,7 +60,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
         pool.userBorrowLimitCents
       )
     ) {
-      return ["0", "0"];
+      return ['0', '0'];
     }
 
     const marginWithBorrowLimitCents = pool.userBorrowLimitCents.minus(
@@ -117,7 +121,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
   });
 
   const handleRightMaxButtonClick = useCallback(() => {
-    const eightyTokens = new BigNumber(limitTokens).times(80).div(100)
+    const eightyTokens = new BigNumber(limitTokens).times(80).div(100);
     // Update field value to correspond to user's wallet balance
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
@@ -131,7 +135,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
         <IsolatedAssetWarning
           pool={pool}
           token={asset.vToken.underlyingToken}
-          type="borrow"
+          type='borrow'
           css={sharedStyles.isolatedAssetWarning}
         />
       )}
@@ -139,7 +143,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
       <div css={[sharedStyles.getRow({ isLast: true })]}>
         <TokenTextField
           data-testid={TEST_IDS.tokenTextField}
-          name="amountTokens"
+          name='amountTokens'
           token={asset.vToken.underlyingToken}
           value={formValues.amountTokens}
           onChange={(amountTokens) =>
@@ -150,20 +154,20 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
           }
           disabled={
             isSubmitting ||
-            formError === "BORROW_CAP_ALREADY_REACHED" ||
-            formError === "NO_COLLATERALS"
+            formError === 'BORROW_CAP_ALREADY_REACHED' ||
+            formError === 'NO_COLLATERALS'
           }
           rightMaxButton={{
-            label: t("operationModal.borrow.rightMaxButtonLabel", {
+            label: t('operationModal.borrow.rightMaxButtonLabel', {
               limitPercentage: SAFE_BORROW_LIMIT_PERCENTAGE,
             }),
             onClick: handleRightMaxButtonClick,
-            className: "custom-btn-wrap",
+            className: 'custom-btn-wrap',
           }}
           hasError={!!formError && Number(formValues.amountTokens) > 0}
           description={
             <Trans
-              i18nKey="operationModal.borrow.borrowableAmount"
+              i18nKey='operationModal.borrow.borrowableAmount'
               components={{
                 White: <span css={sharedStyles.whiteLabel} />,
               }}
@@ -174,7 +178,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
 
         {!isSubmitting && (
           <Notice
-            hasUserCollateralizedSuppliedAssets={formError !== "NO_COLLATERALS"}
+            hasUserCollateralizedSuppliedAssets={formError !== 'NO_COLLATERALS'}
             amount={formValues.amountTokens}
             safeLimitTokens={safeLimitTokens}
             limitTokens={limitTokens}
@@ -188,7 +192,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
         asset={asset}
         pool={pool}
         amountTokens={new BigNumber(formValues.amountTokens || 0)}
-        action="borrow"
+        action='borrow'
       />
 
       <SubmitSection
@@ -214,7 +218,7 @@ const BorrowForm: React.FC<BorrowFormProps> = ({
   onCloseModal,
 }) => {
   const [formValues, setFormValues] = useState<FormValues>({
-    amountTokens: "",
+    amountTokens: '',
     fromToken: asset.vToken.underlyingToken,
   });
 
@@ -224,7 +228,7 @@ const BorrowForm: React.FC<BorrowFormProps> = ({
 
   const isSubmitting = isBorrowLoading;
 
-  const onSubmit: BorrowFormUiProps["onSubmit"] = async ({
+  const onSubmit: BorrowFormUiProps['onSubmit'] = async ({
     fromToken,
     fromTokenAmountTokens,
   }) => {

@@ -1,20 +1,20 @@
-import "assets/styles/App.scss";
-import { routes } from "constants/routing";
-import { useAuth } from "context/AuthContext";
-import Account from "pages/Account";
-import Dashboard from "pages/Dashboard";
-import Market from "pages/Market";
-import NotFound from "pages/NotFound";
-import Pool from "pages/Pool";
-import React, { useEffect } from "react";
+import { routes } from '@/constants/routing';
+import { useAuth } from '@/context/AuthContext';
+import Account from '@/pages/Account';
+import Dashboard from '@/pages/Dashboard';
+import Market from '@/pages/Market';
+import NotFound from '@/pages/NotFound';
+import Pool from '@/pages/Pool';
+import { isFeatureEnabled } from '@/utilities';
+import '@/assets/styles/App.scss';
+import React, { useEffect } from 'react';
 import {
   Switch as RRSwitch,
   Redirect,
   Route,
   useHistory,
   useLocation,
-} from "react-router-dom";
-import { isFeatureEnabled } from "utilities";
+} from 'react-router-dom';
 
 const Switch = () => {
   const { accountAddress } = useAuth();
@@ -42,7 +42,7 @@ const Switch = () => {
 
       <Route exact path={routes.market.path} component={Market} />
 
-      {!isFeatureEnabled("isolatedPools") && (
+      {!isFeatureEnabled('isolatedPools') && (
         <Route exact path={routes.markets.path} component={Pool} />
       )}
       <Route exact path={routes.notfound.path} component={NotFound} />

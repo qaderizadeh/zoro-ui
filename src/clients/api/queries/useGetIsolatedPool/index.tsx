@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { useTranslation } from 'translation';
-import { Pool } from 'types';
-import { getContractAddress } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Pool } from '@/types';
+import { getContractAddress } from '@/utilities';
 
-import { useGetIsolatedAssets } from 'clients/api';
+import { useGetIsolatedAssets } from '@/clients/api';
 
 export interface UseGetMainPoolInput {
   accountAddress?: string;
@@ -18,10 +18,13 @@ export interface UseGetMainPoolOutput {
 
 const mainPoolComptrollerAddress = getContractAddress('degen:comptroller');
 
-const useGetIsolatedPool = ({ accountAddress }: UseGetMainPoolInput): UseGetMainPoolOutput => {
-  const { data: getMainAssetsData, isLoading: isGetMainAssetsDataLoading } = useGetIsolatedAssets({
-    accountAddress,
-  });
+const useGetIsolatedPool = ({
+  accountAddress,
+}: UseGetMainPoolInput): UseGetMainPoolOutput => {
+  const { data: getMainAssetsData, isLoading: isGetMainAssetsDataLoading } =
+    useGetIsolatedAssets({
+      accountAddress,
+    });
 
   const { t } = useTranslation();
 
@@ -37,7 +40,7 @@ const useGetIsolatedPool = ({ accountAddress }: UseGetMainPoolInput): UseGetMain
         userBorrowBalanceCents: getMainAssetsData.userTotalBorrowBalanceCents,
         userBorrowLimitCents: getMainAssetsData.userTotalBorrowLimitCents,
       },
-    [getMainAssetsData?.assets],
+    [getMainAssetsData?.assets]
   );
 
   return { isLoading: isGetMainAssetsDataLoading, data: pool && { pool } };

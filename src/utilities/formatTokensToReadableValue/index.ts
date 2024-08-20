@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
-import { Token, VToken } from 'types';
+import { Token, VToken } from '@/types';
 
-import PLACEHOLDER_KEY from 'constants/placeholderKey';
+import PLACEHOLDER_KEY from '@/constants/placeholderKey';
 
 import shortenValueWithSuffix from '../shortenValueWithSuffix';
 

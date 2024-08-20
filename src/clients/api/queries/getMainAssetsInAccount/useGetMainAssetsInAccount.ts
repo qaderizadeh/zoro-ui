@@ -1,12 +1,12 @@
 import { QueryObserverOptions, useQuery } from 'react-query';
-import { getContractAddress } from 'utilities';
+import { getContractAddress } from '@/utilities';
 
 import getMainAssetsInAccount, {
   GetMainAssetsInAccountInput,
   GetMainAssetsInAccountOutput,
-} from 'clients/api/queries/getMainAssetsInAccount';
-import { useComptrollerContract } from 'clients/contracts/hooks';
-import FunctionKey from 'constants/functionKey';
+} from '@/clients/api/queries/getMainAssetsInAccount';
+import { useComptrollerContract } from '@/clients/contracts/hooks';
+import FunctionKey from '@/constants/functionKey';
 
 const mainPoolComptrollerAddress = getContractAddress('comptroller');
 
@@ -15,19 +15,24 @@ type Options = QueryObserverOptions<
   Error,
   GetMainAssetsInAccountOutput,
   GetMainAssetsInAccountOutput,
-  [FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT, Omit<GetMainAssetsInAccountInput, 'comptrollerContract'>]
+  [
+    FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT,
+    Omit<GetMainAssetsInAccountInput, 'comptrollerContract'>
+  ]
 >;
 
 const useGetMainAssetsInAccount = (
   { accountAddress }: Omit<GetMainAssetsInAccountInput, 'comptrollerContract'>,
-  options?: Options,
+  options?: Options
 ) => {
-  const comptrollerContract = useComptrollerContract(mainPoolComptrollerAddress);
+  const comptrollerContract = useComptrollerContract(
+    mainPoolComptrollerAddress
+  );
 
   return useQuery(
     [FunctionKey.GET_MAIN_ASSETS_IN_ACCOUNT, { accountAddress }],
     () => getMainAssetsInAccount({ comptrollerContract, accountAddress }),
-    options,
+    options
   );
 };
 

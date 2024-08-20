@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import BigNumber from 'bignumber.js';
-import { ApyChartProps } from 'components';
+import { ApyChartProps } from '@/components';
 import React from 'react';
 
 import { assetData } from '__mocks__/models/asset';

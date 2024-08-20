@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { Asset } from 'types';
+import { Asset } from '@/types';
 
 //import getCombinedDistributionApys from './getCombinedDistributionApys';
 
@@ -17,7 +17,11 @@ export const calculateYearlyInterests = ({
   return balance.multipliedBy(interestPercentage).dividedBy(100);
 };
 
-export const calculateYearlyEarningsForAsset = ({ asset }: { asset: Asset }) => {
+export const calculateYearlyEarningsForAsset = ({
+  asset,
+}: {
+  asset: Asset;
+}) => {
   // Combine supply and borrow APYs with distribution APYs
   //const combinedDistributionApys = getCombinedDistributionApys({ asset });
 
@@ -43,11 +47,15 @@ export const calculateYearlyEarningsForAsset = ({ asset }: { asset: Asset }) => 
   return supplyYearlyEarningsCents.minus(borrowYearlyInterestsCents).dp(0);
 };
 
-export const calculateYearlyEarningsForAssets = ({ assets }: { assets: Asset[] }) => {
+export const calculateYearlyEarningsForAssets = ({
+  assets,
+}: {
+  assets: Asset[];
+}) => {
   // We use the yearly earnings to calculate the daily earnings the net APY
   let yearlyEarningsCents: BigNumber | undefined;
 
-  assets.forEach(asset => {
+  assets.forEach((asset) => {
     if (!yearlyEarningsCents) {
       yearlyEarningsCents = new BigNumber(0);
     }

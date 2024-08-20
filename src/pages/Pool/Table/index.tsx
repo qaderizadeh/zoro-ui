@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { Asset, Pool } from 'types';
+import { Asset, Pool } from '@/types';
 
-import { routes } from 'constants/routing';
-import { MarketTable } from 'containers/MarketTable';
+import { routes } from '@/constants/routing';
+import { MarketTable } from '@/containers/MarketTable';
 
 export interface TableProps {
   pool: Pool;
@@ -21,7 +21,7 @@ export const Table: React.FC<TableProps> = ({ pool }) => {
     <MarketTable
       getRowHref={getRowHref}
       pools={[pool]}
-      breakpoint="xl"
+      breakpoint='xl'
       columns={[
         'asset',
         'supplyBalance',

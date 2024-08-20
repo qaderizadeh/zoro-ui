@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { useTranslation } from 'translation';
-import { Vault } from 'types';
+import { useTranslation } from '@/translation';
+import { Vault } from '@/types';
 
 import Section from '../Section';
 import Table from './Table';
@@ -11,7 +11,10 @@ export interface VaultsBreakdownProps {
   className?: string;
 }
 
-export const VaultsBreakdown: React.FC<VaultsBreakdownProps> = ({ vaults, className }) => {
+export const VaultsBreakdown: React.FC<VaultsBreakdownProps> = ({
+  vaults,
+  className,
+}) => {
   const { t } = useTranslation();
 
   return (

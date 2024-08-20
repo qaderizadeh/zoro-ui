@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
-import { Asset } from 'types';
+import { Asset } from '@/types';
 
 import { FormError, FormValues } from './types';
 
@@ -38,13 +38,18 @@ const useFormValidation = ({
       ? new BigNumber(formValues.amountTokens)
       : undefined;
 
-    if (!fromTokenAmountTokens || fromTokenAmountTokens.isLessThanOrEqualTo(0)) {
+    if (
+      !fromTokenAmountTokens ||
+      fromTokenAmountTokens.isLessThanOrEqualTo(0)
+    ) {
       return 'INVALID_TOKEN_AMOUNT';
     }
 
     if (
       asset.borrowCapTokens &&
-      asset.borrowBalanceTokens.plus(fromTokenAmountTokens).isGreaterThan(asset.borrowCapTokens)
+      asset.borrowBalanceTokens
+        .plus(fromTokenAmountTokens)
+        .isGreaterThan(asset.borrowCapTokens)
     ) {
       return 'HIGHER_THAN_BORROW_CAP';
     }

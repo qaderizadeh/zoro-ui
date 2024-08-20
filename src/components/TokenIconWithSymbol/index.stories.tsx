@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import { TOKENS } from 'constants/tokens';
+import { TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { TokenIconWithSymbol } from '.';

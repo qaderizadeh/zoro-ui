@@ -1,12 +1,13 @@
+'use client';
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { usePathname } from 'next/navigation';
 
 export const ResetScrollOnRouteChange: React.FC = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [pathname]);
 
   return null;
 };

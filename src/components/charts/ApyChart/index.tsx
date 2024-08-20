@@ -11,8 +11,11 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useTranslation } from 'translation';
-import { formatCentsToReadableValue, formatToReadablePercentage } from 'utilities';
+import { useTranslation } from '@/translation';
+import {
+  formatCentsToReadableValue,
+  formatToReadablePercentage,
+} from '@/utilities';
 
 import TooltipContent from '../TooltipContent';
 import { useStyles as useSharedStyles } from '../styles';
@@ -31,12 +34,18 @@ export interface ApyChartProps {
   className?: string;
 }
 
-export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => {
+export const ApyChart: React.FC<ApyChartProps> = ({
+  className,
+  data,
+  type,
+}) => {
   const sharedStyles = useSharedStyles();
   const localStyles = useLocalStyles();
 
   const chartColor =
-    type === 'supply' ? localStyles.supplyChartColor : localStyles.borrowChartColor;
+    type === 'supply'
+      ? localStyles.supplyChartColor
+      : localStyles.borrowChartColor;
   const { t } = useTranslation();
 
   // Generate base ID that won't change between renders but will be incremented
@@ -51,15 +60,15 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
         <AreaChart margin={sharedStyles.chartMargin} data={data}>
           {/* Gradient used as filler */}
           <defs>
-            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={chartColor} stopOpacity={0.2} />
-              <stop offset="100%" stopColor={chartColor} stopOpacity={0} />
+            <linearGradient id={gradientId} x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='0%' stopColor={chartColor} stopOpacity={0.2} />
+              <stop offset='100%' stopColor={chartColor} stopOpacity={0} />
             </linearGradient>
           </defs>
 
           <CartesianGrid vertical={false} stroke={sharedStyles.gridLineColor} />
           <XAxis
-            dataKey="timestampMs"
+            dataKey='timestampMs'
             axisLine={false}
             tickLine={false}
             tickFormatter={formatToReadableDate}
@@ -74,7 +83,7 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
             style={sharedStyles.axis}
           />
           <YAxis
-            dataKey="apyPercentage"
+            dataKey='apyPercentage'
             axisLine={false}
             tickLine={false}
             tickFormatter={formatToReadablePercentage}
@@ -92,7 +101,9 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
                   items={[
                     {
                       label: t('apyChart.tooltipItemLabels.date'),
-                      value: formatToReadableDate((payload[0].payload as ApyChartItem).timestampMs),
+                      value: formatToReadableDate(
+                        (payload[0].payload as ApyChartItem).timestampMs
+                      ),
                     },
                     {
                       label:
@@ -100,7 +111,7 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
                           ? t('apyChart.tooltipItemLabels.supplyApy')
                           : t('apyChart.tooltipItemLabels.borrowApy'),
                       value: formatToReadablePercentage(
-                        (payload[0].payload as ApyChartItem).apyPercentage,
+                        (payload[0].payload as ApyChartItem).apyPercentage
                       ),
                     },
                     {
@@ -109,7 +120,8 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
                           ? t('apyChart.tooltipItemLabels.totalSupply')
                           : t('apyChart.tooltipItemLabels.totalBorrow'),
                       value: formatCentsToReadableValue({
-                        value: (payload[0].payload as ApyChartItem).balanceCents,
+                        value: (payload[0].payload as ApyChartItem)
+                          .balanceCents,
                       }),
                     },
                   ]}
@@ -119,7 +131,7 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
           />
           <Area
             isAnimationActive={false}
-            dataKey="apyPercentage"
+            dataKey='apyPercentage'
             stroke={chartColor}
             strokeWidth={sharedStyles.lineStrokeWidth}
             fillOpacity={1}
@@ -132,9 +144,9 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type }) => 
   );
 };
 
-export const SupplyApyChart: React.FC<Omit<ApyChartProps, 'type'>> = props => (
-  <ApyChart type="supply" {...props} />
-);
-export const BorrowApyChart: React.FC<Omit<ApyChartProps, 'type'>> = props => (
-  <ApyChart type="borrow" {...props} />
-);
+export const SupplyApyChart: React.FC<Omit<ApyChartProps, 'type'>> = (
+  props
+) => <ApyChart type='supply' {...props} />;
+export const BorrowApyChart: React.FC<Omit<ApyChartProps, 'type'>> = (
+  props
+) => <ApyChart type='borrow' {...props} />;

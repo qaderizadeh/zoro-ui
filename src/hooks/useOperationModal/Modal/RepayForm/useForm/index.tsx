@@ -1,12 +1,16 @@
 import BigNumber from 'bignumber.js';
 import { ContractReceipt } from 'ethers';
 import { useEffect } from 'react';
-import { useTranslation } from 'translation';
-import { Swap, SwapError, Token, VToken } from 'types';
-import { areTokensEqual, convertTokensToWei, convertWeiToTokens } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Swap, SwapError, Token, VToken } from '@/types';
+import {
+  areTokensEqual,
+  convertTokensToWei,
+  convertWeiToTokens,
+} from '@/utilities';
 
-import useHandleTransactionMutation from 'hooks/useHandleTransactionMutation';
-import useIsMounted from 'hooks/useIsMounted';
+import useHandleTransactionMutation from '@/hooks/useHandleTransactionMutation';
+import useIsMounted from '@/hooks/useIsMounted';
 
 import calculatePercentageOfUserBorrowBalance from '../calculatePercentageOfUserBorrowBalance';
 import { FormError, FormValues } from './types';
@@ -25,7 +29,9 @@ export interface UseFormInput {
   }) => Promise<ContractReceipt>;
   onCloseModal: () => void;
   formValues: FormValues;
-  setFormValues: (setter: (currentFormValues: FormValues) => FormValues | FormValues) => void;
+  setFormValues: (
+    setter: (currentFormValues: FormValues) => FormValues | FormValues
+  ) => void;
   fromTokenUserBorrowBalanceTokens?: BigNumber;
   fromTokenUserWalletBalanceTokens?: BigNumber;
   swap?: Swap;
@@ -103,7 +109,7 @@ const useForm = ({
 
         return contractReceipt;
       },
-      successTransactionModalProps: contractReceipt => ({
+      successTransactionModalProps: (contractReceipt) => ({
         title: t('operationModal.repay.successfulTransactionModal.title'),
         content: t('operationModal.repay.successfulTransactionModal.message'),
         amount: {
@@ -120,7 +126,10 @@ const useForm = ({
   // the total loan value changes, for example when interests accumulate)
   useEffect(() => {
     // Fixed percentage without swapping
-    const isNotSwapping = areTokensEqual(formValues.fromToken, toVToken.underlyingToken);
+    const isNotSwapping = areTokensEqual(
+      formValues.fromToken,
+      toVToken.underlyingToken
+    );
 
     if (isMounted() && formValues.fixedRepayPercentage && isNotSwapping) {
       const fixedAmountToRepayTokens = calculatePercentageOfUserBorrowBalance({
@@ -129,7 +138,7 @@ const useForm = ({
         percentage: formValues.fixedRepayPercentage,
       });
 
-      setFormValues(currentFormValues => ({
+      setFormValues((currentFormValues) => ({
         ...currentFormValues,
         amountTokens: fixedAmountToRepayTokens,
       }));
@@ -157,7 +166,7 @@ const useForm = ({
         token: swap.fromToken,
       }).toFixed();
 
-      setFormValues(currentFormValues => ({
+      setFormValues((currentFormValues) => ({
         ...currentFormValues,
         amountTokens: expectedFromTokenAmountSoldTokens,
       }));

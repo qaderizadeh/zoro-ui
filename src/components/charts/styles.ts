@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
-import { SPACING } from 'theme/MuiThemeProvider/muiTheme';
+import { SPACING } from '@/theme/MuiThemeProvider/muiTheme';
 
 export const useStyles = () => {
   const theme = useTheme();
@@ -17,7 +17,10 @@ export const useStyles = () => {
     borrowChartColor: theme.palette.interactive.error,
     gridLineColor: theme.palette.secondary.light,
     accessoryColor,
-    cursor: { strokeDasharray: `${SPACING} ${SPACING}`, stroke: accessoryColor },
+    cursor: {
+      strokeDasharray: `${SPACING} ${SPACING}`,
+      stroke: accessoryColor,
+    },
     lineStrokeWidth: theme.spacing(0.5),
     axis: theme.typography.tiny,
     tickMargin: SPACING * 2,

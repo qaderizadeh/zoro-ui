@@ -1,19 +1,26 @@
 import { MutationObserverOptions, useMutation } from 'react-query';
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
-import supply, { SupplyInput, SupplyOutput } from 'clients/api/mutations/supply';
-import queryClient from 'clients/api/queryClient';
-import FunctionKey from 'constants/functionKey';
-import { useAuth } from 'context/AuthContext';
+import supply, {
+  SupplyInput,
+  SupplyOutput,
+} from '@/clients/api/mutations/supply';
+import queryClient from '@/clients/api/queryClient';
+import FunctionKey from '@/constants/functionKey';
+import { useAuth } from '@/context/AuthContext';
 
-type Options = MutationObserverOptions<SupplyOutput, Error, Omit<SupplyInput, 'vToken' | 'signer'>>;
+type Options = MutationObserverOptions<
+  SupplyOutput,
+  Error,
+  Omit<SupplyInput, 'vToken' | 'signer'>
+>;
 
 const useSupply = ({ vToken }: { vToken: VToken }, options?: Options) => {
   const { signer, accountAddress } = useAuth();
 
   return useMutation(
     FunctionKey.SUPPLY,
-    params =>
+    (params) =>
       supply({
         vToken,
         signer,
@@ -37,7 +44,7 @@ const useSupply = ({ vToken }: { vToken: VToken }, options?: Options) => {
           options.onSuccess(...onSuccessParams);
         }
       },
-    },
+    }
   );
 };
 

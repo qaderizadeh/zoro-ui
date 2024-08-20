@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
-import React from 'react';
-import { Link, LinkProps } from 'react-router-dom';
+import React, { PropsWithChildren } from 'react';
+import Link from 'next/link';
 
 import { Spinner } from '../Spinner';
 import useStyles from './styles';
@@ -37,42 +37,71 @@ export const Button = ({
       css={styles.getButton({ disabled, active })}
       className={className}
       disabled={loading || disabled}
-      type="button"
+      type='button'
       {...otherProps}
     >
       {loading && (
         <div css={styles.loadingIcon}>
-          <Spinner variant="small" />
+          <Spinner variant='small' />
         </div>
       )}
 
-      <Typography css={styles.label} component="span">
+      <Typography css={styles.label} component='span'>
         {children}
       </Typography>
     </button>
   );
 };
 
-export const PrimaryButton = (props: ButtonProps) => <Button variant="primary" {...props} />;
-export const SecondaryButton = (props: ButtonProps) => <Button variant="secondary" {...props} />;
-export const TertiaryButton = (props: ButtonProps) => <Button variant="tertiary" {...props} />;
-export const QuaternaryButton = (props: ButtonProps) => <Button variant="quaternary" {...props} />;
-export const QuinaryButton = (props: ButtonProps) => <Button variant="quinary" {...props} />;
-export const SenaryButton = (props: ButtonProps) => <Button variant="senary" {...props} />;
-export const TextButton = (props: ButtonProps) => <Button variant="text" {...props} />;
+export const PrimaryButton = (props: ButtonProps) => (
+  <Button variant='primary' {...props} />
+);
+export const SecondaryButton = (props: ButtonProps) => (
+  <Button variant='secondary' {...props} />
+);
+export const TertiaryButton = (props: ButtonProps) => (
+  <Button variant='tertiary' {...props} />
+);
+export const QuaternaryButton = (props: ButtonProps) => (
+  <Button variant='quaternary' {...props} />
+);
+export const QuinaryButton = (props: ButtonProps) => (
+  <Button variant='quinary' {...props} />
+);
+export const SenaryButton = (props: ButtonProps) => (
+  <Button variant='senary' {...props} />
+);
+export const TextButton = (props: ButtonProps) => (
+  <Button variant='text' {...props} />
+);
 
 export const LinkButton = ({
   variant = 'primary',
   fullWidth = false,
   disabled = false,
   active = false,
+  href,
+  children,
   ...props
-}: LinkProps & BaseButtonProps) => {
+}: PropsWithChildren<
+  BaseButtonProps & {
+    href: string;
+  }
+>) => {
+  console.log('props', props);
   const styles = useStyles({ fullWidth, variant });
-  return <Link {...props} css={[styles.getButton({ disabled, active }), styles.link]} />;
+  return (
+    <Link
+      href={href}
+      css={[styles.getButton({ disabled, active }), styles.link]}
+    >
+      {children}
+    </Link>
+  );
 };
 
-type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type AnchorButtonProps = BaseButtonProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export const AnchorButton = ({
   variant = 'primary',
@@ -85,8 +114,8 @@ export const AnchorButton = ({
   const styles = useStyles({ fullWidth, variant });
   return (
     <a
-      target="_blank"
-      rel="noreferrer"
+      target='_blank'
+      rel='noreferrer'
       {...props}
       css={[styles.getButton({ disabled, active }), styles.link]}
     >
@@ -96,9 +125,9 @@ export const AnchorButton = ({
 };
 
 export const PrimaryAnchorButton = (props: AnchorButtonProps) => (
-  <AnchorButton variant="primary" {...props} />
+  <AnchorButton variant='primary' {...props} />
 );
 
 export const SecondaryAnchorButton = (props: AnchorButtonProps) => (
-  <AnchorButton variant="secondary" {...props} />
+  <AnchorButton variant='secondary' {...props} />
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 
 import { Modal, ModalProps } from '../Modal';
 import { AccountDetails, AccountDetailsProps } from './AccountDetails';
@@ -24,20 +24,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleLogin: WalletListProps['onLogin'] = connector => {
+  const handleLogin: WalletListProps['onLogin'] = (connector) => {
     onClose();
     return onLogin(connector);
   };
 
   return (
     <Modal
-      className="zoro-modal"
+      className='zoro-modal'
       isOpen={isOpen}
       handleClose={onClose}
       noHorizontalPadding={!accountAddress}
       title={
         <h4>
-          {!accountAddress ? t('authModal.title.connectWallet') : t('authModal.title.yourAccount')}
+          {!accountAddress
+            ? t('authModal.title.connectWallet')
+            : t('authModal.title.yourAccount')}
         </h4>
       }
     >

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react'
+import React from 'react';
 import {
   CartesianGrid,
   Line,
@@ -8,36 +8,36 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
-} from 'recharts'
-import { useTranslation } from 'translation'
-import { formatToReadablePercentage } from 'utilities'
+  YAxis,
+} from 'recharts';
+import { useTranslation } from '@/translation';
+import { formatToReadablePercentage } from '@/utilities';
 
-import TooltipContent from '../TooltipContent'
-import { useStyles as useSharedStyles } from '../styles'
-import { useStyles as useLocalStyles } from './styles'
+import TooltipContent from '../TooltipContent';
+import { useStyles as useSharedStyles } from '../styles';
+import { useStyles as useLocalStyles } from './styles';
 
 export interface InterestRateItem {
-  utilizationRate: number
-  borrowApyPercentage: number
-  supplyApyPercentage: number
+  utilizationRate: number;
+  borrowApyPercentage: number;
+  supplyApyPercentage: number;
 }
 
 export interface InterestRateChartProps {
-  data: InterestRateItem[]
-  currentUtilizationRate?: number
-  className?: string
+  data: InterestRateItem[];
+  currentUtilizationRate?: number;
+  className?: string;
 }
 
 export const InterestRateChart: React.FC<InterestRateChartProps> = ({
   className,
   currentUtilizationRate,
-  data
+  data,
 }) => {
-  const sharedStyles = useSharedStyles()
-  const localStyles = useLocalStyles()
+  const sharedStyles = useSharedStyles();
+  const localStyles = useLocalStyles();
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <div css={sharedStyles.container} className={className}>
@@ -76,22 +76,22 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
                       ),
                       value: formatToReadablePercentage(
                         (payload[0].payload as InterestRateItem).utilizationRate
-                      )
+                      ),
                     },
                     {
                       label: t('interestRateChart.tooltipItemLabels.borrowApy'),
                       value: formatToReadablePercentage(
                         (payload[0].payload as InterestRateItem)
                           .borrowApyPercentage
-                      )
+                      ),
                     },
                     {
                       label: t('interestRateChart.tooltipItemLabels.supplyApy'),
                       value: formatToReadablePercentage(
                         (payload[0].payload as InterestRateItem)
                           .supplyApyPercentage
-                      )
-                    }
+                      ),
+                    },
                   ]}
                 />
               ) : null
@@ -125,8 +125,10 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
               // that
               label={Object.assign(localStyles.referenceLineLabel || {}, {
                 value: t('interestRateChart.currentUtilizationRateLabelValue', {
-                  percentage: formatToReadablePercentage(currentUtilizationRate)
-                })
+                  percentage: formatToReadablePercentage(
+                    currentUtilizationRate
+                  ),
+                }),
               })}
               alwaysShow
             />
@@ -134,5 +136,5 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
         </LineChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};

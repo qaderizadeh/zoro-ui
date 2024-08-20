@@ -1,5 +1,7 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 
 type PaginationProps = {
   itemsCount: number;
@@ -17,7 +19,11 @@ const getInitialPageIndex = () => {
   return initialPageIndex;
 };
 
-export function usePagination({ itemsCount, onChange, itemsPerPageCount = 10 }: PaginationProps) {
+export function usePagination({
+  itemsCount,
+  onChange,
+  itemsPerPageCount = 10,
+}: PaginationProps) {
   const { t } = useTranslation();
 
   const [activePageIndex, setActivePageIndex] = useState(getInitialPageIndex());
@@ -30,12 +36,18 @@ export function usePagination({ itemsCount, onChange, itemsPerPageCount = 10 }: 
 
   const isLastPage = activePageIndex === pagesCount - 1;
   const currentPageFirstIndex = activePageIndex * itemsPerPageCount;
-  const currentPageLastIndex = isLastPage ? itemsCount : currentPageFirstIndex + itemsPerPageCount;
+  const currentPageLastIndex = isLastPage
+    ? itemsCount
+    : currentPageFirstIndex + itemsPerPageCount;
   const firstItemNumber = currentPageFirstIndex + 1;
   const isSingleItemOnPage = firstItemNumber === currentPageLastIndex;
   const itemsCountString = isSingleItemOnPage
     ? t('pagination.itemOf', { currentPageLastIndex, itemsCount })
-    : t('pagination.itemsOf', { firstItemNumber, currentPageLastIndex, itemsCount });
+    : t('pagination.itemsOf', {
+        firstItemNumber,
+        currentPageLastIndex,
+        itemsCount,
+      });
 
   /* creating pages array */
   const pagesArray = Array.from({ length: pagesCount }, (_, i) => i + 1);

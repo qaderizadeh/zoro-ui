@@ -1,4 +1,4 @@
-import config from 'config';
+import config from '@/config';
 // import { Chain, configureChains, createClient } from 'wagmi';
 // import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 // import { InjectedConnector } from 'wagmi/connectors/injected';
@@ -9,7 +9,7 @@ import config from 'config';
 // used for ZkSync Local
 // import { jsonRpcProvider  } from 'wagmi/providers/jsonRpc'
 
-//import { WALLET_CONNECT_PROJECT_ID } from 'constants/walletConnect';
+//import { WALLET_CONNECT_PROJECT_ID } from '@/constants/walletConnect';
 
 //import { BinanceWalletConnector } from './binanceWalletConnector';
 
@@ -44,7 +44,10 @@ export const chain = null;
 
 // use with ZkSync Testnet
 //export const { provider, webSocketProvider } = configureChains([chain], [publicProvider()]);
-export const { provider, webSocketProvider } = {provider: null, webSocketProvider: null}; 
+export const { provider, webSocketProvider } = {
+  provider: null,
+  webSocketProvider: null,
+};
 // configureChains([chain], [
 //   jsonRpcProvider({
 //     rpc: (chain) => ({
@@ -58,24 +61,24 @@ const client = null;
 //   autoConnect: true,
 //   provider,
 //   connectors: [
-    // new InjectedConnector({ chains: [chain] }),
-    // new MetaMaskConnector({ chains: [chain] }),
-    //new WalletConnectConnector({
-      //chains: [chain],
-      //options: {
-        //projectId: WALLET_CONNECT_PROJECT_ID,
-        //showQrModal: true,
-      //},
-    //}),
-    //new CoinbaseWalletConnector({
-      //chains: [chain],
-      //options: {
-        //appName: 'Zoro',
-      //},
-    //}),
-    //new BinanceWalletConnector({
-      //chains: [chain],
-    //}),
+// new InjectedConnector({ chains: [chain] }),
+// new MetaMaskConnector({ chains: [chain] }),
+//new WalletConnectConnector({
+//chains: [chain],
+//options: {
+//projectId: WALLET_CONNECT_PROJECT_ID,
+//showQrModal: true,
+//},
+//}),
+//new CoinbaseWalletConnector({
+//chains: [chain],
+//options: {
+//appName: 'Zoro',
+//},
+//}),
+//new BinanceWalletConnector({
+//chains: [chain],
+//}),
 //   ],
 //   webSocketProvider,
 // });

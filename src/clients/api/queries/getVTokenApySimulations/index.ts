@@ -1,11 +1,14 @@
 import BigNumber from 'bignumber.js';
 import { ContractCallContext, ContractCallResults } from 'ethereum-multicall';
 
-import interestModelAbi from 'constants/contracts/abis/interestModel.json';
-import interestModelAbiV2 from 'constants/contracts/abis/interestModelV2.json';
+import interestModelAbi from '@/constants/contracts/abis/interestModel.json';
+import interestModelAbiV2 from '@/constants/contracts/abis/interestModelV2.json';
 
 import formatToApySnapshots from './formatToApySnapshots';
-import { GetVTokenApySimulationsOutput, GetVTokenInterestRatesInput } from './types';
+import {
+  GetVTokenApySimulationsOutput,
+  GetVTokenInterestRatesInput,
+} from './types';
 
 export * from './types';
 
@@ -30,7 +33,11 @@ const getVTokenApySimulations = async ({
     const reservesAmountWei = new BigNumber(0).toFixed();
     const badDebtWei = new BigNumber(0).toFixed();
 
-    const getBorrowRateParams = [cashAmountWei, borrowsAmountWei, reservesAmountWei];
+    const getBorrowRateParams = [
+      cashAmountWei,
+      borrowsAmountWei,
+      reservesAmountWei,
+    ];
 
     if (isIsolatedPoolMarket) getBorrowRateParams.push(badDebtWei);
 
@@ -63,7 +70,9 @@ const getVTokenApySimulations = async ({
     calls,
   };
 
-  const vTokenBalanceCallResults: ContractCallResults = await multicall.call(contractCallContext);
+  const vTokenBalanceCallResults: ContractCallResults = await multicall.call(
+    contractCallContext
+  );
   const apySimulations = formatToApySnapshots({ vTokenBalanceCallResults });
 
   return { apySimulations };

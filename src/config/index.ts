@@ -1,8 +1,8 @@
 import sample from 'lodash/sample';
-import { ZkChainId, Environment } from 'types';
+import { ZkChainId, Environment } from '@/types';
 
-import { ZK_SCAN_URLS } from 'constants/zk';
-import { API_ENDPOINT_URLS, RPC_URLS } from 'constants/endpoints';
+import { ZK_SCAN_URLS } from '@/constants/zk';
+import { API_ENDPOINT_URLS, RPC_URLS } from '@/constants/endpoints';
 
 //import { MAINNET_SUBGRAPH_URL, TESTNET_SUBGRAPH_URL } from './codegen';
 
@@ -16,8 +16,8 @@ export interface Config {
   zkScanUrl: string;
   //sentryDsn: string;
   //posthog: {
-    //apiKey: string;
-    //hostUrl: string;
+  //apiKey: string;
+  //hostUrl: string;
   //};
 }
 
@@ -32,32 +32,34 @@ export const ENV_VARIABLES = {
 
   // Third-parties
   //VITE_SENTRY_DSN:
-    //typeof process !== 'undefined' ? process.env.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
+  //typeof process !== 'undefined' ? process.env.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
   //VITE_POSTHOG_API_KEY:
-    //typeof process !== 'undefined'
-      //? process.env.VITE_POSTHOG_API_KEY
-      //: import.meta.env.VITE_POSTHOG_API_KEY,
+  //typeof process !== 'undefined'
+  //? process.env.VITE_POSTHOG_API_KEY
+  //: import.meta.env.VITE_POSTHOG_API_KEY,
   //VITE_POSTHOG_HOST_URL:
-    //typeof process !== 'undefined'
-      //? process.env.VITE_POSTHOG_HOST_URL
-      //: import.meta.env.VITE_POSTHOG_HOST_URL,
+  //typeof process !== 'undefined'
+  //? process.env.VITE_POSTHOG_HOST_URL
+  //: import.meta.env.VITE_POSTHOG_HOST_URL,
 
   //// Feature flags
   //VITE_FF_ISOLATED_POOLS:
-    //typeof process !== 'undefined'
-      //? process.env.VITE_FF_ISOLATED_POOLS
-      //: import.meta.env.VITE_FF_ISOLATED_POOLS,
+  //typeof process !== 'undefined'
+  //? process.env.VITE_FF_ISOLATED_POOLS
+  //: import.meta.env.VITE_FF_ISOLATED_POOLS,
   //VITE_FF_INTEGRATED_SWAP:
-    //typeof process !== 'undefined'
-      //? process.env.VITE_FF_INTEGRATED_SWAP
-      //: import.meta.env.VITE_FF_INTEGRATED_SWAP,
+  //typeof process !== 'undefined'
+  //? process.env.VITE_FF_INTEGRATED_SWAP
+  //: import.meta.env.VITE_FF_INTEGRATED_SWAP,
 };
 
 const environment: Environment =
   (ENV_VARIABLES.VITE_ENVIRONMENT as Environment | undefined) || 'mainnet';
 
 const isOnTestnet =
-  environment === 'testnet' || environment === 'storybook' || environment === 'ci';
+  environment === 'testnet' ||
+  environment === 'storybook' ||
+  environment === 'ci';
 
 const chainId: ZkChainId = isOnTestnet ? 280 : 324;
 
@@ -76,8 +78,8 @@ const config: Config = {
   zkScanUrl,
   //sentryDsn: ENV_VARIABLES.VITE_SENTRY_DSN || '',
   //posthog: {
-    //apiKey: ENV_VARIABLES.VITE_POSTHOG_API_KEY || '',
-    //hostUrl: ENV_VARIABLES.VITE_POSTHOG_HOST_URL || '',
+  //apiKey: ENV_VARIABLES.VITE_POSTHOG_API_KEY || '',
+  //hostUrl: ENV_VARIABLES.VITE_POSTHOG_HOST_URL || '',
   //},
 };
 

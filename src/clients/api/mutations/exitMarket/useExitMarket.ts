@@ -1,10 +1,15 @@
 import { MutationObserverOptions, useMutation } from 'react-query';
 
-import { ExitMarketInput, ExitMarketOutput, exitMarket, queryClient } from 'clients/api';
-import FunctionKey from 'constants/functionKey';
+import {
+  ExitMarketInput,
+  ExitMarketOutput,
+  exitMarket,
+  queryClient,
+} from '@/clients/api';
+import FunctionKey from '@/constants/functionKey';
 
 const useExitMarket = (
-  options?: MutationObserverOptions<ExitMarketOutput, Error, ExitMarketInput>,
+  options?: MutationObserverOptions<ExitMarketOutput, Error, ExitMarketInput>
 ) =>
   useMutation(FunctionKey.EXIT_MARKET, exitMarket, {
     ...options,

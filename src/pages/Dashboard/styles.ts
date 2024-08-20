@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
-import { useTheme } from "@mui/material";
-import { isFeatureEnabled } from "utilities";
+import { css } from '@emotion/react';
+import { useTheme } from '@mui/material';
+import { isFeatureEnabled } from '@/utilities';
 
 export const useStyles = () => {
   const theme = useTheme();
@@ -16,7 +16,7 @@ export const useStyles = () => {
     header: css`
       margin-bottom: ${theme.spacing(6)};
 
-      ${!isFeatureEnabled("isolatedPools") && theme.breakpoints.down("xl")} {
+      ${!isFeatureEnabled('isolatedPools') && theme.breakpoints.down('xl')} {
         margin-bottom: 0;
       }
     `,
@@ -25,7 +25,7 @@ export const useStyles = () => {
       align-items: center;
       justify-content: space-between;
 
-      ${theme.breakpoints.down("md")} {
+      ${theme.breakpoints.down('md')} {
         display: block;
       }
     `,
@@ -36,11 +36,11 @@ export const useStyles = () => {
       margin-right: ${theme.spacing(4)};
       margin-top: ${theme.spacing(-2)};
 
-      ${theme.breakpoints.down("xl")} {
+      ${theme.breakpoints.down('xl')} {
         margin-right: 0;
       }
 
-      ${theme.breakpoints.down("md")} {
+      ${theme.breakpoints.down('md')} {
         flex-wrap: nowrap;
         overflow-y: auto;
         -ms-overflow-style: none;

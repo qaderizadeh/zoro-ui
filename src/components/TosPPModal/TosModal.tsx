@@ -1,35 +1,35 @@
 /** @jsxImportSource @emotion/react */
-import TosPPModal from ".";
-import { SecondaryButton } from "../Button";
-import { useStyles } from "./styles";
-import type { DialogProps } from "@mui/material";
-import { ModalProps } from "components";
-import React from "react";
-import { useTranslation } from "translation";
+import TosPPModal from '.';
+import { SecondaryButton } from '../Button';
+import { useStyles } from './styles';
+import type { DialogProps } from '@mui/material';
+import { ModalProps } from '@/components';
+import React from 'react';
+import { useTranslation } from '@/translation';
 
 export interface TosModalProps {
   title: string;
   open: boolean;
-  handleClose: ModalProps["handleClose"];
+  handleClose: ModalProps['handleClose'];
 }
 
 const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const onClose: DialogProps["onClose"] = (event, reason) => {
-    if (reason && reason === "backdropClick") return;
+  const onClose: DialogProps['onClose'] = (event, reason) => {
+    if (reason && reason === 'backdropClick') return;
     handleClose();
   };
   return (
     <TosPPModal
       isOpen={open}
       handleClose={onClose}
-      title={t("tos.header")}
+      title={t('tos.header')}
       css={styles.tosModal}
       disableEscapeKeyDown={true}
     >
-      <div css={styles.tosContent} className="tosContent">
+      <div css={styles.tosContent} className='tosContent'>
         <ol>
           <li>
             <strong> Welcome to zoroprotocol.com and the Interface!</strong>
@@ -167,7 +167,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="2">
+        <ol start='2'>
           <li>
             <strong> Services</strong>
           </li>
@@ -295,7 +295,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="3">
+        <ol start='3'>
           <li>
             <strong> Assumption of Risk</strong>
           </li>
@@ -477,7 +477,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="5">
+        <ol start='5'>
           <li>
             <strong> Ownership</strong>
           </li>
@@ -625,7 +625,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="7">
+        <ol start='7'>
           <li>
             <strong> Disclaimers and Limitations of Liability</strong>
           </li>
@@ -792,7 +792,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="8">
+        <ol start='8'>
           <li>
             <strong> Indemnification</strong>
           </li>
@@ -827,10 +827,10 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="9">
+        <ol start='9'>
           <li>
             <strong>
-              {" "}
+              {' '}
               Arbitration Agreement and Waiver of Rights, Including Class
               Actions
             </strong>
@@ -920,7 +920,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="10">
+        <ol start='10'>
           <li>
             <strong> Waiver of Injunctive or Other Equitable Relief</strong>
           </li>
@@ -937,7 +937,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="11">
+        <ol start='11'>
           <li>
             <strong> Termination; Cancellation</strong>
           </li>
@@ -973,7 +973,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="12">
+        <ol start='12'>
           <li>
             <strong> Severability</strong>
           </li>
@@ -990,7 +990,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="13">
+        <ol start='13'>
           <li>
             <strong> Assignment</strong>
           </li>
@@ -1006,7 +1006,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="14">
+        <ol start='14'>
           <li>
             <strong> Entire Agreement</strong>
           </li>
@@ -1026,7 +1026,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="15">
+        <ol start='15'>
           <li>
             <strong> Governing Law</strong>
           </li>
@@ -1039,7 +1039,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
           </span>
         </p>
         <p>&nbsp;</p>
-        <ol start="16">
+        <ol start='16'>
           <li>
             <strong> Contact Us</strong>
           </li>
@@ -1052,7 +1052,7 @@ const TosModal: React.FC<TosModalProps> = ({ open, handleClose }) => {
         </p>
       </div>
       <SecondaryButton onClick={handleClose} css={styles.acceptTerms}>
-        {t("tos.button")}
+        {t('tos.button')}
       </SecondaryButton>
     </TosPPModal>
   );

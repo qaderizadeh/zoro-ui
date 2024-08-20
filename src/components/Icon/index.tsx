@@ -1,3 +1,5 @@
+'use client';
+
 import { useTheme } from '@mui/material';
 import _uniqueId from 'lodash/uniqueId';
 import React, { useRef } from 'react';
@@ -14,7 +16,12 @@ export interface IconProps {
   onClick?: (e: React.MouseEvent) => void;
 }
 
-export const Icon: React.FC<IconProps> = ({ name, size, color, ...otherProps }) => {
+export const Icon: React.FC<IconProps> = ({
+  name,
+  size,
+  color,
+  ...otherProps
+}) => {
   const idRef = useRef<string>(_uniqueId());
 
   const theme = useTheme();

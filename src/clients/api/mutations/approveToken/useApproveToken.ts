@@ -1,9 +1,14 @@
 import { MutationObserverOptions, useMutation } from 'react-query';
-import { Token } from 'types';
+import { Token } from '@/types';
 
-import { ApproveTokenInput, ApproveTokenOutput, approveToken, queryClient } from 'clients/api';
-import { useTokenContract } from 'clients/contracts/hooks';
-import FunctionKey from 'constants/functionKey';
+import {
+  ApproveTokenInput,
+  ApproveTokenOutput,
+  approveToken,
+  queryClient,
+} from '@/clients/api';
+import { useTokenContract } from '@/clients/contracts/hooks';
+import FunctionKey from '@/constants/functionKey';
 
 const useApproveToken = (
   { token }: { token: Token },
@@ -11,13 +16,13 @@ const useApproveToken = (
     ApproveTokenOutput,
     Error,
     Omit<ApproveTokenInput, 'tokenContract'>
-  >,
+  >
 ) => {
   const tokenContract = useTokenContract(token);
 
   return useMutation(
     [FunctionKey.APPROVE_TOKEN, { token }],
-    params =>
+    (params) =>
       approveToken({
         tokenContract,
         ...params,
@@ -41,7 +46,7 @@ const useApproveToken = (
           options.onSuccess(...onSuccessParams);
         }
       },
-    },
+    }
   );
 };
 

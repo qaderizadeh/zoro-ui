@@ -1,7 +1,8 @@
+'use client';
 /** @jsxImportSource @emotion/react */
-import { ButtonGroup } from "../ButtonGroup";
-import useStyles from "./styles";
-import React, { ReactElement, useState } from "react";
+import { ButtonGroup } from '../ButtonGroup';
+import useStyles from './styles';
+import React, { ReactElement, useState } from 'react';
 
 export type TabContent = {
   title: string;
@@ -40,7 +41,7 @@ export const Tabs = ({
         activeButtonIndex={activeTabIndex}
         onButtonClick={handleChange}
         fullWidth
-        buttonClassName="custom-btn-swap"
+        buttonClassName='custom-btn-swap'
       />
 
       {tabsContent[activeTabIndex].content}

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { Pool } from 'types';
+import { Pool } from '@/types';
 
-import { useGetPools } from 'clients/api';
+import { useGetPools } from '@/clients/api';
 
 export interface UseGetPoolInput {
   poolComptrollerAddress: string;
@@ -27,10 +27,11 @@ const useGetPool = ({
     () =>
       getPoolsData?.pools &&
       getPoolsData.pools.find(
-        currPool =>
-          currPool.comptrollerAddress.toLowerCase() === poolComptrollerAddress.toLowerCase(),
+        (currPool) =>
+          currPool.comptrollerAddress.toLowerCase() ===
+          poolComptrollerAddress.toLowerCase()
       ),
-    [poolComptrollerAddress, getPoolsData?.pools],
+    [poolComptrollerAddress, getPoolsData?.pools]
   );
 
   return {

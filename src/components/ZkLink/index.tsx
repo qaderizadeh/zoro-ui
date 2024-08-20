@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { useTranslation } from 'translation';
-import { UrlType, generateZkScanUrl } from 'utilities';
+import { useTranslation } from '@/translation';
+import { UrlType, generateZkScanUrl } from '@/utilities';
 
 import { Breakpoint, EllipseAddress } from '../EllipseAddress';
 import { Icon } from '../Icon';
@@ -41,16 +41,16 @@ export const ZkLink: React.FC<ZkLinkProps> = ({
   return (
     <div css={styles.container} className={className}>
       <Typography
-        component="a"
+        component='a'
         href={generateZkScanUrl(hash, urlType)}
-        target="_blank"
-        rel="noreferrer"
-        variant="small1"
+        target='_blank'
+        rel='noreferrer'
+        variant='small1'
         css={styles.text}
       >
         {content}
 
-        <Icon name="open" css={styles.icon} />
+        <Icon name='open' css={styles.icon} />
       </Typography>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Asset, Pool } from 'types';
+import { Asset, Pool } from '@/types';
 
 export type ColumnKey =
   | 'asset'

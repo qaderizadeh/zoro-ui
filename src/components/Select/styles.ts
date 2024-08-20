@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 
-import imgMark from 'assets/img/mark.svg';
+import imgMark from '@/assets/img/mark.svg';
 
 export const SELECTED_MENU_ITEM_CLASSNAME = 'SELECTED_MENU_ITEM_CLASSNAME';
 export const useStyles = () => {
@@ -33,7 +33,8 @@ export const useStyles = () => {
       flex: 1;
       background-color: ${theme.palette.secondary.light};
       border-radius: ${theme.shape.borderRadius.small}px;
-      border: 1px solid ${isOpen ? theme.palette.interactive.primary : 'transparent'};
+      border: 1px solid
+        ${isOpen ? theme.palette.interactive.primary : 'transparent'};
       width: 100%;
       font-size: ${theme.typography.small2.fontSize};
       font-weight: ${theme.typography.small2.fontWeight};

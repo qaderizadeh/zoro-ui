@@ -1,13 +1,13 @@
 import BigNumber from 'bignumber.js';
 import { QueryObserverOptions, useQuery } from 'react-query';
-import { VToken } from 'types';
+import { VToken } from '@/types';
 
 import getVTokenApySimulations, {
   GetVTokenApySimulationsOutput,
-} from 'clients/api/queries/getVTokenApySimulations';
-import useGetVTokenInterestRateModel from 'clients/api/queries/getVTokenInterestRateModel/useGetVTokenInterestRateModel';
-import { useMulticall } from 'clients/web3';
-import FunctionKey from 'constants/functionKey';
+} from '@/clients/api/queries/getVTokenApySimulations';
+import useGetVTokenInterestRateModel from '@/clients/api/queries/getVTokenInterestRateModel/useGetVTokenInterestRateModel';
+import { useMulticall } from '@/clients/web3';
+import FunctionKey from '@/constants/functionKey';
 
 type Options = QueryObserverOptions<
   GetVTokenApySimulationsOutput,
@@ -22,19 +22,29 @@ const useGetVTokenApySimulations = (
     vToken,
     isIsolatedPoolMarket,
     reserveFactorMantissa,
-  }: { vToken: VToken; isIsolatedPoolMarket: boolean; reserveFactorMantissa?: BigNumber },
-  options?: Options,
+  }: {
+    vToken: VToken;
+    isIsolatedPoolMarket: boolean;
+    reserveFactorMantissa?: BigNumber;
+  },
+  options?: Options
 ) => {
   const multicall = useMulticall();
-  const { data: interestRateModelData } = useGetVTokenInterestRateModel({ vToken });
+  const { data: interestRateModelData } = useGetVTokenInterestRateModel({
+    vToken,
+  });
 
   return useQuery(
-    [FunctionKey.GET_V_TOKEN_APY_SIMULATIONS, { vTokenAddress: vToken.address }],
+    [
+      FunctionKey.GET_V_TOKEN_APY_SIMULATIONS,
+      { vTokenAddress: vToken.address },
+    ],
     () =>
       getVTokenApySimulations({
         multicall,
         reserveFactorMantissa: reserveFactorMantissa || new BigNumber(0),
-        interestRateModelContractAddress: interestRateModelData?.contractAddress || '',
+        interestRateModelContractAddress:
+          interestRateModelData?.contractAddress || '',
         isIsolatedPoolMarket,
       }),
     {
@@ -43,7 +53,7 @@ const useGetVTokenApySimulations = (
         (options?.enabled === undefined || options?.enabled) &&
         interestRateModelData?.contractAddress !== undefined &&
         reserveFactorMantissa !== undefined,
-    },
+    }
   );
 };
 

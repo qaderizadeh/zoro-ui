@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
 
-import { TOKENS, VBEP_TOKENS } from 'constants/tokens';
+import { TOKENS, VBEP_TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { TokenIcon } from '.';
@@ -24,7 +24,7 @@ export const Default = () => (
         marginBottom: '32px',
       }}
     >
-      {Object.values(TOKENS).map(token => (
+      {Object.values(TOKENS).map((token) => (
         <div
           style={{
             display: 'flex',
@@ -40,8 +40,14 @@ export const Default = () => (
 
     <h2 style={{ marginBottom: '12px' }}>VBep20 tokens (testnet)</h2>
 
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px 24px' }}>
-      {Object.values(VBEP_TOKENS).map(vToken => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gap: '8px 24px',
+      }}
+    >
+      {Object.values(VBEP_TOKENS).map((vToken) => (
         <div
           style={{
             display: 'flex',

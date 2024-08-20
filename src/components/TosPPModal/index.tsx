@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Modal, ModalProps } from 'components';
+import { Modal, ModalProps } from '@/components';
 import React from 'react';
 
 export interface TosPPModalProps {
@@ -15,10 +15,14 @@ const TosPPModal: React.FC<TosPPModalProps> = ({
   children,
   ...otherProps
 }) => {
-  
   return (
-    <Modal isOpen={isOpen} handleClose={handleClose} title={title} {...otherProps} >
-        <>{children}</>
+    <Modal
+      isOpen={isOpen}
+      handleClose={handleClose}
+      title={title}
+      {...otherProps}
+    >
+      <>{children}</>
     </Modal>
   );
 };

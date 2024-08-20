@@ -1,10 +1,19 @@
 import { MutationObserverOptions, useMutation } from 'react-query';
 
-import { EnterMarketsInput, EnterMarketsOutput, enterMarkets, queryClient } from 'clients/api';
-import FunctionKey from 'constants/functionKey';
+import {
+  EnterMarketsInput,
+  EnterMarketsOutput,
+  enterMarkets,
+  queryClient,
+} from '@/clients/api';
+import FunctionKey from '@/constants/functionKey';
 
 const useEnterMarkets = (
-  options?: MutationObserverOptions<EnterMarketsOutput, Error, EnterMarketsInput>,
+  options?: MutationObserverOptions<
+    EnterMarketsOutput,
+    Error,
+    EnterMarketsInput
+  >
 ) =>
   useMutation(FunctionKey.ENTER_MARKETS, enterMarkets, {
     ...options,

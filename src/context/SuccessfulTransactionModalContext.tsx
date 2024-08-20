@@ -1,10 +1,10 @@
 import noop from 'noop-ts';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import {
   SuccessfulTransactionModal,
   SuccessfulTransactionModalProps,
-} from 'components/SuccessfulTransactionModal';
+} from '@/components/SuccessfulTransactionModal';
 
 export type OpenSuccessfulTransactionModalInput = Pick<
   SuccessfulTransactionModalProps,
@@ -12,7 +12,9 @@ export type OpenSuccessfulTransactionModalInput = Pick<
 >;
 
 export interface SuccessfulTransactionModalContextValue {
-  openSuccessfulTransactionModal: (params: OpenSuccessfulTransactionModalInput) => void;
+  openSuccessfulTransactionModal: (
+    params: OpenSuccessfulTransactionModalInput
+  ) => void;
   closeSuccessfulTransactionModal: () => void;
 }
 
@@ -22,13 +24,17 @@ export const SuccessfulTransactionModalContext =
     closeSuccessfulTransactionModal: noop,
   });
 
-export const SuccessfulTransactionModalProvider: React.FC = ({ children }) => {
+export const SuccessfulTransactionModalProvider = ({
+  children,
+}: PropsWithChildren) => {
   const [isOpen, setIsOpened] = React.useState(false);
   const [modalProps, setModalProps] = React.useState<
     OpenSuccessfulTransactionModalInput | undefined
   >();
 
-  const openSuccessfulTransactionModal = (params: OpenSuccessfulTransactionModalInput) => {
+  const openSuccessfulTransactionModal = (
+    params: OpenSuccessfulTransactionModalInput
+  ) => {
     setModalProps(params);
     setIsOpened(true);
   };

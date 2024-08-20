@@ -2,9 +2,9 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 import React from 'react';
-import { formatToReadablePercentage } from 'utilities';
+import { formatToReadablePercentage } from '@/utilities';
 
-import { TOKENS } from 'constants/tokens';
+import { TOKENS } from '@/constants/tokens';
 
 import { Toggle } from '../Toggle';
 import { TokenIconWithSymbol } from '../TokenIconWithSymbol';
@@ -57,7 +57,7 @@ export const data = [
   { token: TOKENS.xvs, apy: 0.15, wallet: 160, collateral: true },
 ];
 
-type Row = typeof data[number];
+type Row = (typeof data)[number];
 
 export const columns: TableColumn<Row>[] = [
   {
@@ -80,11 +80,13 @@ export const columns: TableColumn<Row>[] = [
   {
     key: 'collateral',
     label: 'Collateral',
-    renderCell: ({ collateral }) => <Toggle onChange={console.log} value={collateral} />,
+    renderCell: ({ collateral }) => (
+      <Toggle onChange={console.log} value={collateral} />
+    ),
   },
 ];
 
-export const orderableColumns: TableColumn<Row>[] = columns.map(column => ({
+export const orderableColumns: TableColumn<Row>[] = columns.map((column) => ({
   ...column,
   sortRows:
     column.key === 'collateral'

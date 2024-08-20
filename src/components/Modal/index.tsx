@@ -1,8 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { Button, Modal as MUIModal, ModalProps as MUIModalProps } from '@mui/material';
+import {
+  Button,
+  Modal as MUIModal,
+  ModalProps as MUIModalProps,
+} from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
-import config from 'config';
+import config from '@/config';
 import React, { ReactElement } from 'react';
 
 import { Icon } from '../Icon';
@@ -27,7 +31,10 @@ export const Modal: React.FC<ModalProps> = ({
   noHorizontalPadding,
   ...otherModalProps
 }) => {
-  const s = useModalStyles({ hasTitleComponent: Boolean(title), noHorizontalPadding });
+  const s = useModalStyles({
+    hasTitleComponent: Boolean(title),
+    noHorizontalPadding,
+  });
   return (
     <MUIModal
       open={isOpen}
@@ -44,13 +51,22 @@ export const Modal: React.FC<ModalProps> = ({
         <div css={s.box} className={className}>
           <div css={s.titleWrapper}>
             {!!handleBackAction && (
-              <Button css={s.backAction} disableRipple onClick={handleBackAction}>
-                <Icon css={s.backArrow} name="arrowRight" />
+              <Button
+                css={s.backAction}
+                disableRipple
+                onClick={handleBackAction}
+              >
+                <Icon css={s.backArrow} name='arrowRight' />
               </Button>
             )}
             <div css={s.titleComponent}>{title}</div>
-            <Button css={s.closeIcon} disableRipple onClick={handleClose} className='modal-close-btn'>
-              <Icon name="close" size={`${s.closeIconSize}`} />
+            <Button
+              css={s.closeIcon}
+              disableRipple
+              onClick={handleClose}
+              className='modal-close-btn'
+            >
+              <Icon name='close' size={`${s.closeIconSize}`} />
             </Button>
           </div>
           <div css={s.contentWrapper}>{children}</div>

@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { Paper, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
+import Link from 'next/link';
 
 import { Delimiter } from '../Delimiter';
 import { Select, SelectOption, SelectProps } from '../Select';
@@ -12,7 +12,12 @@ import { Order, TableProps } from './types';
 interface TableCardProps<R>
   extends Pick<
     TableProps<R>,
-    'data' | 'rowKeyExtractor' | 'rowOnClick' | 'getRowHref' | 'breakpoint' | 'columns'
+    | 'data'
+    | 'rowKeyExtractor'
+    | 'rowOnClick'
+    | 'getRowHref'
+    | 'breakpoint'
+    | 'columns'
   > {
   order: Order<R> | undefined;
   onOrderChange: (newOrder: Order<R>) => void;
@@ -47,20 +52,23 @@ export function TableCards<R>({
 
         return [...acc, option];
       }, [] as SelectOption[]),
-    [columns],
+    [columns]
   );
 
   const selectedOption = useMemo(
-    () => order && selectOptions.find(option => option.value === order.orderBy.key),
-    [order, selectOptions],
+    () =>
+      order &&
+      selectOptions.find((option) => option.value === order.orderBy.key),
+    [order, selectOptions]
   );
 
-  const handleOrderChange: SelectProps['onChange'] = selectChangeEvent => {
+  const handleOrderChange: SelectProps['onChange'] = (selectChangeEvent) => {
     const newSelectedOption = selectOptions.find(
-      option => option.value === selectChangeEvent.target.value,
+      (option) => option.value === selectChangeEvent.target.value
     );
     const orderBy =
-      newSelectedOption && columns.find(column => column.key === newSelectedOption.value);
+      newSelectedOption &&
+      columns.find((column) => column.key === newSelectedOption.value);
 
     if (orderBy) {
       onOrderChange({
@@ -91,13 +99,24 @@ export function TableCards<R>({
           return (
             <Paper
               key={rowKey}
-              css={styles.tableWrapperMobile({ clickable: !!(rowOnClick || getRowHref) })}
-              onClick={rowOnClick && ((e: React.MouseEvent<HTMLDivElement>) => rowOnClick(e, row))}
+              css={styles.tableWrapperMobile({
+                clickable: !!(rowOnClick || getRowHref),
+              })}
+              onClick={
+                rowOnClick &&
+                ((e: React.MouseEvent<HTMLDivElement>) => rowOnClick(e, row))
+              }
               component={
                 getRowHref
-                  ? ({ children, ...props }) => (
+                  ? ({
+                      children,
+                      ...props
+                    }: {
+                      children: React.ReactNode;
+                      [key: string]: any;
+                    }) => (
                       <div {...props}>
-                        <Link css={styles.link} to={getRowHref(row)}>
+                        <Link css={styles.link} href={getRowHref(row)}>
                           {children}
                         </Link>
                       </div>
@@ -105,18 +124,23 @@ export function TableCards<R>({
                   : 'div'
               }
             >
-              <div css={styles.rowTitleMobile}>{titleColumn.renderCell(row, rowIndex)}</div>
+              <div css={styles.rowTitleMobile}>
+                {titleColumn.renderCell(row, rowIndex)}
+              </div>
 
               <Delimiter css={styles.delimiterMobile} />
 
-              <div className="table__table-cards__card-content" css={styles.rowWrapperMobile}>
-                {otherColumns.map(column => (
+              <div
+                className='table__table-cards__card-content'
+                css={styles.rowWrapperMobile}
+              >
+                {otherColumns.map((column) => (
                   <div key={`${rowKey}-${column.key}`} css={styles.cellMobile}>
-                    <Typography variant="tiny" css={styles.cellTitleMobile}>
+                    <Typography variant='body1' css={styles.cellTitleMobile}>
                       {column.label}
                     </Typography>
 
-                    <Typography variant="small2" css={styles.cellValueMobile}>
+                    <Typography variant='body2' css={styles.cellValueMobile}>
                       {column.renderCell(row, rowIndex)}
                     </Typography>
                   </div>

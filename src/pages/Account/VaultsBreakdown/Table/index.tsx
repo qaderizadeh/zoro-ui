@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import BigNumber from 'bignumber.js';
-import { Table, TableProps, TokenIconWithSymbol } from 'components';
+import { Table, TableProps, TokenIconWithSymbol } from '@/components';
 import React, { useMemo } from 'react';
-import { useTranslation } from 'translation';
-import { Vault } from 'types';
+import { useTranslation } from '@/translation';
+import { Vault } from '@/types';
 import {
   compareBigNumbers,
   compareNumbers,
   convertWeiToTokens,
   formatToReadablePercentage,
-} from 'utilities';
+} from '@/utilities';
 
-import { routes } from 'constants/routing';
+import { routes } from '@/constants/routing';
 
 import { useStyles } from './styles';
 
@@ -28,19 +28,26 @@ export const VaultTable: React.FC<VaultTableProps> = ({ vaults }) => {
       {
         key: 'asset',
         label: t('account.vaultsBreakdown.table.column.asset'),
-        renderCell: vault => <TokenIconWithSymbol token={vault.stakedToken} />,
+        renderCell: (vault) => (
+          <TokenIconWithSymbol token={vault.stakedToken} />
+        ),
       },
       {
         key: 'apr',
         label: t('account.vaultsBreakdown.table.column.apr'),
-        renderCell: vault => formatToReadablePercentage(vault.stakingAprPercentage),
+        renderCell: (vault) =>
+          formatToReadablePercentage(vault.stakingAprPercentage),
         sortRows: (rowA, rowB, direction) =>
-          compareNumbers(rowA.stakingAprPercentage, rowB.stakingAprPercentage, direction),
+          compareNumbers(
+            rowA.stakingAprPercentage,
+            rowB.stakingAprPercentage,
+            direction
+          ),
       },
       {
         key: 'stake',
         label: t('account.vaultsBreakdown.table.column.stake'),
-        renderCell: vault =>
+        renderCell: (vault) =>
           convertWeiToTokens({
             valueWei: new BigNumber(vault.userStakedWei || 0),
             token: vault.stakedToken,
@@ -52,7 +59,7 @@ export const VaultTable: React.FC<VaultTableProps> = ({ vaults }) => {
           compareBigNumbers(rowA.userStakedWei, rowB.userStakedWei, direction),
       },
     ],
-    [vaults],
+    [vaults]
   );
 
   return (
@@ -61,7 +68,7 @@ export const VaultTable: React.FC<VaultTableProps> = ({ vaults }) => {
       title={t('account.vaultsBreakdown.table.title')}
       data={vaults}
       columns={tableColumns}
-      rowKeyExtractor={row =>
+      rowKeyExtractor={(row) =>
         `account-vaults-breakdown-table-item-${row.stakedToken.address}-${
           row.rewardToken.address
         }-${row.poolIndex || 0}-${row.lockingPeriodMs || 0}`
@@ -71,7 +78,7 @@ export const VaultTable: React.FC<VaultTableProps> = ({ vaults }) => {
         orderDirection: 'desc',
       }}
       getRowHref={() => routes.vaults.path}
-      breakpoint="xs"
+      breakpoint='xs'
     />
   );
 };

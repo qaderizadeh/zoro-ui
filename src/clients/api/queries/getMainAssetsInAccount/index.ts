@@ -1,4 +1,4 @@
-import { Comptroller } from 'types/contracts';
+import { Comptroller } from '@/types/contracts';
 
 export interface GetMainAssetsInAccountInput {
   comptrollerContract: Comptroller;

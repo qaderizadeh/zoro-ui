@@ -1,9 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { ProgressCircle, Tag, TagGroup, Tooltip } from 'components';
+import { ProgressCircle, Tag, TagGroup, Tooltip } from '@/components';
 import React, { useMemo, useState } from 'react';
-import { useTranslation } from 'translation';
-import { Pool } from 'types';
-import { calculatePercentage, formatToReadablePercentage, isFeatureEnabled } from 'utilities';
+import { useTranslation } from '@/translation';
+import { Pool } from '@/types';
+import {
+  calculatePercentage,
+  formatToReadablePercentage,
+  isFeatureEnabled,
+} from '@/utilities';
 
 import Section from '../Section';
 import Summary from '../Summary';
@@ -16,15 +20,20 @@ export interface PoolsBreakdownProps {
   startPoolIndex?: number;
 }
 
-export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className, startPoolIndex = 0 }) => {
+export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({
+  pools,
+  className,
+  startPoolIndex = 0,
+}) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const [selectedPoolIndex, setSelectedPoolIndex] = useState<number>(startPoolIndex);
+  const [selectedPoolIndex, setSelectedPoolIndex] =
+    useState<number>(startPoolIndex);
   const selectedPool = pools[selectedPoolIndex];
 
   const tags: Tag[] = useMemo(
     () =>
-      pools.map(pool => {
+      pools.map((pool) => {
         const borrowLimitUsedPercentage =
           pool.userBorrowBalanceCents &&
           pool.userBorrowLimitCents &&
@@ -33,8 +42,9 @@ export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className
             denominator: pool.userBorrowLimitCents.toNumber(),
           });
 
-        const readableBorrowLimitUsedPercentage =
-          formatToReadablePercentage(borrowLimitUsedPercentage);
+        const readableBorrowLimitUsedPercentage = formatToReadablePercentage(
+          borrowLimitUsedPercentage
+        );
 
         return {
           id: pool.comptrollerAddress,
@@ -45,7 +55,8 @@ export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className
               {borrowLimitUsedPercentage !== undefined && (
                 <Tooltip
                   title={t('account.poolsBreakdown.poolTagTooltip', {
-                    borrowLimitUsedPercentage: readableBorrowLimitUsedPercentage,
+                    borrowLimitUsedPercentage:
+                      readableBorrowLimitUsedPercentage,
                   })}
                   css={styles.tagTooltip}
                 >
@@ -56,14 +67,16 @@ export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className
           ),
         };
       }),
-    [pools],
+    [pools]
   );
 
   return (
     <Section
       className={className}
       title={
-        isFeatureEnabled('isolatedPools') ? t('account.poolsBreakdown.title') : selectedPool.name
+        isFeatureEnabled('isolatedPools')
+          ? t('account.poolsBreakdown.title')
+          : selectedPool.name
       }
     >
       {isFeatureEnabled('isolatedPools') && pools.length > 0 && (
@@ -75,7 +88,11 @@ export const PoolsBreakdown: React.FC<PoolsBreakdownProps> = ({ pools, className
         />
       )}
 
-      <Summary pools={[selectedPool]} displayAccountHealth css={styles.summary} />
+      <Summary
+        pools={[selectedPool]}
+        displayAccountHealth
+        css={styles.summary}
+      />
 
       <Tables pool={selectedPool} />
     </Section>

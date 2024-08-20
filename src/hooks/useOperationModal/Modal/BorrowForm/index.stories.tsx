@@ -3,7 +3,7 @@ import noop from 'noop-ts';
 import React from 'react';
 
 import { poolData } from '__mocks__/models/pools';
-import { TESTNET_TOKENS } from 'constants/tokens';
+import { TESTNET_TOKENS } from '@/constants/tokens';
 import { withCenterStory } from 'stories/decorators';
 
 import { BorrowFormUi } from '.';

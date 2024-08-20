@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
-import config from 'config';
-import { VError, formatVErrorToReadableString } from 'errors';
+import config from '@/config';
+import { VError, formatVErrorToReadableString } from '@/errors';
 import React from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 
-import { Connector } from 'clients/web3/types';
+import { Connector } from '@/clients/web3/types';
 
 import { toast } from '../../Toast';
 import {
@@ -43,44 +43,51 @@ export const WalletList: React.FC<WalletListProps> = ({ onLogin }) => {
   return (
     <div css={styles.container}>
       <div css={styles.walletList}>
-        {WALLETS.filter(({ mainnetOnly }) => !mainnetOnly || !config.isOnTestnet).map(
-          ({ name, connector, Logo }) => (
-            <button
-              css={styles.getListItem({ isActionable: true })}
-              key={`wallet-${name}`}
-              type="button"
-              onClick={() => handleLogin(connector)}
-            >
-              <Logo css={styles.walletLogo} />
+        {WALLETS.filter(
+          ({ mainnetOnly }) => !mainnetOnly || !config.isOnTestnet
+        ).map(({ name, connector, Logo }) => (
+          <button
+            css={styles.getListItem({ isActionable: true })}
+            key={`wallet-${name}`}
+            type='button'
+            onClick={() => handleLogin(connector)}
+          >
+            <Logo css={styles.walletLogo} />
 
-              <Typography variant="tiny" component="div">
-                {name}
-              </Typography>
-            </button>
-          ),
-        )}
+            <Typography variant='tiny' component='div'>
+              {name}
+            </Typography>
+          </button>
+        ))}
 
         {INTEGRATED_WALLETS.map(({ name, Logo, linkUrl }) => (
           <a
             css={styles.getListItem({ isActionable: true })}
             key={`wallet-${name}`}
             href={linkUrl}
-            target="_blank"
-            rel="noreferrer"
+            target='_blank'
+            rel='noreferrer'
           >
             <Logo css={styles.walletLogo} />
 
-            <Typography variant="tiny" component="div">
+            <Typography variant='tiny' component='div'>
               {name}
             </Typography>
           </a>
         ))}
 
         {UPCOMING_WALLETS.map(({ name, Logo }) => (
-          <div css={styles.getListItem({ isActionable: false })} key={`upcoming-wallet-${name}`}>
+          <div
+            css={styles.getListItem({ isActionable: false })}
+            key={`upcoming-wallet-${name}`}
+          >
             <Logo css={styles.walletLogo} />
 
-            <Typography variant="tiny" css={styles.comingSoonText} component="div">
+            <Typography
+              variant='tiny'
+              css={styles.comingSoonText}
+              component='div'
+            >
               {t('authModal.walletList.comingSoon')}
             </Typography>
           </div>
@@ -88,15 +95,15 @@ export const WalletList: React.FC<WalletListProps> = ({ onLogin }) => {
       </div>
 
       <div css={styles.footer}>
-        <Typography variant="small2">
+        <Typography variant='small2'>
           <Trans
-            i18nKey="authModal.walletList.termsOfServiceLink"
+            i18nKey='authModal.walletList.termsOfServiceLink'
             components={{
               Anchor: (
                 <a // eslint-disable-line jsx-a11y/anchor-has-content
                   href={ZORO_TERMS_OF_SERVICE_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                  target='_blank'
+                  rel='noreferrer'
                 />
               ),
             }}

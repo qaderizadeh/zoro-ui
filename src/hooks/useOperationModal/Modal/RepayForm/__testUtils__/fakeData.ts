@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { Asset, Pool } from 'types';
+import { Asset, Pool } from '@/types';
 
 import { poolData } from '__mocks__/models/pools';
 

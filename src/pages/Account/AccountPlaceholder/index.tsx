@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
-import { LinkButton } from 'components';
+import { LinkButton } from '@/components';
 import React from 'react';
-import { useTranslation } from 'translation';
+import { useTranslation } from '@/translation';
 
-import { routes } from 'constants/routing';
+import { routes } from '@/constants/routing';
 
 import { useStyles } from './styles';
 import wallet from './../../../assets/img/wallet.webp';
@@ -23,7 +23,7 @@ const AccountPlaceholder: React.FC = () => {
           title={t('dashboard.connectWalletBanner.illustration.alt')}
         />
       </div>
-      <Typography css={styles.placeholderText} variant="h4">
+      <Typography css={styles.placeholderText} variant='h4'>
         {t('accountPlaceholder.assetsWillAppearHere')}
       </Typography>
       {/* <LinkButton to={routes.dashboard.path} className='custom-btn-wrap'>{t('accountPlaceholder.letsGetStarted')}</LinkButton> */}

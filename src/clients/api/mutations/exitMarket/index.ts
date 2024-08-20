@@ -1,7 +1,7 @@
-import { checkForComptrollerTransactionError } from 'errors';
+import { checkForComptrollerTransactionError } from '@/errors';
 import { ContractReceipt } from 'ethers';
 
-import { Comptroller } from 'types/contracts';
+import { Comptroller } from '@/types/contracts';
 
 export interface ExitMarketInput {
   comptrollerContract: Comptroller;

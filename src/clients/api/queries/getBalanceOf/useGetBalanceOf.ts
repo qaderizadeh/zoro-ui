@@ -1,8 +1,12 @@
 import { QueryObserverOptions, useQuery } from 'react-query';
 
-import { GetBalanceOfInput, GetBalanceOfOutput, getBalanceOf } from 'clients/api';
-import FunctionKey from 'constants/functionKey';
-import { useAuth } from 'context/AuthContext';
+import {
+  GetBalanceOfInput,
+  GetBalanceOfOutput,
+  getBalanceOf,
+} from '@/clients/api';
+import FunctionKey from '@/constants/functionKey';
+import { useAuth } from '@/context/AuthContext';
 
 type Options = QueryObserverOptions<
   GetBalanceOfOutput,
@@ -14,13 +18,13 @@ type Options = QueryObserverOptions<
     {
       accountAddress: string;
       tokenAddress: string;
-    },
+    }
   ]
 >;
 
 const useGetBalanceOf = (
   { accountAddress, token }: Omit<GetBalanceOfInput, 'signer' | 'provider'>,
-  options?: Options,
+  options?: Options
 ) => {
   const { provider } = useAuth();
 
@@ -33,7 +37,7 @@ const useGetBalanceOf = (
       },
     ],
     () => getBalanceOf({ provider, accountAddress, token }),
-    options,
+    options
   );
 };
 

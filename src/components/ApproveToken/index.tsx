@@ -1,22 +1,29 @@
+'use client';
+
 /** @jsxImportSource @emotion/react */
-import { SecondaryButton } from "../Button";
+import { SecondaryButton } from '../Button';
 import {
   LabeledInlineContent,
   LabeledInlineContentProps,
-} from "../LabeledInlineContent";
-import { Spinner } from "../Spinner";
-import { toast } from "../Toast";
-import { TokenIcon } from "../TokenIcon";
-import useStyles from "./styles";
-import Typography from "@mui/material/Typography";
-import { useAuth } from "context/AuthContext";
-import { GeolocationContext } from "context/GeolocationContext";
-import { VError, formatVErrorToReadableString } from "errors";
-import { ContractReceipt } from "ethers";
-import useTokenApproval from "hooks/useTokenApproval";
-import React, { useContext, useState, useEffect } from "react";
-import { useTranslation } from "translation";
-import { Token } from "types";
+} from '../LabeledInlineContent';
+import { Spinner } from '../Spinner';
+import { toast } from '../Toast';
+import { TokenIcon } from '../TokenIcon';
+import useStyles from './styles';
+import Typography from '@mui/material/Typography';
+import { useAuth } from '@/context/AuthContext';
+import { GeolocationContext } from '@/context/GeolocationContext';
+import { VError, formatVErrorToReadableString } from '@/errors';
+import { ContractReceipt } from 'ethers';
+import useTokenApproval from '@/hooks/useTokenApproval';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  PropsWithChildren,
+} from 'react';
+import { useTranslation } from '@/translation';
+import { Token } from '@/types';
 
 export interface ApproveTokenUiProps {
   token: Token;
@@ -31,7 +38,7 @@ export interface ApproveTokenUiProps {
   isValidAllowance?: boolean;
 }
 
-export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
+export const ApproveTokenUi = ({
   token,
   title,
   assetInfo = [],
@@ -43,7 +50,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
   disabled = false,
   isValidAllowance,
   setIsValidAllowance,
-}) => {
+}: PropsWithChildren<ApproveTokenUiProps>) => {
   const { t } = useTranslation();
   const styles = useStyles();
   const { geolocation } = useContext(GeolocationContext);
@@ -71,7 +78,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
 
   useEffect(() => {
     if (!isValidAllowance) handleApproveToken();
-  }, [isValidAllowance])
+  }, [isValidAllowance]);
 
   if (isTokenApproved) {
     return <>{children}</>;
@@ -85,7 +92,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
         <>
           <TokenIcon token={token} css={styles.mainLogo} />
 
-          <Typography component="h3" variant="h3" css={styles.mainText}>
+          <Typography component='h3' variant='h3' css={styles.mainText}>
             {title}
           </Typography>
 
@@ -106,18 +113,18 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
             loading={isApproveTokenLoading}
             fullWidth
             onClick={handleApproveToken}
-            className="custom-btn-wrap"
+            className='custom-btn-wrap'
             style={{
               backgroundImage: loading
-                ? "linear-gradient(114deg, #ecaf54 0%, #e9bc11 100%)"
-                : "",
+                ? 'linear-gradient(114deg, #ecaf54 0%, #e9bc11 100%)'
+                : '',
             }}
           >
             {geolocation
-              ? t("blockedRegion")
+              ? t('blockedRegion')
               : loading
-              ? t("approveToken.approvingButtonLabel")
-              : t("approveToken.approveButtonLabel")}
+              ? t('approveToken.approvingButtonLabel')
+              : t('approveToken.approveButtonLabel')}
           </SecondaryButton>
         </>
       )}
@@ -128,7 +135,7 @@ export const ApproveTokenUi: React.FC<ApproveTokenUiProps> = ({
 export interface ApproveTokenProps
   extends Pick<
     ApproveTokenUiProps,
-    "assetInfo" | "disabled" | "title" | "token"
+    'assetInfo' | 'disabled' | 'title' | 'token'
   > {
   spenderAddress: string;
   setIsValidAllowance: () => void;
@@ -162,7 +169,7 @@ export const ApproveToken: React.FC<ApproveTokenProps> = ({
       approveToken={approveToken}
       setIsValidAllowance={setIsValidAllowance}
       isValidAllowance={isValidAllowance}
-      isTokenApproved={isValidAllowance? isTokenApproved ?? false : false}
+      isTokenApproved={isValidAllowance ? isTokenApproved ?? false : false}
       isApproveTokenLoading={isApproveTokenLoading}
       isInitialLoading={isTokenApprovalStatusLoading}
       disabled={!accountAddress}

@@ -1,4 +1,4 @@
-import { ZkChainId } from 'types';
+import { ZkChainId } from '@/types';
 
 export const BLOCK_TIME_MS = 3000;
 // 20 blocks a minute, 60 minutes an hour, 24 hours a day
