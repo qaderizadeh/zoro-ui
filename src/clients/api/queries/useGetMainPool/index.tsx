@@ -1,29 +1,32 @@
-import { useMemo } from 'react';
-import { useTranslation } from 'translation';
-import { Pool } from 'types';
-import { getContractAddress } from 'utilities';
+import { useMemo } from 'react'
+import { useTranslation } from 'translation'
+import { Pool } from 'types'
+import { getContractAddress } from 'utilities'
 
-import { useGetMainAssets } from 'clients/api';
+import { useGetMainAssets } from 'clients/api'
 
 export interface UseGetMainPoolInput {
-  accountAddress?: string;
+  accountAddress?: string
 }
 
 export interface UseGetMainPoolOutput {
-  isLoading: boolean;
+  isLoading: boolean
   data?: {
-    pool: Pool;
-  };
+    pool: Pool
+  }
 }
 
-const mainPoolComptrollerAddress = getContractAddress('comptroller');
+const mainPoolComptrollerAddress = getContractAddress('comptroller')
 
-const useGetMainPool = ({ accountAddress }: UseGetMainPoolInput): UseGetMainPoolOutput => {
-  const { data: getMainAssetsData, isLoading: isGetMainAssetsDataLoading } = useGetMainAssets({
-    accountAddress,
-  });
+const useGetMainPool = ({
+  accountAddress
+}: UseGetMainPoolInput): UseGetMainPoolOutput => {
+  const { data: getMainAssetsData, isLoading: isGetMainAssetsDataLoading } =
+    useGetMainAssets({
+      accountAddress
+    })
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const pool: Pool | undefined = useMemo(
     () =>
@@ -35,12 +38,11 @@ const useGetMainPool = ({ accountAddress }: UseGetMainPoolInput): UseGetMainPool
         assets: getMainAssetsData.assets,
         userSupplyBalanceCents: getMainAssetsData.userTotalSupplyBalanceCents,
         userBorrowBalanceCents: getMainAssetsData.userTotalBorrowBalanceCents,
-        userBorrowLimitCents: getMainAssetsData.userTotalBorrowLimitCents,
+        userBorrowLimitCents: getMainAssetsData.userTotalBorrowLimitCents
       },
-    [getMainAssetsData?.assets],
-  );
+    [getMainAssetsData?.assets]
+  )
+  return { isLoading: isGetMainAssetsDataLoading, data: pool && { pool } }
+}
 
-  return { isLoading: isGetMainAssetsDataLoading, data: pool && { pool } };
-};
-
-export default useGetMainPool;
+export default useGetMainPool

@@ -15,6 +15,9 @@ import {
   InterestRateChartProps,
   SecondaryButton,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d792741 (fix the decimals)
   Spinner
 } from 'components'
 import { COMPOUND_MANTISSA } from 'constants/compoundMantissa'
@@ -22,6 +25,10 @@ import PLACEHOLDER_KEY from 'constants/placeholderKey'
 import { routes } from 'constants/routing'
 import { TOKENS } from 'constants/tokens'
 import { BLOCKS_PER_DAY } from 'constants/zk'
+<<<<<<< HEAD
+=======
+import { SECONDS_PER_DAY } from 'constants/zk'
+>>>>>>> d792741 (fix the decimals)
 import { useAuth } from 'context/AuthContext'
 import { useHideXlDownCss, useShowXlDownCss } from 'hooks/responsive'
 import useOperationModal from 'hooks/useOperationModal'
@@ -29,6 +36,7 @@ import React, { useMemo } from 'react'
 import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'translation'
 import { Asset } from 'types'
+<<<<<<< HEAD
 =======
   Spinner,
 } from "components";
@@ -46,6 +54,8 @@ import { Redirect, RouteComponentProps } from "react-router-dom";
 import { useTranslation } from "translation";
 import { Asset } from "types";
 >>>>>>> 92097fc (blocks per day)
+=======
+>>>>>>> d792741 (fix the decimals)
 import {
   areAddressesEqual,
   formatCentsToReadableValue,
@@ -109,10 +119,14 @@ export const MarketUi: React.FC<MarketUiProps> = ({
       dailySupplyInterestsCents: asset && +asset.supplyBalanceCents * (((1 + asset.supplyRatePerBlockTokens.toNumber()) ** SECONDS_PER_DAY) - 1),
       // prettier-ignore
 <<<<<<< HEAD
+<<<<<<< HEAD
       dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** BLOCKS_PER_DAY) - 1)
 =======
       dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** SECONDS_PER_DAY) - 1),
 >>>>>>> 92097fc (blocks per day)
+=======
+      dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** SECONDS_PER_DAY) - 1)
+>>>>>>> d792741 (fix the decimals)
     }),
     [
       asset?.supplyRatePerBlockTokens,
@@ -148,7 +162,9 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             },
             {
               label: t('market.supplyInfo.stats.apy'),
-              value: formatToReadablePercentage(asset?.supplyApyPercentage)
+              value: formatToReadablePercentage(
+                Math.abs(asset?.supplyApyPercentage)
+              )
             },
             {
               label: t('market.supplyInfo.stats.distributionApy'),
@@ -188,7 +204,9 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             },
             {
               label: t('market.borrowInfo.stats.apy'),
-              value: formatToReadablePercentage(asset.borrowApyPercentage)
+              value: formatToReadablePercentage(
+                Math.abs(asset.borrowApyPercentage)
+              )
             },
             {
               label: t('market.borrowInfo.stats.distributionApy'),
@@ -432,7 +450,6 @@ export const MarketUi: React.FC<MarketUiProps> = ({
             )}
             {isChartDataLoading && supplyChartData.length === 0 && <Spinner />}
           </Card>
-
           <Card
             testId={TEST_IDS.borrowInfo}
             title={t('market.borrowInfo.title')}
