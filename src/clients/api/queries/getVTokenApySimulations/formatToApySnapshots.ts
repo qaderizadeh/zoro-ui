@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js';
 import { ContractCallResults } from 'ethereum-multicall';
 
 import { BLOCKS_PER_DAY } from 'constants/zk';
+import { SECONDS_PER_DAY } from 'constants/zk';
 import { COMPOUND_MANTISSA } from 'constants/compoundMantissa';
 import { DAYS_PER_YEAR } from 'constants/daysPerYear';
 
@@ -19,7 +20,7 @@ const formatToApySnapshots = ({
   for (let i = 0; i < results.length; i += 2) {
     const borrowBase = new BigNumber(results[i].returnValues[0]?.hex)
       .div(COMPOUND_MANTISSA)
-      .times(BLOCKS_PER_DAY)
+      .times(SECONDS_PER_DAY)
       .plus(1);
 
     const borrowApyPercentage = borrowBase
@@ -30,7 +31,7 @@ const formatToApySnapshots = ({
 
     const supplyBase = new BigNumber(results[i + 1].returnValues[0]?.hex)
       .div(COMPOUND_MANTISSA)
-      .times(BLOCKS_PER_DAY)
+      .times(SECONDS_PER_DAY)
       .plus(1);
 
     const supplyApyPercentage = supplyBase

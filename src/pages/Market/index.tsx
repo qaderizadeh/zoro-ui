@@ -14,6 +14,7 @@ import {
   InterestRateChart,
   InterestRateChartProps,
   SecondaryButton,
+<<<<<<< HEAD
   Spinner
 } from 'components'
 import { COMPOUND_MANTISSA } from 'constants/compoundMantissa'
@@ -28,6 +29,23 @@ import React, { useMemo } from 'react'
 import { Redirect, RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'translation'
 import { Asset } from 'types'
+=======
+  Spinner,
+} from "components";
+import { COMPOUND_MANTISSA } from "constants/compoundMantissa";
+import PLACEHOLDER_KEY from "constants/placeholderKey";
+import { routes } from "constants/routing";
+import { TOKENS } from "constants/tokens";
+import { BLOCKS_PER_DAY } from "constants/zk";
+import { SECONDS_PER_DAY } from "constants/zk";
+import { useAuth } from "context/AuthContext";
+import { useHideXlDownCss, useShowXlDownCss } from "hooks/responsive";
+import useOperationModal from "hooks/useOperationModal";
+import React, { useMemo } from "react";
+import { Redirect, RouteComponentProps } from "react-router-dom";
+import { useTranslation } from "translation";
+import { Asset } from "types";
+>>>>>>> 92097fc (blocks per day)
 import {
   areAddressesEqual,
   formatCentsToReadableValue,
@@ -88,9 +106,13 @@ export const MarketUi: React.FC<MarketUiProps> = ({
       // precise
 
       // prettier-ignore
-      dailySupplyInterestsCents: asset && +asset.supplyBalanceCents * (((1 + asset.supplyRatePerBlockTokens.toNumber()) ** BLOCKS_PER_DAY) - 1),
+      dailySupplyInterestsCents: asset && +asset.supplyBalanceCents * (((1 + asset.supplyRatePerBlockTokens.toNumber()) ** SECONDS_PER_DAY) - 1),
       // prettier-ignore
+<<<<<<< HEAD
       dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** BLOCKS_PER_DAY) - 1)
+=======
+      dailyBorrowInterestsCents: asset && +asset.borrowBalanceCents * (((1 + asset.borrowRatePerBlockTokens.toNumber()) ** SECONDS_PER_DAY) - 1),
+>>>>>>> 92097fc (blocks per day)
     }),
     [
       asset?.supplyRatePerBlockTokens,

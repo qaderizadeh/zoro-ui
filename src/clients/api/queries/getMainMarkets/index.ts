@@ -22,6 +22,7 @@ export interface GetMainMarketsOutput {
 }
 
 const BLOCKS_PER_DAY = new BigNumber(6171);
+const SECONDS_PER_DAY = new BigNumber(86400);
 
 function getTokenData(address) {
   const tokenAddress = address.toLowerCase();
@@ -224,7 +225,7 @@ function getApyData(marketMetadata) {
   };
 
   const apyData = _.mapValues(rates, (rate) => {
-    return (BLOCKS_PER_DAY.times(borrowRatePerBlock).div(base).plus(1))
+    return (SECONDS_PER_DAY.times(borrowRatePerBlock).div(base).plus(1))
     .pow(365).minus(1);
   });
 
@@ -278,8 +279,8 @@ const getMainMarkets = async ({
     const tokenPrice = (new BigNumber(underlyingPrice)).div(divisor);
 
     const { compBorrowSpeeds, compSupplySpeeds } = marketMetadata;
-    const borrowerDailyVenus = BLOCKS_PER_DAY.times(compBorrowSpeeds);
-    const supplierDailyVenus = BLOCKS_PER_DAY.times(compSupplySpeeds);
+    const borrowerDailyVenus = SECONDS_PER_DAY.times(compBorrowSpeeds);
+    const supplierDailyVenus = SECONDS_PER_DAY.times(compSupplySpeeds);
 
     const tokenConfig = VBEP_TOKENS[address.toLowerCase()];
     const underlyingAddress = tokenConfig.underlyingToken.address;
